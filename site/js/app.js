@@ -601,7 +601,7 @@
     directory.hidden = false;
     document.documentElement.style.overflow = "hidden";
     if (!reduced) { directory.style.opacity = "0"; directory.style.transition = "opacity .25s ease"; requestAnimationFrame(() => { directory.style.opacity = "1"; }); }
-    dirUntrap = trap(directory, () => closeDirectoryUI());
+    dirUntrap = trap(directory, () => closeView("directory"));
     dirCloseBtn.focus({ preventScroll: true });
   }
   function closeDirectoryUI() {
