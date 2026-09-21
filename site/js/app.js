@@ -468,7 +468,7 @@
     scrim.hidden = false; panel.hidden = false;
     document.documentElement.style.overflow = "hidden";
     requestAnimationFrame(() => panel.classList.add("open"));
-    panelUntrap = trap(panel, () => closeRoomUI());
+    panelUntrap = trap(panel, () => closeView("room"));
   }
   function closeRoomUI() {
     if (panel.hidden) return;
