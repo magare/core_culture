@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WIREFRAME — Core Culture combined page</title>
+<style>
+/* Grey-box wireframe: combined homepage, desktop composition */
+:root{--ln:#8a8a8a;--bx:#e9e6de;--dk:#3a3a3e;--ac:#ff5a1f;--ann:#b3271d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:12px/1.5 "Helvetica Neue",Arial,sans-serif;background:#f6f4ef;color:#333;padding:18px}
+h1{font-size:15px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.note{color:#777;margin-bottom:18px;max-width:90ch}
+.wf{border:1.5px solid var(--ln);margin-bottom:22px;position:relative}
+.lab{position:absolute;top:-9px;left:10px;background:#f6f4ef;padding:0 6px;font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ann)}
+.row{display:flex;gap:10px;padding:10px}
+.box{background:var(--bx);border:1px solid var(--ln);display:flex;align-items:center;justify-content:center;color:#555;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:8px}
+.dark{background:var(--dk);border-color:#222;color:#ddd}
+.ac{outline:2px dashed var(--ac);outline-offset:-6px}
+.tall{min-height:64px}
+/* nav */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1.5px solid var(--ln)}
+.nav .links{display:flex;gap:8px}
+.nav .links span{border:1px solid var(--ln);padding:5px 9px;background:var(--bx);font-size:9.5px}
+/* hero */
+.hero{min-height:420px;display:grid;grid-template-columns:1.1fr .9fr;position:relative}
+.hero .left{padding:26px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.h1x{font-size:34px;font-weight:900;letter-spacing:-.02em;line-height:.95;text-transform:uppercase}
+/* carousel */
+.car{display:flex;gap:10px;padding:12px;overflow:hidden}
+.panel{flex:0 0 30%;border:1px solid var(--ln);background:var(--bx);min-height:230px;position:relative}
+.panel .ph{position:absolute;inset:0 0 34% 0;background:#d8d4c9;border-bottom:1px solid var(--ln)}
+.panel .tx{position:absolute;inset:66% 0 0 0;padding:8px}
+/* plan */
+.plan{display:grid;grid-template-columns:1.4fr .6fr;gap:10px;padding:12px}
+.plansvg{min-height:300px;position:relative}
+.plansvg .z{position:absolute;border:1.5px dashed var(--dk);background:#ded9cc}
+.plansvg .z b{position:absolute;top:4px;left:5px;font-size:9px}
+/* sections */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px}
+.card{min-height:110px}
+.rows{padding:12px;display:flex;flex-direction:column;gap:6px}
+.rowline{display:flex;gap:10px;align-items:center}
+.rowline .t{width:54px;background:var(--bx);border:1px solid var(--ln);padding:6px;text-align:center;font-size:10px}
+.rowline .n{flex:1;background:var(--bx);border:1px solid var(--ln);padding:8px}
+.ann{position:absolute;font-size:9.5px;color:var(--ann);font-weight:700;letter-spacing:.04em;max-width:200px}
+footer{border-top:1.5px solid var(--ln);display:flex;justify-content:space-between;padding:14px}
+</style>
+</head>
+<body>
+<h1>Wireframe — Core Culture · combined page (desktop)</h1>
+<p class="note">Annotated grey boxes. A = torch mask area (photo layer only). Section order follows the brief; every section is reachable from the sticky nav without animations. Sample-content chips marked ◇.</p>
+
+<div class="wf"><span class="lab">01 · Sticky nav</span>
+  <div class="nav">
+    <span class="box" style="min-width:130px">Logo / wordmark</span>
+    <div class="links"><span>Explore the Gym</span><span>Layout</span><span>Equipment</span><span>Batches &amp; Events</span><span>Memberships</span><span>Contact</span></div>
+    <span class="box" style="background:var(--ac);color:#fff;border-color:var(--ac)">Book a Trial</span>
+  </div>
+  <div class="ann" style="right:12px;top:38px">mobile: ☰ → full-screen menu, same links + Book</div>
+</div>
+
+<div class="wf"><span class="lab">02 · Hero — concept 24 torch reveal</span>
+  <div class="hero dark">
+    <div class="left">
+      <div class="h1x">Core Culture<br>This is your<br>Training Ground</div>
+      <div class="box dark tall" style="max-width:300px">Support line + meta ◇ (hours · location)</div>
+      <div style="display:flex;gap:8px"><span class="box" style="background:var(--ac);color:#fff;border-color:var(--ac)">Book a Trial</span><span class="box dark">Explore the Gym ↓</span></div>
+    </div>
+    <div class="box ac dark">Full-bleed gym photograph — torch mask follows pointer over the IMAGE LAYER ONLY<br>headline &amp; buttons always above it (readable)</div>
+    <div class="ann" style="right:14px;bottom:14px;color:#ffb99a">[ LIGHTS ON ] switch — always visible · keyboard + tap-to-reveal on mobile · reduced-motion → fully lit</div>
+  </div>
+</div>
+
+<div class="wf" style="border-bottom:0"><span class="lab">03 · Marquee strip — concept 11 energy</span>
+  <div class="box tall">TRAIN ★ MOVE ★ RECOVER ★ CONNECT ★ (animated, static under reduced-motion, aria-hidden)</div>
+</div>
+
+<div class="wf"><span class="lab">04 · Amenities walkthrough — concept 07 grammar, CONTAINED</span>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 12px 0">
+    <b style="letter-spacing:.1em">EXPLORE THE GYM — ROOM BY ROOM</b>
+    <div style="display:flex;gap:6px"><span class="box" style="min-width:34px">←</span><span class="box" style="min-width:34px">→</span></div>
+  </div>
+  <div class="car">
+    <div class="panel"><div class="ph">photo 01 strength</div><div class="tx"><b>01 STRENGTH ZONE</b><br>one-liner + amenity chips ◇ + "Explore this space →"</div></div>
+    <div class="panel"><div class="ph">photo 02 hybrid turf</div><div class="tx">…same anatomy…</div></div>
+    <div class="panel"><div class="ph">photo 03 cardio</div><div class="tx">…</div></div>
+    <div class="panel" style="opacity:.55"><div class="ph">04 studio →</div><div class="tx">+ recovery · lounge · arrival (7 panels)</div></div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 12px 12px;gap:10px">
+    <div class="box" style="height:22px;flex:1">progress line + room chips (click to travel)</div>
+    <div class="ann" style="position:static;max-width:280px">no wheel hijack — arrows, swipe, chips, native scroll</div>
+  </div>
+</div>
+
+<div class="wf"><span class="lab">05 · Interactive floor plan — concept 19 grammar · THE CENTREPIECE</span>
+  <div class="plan">
+    <div class="plansvg box">
+      <div class="z" style="left:3%;top:4%;width:33%;height:52%"><b>A · STRENGTH</b></div>
+      <div class="z" style="left:38%;top:4%;width:25%;height:52%"><b>C · HYBRID TURF</b></div>
+      <div class="z" style="left:65%;top:4%;width:32%;height:30%"><b>D · CARDIO</b></div>
+      <div class="z" style="left:65%;top:38%;width:32%;height:32%"><b>E · STUDIO</b></div>
+      <div class="z" style="left:3%;top:60%;width:20%;height:34%"><b>B · LOBBY/DESK</b></div>
+      <div class="z" style="left:25%;top:60%;width:18%;height:34%"><b>F · RECOVERY</b></div>
+      <div class="z" style="left:45%;top:60%;width:52%;height:34%"><b>G · LOUNGE</b></div>
+      <div style="position:absolute;bottom:-4px;left:3%;font-size:9px;color:#777">◇ dashed strip: arrival &amp; member parking · "illustrative layout — not survey data"</div>
+    </div>
+    <div class="box" style="flex-direction:column;gap:6px;align-items:stretch">
+      <b>ROOM LIST (equal navigation)</b>
+      <span class="box" style="min-height:34px">A Strength — open →</span>
+      <span class="box" style="min-height:34px">B Hybrid — open →</span>
+      <span class="box" style="min-height:34px">… every zone has a visible name …</span>
+      <span class="box" style="min-height:26px;border-style:dashed">single floor confirmed → no floor selector, note shown</span>
+    </div>
+  </div>
+  <div class="ann" style="right:12px;bottom:10px">hover/FOCUS highlights zone · click/tap/Enter opens room detail · category colours match carousel + timetable</div>
+</div>
+
+<div class="wf"><span class="lab">06 · Equipment preview + full directory</span>
+  <div class="grid3">
+    <div class="box card">equip card: photo/monogram · name · plain purpose · zone</div>
+    <div class="box card">…6 cards…</div>
+    <div class="box card">"Open full directory →" (search · category + zone filters · specs on demand · find-on-layout)</div>
+  </div>
+  <div class="ann" style="right:12px;bottom:8px">directory opens as overlay view (deep-link #directory) with focus trap + Esc + Back support</div>
+</div>
+
+<div class="wf"><span class="lab">07 · Batches &amp; events — concepts 20 + 13</span>
+  <div class="box tall" style="margin:12px;background:#111;color:#ffb400;border-width:2px;border-color:#000;box-shadow:inset 0 0 0 4px #1c1c1c">SPLIT-FLAP BOARD — "UP NEXT AT CORE CULTURE" · next 3–4 sessions (time · name · zone) · flips on load/change · static text for reduced-motion + screen readers</div>
+  <div class="box tall" style="margin:0 12px 10px">tabs: WEEKLY BATCHES | UPCOMING EVENTS + day chips (Mon–Sun) + category filter chips (HYROX · Strength · Cardio · Dance · Yoga · Recovery · Community)</div>
+  <div class="rows">
+    <div class="rowline"><span class="t">06:00</span><span class="n">CLASS NAME · coach ◇ · zone(link) · level · duration — expands: description, what to bring, Book action</span><span class="box">+</span></div>
+    <div class="rowline"><span class="t">09:00</span><span class="n">…rows share one schedule source with board + room details…</span><span class="box">+</span></div>
+  </div>
+</div>
+
+<div class="wf"><span class="lab">08 · Memberships — paper section, no invented prices</span>
+  <div class="grid3">
+    <div class="box card" style="min-height:190px">plan: name · price "TBC ◇" · billing · duration · facilities · classes · extras · terms · CTA</div>
+    <div class="box card" style="min-height:190px;outline:2px solid var(--ac);outline-offset:-8px">highlighted card ◇ "house pick — pending confirmation"</div>
+    <div class="box card" style="min-height:190px">plan 3 · terms TBC rows ◇</div>
+  </div>
+</div>
+
+<div class="wf"><span class="lab">09 · Book a trial + 10 · Contact &amp; footer</span>
+  <div class="two">
+    <div class="box" style="min-height:230px;flex-direction:column;gap:6px;align-items:stretch">
+      <b>FORM</b> — name · phone · training interest · preferred date + time
+      <span class="box" style="min-height:26px;border-style:dashed">context chip when carried from room/class ◇</span>
+      <span class="box" style="min-height:26px">states: validation · loading · success · error — labelled DEMO (nothing is sent)</span>
+    </div>
+    <div class="box" style="min-height:230px;flex-direction:column;gap:6px;align-items:stretch">
+      <b>CONTACT ◇</b> — address · hours · phone · whatsapp · email · directions · socials · parking/access
+      <span class="box" style="min-height:26px;border-style:dashed">every field carries SAMPLE/TBC chip until confirmed</span>
+    </div>
+  </div>
+  <footer><span>◆ wordmark · THIS IS YOUR TRAINING GROUND</span><span>concise nav · prototype notice</span></footer>
+</div>
+
+<p class="note">Shared room-detail panel wireframe → <a href="wireframe-room.html">wireframe-room.html</a></p>
+</body>
+</html>

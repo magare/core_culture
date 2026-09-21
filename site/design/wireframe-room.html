@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WIREFRAME — Core Culture room detail (shared view)</title>
+<style>
+:root{--ln:#8a8a8a;--bx:#e9e6de;--ac:#ff5a1f;--ann:#b3271d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:12px/1.5 "Helvetica Neue",Arial,sans-serif;background:#f6f4ef;color:#333;padding:18px}
+h1{font-size:15px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.note{color:#777;margin-bottom:18px;max-width:90ch}
+.stage{border:1.5px solid var(--ln);position:relative;min-height:560px;display:grid;grid-template-columns:1fr 460px}
+.page{background:#cfcabe;display:flex;align-items:center;justify-content:center;color:#666;letter-spacing:.1em;text-transform:uppercase;font-size:11px}
+.panel{background:#fff;border-left:1.5px solid var(--ln);padding:14px;display:flex;flex-direction:column;gap:10px;position:relative}
+.lab{position:absolute;top:-9px;left:10px;background:#f6f4ef;padding:0 6px;font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ann)}
+.b{background:var(--bx);border:1px solid var(--ln);padding:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#555;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em}
+.dash{border-style:dashed}
+.row{display:flex;gap:8px}
+.ann{font-size:9.5px;color:var(--ann);font-weight:700}
+@media(max-width:900px){.stage{grid-template-columns:1fr}.page{display:none}.panel{border-left:0;border-top:1.5px solid var(--ln)}.mobile-note{display:block!important}}
+.mobile-note{display:none;color:var(--ann);font-weight:700;font-size:10px;margin-top:10px}
+</style>
+</head>
+<body>
+<h1>Wireframe — room detail (shared by carousel + floor plan + directory)</h1>
+<p class="note">Desktop: right side panel (~460–560px) over dimmed page. Mobile: full-screen. Opens from: amenities panel CTA, plan zone click, room-list click, equipment "find on layout", schedule location links. Deep link <b>#room=strength</b>. Esc / ✕ / browser-Back close; scroll position and previously selected room are preserved.</p>
+
+<div class="stage"><span class="lab" style="z-index:2">Shared room-detail panel</span>
+  <div class="page">page beneath — dimmed, scroll preserved</div>
+  <div class="panel" role="dialog" aria-label="Room detail wireframe">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <span class="b dash" style="min-width:86px">← category chip</span>
+      <span class="b" style="min-width:60px">✕ close</span>
+    </div>
+    <div style="font-size:19px;font-weight:900;letter-spacing:-.01em;text-transform:uppercase">Strength Zone <span class="ann">+ room no.</span></div>
+    <div class="b" style="min-height:20px;border:0;justify-content:flex-start;padding:0;color:#777;text-transform:none">short introduction — 1–2 lines</div>
+    <div class="b" style="min-height:200px">GALLERY — main photograph (prev / next)</div>
+    <div class="row">
+      <span class="b" style="flex:1;min-height:52px">thumb 1</span>
+      <span class="b" style="flex:1;min-height:52px">thumb 2</span>
+      <span class="b" style="flex:1;min-height:52px">thumb 3</span>
+      <span class="b dash" style="flex:1;min-height:52px">enlarge ⤢ (lightbox, Esc closes)</span>
+    </div>
+    <div class="row">
+      <span class="b" style="flex:1">Facilities &amp; specs (mono table) ◇</span>
+      <span class="b dash" style="flex:1">ACCESS: included · bookable · TBC</span>
+    </div>
+    <div class="b" style="min-height:44px">Equipment in this zone — chips → open directory filtered to this room</div>
+    <div class="b" style="min-height:60px">Relevant batches / sessions (from the one schedule source) — each row: day · time · name · Book</div>
+    <div class="row">
+      <span class="b" style="flex:1;background:var(--ac);border-color:var(--ac);color:#fff">Book a trial (context carried)</span>
+      <span class="b" style="flex:1">Enquire about this space</span>
+    </div>
+    <div class="ann">focus trapped in panel · close returns focus to trigger · ✕ = first focus on open</div>
+  </div>
+</div>
+<p class="mobile-note">MOBILE → panel becomes full-screen sheet; room list under the plan remains the simple alternative navigation.</p>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — This is your Training Ground</title>
+<meta name="description" content="Core Culture Training Club — strength, HYROX, cardio, dance and recovery under one roof. Explore the gym, find your batch, book a trial.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101013'/%3E%3Crect x='7' y='7' width='18' height='18' fill='%23ff5a1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=Doto:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- prototype notice -->
+<div class="notice" id="notice" hidden>
+  <span><b>Prototype.</b> Schedules, prices and contact details are clearly-marked samples — nothing here is a confirmed business fact yet.</span>
+  <button type="button" id="noticeClose" aria-label="Dismiss notice">Dismiss</button>
+</div>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="siteNav">
+  <a class="brand" href="#top" aria-label="Core Culture — back to top">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-word">Core&nbsp;<em>Culture</em></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#amenities">Explore the Gym</a>
+    <a href="#plan">Layout</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#schedule">Batches &amp; Events</a>
+    <a href="#memberships">Memberships</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="nav-actions">
+    <a class="btn btn-accent btn-nav" href="#book" data-book>Book a Trial</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <nav aria-label="Mobile">
+    <a href="#amenities">Explore the Gym</a>
+    <a href="#plan">Layout</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#schedule">Batches &amp; Events</a>
+    <a href="#memberships">Memberships</a>
+    <a href="#contact">Contact</a>
+    <a class="btn btn-accent" href="#book" data-book>Book a Trial</a>
+  </nav>
+  <p class="mobile-menu-foot">This is your Training Ground</p>
+</div>
+
+<main id="main">
+
+  <!-- ================= HERO — concept 24 ================= -->
+  <section class="hero" id="top" aria-label="Core Culture — introduction">
+    <div class="hero-media" id="heroMedia" aria-hidden="true">
+      <img id="heroImg" alt="" draggable="false">
+      <div class="torch" id="torch" aria-hidden="true"></div>
+      <div class="hero-shade" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-kicker">Core Culture — Training Club</p>
+      <h1 class="hero-title">This is your<br><span class="hero-title-accent">Training&nbsp;Ground</span></h1>
+      <p class="hero-lede">Strength, HYROX turf, engine room, a studio that dances, and three honest minutes in an ice bath — one roof, one culture. Have a look around before you come down.</p>
+      <div class="hero-cta">
+        <a class="btn btn-accent btn-big" href="#book" data-book>Book a Trial</a>
+        <a class="btn btn-ghost btn-big" href="#amenities">Explore the Gym</a>
+      </div>
+      <p class="hero-meta"><span id="heroHours">Hours — to confirm</span><span id="heroRooms"></span><span>Walk-ins welcome</span></p>
+    </div>
+
+    <button class="lights" id="lightsBtn" aria-pressed="false">
+      <span class="lights-toggle" aria-hidden="true"></span>
+      <span class="lights-label">Lights on<small id="lightsState">the floor, before the lights</small></span>
+    </button>
+    <p class="hero-hint" id="heroHint">Move to explore · flip the lights when ready</p>
+  </section>
+
+  <!-- marquee — concept 11 energy -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- ================= AMENITIES — concept 07 ================= -->
+  <section class="section section-amenities" id="amenities" aria-labelledby="amenities-h">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">01 · Explore the gym</p>
+        <h2 class="section-title" id="amenities-h">One roof. Seven ways in.</h2>
+        <p class="section-intro">Walk the club sideways, room by room. Every space opens into its own detail — photos, kit, and what's on there.</p>
+      </div>
+      <div class="car-controls">
+        <button class="ctl" id="carPrev" aria-label="Previous room">←</button>
+        <button class="ctl" id="carNext" aria-label="Next room">→</button>
+      </div>
+    </div>
+
+    <div class="car-track" id="carTrack" role="region" aria-label="Rooms carousel — scrolls horizontally" tabindex="0"></div>
+
+    <div class="car-foot">
+      <div class="car-progress" aria-hidden="true"><span id="carBar"></span></div>
+      <div class="car-chips" id="carChips" role="group" aria-label="Jump to a room"></div>
+    </div>
+  </section>
+
+  <!-- ================= FLOOR PLAN — concept 19 ================= -->
+  <section class="section section-plan" id="plan" aria-labelledby="plan-h">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">02 · The layout</p>
+        <h2 class="section-title" id="plan-h">The floor, drawn to be read</h2>
+        <p class="section-intro">Click a zone — on the plan or in the list — to open the room. <b class="sample-chip">Illustrative layout</b> — the real survey drawing replaces it when supplied.</p>
+      </div>
+      <p class="plan-floor">Ground floor · single-level club <span class="sample-chip">to confirm</span></p>
+    </div>
+
+    <div class="plan-grid">
+      <div class="plan-sheet">
+        <svg id="planSvg" viewBox="0 0 1000 640" role="group" aria-label="Gym floor plan with clickable zones"></svg>
+        <span class="plan-stamp">CC · layout 01 — illustrative, not for construction</span>
+      </div>
+      <div class="room-list" id="roomList" role="list" aria-label="Room list — every zone, as an alternative to the plan"></div>
+    </div>
+  </section>
+
+  <!-- ================= EQUIPMENT ================= -->
+  <section class="section section-equip" id="equipment" aria-labelledby="equip-h">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">03 · Equipment</p>
+        <h2 class="section-title" id="equip-h">The kit, in plain language</h2>
+        <p class="section-intro">What it is, what it's for, and where it lives. No jargon required — specs are there when you want them.</p>
+      </div>
+      <button class="btn btn-dark btn-big" id="openDirectory">Browse the full directory</button>
+    </div>
+    <div class="equip-grid" id="equipPreview"></div>
+  </section>
+
+  <!-- ================= BATCHES & EVENTS — concepts 20 + 13 ================= -->
+  <section class="section section-schedule" id="schedule" aria-labelledby="sched-h">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">04 · Batches &amp; events</p>
+        <h2 class="section-title" id="sched-h">What's on, and what's next</h2>
+        <p class="section-intro">One schedule feeds everything on this page — the board below, the weekly batches, and each room's sessions.</p>
+      </div>
+    </div>
+
+    <div class="flap-wrap">
+      <div class="flap-head">
+        <h3 class="flap-title">Up next at Core Culture</h3>
+        <p class="flap-note">Board animates once, then settles — the list below is always the readable source.</p>
+      </div>
+      <div class="flapboard" id="flapBoard" aria-live="polite" aria-label="Next sessions at Core Culture"></div>
+    </div>
+
+    <div class="tt" id="timetable">
+      <div class="tt-controls">
+        <div class="tt-tabs" role="tablist" aria-label="Schedule type">
+          <button class="tt-tab" role="tab" id="tabBatches" aria-selected="true" aria-controls="ttPanel">Weekly Batches</button>
+          <button class="tt-tab" role="tab" id="tabEvents" aria-selected="false" aria-controls="ttPanel">Upcoming Events</button>
+        </div>
+        <div class="tt-chips" id="dayChips" role="group" aria-label="Day"></div>
+      </div>
+      <div class="tt-filter" id="catChips" role="group" aria-label="Category"></div>
+      <div class="tt-rows" id="ttRows" role="tabpanel" aria-labelledby="tabBatches" tabindex="0"></div>
+      <p class="tt-empty" id="ttEmpty" hidden>Nothing matches that combination — try another day or category.</p>
+    </div>
+
+    <div class="noteband">
+      <span><b>Every batch is included</b> in membership — trial week covers them all. <span class="sample-chip sample-chip-dark">schedule is sample</span></span>
+      <span>Questions → <a href="#contact">contact the desk</a></span>
+    </div>
+  </section>
+
+  <!-- ================= MEMBERSHIPS ================= -->
+  <section class="section section-plans paper" id="memberships" aria-labelledby="plans-h">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">05 · Memberships</p>
+        <h2 class="section-title" id="plans-h">Pick a lane. All lanes include the whole club.</h2>
+        <p class="section-intro">The structure is ready; the numbers wait for the owner. <b class="sample-chip">No prices are published until confirmed</b> — nothing below is an offer.</p>
+      </div>
+    </div>
+    <div class="plans-grid" id="plansGrid"></div>
+    <p class="plans-note">Every plan: joining, cancellation and freeze terms are being finalised — ask at the desk or send the enquiry form and we'll walk you through the current terms.</p>
+  </section>
+
+  <!-- ================= BOOK A TRIAL ================= -->
+  <section class="section section-book" id="book" aria-labelledby="book-h">
+    <div class="book-grid">
+      <div class="book-intro">
+        <p class="section-kicker">06 · Book a trial</p>
+        <h2 class="section-title" id="book-h">First visit? Walk in like you own it.</h2>
+        <p class="section-intro">Leave your details and preferred slot — the desk calls back to confirm your tour and first session. If you came here from a room or a class, we've already noted it.</p>
+        <ul class="book-points">
+          <li>A tour of every zone, lights on</li>
+          <li>One coached taster session — your pick</li>
+          <li>No card, no contract, no sales theatre</li>
+        </ul>
+      </div>
+
+      <form class="book-form" id="trialForm" novalidate>
+        <p class="form-context" id="formContext" hidden></p>
+
+        <div class="field">
+          <label for="fName">Name</label>
+          <input id="fName" name="name" type="text" autocomplete="name" required>
+          <p class="field-err" id="errName" hidden>Please tell us your name.</p>
+        </div>
+        <div class="field">
+          <label for="fPhone">Contact number</label>
+          <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="Digits with country code if abroad">
+          <p class="field-err" id="errPhone" hidden>That number looks too short — include the full digits.</p>
+        </div>
+        <div class="field">
+          <label for="fInterest">Training interest</label>
+          <select id="fInterest" name="interest">
+            <option value="general">Just looking — show me everything</option>
+            <option value="strength">Strength</option>
+            <option value="hybrid">HYROX / functional</option>
+            <option value="cardio">Cardio &amp; engine</option>
+            <option value="studio">Dance &amp; yoga</option>
+            <option value="recovery">Recovery</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="fDate">Preferred date</label>
+            <input id="fDate" name="date" type="date" required>
+            <p class="field-err" id="errDate" hidden>Pick a date from today onwards.</p>
+          </div>
+          <div class="field">
+            <label for="fTime">Preferred time</label>
+            <select id="fTime" name="time">
+              <option>Morning (06:00 – 10:00)</option>
+              <option>Midday (10:00 – 16:00)</option>
+              <option>Evening (16:00 – 22:00)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fMsg">Anything else? <span class="opt">(optional)</span></label>
+          <textarea id="fMsg" name="message" rows="3" placeholder="Goals, injuries, questions…"></textarea>
+        </div>
+
+        <button class="btn btn-accent btn-big btn-submit" id="formSubmit" type="submit">Request my trial</button>
+        <p class="form-note" id="formNote"><b>Demo form.</b> Nothing is sent or booked — in production this hands your request to the club's booking contact and the desk confirms by call or WhatsApp.</p>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section section-contact paper" id="contact" aria-labelledby="contact-h">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">07 · Contact</p>
+        <h2 class="section-title" id="contact-h">Find us. Park. Walk in.</h2>
+        <p class="section-intro" id="contactSampleNote"></p>
+      </div>
+    </div>
+    <div class="contact-grid" id="contactGrid"></div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot-brand">
+      <span class="brand-word brand-word-big">Core&nbsp;<em>Culture</em></span>
+      <p class="foot-tag">This is your Training Ground</p>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="#amenities">Explore the Gym</a>
+      <a href="#plan">Layout</a>
+      <a href="#equipment">Equipment</a>
+      <a href="#schedule">Batches &amp; Events</a>
+      <a href="#memberships">Memberships</a>
+      <a href="#book" data-book>Book a Trial</a>
+    </nav>
+    <p class="foot-note">Review prototype · schedules, prices &amp; contact details are samples pending owner confirmation · imagery is brand art direction, not verified photography of the gym.</p>
+  </footer>
+</main>
+
+<!-- ================= ROOM DETAIL PANEL (shared) ================= -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="room-panel" id="roomPanel" role="dialog" aria-modal="true" aria-labelledby="rpName" hidden>
+  <button class="panel-close" id="rpClose" aria-label="Close room details">✕</button>
+  <div class="panel-body" id="rpBody"><!-- filled by app.js --></div>
+</aside>
+
+<!-- ================= EQUIPMENT DIRECTORY (full view) ================= -->
+<div class="directory" id="directory" role="dialog" aria-modal="true" aria-labelledby="dirTitle" hidden>
+  <div class="dir-head">
+    <div>
+      <p class="section-kicker">Equipment directory</p>
+      <h2 id="dirTitle">Every piece, in plain language</h2>
+    </div>
+    <button class="panel-close panel-close-static" id="dirClose" aria-label="Close directory">✕</button>
+  </div>
+  <div class="dir-controls">
+    <div class="dir-search">
+      <label class="mono-label" for="dirSearch">Search</label>
+      <input id="dirSearch" type="search" placeholder="Try “sled”, “barbell”, “plunge”…">
+    </div>
+    <div class="dir-filter">
+      <span class="mono-label" id="dirCatLabel">Category</span>
+      <div class="chip-row" id="dirCats" role="group" aria-labelledby="dirCatLabel"></div>
+    </div>
+    <div class="dir-filter">
+      <label class="mono-label" for="dirZone">Zone</label>
+      <select id="dirZone"><option value="all">All zones</option></select>
+    </div>
+  </div>
+  <p class="dir-count" id="dirCount" role="status" aria-live="polite"></p>
+  <div class="dir-grid" id="dirGrid"></div>
+</div>
+
+<!-- lightbox for gallery enlarge -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo" hidden>
+  <button class="panel-close panel-close-static" id="lbClose" aria-label="Close enlarged photo">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous photo">←</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">→</button>
+</div>
+
+<script src="js/data.js?v=3"></script>
+<script src="js/app.js?v=3" defer></script>
+</body>
+</html>
