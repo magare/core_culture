@@ -1,0 +1,10 @@
+# Local macOS and editor metadata
+.DS_Store
+.zcode/
+
+# Common local development artifacts
+node_modules/
+dist/
+build/
+coverage/
+*.log
