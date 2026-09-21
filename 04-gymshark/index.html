@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — We Do Train</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232f9d72'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='700' fill='%23fff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#fff; --ink:#0d1012; --gray:#5a5f62; --field:#f0efec; --hair:#e6e6e4;
+  --green:#2f9d72; --green-deep:#237d59; --green-soft:#67c59a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',Helvetica,Arial,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,.disp{font-family:'Barlow Semi Condensed','Arial Narrow',sans-serif;text-transform:uppercase}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 18px;z-index:300}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.on-green :focus-visible{outline-color:#fff}
+
+/* promo bar */
+.promo{background:var(--green);color:#fff;text-align:center;font-size:13px;font-weight:500;padding:9px 16px}
+.promo a{text-decoration:underline;text-underline-offset:2px}
+
+/* header */
+header.site{position:sticky;top:0;left:0;right:0;z-index:120;transition:background .2s ease, box-shadow .2s ease}
+header.site.solid{background:var(--white);box-shadow:0 1px 0 var(--hair)}
+header.site.solid a, header.site.solid .logo{color:var(--ink)}
+header.site:not(.solid) a, header.site:not(.solid) button, header.site:not(.solid) .logo{color:#fff}
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:60px;padding:0 40px}
+nav.main{display:flex;gap:4px}
+nav.main a{font-size:14px;font-weight:500;padding:7px 12px}
+nav.main a:hover{text-decoration:underline;text-underline-offset:4px}
+.logo{font-family:'Barlow Semi Condensed',sans-serif;font-weight:800;font-size:21px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.bar-right{display:flex;justify-content:flex-end;align-items:center;gap:4px}
+.icon-btn{width:38px;height:38px;display:grid;place-items:center;border-radius:0}
+.icon-btn:hover{background:rgba(128,128,128,.15)}
+header.site.solid .icon-btn:hover{background:var(--field)}
+.icon-btn svg{width:19px;height:19px}
+.burger{display:none}
+
+/* search */
+.search-overlay{position:fixed;inset:0;z-index:200;background:rgba(255,255,255,.985);display:none;flex-direction:column;padding:24px}
+.search-overlay.open{display:flex}
+.search-overlay .row{display:grid;grid-template-columns:1fr auto;gap:0;max-width:860px;width:100%;margin:72px auto 0}
+.search-overlay input{font:inherit;font-size:20px;padding:15px 18px;border:2px solid var(--ink);background:#fff;width:100%;border-radius:0}
+.results{max-width:860px;width:100%;margin:20px auto 0;overflow:auto}
+.results a{display:flex;justify-content:space-between;gap:16px;padding:12px 18px}
+.results a:hover,.results a.active{background:var(--field)}
+.results a b{font-weight:700;color:var(--ink)}
+.results a span{color:var(--gray);font-size:13px}
+.results .none{color:var(--gray);padding:12px 18px}
+.sx{background:var(--ink);color:#fff;padding:0 20px;font-weight:700}
+
+/* mobile nav */
+.mnav{position:fixed;inset:0;background:var(--white);z-index:210;display:none;flex-direction:column;padding:16px}
+.mnav.open{display:flex}
+.mnav .top{display:flex;justify-content:space-between;align-items:center;height:48px}
+.mnav nav{display:flex;flex-direction:column;margin-top:22px}
+.mnav nav a{font-family:'Barlow Semi Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:34px;color:var(--ink);padding:11px 2px;border-bottom:1px solid var(--hair)}
+.mnav nav a:hover{color:var(--green)}
+.mnav .foot{margin-top:auto;color:var(--gray);font-size:13.5px}
+
+/* hero */
+.hero{background:radial-gradient(120% 160% at 15% 10%, #6fce9f 0%, var(--green) 42%, var(--green-deep) 100%);padding:188px 0 64px;margin-top:-60px}
+.hero .stack{text-align:center;color:#fff;padding:0 24px}
+.hero h2{font-size:clamp(38px,4.6vw,64px);font-weight:800;letter-spacing:.01em;line-height:.94}
+.hero .stack p{font-size:15.5px;margin:16px auto 6px;max-width:560px;color:rgba(255,255,255,.92)}
+.hero .stack .fine{font-size:13px;color:rgba(255,255,255,.75)}
+.halves{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:1392px;margin:52px auto 0;padding:0 24px}
+.half{position:relative;display:block;overflow:hidden;aspect-ratio:.72;background:#111}
+.half img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.half:hover img{transform:scale(1.03)}
+.half .cap{position:absolute;left:0;right:0;top:44px;text-align:center;color:#fff;font-family:'Barlow Semi Condensed',sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(26px,2.6vw,38px);letter-spacing:.02em;line-height:.95;text-shadow:0 1px 14px rgba(0,0,0,.45)}
+.half .cap small{display:block;font-family:'Inter',sans-serif;font-weight:500;font-size:13px;text-transform:none;letter-spacing:0;opacity:.9;margin-top:6px}
+.btn{display:inline-block;background:#fff;color:var(--ink);font-size:14px;font-weight:500;padding:13px 26px;border-radius:0;transition:background .2s}
+.btn:hover{background:#e9e9e9}
+.half .btn{position:absolute;left:50%;transform:translateX(-50%);top:150px}
+
+/* sections */
+.sec{max-width:1392px;margin:0 auto;padding:72px 24px 0}
+.sec-head{font-size:17px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:var(--ink)}
+
+/* product rows */
+.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px}
+.row4[hidden]{display:none}
+.card{display:block}
+.card .ph{position:relative;background:var(--field);overflow:hidden;aspect-ratio:4/4.4}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover .ph img{transform:scale(1.04)}
+.badge{position:absolute;top:0;left:0;width:34px;height:34px;background:var(--green);color:#fff;display:grid;place-items:center}
+.badge svg{width:17px;height:17px}
+.card .cap{font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink);margin-top:10px}
+.card .cap b{font-weight:800}
+.card .sub{font-size:13.5px;color:var(--gray);margin-top:2px}
+
+/* new in halves */
+.wide2{display:grid;grid-template-columns:1fr 1fr;margin:64px -24px 0}
+.wide2 .half{aspect-ratio:1.18;border-radius:0}
+.wide2 .half .cap{top:auto;bottom:88px}
+.wide2 .half .btn{top:auto;bottom:28px}
+
+/* tabs */
+.chips{display:flex;gap:8px;margin-top:14px}
+.chip{font-size:13.5px;font-weight:500;padding:9px 18px;border:1px solid #c9c9c9;border-radius:0;background:#fff;color:var(--gray);transition:border-color .15s,color .15s}
+.chip[aria-selected="true"]{border-color:var(--ink);color:var(--ink);font-weight:700}
+.chip:hover{color:var(--ink)}
+
+/* green email band */
+.band{margin-top:88px;background:radial-gradient(130% 200% at 80% 0%, #6fce9f 0%, var(--green) 45%, var(--green-deep) 100%);text-align:center;color:#fff;padding:88px 24px}
+.band h2{font-size:clamp(30px,3.6vw,48px);font-weight:800;letter-spacing:.01em;line-height:.95;max-width:760px;margin:0 auto}
+.band p{font-size:15px;margin:14px auto 22px;color:rgba(255,255,255,.92)}
+.band .ul{display:inline-block;color:#fff;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid #fff;padding-bottom:3px}
+.band .ul:hover{opacity:.85}
+
+/* seo block */
+.about{max-width:1392px;margin:0 auto;padding:72px 24px 64px}
+.about h3{font-size:17px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;margin:26px 0 10px;color:var(--ink)}
+.about p{color:var(--gray);max-width:1160px}
+.about p b{color:var(--ink)}
+
+/* footer */
+footer{border-top:1px solid var(--hair)}
+.foot{max-width:1392px;margin:0 auto;padding:52px 24px 20px}
+.foot-grid{display:grid;grid-template-columns:repeat(3,1fr) 1.4fr;gap:32px;padding-bottom:44px}
+.foot h4{font-size:13.5px;font-weight:700;margin-bottom:14px}
+.foot-links a{display:block;font-size:13.5px;color:var(--gray);padding:4.5px 0}
+.foot-links a:hover{color:var(--ink);text-decoration:underline}
+.about-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.atile{position:relative;display:block;background:var(--field);aspect-ratio:1.35;overflow:hidden}
+.atile img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.atile:hover img{transform:scale(1.04)}
+.atile .lbl{position:absolute;left:0;right:0;bottom:0;background:#fff;padding:9px 12px;font-size:13px;font-weight:500;color:var(--ink)}
+.pay{display:flex;gap:6px;flex-wrap:wrap;margin:26px 0 18px}
+.pay span{border:1px solid var(--hair);background:#fff;color:var(--gray);font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:6px 10px}
+.legal{border-top:1px solid var(--hair);padding-top:16px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--gray)}
+.legal .copy{margin-right:auto}
+.legal a{text-decoration:underline;text-underline-offset:2px}
+.legal a:hover{color:var(--ink)}
+
+/* responsive */
+@media (max-width:1000px){
+  .row4{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .about-tiles{grid-template-columns:1fr 1fr}
+}
+@media (max-width:820px){
+  nav.main{display:none}
+  .burger{display:grid}
+  .bar{padding:0 16px}
+  .halves{padding:0 16px}
+  .sec{padding:56px 16px 0}
+  .wide2{margin-left:-16px;margin-right:-16px}
+  .about{padding:56px 16px 48px}
+  .foot{padding:40px 16px 16px}
+}
+@media (max-width:600px){
+  .halves{grid-template-columns:1fr}
+  .half{aspect-ratio:.9}
+  .wide2{grid-template-columns:1fr}
+  .wide2 .half{aspect-ratio:1}
+  .row4{grid-template-columns:1fr}
+  .card .ph{aspect-ratio:4/3.4}
+  .foot-grid{grid-template-columns:1fr}
+  .hero{padding-top:104px}
+  .hero h2{font-size:clamp(32px,9.4vw,44px)}
+  .half .btn{top:120px}
+  .wide2 .half .cap{bottom:84px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .half img,.card .ph img,.atile img{transition:none}
+  .half:hover img,.card:hover .ph img,.atile:hover img{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<div class="promo">First session free this month — <a href="#join">claim it</a></div>
+<header class="site" id="siteHeader">
+  <div class="bar">
+    <nav class="main" aria-label="Primary">
+      <a href="#floor">Train</a>
+      <a href="#season">Move</a>
+      <a href="#recover">Recover</a>
+      <a href="#popular">Timetable</a>
+    </nav>
+    <a class="logo" href="#top">Core Culture</a>
+    <div class="bar-right">
+      <button class="icon-btn" id="searchOpen" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg>
+      </button>
+      <a class="icon-btn" href="#join" aria-label="Membership">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 4h10a2 2 0 0 1 2 2v14l-7-3.5L5 20V6a2 2 0 0 1 2-2z"/></svg>
+      </a>
+      <button class="icon-btn burger" id="mnavOpen" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="row">
+    <input id="searchInput" type="search" placeholder="Search the club…" autocomplete="off">
+    <button class="sx" id="searchClose" aria-label="Close search">✕</button>
+  </div>
+  <div class="results" id="searchResults"></div>
+</div>
+
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="logo" style="color:var(--ink)">Core Culture</span>
+    <button class="icon-btn" id="mnavClose" aria-label="Close menu" style="background:var(--field);color:var(--ink)">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#floor">Train</a>
+    <a href="#season">Move</a>
+    <a href="#recover">Recover</a>
+    <a href="#popular">Timetable</a>
+    <a href="#join">Membership</a>
+  </nav>
+  <div class="foot">The Foundry District · Open 05:00–23:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — we do train. Sessions, recovery and culture in one membership.</h1>
+
+<!-- HERO -->
+<section class="hero on-green" id="top">
+  <div class="stack">
+    <h2>Training is only<br>part of the culture</h2>
+    <p>Weights, hybrid engine work, a neon dance studio, real recovery — one floor, one membership.</p>
+    <p class="fine">First session free · No joiner's fee this month</p>
+  </div>
+  <div class="halves">
+    <a class="half" href="#popular">
+      <img width="390" height="1180" src="../crops/w304-half-floor.jpg" alt="Athlete driving a weighted sled under gym lights" fetchpriority="high">
+      <span class="cap">The floor<small>Sled, racks and engine work</small></span>
+      <span class="btn">Train</span>
+    </a>
+    <a class="half" href="#season" id="recover">
+      <img width="600" height="580" src="../crops/w304-half-studio.jpg" alt="Dancer silhouetted between neon tubes" fetchpriority="high">
+      <span class="cap">The studio<small>Dance, yoga and Zumba</small></span>
+      <span class="btn">Move</span>
+    </a>
+  </div>
+</section>
+
+<!-- THIS MONTH ON THE FLOOR -->
+<section class="sec" id="floor">
+  <h2 class="sec-head">This month on the floor</h2>
+  <div class="row4">
+    <a class="card" href="#join">
+      <div class="ph"><img width="410" height="400" src="../crops/w304-card-machine.jpg" alt="" loading="lazy"><span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span></div>
+      <p class="cap">Weights <b>from 45 min</b></p>
+      <p class="sub">Biomechanics-backed racks. Less guesswork, more gains.</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="560" height="560" src="../crops/w304-card-ice.jpg" alt="" loading="lazy"><span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span></div>
+      <p class="cap">Ice bath <b>from 20 min</b></p>
+      <p class="sub">Cold, then warm, then quiet. Recover like an athlete.</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="600" height="580" src="../crops/w304-card-dance.jpg" alt="" loading="lazy"><span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span></div>
+      <p class="cap">Dance <b>from 60 min</b></p>
+      <p class="sub">Fitness that doesn't have to look like lifting weights.</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="415" height="375" src="../crops/w304-card-streak.jpg" alt="" loading="lazy"><span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span></div>
+      <p class="cap">Night cardio <b>from 45 min</b></p>
+      <p class="sub">Netflix on the treadmills. One less excuse.</p>
+    </a>
+  </div>
+</section>
+
+<!-- AROUND THE CLUB -->
+<section class="sec">
+  <h2 class="sec-head">Around the club — included</h2>
+  <div class="row4">
+    <a class="card" href="#join">
+      <div class="ph"><img width="1080" height="580" src="../crops/w304-about-field.jpg" alt="" loading="lazy"></div>
+      <p class="cap"><b>Included</b> · Lounge desks</p>
+      <p class="sub">Work-lift balance. Meetings before, chapters after.</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="1080" height="590" src="../crops/w304-about-park.jpg" alt="" loading="lazy"></div>
+      <p class="cap"><b>Included</b> · Ample parking</p>
+      <p class="sub">No parking-lot cardio required.</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="1080" height="510" src="../crops/w304-new-frost.jpg" alt="" loading="lazy"></div>
+      <p class="cap"><b>Included</b> · Industrial AC</p>
+      <p class="sub">Sweating should be a feature, not a problem.</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="415" height="375" src="../crops/w304-card-streak.jpg" alt="" loading="lazy"></div>
+      <p class="cap"><b>Included</b> · Netflix treadmills</p>
+      <p class="sub">OTTI platforms, headphones optional.</p>
+    </a>
+  </div>
+</section>
+
+<!-- NEW THIS SEASON -->
+<section class="sec" id="season">
+  <h2 class="sec-head">New this season</h2>
+  <div class="wide2">
+    <a class="half" href="#join">
+      <img width="1080" height="530" src="../crops/w304-new-pop.jpg" alt="Pop-art figure mid-stride on the culture wall" loading="lazy">
+      <span class="cap">Culture nights<small>Season two opens Friday</small></span>
+      <span class="btn">See the nights</span>
+    </a>
+    <a class="half" href="#join">
+      <img width="1080" height="510" src="../crops/w304-new-frost.jpg" alt="Frosted glass glowing deep blue in the recovery room" loading="lazy">
+      <span class="cap">Cold start<small>Ice bath + steam, reimagined</small></span>
+      <span class="btn">Book the reset</span>
+    </a>
+  </div>
+</section>
+
+<!-- POPULAR RIGHT NOW -->
+<section class="sec" id="popular">
+  <h2 class="sec-head">Popular right now</h2>
+  <div class="chips" role="tablist" aria-label="Time of day">
+    <button class="chip" role="tab" id="chipAm" aria-selected="true">Morning</button>
+    <button class="chip" role="tab" id="chipPm" aria-selected="false" tabindex="-1">Night</button>
+  </div>
+  <div class="row4" id="setAm">
+    <a class="card" href="#join">
+      <div class="ph"><img width="460" height="610" src="../crops/w304-tab-machine.jpg" alt="" loading="lazy"></div>
+      <p class="cap">Iron technique <b>06:00</b></p>
+      <p class="sub">Strength · 60 min · beginner</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="400" height="400" src="../crops/w304-tab-sled.jpg" alt="" loading="lazy"></div>
+      <p class="cap">Engine room <b>07:15</b></p>
+      <p class="sub">Hybrid · 45 min · intermediate</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="600" height="580" src="../crops/w304-tab-dance.jpg" alt="" loading="lazy"></div>
+      <p class="cap">Sunrise groove <b>08:00</b></p>
+      <p class="sub">Dance · 60 min · all levels</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="540" height="590" src="../crops/w304-tab-park.jpg" alt="" loading="lazy"></div>
+      <p class="cap">Arrival window <b>05:00</b></p>
+      <p class="sub">Parking is easy before the city wakes.</p>
+    </a>
+  </div>
+  <div class="row4" id="setPm" hidden>
+    <a class="card" href="#join">
+      <div class="ph"><img width="500" height="375" src="../crops/w304-tab-streak.jpg" alt="" loading="lazy"></div>
+      <p class="cap">Night shift cardio <b>20:00</b></p>
+      <p class="sub">Conditioning · 45 min · all levels</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="490" height="490" src="../crops/w304-tab-frost.jpg" alt="" loading="lazy"></div>
+      <p class="cap">Breath + frost <b>21:00</b></p>
+      <p class="sub">Mobility · 30 min · all levels</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="510" height="460" src="../crops/w304-tab-ice2.jpg" alt="" loading="lazy"></div>
+      <p class="cap">Cold start <b>21:45</b></p>
+      <p class="sub">Recovery · 20 min · all levels</p>
+    </a>
+    <a class="card" href="#join">
+      <div class="ph"><img width="580" height="270" src="../crops/w304-tab-red.jpg" alt="" loading="lazy"></div>
+      <p class="cap">Culture night <b>22:00</b></p>
+      <p class="sub">Community · until late</p>
+    </a>
+  </div>
+</section>
+
+<!-- EMAIL BAND -->
+<section class="band on-green" id="join">
+  <h2>First session's on us. Want in?</h2>
+  <p>Claim a free trial week — every floor, every class, no card.</p>
+  <button class="ul" id="joinOpen">Sign up</button>
+</section>
+
+<!-- SEO-STYLE STORY BLOCK -->
+<section class="about">
+  <h3>More than a gym</h3>
+  <p>Core Culture was built in the weight room, but it was never only about the weight room. <b>Training is only part of the culture</b> — the rest is ice, steam, sofas, screens and people who wave at you by name.</p>
+  <h3>One space. More than one way to move</h3>
+  <p>Our <b>strength floor</b> fits biomechanics, not the other way around. Our <b>engine bay</b> runs on sleds, assault bikes and long intervals. The <b>studio</b> hosts dance, yoga and Zumba for people who train — and for people who just like moving to music.</p>
+  <h3>Recovery is training too</h3>
+  <p><b>Cold, then warm, then quiet.</b> Ice bath, steam and sauna sit ten steps from the racks, because the session doesn't end when the weights are racked.</p>
+  <h3>Train. Move. Recover. Connect.</h3>
+  <p>That's the whole philosophy. Looking for the timetable, culture nights or the lounge? It's all under one roof at The Foundry District — open 05:00–23:00, seven days.</p>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer id="visit">
+  <div class="foot">
+    <div class="foot-grid">
+      <div class="foot-links">
+        <h4>Train</h4>
+        <a href="#floor">The floor</a>
+        <a href="#popular">Timetable</a>
+        <a href="#season">Culture nights</a>
+        <a href="#recover">Recovery</a>
+      </div>
+      <div class="foot-links">
+        <h4>Visit</h4>
+        <a href="#visit">The Foundry District</a>
+        <a href="#visit">Parking</a>
+        <a href="#visit">Opening hours</a>
+        <a href="#visit">Contact</a>
+      </div>
+      <div class="foot-links">
+        <h4>Membership</h4>
+        <a href="#join">Free trial week</a>
+        <a href="#join">Plans</a>
+        <a href="#join">Freeze or cancel</a>
+        <a href="#join">Student rate</a>
+      </div>
+      <div>
+        <h4>More about Core Culture</h4>
+        <div class="about-tiles">
+          <a class="atile" href="#floor"><img width="580" height="410" src="../crops/w304-about-desk.jpg" alt="" loading="lazy"><span class="lbl">Training guides</span></a>
+          <a class="atile" href="#season"><img width="580" height="270" src="../crops/w304-tab-red.jpg" alt="" loading="lazy"><span class="lbl">Culture nights</span></a>
+          <a class="atile" href="#join"><img width="1080" height="590" src="../crops/w304-about-park.jpg" alt="" loading="lazy"><span class="lbl">Email sign up</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="pay" aria-label="Accepted at the club">
+      <span>VISA</span><span>MASTERCARD</span><span>APPLE PAY</span><span>GOOGLE PAY</span><span>CASH</span>
+    </div>
+    <div class="legal">
+      <span class="copy">© 2026 | Core Culture | All rights reserved. | Train. Move. Recover. Connect.</span>
+      <a href="#top">Back to top</a>
+      <a href="#join">Terms</a>
+      <a href="#visit">Privacy</a>
+      <a href="#visit">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<dialog id="joinDlg" style="border:0;border-radius:0;padding:0;max-width:440px;width:calc(100% - 48px);box-shadow:0 24px 64px rgba(0,0,0,.3)" aria-labelledby="dlgTitle">
+  <div style="padding:28px">
+    <div id="dlgForm">
+      <h2 id="dlgTitle" style="font-size:24px;font-weight:800;letter-spacing:.02em;color:var(--ink)">Claim your first session</h2>
+      <p style="color:var(--gray);font-size:14px;margin:8px 0 4px">Free trial week, no card. We'll hold a spot on the floor.</p>
+      <form id="joinForm" novalidate>
+        <label for="jfName" style="display:block;font-size:13px;font-weight:500;margin:14px 0 6px">Name</label>
+        <input id="jfName" type="text" autocomplete="name" required style="width:100%;font:inherit;padding:12px 14px;border:1.5px solid #c9c9c9;border-radius:0">
+        <label for="jfEmail" style="display:block;font-size:13px;font-weight:500;margin:14px 0 6px">Email</label>
+        <input id="jfEmail" type="email" autocomplete="email" required style="width:100%;font:inherit;padding:12px 14px;border:1.5px solid #c9c9c9;border-radius:0">
+        <p id="jfErr" style="color:#b4241a;font-size:13px;margin-top:10px;display:none">Please add your name and a valid email.</p>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:22px">
+          <button type="button" class="btn" id="dlgCancel" style="background:var(--field)">Not now</button>
+          <button type="submit" class="btn" style="background:var(--green);color:#fff">Claim it</button>
+        </div>
+      </form>
+    </div>
+    <div id="dlgOk" style="display:none;text-align:center;padding:16px 0 8px">
+      <p style="font-family:'Barlow Semi Condensed',sans-serif;text-transform:uppercase;font-weight:800;font-size:30px;color:var(--ink);margin-bottom:10px">You're in.</p>
+      <p id="okMsg" style="color:var(--gray)"></p>
+      <div style="margin-top:20px"><button class="btn" id="dlgDone" style="background:var(--ink);color:#fff">Done</button></div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* header solid state */
+  var header = document.getElementById("siteHeader");
+  var hero = document.querySelector(".hero");
+  function headerState(){
+    var heroBottom = hero.offsetTop + hero.offsetHeight;
+    header.classList.toggle("solid", window.scrollY > heroBottom - 64);
+  }
+  window.addEventListener("scroll", headerState, {passive:true});
+  headerState();
+
+  /* tabs */
+  var chips = [document.getElementById("chipAm"), document.getElementById("chipPm")];
+  var sets = [document.getElementById("setAm"), document.getElementById("setPm")];
+  function pick(i){
+    chips.forEach(function(c, k){
+      c.setAttribute("aria-selected", k === i ? "true" : "false");
+      c.tabIndex = k === i ? 0 : -1;
+    });
+    sets.forEach(function(s, k){ s.hidden = k !== i; });
+  }
+  chips.forEach(function(c, i){
+    c.addEventListener("click", function(){ pick(i); });
+    c.addEventListener("keydown", function(e){
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft"){
+        var n = (i + 1) % 2;
+        pick(n); chips[n].focus();
+      }
+    });
+  });
+
+  /* search */
+  var index = [
+    {t: "Weights", k: "from 45 min", h: "#floor"},
+    {t: "Ice bath", k: "from 20 min", h: "#floor"},
+    {t: "Dance", k: "from 60 min", h: "#floor"},
+    {t: "Night cardio", k: "from 45 min", h: "#floor"},
+    {t: "Iron technique", k: "Morning · 06:00", h: "#popular"},
+    {t: "Engine room", k: "Morning · 07:15", h: "#popular"},
+    {t: "Night shift cardio", k: "Night · 20:00", h: "#popular"},
+    {t: "Culture nights", k: "New this season", h: "#season"},
+    {t: "Cold start", k: "Ice bath + steam", h: "#season"},
+    {t: "Membership", k: "Free trial week", h: "#join"},
+    {t: "Parking", k: "Included", h: "#visit"}
+  ];
+  var so = document.getElementById("searchOverlay"),
+      si = document.getElementById("searchInput"),
+      sr = document.getElementById("searchResults"),
+      soOpener = document.getElementById("searchOpen");
+  function render(q){
+    sr.innerHTML = "";
+    var list = index.filter(function(x){ return !q || (x.t + " " + x.k).toLowerCase().indexOf(q.toLowerCase()) !== -1; });
+    if (!list.length){
+      var p = document.createElement("p");
+      p.className = "none";
+      p.textContent = "Nothing matches “" + q + "”.";
+      sr.appendChild(p); return;
+    }
+    list.slice(0, 8).forEach(function(x, i){
+      var a = document.createElement("a");
+      a.href = x.h; if (i === 0) a.className = "active";
+      var b = document.createElement("b"); b.textContent = x.t;
+      var s = document.createElement("span"); s.textContent = x.k;
+      a.appendChild(b); a.appendChild(s);
+      a.addEventListener("click", closeSearch);
+      sr.appendChild(a);
+    });
+  }
+  function openSearch(){
+    so.classList.add("open");
+    document.body.style.overflow = "hidden";
+    si.value = ""; render("");
+    si.focus();
+  }
+  function closeSearch(){
+    so.classList.remove("open");
+    document.body.style.overflow = "";
+    soOpener.focus();
+  }
+  soOpener.addEventListener("click", openSearch);
+  document.getElementById("searchClose").addEventListener("click", closeSearch);
+  si.addEventListener("input", function(){ render(si.value.trim()); });
+  si.addEventListener("keydown", function(e){
+    if (e.key === "Enter"){
+      var first = sr.querySelector("a");
+      if (first){ closeSearch(); location.hash = first.getAttribute("href"); }
+    }
+  });
+
+  /* mobile nav */
+  var mnav = document.getElementById("mnav");
+  document.getElementById("mnavOpen").addEventListener("click", function(){
+    mnav.classList.add("open");
+    this.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mnav.querySelector("a").focus();
+  });
+  function closeMnav(){
+    mnav.classList.remove("open");
+    document.getElementById("mnavOpen").setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+  document.getElementById("mnavClose").addEventListener("click", closeMnav);
+  [].forEach.call(mnav.querySelectorAll("nav a"), function(a){ a.addEventListener("click", closeMnav); });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape"){
+      if (so.classList.contains("open")) closeSearch();
+      if (mnav.classList.contains("open")) closeMnav();
+    }
+  });
+
+  /* join dialog */
+  var dlg = document.getElementById("joinDlg");
+  document.getElementById("joinOpen").addEventListener("click", function(){
+    document.getElementById("dlgForm").style.display = "";
+    document.getElementById("dlgOk").style.display = "none";
+    document.getElementById("jfErr").style.display = "none";
+    dlg.showModal();
+  });
+  document.getElementById("dlgCancel").addEventListener("click", function(){ dlg.close(); });
+  document.getElementById("dlgDone").addEventListener("click", function(){ dlg.close(); });
+  document.getElementById("joinForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("jfName").value.trim();
+    var email = document.getElementById("jfEmail").value.trim();
+    if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      document.getElementById("jfErr").style.display = "block"; return;
+    }
+    document.getElementById("okMsg").textContent = "Check your inbox, " + name.split(" ")[0] + " — your first session is on us.";
+    document.getElementById("dlgForm").style.display = "none";
+    document.getElementById("dlgOk").style.display = "block";
+  });
+})();
+</script>
+</body>
+</html>

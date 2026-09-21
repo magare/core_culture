@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Movement, Engineered</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23fff'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='700' fill='%23111' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#fff; --ink:#111; --body:#333; --field:#f0f0f0; --hair:#e3e3e3; --gray:#6b6b6b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',Helvetica,Arial,sans-serif;color:var(--body);background:var(--white);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 18px;z-index:300}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.on-img :focus-visible{outline-color:#fff}
+
+/* header */
+header.site{position:fixed;top:0;left:0;right:0;z-index:120;transition:background .25s ease, box-shadow .25s ease}
+header.site.solid{background:var(--white);box-shadow:0 1px 0 var(--hair)}
+header.site.solid a, header.site.solid .wordmark{color:var(--ink)}
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px;padding:0 48px}
+header.site:not(.solid) a, header.site:not(.solid) .wordmark, header.site:not(.solid) button{color:#fff}
+.wordmark{font-weight:700;font-size:18px;letter-spacing:-.02em;white-space:nowrap}
+nav.main{display:flex;gap:6px}
+nav.main a{font-size:16px;font-weight:500;padding:8px 14px;border-radius:99px}
+nav.main a:hover{background:rgba(128,128,128,.14)}
+header.site.solid nav.main a:hover{background:var(--field)}
+.bar-right{display:flex;justify-content:flex-end;align-items:center;gap:6px}
+.icon-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center}
+.icon-btn:hover{background:rgba(128,128,128,.14)}
+header.site.solid .icon-btn:hover{background:var(--field)}
+.icon-btn svg{width:20px;height:20px}
+.burger{display:none}
+
+/* search */
+.search-overlay{position:fixed;inset:0;z-index:200;background:rgba(255,255,255,.985);display:none;flex-direction:column;padding:24px}
+.search-overlay.open{display:flex}
+.search-overlay .row{display:grid;grid-template-columns:1fr auto;gap:12px;max-width:880px;width:100%;margin:72px auto 0}
+.search-overlay input{font:inherit;font-size:22px;padding:16px 22px;border:2px solid var(--ink);border-radius:99px;background:#fff;width:100%}
+.results{max-width:880px;width:100%;margin:20px auto 0;overflow:auto}
+.results a{display:flex;justify-content:space-between;gap:16px;padding:13px 20px;border-radius:12px}
+.results a:hover,.results a.active{background:var(--field)}
+.results a b{font-weight:700;color:var(--ink)}
+.results a span{color:var(--gray);font-size:14px}
+.results .none{color:var(--gray);padding:13px 20px}
+
+/* mobile nav */
+.mnav{position:fixed;inset:0;background:var(--white);z-index:210;display:none;flex-direction:column;padding:20px}
+.mnav.open{display:flex}
+.mnav .top{display:flex;justify-content:space-between;align-items:center;height:48px}
+.mnav nav{display:flex;flex-direction:column;margin-top:26px}
+.mnav nav a{font-weight:700;font-size:34px;letter-spacing:-.02em;color:var(--ink);padding:12px 4px;border-bottom:1px solid var(--hair)}
+.mnav nav a:hover{color:var(--gray)}
+.mnav .foot{margin-top:auto;color:var(--gray);font-size:14px}
+
+/* hero */
+.hero{position:relative;height:min(88vh,820px);min-height:560px;overflow:hidden;background:#101010}
+.hero img{width:100%;height:100%;object-fit:cover}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,0) 40%,rgba(0,0,0,.38))}
+.hero .stack{position:absolute;left:48px;bottom:64px;color:#fff;max-width:640px}
+.hero h2{font-size:clamp(38px,4.4vw,60px);font-weight:700;letter-spacing:-.025em;line-height:1.05;color:#fff;text-shadow:0 1px 18px rgba(0,0,0,.35)}
+.hero .stack p{font-size:17px;margin:12px 0 24px;max-width:460px;text-shadow:0 1px 10px rgba(0,0,0,.45)}
+.hero .tagline{position:absolute;right:48px;bottom:64px;color:#fff;text-align:right;font-size:14px;font-weight:500;line-height:1.5;opacity:.9;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:99px;padding:11px 22px;font-size:15px;font-weight:700;line-height:1.2;transition:background .2s,color .2s,transform .2s}
+.pill-white{background:#fff;color:var(--ink)}
+.pill-white:hover{background:#e8e8e8}
+.pill-black{background:var(--ink);color:#fff}
+.pill-black:hover{background:#000}
+.pill .arr{font-weight:400;transition:transform .2s}
+.pill:hover .arr{transform:translateX(3px)}
+
+/* sections */
+.sec{max-width:1440px;margin:0 auto;padding:96px 48px 0}
+.sec-head{font-size:clamp(34px,3.6vw,50px);font-weight:700;letter-spacing:-.025em;line-height:1.1;color:var(--ink)}
+.sec-sub{max-width:520px;margin-top:10px;color:var(--gray)}
+
+/* floor tiles */
+.floor{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.tile{position:relative;display:block;overflow:hidden;border-radius:10px;background:var(--field)}
+.tile.tall{aspect-ratio:3/4}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.tile:hover img{transform:scale(1.04)}
+.tile .cap{position:absolute;left:20px;bottom:18px;color:#fff;font-weight:700;font-size:20px;letter-spacing:-.01em;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.tile .cap small{display:block;font-weight:500;font-size:14px;opacity:.9;margin-bottom:2px}
+
+/* discipline index */
+.index{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;margin-top:44px;align-items:center}
+.index-list{list-style:none}
+.index-list button{display:block;width:100%;text-align:left;font-weight:700;font-size:clamp(34px,3.9vw,54px);letter-spacing:-.025em;line-height:1.18;color:#c9c9c9;transition:color .2s;padding:2px 0}
+.index-list button:hover{color:var(--ink)}
+.index-list button[aria-selected="true"]{color:var(--ink)}
+.index-list button .count{font-size:15px;font-weight:500;color:var(--gray);vertical-align:super;margin-left:8px;letter-spacing:0}
+.index-media{position:relative;aspect-ratio:4/3.2;border-radius:12px;overflow:hidden;background:var(--field)}
+.index-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease}
+.index-media img.current{opacity:1}
+.index-media .media-cap{position:absolute;left:20px;bottom:16px;color:#fff;font-weight:700;font-size:17px;text-shadow:0 1px 10px rgba(0,0,0,.55)}
+
+/* class carousel */
+.classes-sec{position:relative}
+.class-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-top:40px;padding-bottom:4px}
+.class-track::-webkit-scrollbar{display:none}
+.class-card{flex:0 0 clamp(240px,26vw,380px);scroll-snap-align:start}
+.class-card .ph{background:var(--field);border-radius:10px;overflow:hidden;aspect-ratio:1/1}
+.class-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.class-card:hover img{transform:scale(1.04)}
+.class-card .name{font-weight:700;font-size:16px;color:var(--ink);margin-top:14px}
+.class-card .desc{font-size:14.5px;color:var(--gray);margin-top:2px}
+.class-card .meta{font-size:13px;font-weight:500;color:var(--ink);margin-top:10px}
+.car-ctrl{display:flex;align-items:center;gap:20px;margin-top:28px}
+.car-arrow{font-size:24px;line-height:1;color:var(--ink);padding:6px 10px;border-radius:8px;transition:background .2s}
+.car-arrow:hover{background:var(--field)}
+.car-arrow[disabled]{color:#bdbdbd;cursor:default;background:none}
+.progress{flex:1;height:2px;background:var(--hair);border-radius:2px;overflow:hidden}
+.progress i{display:block;height:100%;width:25%;background:var(--ink);transition:width .2s ease, transform .2s ease}
+
+/* stories */
+.stories{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.story{position:relative;display:block;aspect-ratio:4/5;border-radius:10px;overflow:hidden;background:var(--field)}
+.story img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.story:hover img{transform:scale(1.04)}
+.story .cap{position:absolute;left:20px;right:20px;bottom:18px;color:#fff;font-weight:700;font-size:19px;letter-spacing:-.01em;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.story.black{background:#000;display:flex;align-items:flex-end;padding:22px}
+.story.black p{color:#fff;font-weight:700;font-size:22px;letter-spacing:-.015em;line-height:1.25}
+.story.black:hover p{color:#d8d8d8}
+
+/* mission */
+.mission{margin-top:96px}
+.collage{display:flex;gap:16px;align-items:flex-start;overflow:hidden;margin-bottom:56px}
+.collage .c{flex:0 0 auto;border-radius:10px;overflow:hidden}
+.collage .c img{height:100%;width:100%;object-fit:cover}
+.collage .c1{width:44%;aspect-ratio:4/3.1}
+.collage .c2{width:26%;aspect-ratio:4/4.4;margin-top:48px}
+.collage .c3{width:26%;aspect-ratio:4/3.6;background:#000;color:#fff;display:flex;align-items:flex-end;padding:20px;font-weight:700;font-size:21px;letter-spacing:-.015em;line-height:1.25}
+.mission h2{font-size:clamp(34px,3.6vw,50px);font-weight:700;letter-spacing:-.025em;color:var(--ink)}
+.mission .state{font-size:clamp(22px,2.3vw,32px);font-weight:400;letter-spacing:-.015em;line-height:1.35;color:var(--body);max-width:620px;margin:16px 0 28px}
+
+/* footer */
+footer{margin-top:110px;border-top:1px solid var(--hair)}
+.foot{max-width:1440px;margin:0 auto;padding:56px 48px 24px}
+.foot-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:64px;padding-bottom:48px;border-bottom:1px solid var(--hair)}
+.foot h3{font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.01em;max-width:380px}
+.news-form{display:flex;gap:10px;margin-top:18px;max-width:420px}
+.news-form input{flex:1;font:inherit;font-size:15px;padding:12px 16px;border:0;border-radius:10px;background:var(--field)}
+.news-form input:focus{outline:2px solid var(--ink)}
+.news-msg{font-size:13.5px;margin-top:10px;color:var(--gray)}
+.news-msg.ok{color:#1c7c31}
+.news-msg.err{color:#b4241a}
+.foot-links{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.foot-links h4{font-size:13px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.foot-links a{display:block;font-size:14.5px;color:var(--body);padding:4px 0}
+.foot-links a:hover{color:var(--ink);text-decoration:underline}
+.region{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--body);padding:20px 0}
+.region .dot{width:14px;height:14px;border-radius:50%;background:conic-gradient(#1c7c31 0 33%,#f4c531 33% 66%,#b4241a 66% 100%)}
+.legal{display:flex;gap:22px;flex-wrap:wrap;align-items:center;padding-top:18px;border-top:1px solid var(--hair);font-size:12.5px;color:var(--gray)}
+.legal .copy{margin-right:auto}
+.legal a:hover{text-decoration:underline;color:var(--ink)}
+
+/* responsive */
+@media (max-width:1100px){
+  .index{grid-template-columns:1fr;gap:32px}
+  .index-media{order:-1}
+  .stories{grid-template-columns:1fr 1fr}
+  .collage .c1{width:60%}
+  .collage .c2,.collage .c3{width:34%}
+  .foot-grid{grid-template-columns:1fr;gap:40px}
+}
+@media (max-width:900px){
+  nav.main{display:none}
+  .burger{display:grid}
+  .bar{padding:0 20px}
+  .sec{padding:72px 20px 0}
+  .floor{grid-template-columns:1fr 1fr}
+  .hero .stack{left:20px;bottom:48px;right:20px}
+  .hero .tagline{display:none}
+}
+@media (max-width:640px){
+  .floor{grid-template-columns:1fr}
+  .tile.tall{aspect-ratio:4/5}
+  .stories{grid-template-columns:1fr}
+  .story{aspect-ratio:4/4.4}
+  .collage{flex-direction:column}
+  .collage .c1,.collage .c2,.collage .c3{width:100%;margin-top:0}
+  .collage .c2{display:none}
+  .foot{padding:44px 20px 20px}
+  .sec-head{font-size:32px}
+  .hero{min-height:520px}
+  .index-list button{font-size:32px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .tile img,.class-card img,.story img{transition:none}
+  .tile:hover img,.class-card:hover img,.story:hover img{transform:none}
+  .index-media img{transition:none}
+  .pill,.pill .arr{transition:none}
+  .pill:hover .arr{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="site" id="siteHeader">
+  <div class="bar">
+    <a class="wordmark" href="#top">CORE CULTURE</a>
+    <nav class="main" aria-label="Primary">
+      <a href="#floor">Train</a>
+      <a href="#disciplines">Move</a>
+      <a href="#recover">Recover</a>
+      <a href="#stories">Culture</a>
+    </nav>
+    <div class="bar-right">
+      <button class="icon-btn" id="searchOpen" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg>
+      </button>
+      <a class="icon-btn" href="#join" aria-label="Membership">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 4h10a2 2 0 0 1 2 2v14l-7-3.5L5 20V6a2 2 0 0 1 2-2z"/></svg>
+      </a>
+      <button class="icon-btn burger" id="mnavOpen" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="row">
+    <input id="searchInput" type="search" placeholder="Search the club…" autocomplete="off">
+    <button class="icon-btn" id="searchClose" aria-label="Close search" style="background:var(--field)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="results" id="searchResults"></div>
+</div>
+
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark" style="color:var(--ink)">CORE CULTURE</span>
+    <button class="icon-btn" id="mnavClose" aria-label="Close menu" style="background:var(--field)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#floor">Train</a>
+    <a href="#disciplines">Move</a>
+    <a href="#recover">Recover</a>
+    <a href="#stories">Culture</a>
+    <a href="#join">Membership</a>
+  </nav>
+  <div class="foot">The Foundry District · Open 05:00–23:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — movement, engineered. Train, move, recover, connect.</h1>
+
+<!-- HERO -->
+<section class="hero on-img" id="top">
+  <img width="1080" height="580" src="../crops/w303-hero-dance.jpg" alt="Dancer silhouetted between neon tubes in the Core Culture studio" fetchpriority="high">
+  <div class="veil"></div>
+  <div class="stack">
+    <h2>Move like it matters</h2>
+    <p>Weights, hybrid engine work, a neon dance studio, real recovery — one floor, engineered around you.</p>
+    <a class="pill pill-white" href="#join">Find your core</a>
+  </div>
+  <p class="tagline">Open 05:00–23:00<br>The Foundry District</p>
+</section>
+
+<!-- THE FLOOR -->
+<section class="sec" id="floor">
+  <h2 class="sec-head">The floor</h2>
+  <p class="sec-sub">Three rooms, one membership. Biomechanics-backed machines, a sprung dance floor, and an engine bay that doesn't care about your excuses.</p>
+  <div class="floor">
+    <a class="tile tall" href="#disciplines">
+      <img width="410" height="1180" src="../crops/w303-floor-weights.jpg" alt="Plate-loaded strength machine" loading="lazy">
+      <span class="cap"><small>Weights</small>The strength floor</span>
+    </a>
+    <a class="tile tall" href="#disciplines">
+      <img width="600" height="580" src="../crops/w303-floor-studio.jpg" alt="Dancer under neon light" loading="lazy">
+      <span class="cap"><small>Move</small>The studio</span>
+    </a>
+    <a class="tile tall" href="#disciplines">
+      <img width="380" height="1180" src="../crops/w303-floor-engine.jpg" alt="Athlete driving a training sled" loading="lazy">
+      <span class="cap"><small>Push</small>The engine bay</span>
+    </a>
+  </div>
+</section>
+
+<!-- DISCIPLINE INDEX -->
+<section class="sec" id="disciplines">
+  <h2 class="sec-head">Find your discipline</h2>
+  <div class="index">
+    <ul class="index-list" role="tablist" aria-label="Disciplines">
+      <li role="presentation"><button role="tab" aria-selected="true" id="tab-0" data-img="0">Strength <span class="count">14</span></button></li>
+      <li role="presentation"><button role="tab" aria-selected="false" id="tab-1" data-img="1" tabindex="-1">Conditioning <span class="count">9</span></button></li>
+      <li role="presentation"><button role="tab" aria-selected="false" id="tab-2" data-img="2" tabindex="-1">Dance <span class="count">11</span></button></li>
+      <li role="presentation" id="recover" style="scroll-margin-top:96px"><button role="tab" aria-selected="false" id="tab-3" data-img="3" tabindex="-1">Recovery <span class="count">7</span></button></li>
+      <li role="presentation"><button role="tab" aria-selected="false" id="tab-4" data-img="4" tabindex="-1">Community <span class="count">6</span></button></li>
+      <li role="presentation"><button role="tab" aria-selected="false" id="tab-5" data-img="5" tabindex="-1">Arrival <span class="count">24/7</span></button></li>
+    </ul>
+    <div class="index-media" id="indexMedia">
+      <img width="520" height="550" src="../crops/w303-ix-strength.jpg" alt="Athlete training with a heavy sled" class="current">
+      <img width="1080" height="375" src="../crops/w303-ix-condition.jpg" alt="Streaks of light in the conditioning zone" loading="lazy">
+      <img width="1080" height="580" src="../crops/w303-ix-dance.jpg" alt="Dancer between neon tubes" loading="lazy">
+      <img width="1080" height="580" src="../crops/w303-ix-recover.jpg" alt="Ice bath filled with fresh ice" loading="lazy">
+      <img width="850" height="640" src="../crops/w303-ix-community.jpg" alt="A desk set up on the field — the lounge" loading="lazy">
+      <img width="1080" height="590" src="../crops/w303-ix-arrival.jpg" alt="Parking lot at dusk with tail lights" loading="lazy">
+      <span class="media-cap" id="mediaCap">Sled pushes, racks that fit biomechanics.</span>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section class="sec classes-sec" id="classes">
+  <h2 class="sec-head">On the timetable</h2>
+  <div class="class-track" id="classTrack" tabindex="0" aria-label="Classes, scrolls horizontally">
+    <a class="class-card" href="#join">
+      <div class="ph"><img width="410" height="400" src="../crops/w303-class-machine.jpg" alt="" loading="lazy"></div>
+      <p class="name">Iron Technique</p>
+      <p class="desc">Machines that fit biomechanics. Less guesswork, more gains.</p>
+      <p class="meta">60 MIN · STRENGTH · BEGINNER</p>
+    </a>
+    <a class="class-card" href="#join">
+      <div class="ph"><img width="400" height="400" src="../crops/w303-class-sled.jpg" alt="" loading="lazy"></div>
+      <p class="name">Engine Room</p>
+      <p class="desc">For engines, and for the days after leg day.</p>
+      <p class="meta">45 MIN · HYBRID · INTERMEDIATE</p>
+    </a>
+    <a class="class-card" href="#join">
+      <div class="ph"><img width="600" height="580" src="../crops/w303-class-dance.jpg" alt="" loading="lazy"></div>
+      <p class="name">Neon Groove</p>
+      <p class="desc">Because fitness doesn't have to look like lifting weights.</p>
+      <p class="meta">60 MIN · DANCE · ALL LEVELS</p>
+    </a>
+    <a class="class-card" href="#join">
+      <div class="ph"><img width="560" height="560" src="../crops/w303-class-ice.jpg" alt="" loading="lazy"></div>
+      <p class="name">Cold Start</p>
+      <p class="desc">Cold, then warm, then quiet. Recover like an athlete.</p>
+      <p class="meta">20 MIN · RECOVERY · ALL LEVELS</p>
+    </a>
+    <a class="class-card" href="#join">
+      <div class="ph"><img width="415" height="375" src="../crops/w303-class-streak.jpg" alt="" loading="lazy"></div>
+      <p class="name">Night Shift Cardio</p>
+      <p class="desc">OTTI on the treadmills. One less excuse.</p>
+      <p class="meta">45 MIN · CONDITIONING · ALL LEVELS</p>
+    </a>
+    <a class="class-card" href="#join">
+      <div class="ph"><img width="490" height="490" src="../crops/w303-class-frost.jpg" alt="" loading="lazy"></div>
+      <p class="name">Breath + Frost</p>
+      <p class="desc">Because sweating should be a feature, not a problem.</p>
+      <p class="meta">30 MIN · MOBILITY · ALL LEVELS</p>
+    </a>
+  </div>
+  <div class="car-ctrl">
+    <button class="car-arrow" id="clsPrev" aria-label="Scroll classes back" disabled>←</button>
+    <button class="car-arrow" id="clsNext" aria-label="Scroll classes forward">→</button>
+    <div class="progress" aria-hidden="true"><i id="clsBar"></i></div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section class="sec" id="stories">
+  <h2 class="sec-head">Stories that move</h2>
+  <div class="stories">
+    <a class="story" href="#join">
+      <img width="580" height="540" src="../crops/w303-story-pop.jpg" alt="Pop-art figure mid-stride" loading="lazy">
+      <span class="cap">Culture nights: main character energy</span>
+    </a>
+    <a class="story black" href="#recover"><p>Powered by industrial air.</p></a>
+    <a class="story" href="#recover">
+      <img width="580" height="270" src="../crops/w303-story-red.jpg" alt="Red light folds across the club wall" loading="lazy">
+      <span class="cap">We believe recovery is training.</span>
+    </a>
+    <a class="story black" href="#visit"><p>Ample parking. Finally.</p></a>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="sec mission" id="join">
+  <div class="collage" aria-hidden="true">
+    <div class="c c1"><img width="1080" height="580" src="../crops/w303-mission-field.jpg" alt="" loading="lazy"></div>
+    <div class="c c2"><img width="490" height="510" src="../crops/w303-mission-frost.jpg" alt="" loading="lazy"></div>
+    <div class="c c3"><span>Work-life balance? Try work-lift balance.</span></div>
+  </div>
+  <h2>Our culture</h2>
+  <p class="state">Training is only part of the culture. The rest is ice, steam, sofas, screens and people who wave at you by name.</p>
+  <button class="pill pill-black" id="joinOpen">Become part of it <span class="arr">→</span></button>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer id="visit">
+  <div class="foot">
+    <div class="foot-grid">
+      <div>
+        <h3>Stay in the loop, with training stories, member events and product previews.</h3>
+        <form class="news-form" id="newsForm" novalidate>
+          <label class="vh" for="newsEmail">Email</label>
+          <input id="newsEmail" type="email" placeholder="Email" autocomplete="email">
+          <button class="pill pill-black" type="submit">Sign up <span class="arr">→</span></button>
+        </form>
+        <p class="news-msg" id="newsMsg"></p>
+      </div>
+      <div class="foot-links">
+        <div>
+          <h4>Train</h4>
+          <a href="#floor">The floor</a>
+          <a href="#classes">Timetable</a>
+          <a href="#disciplines">Disciplines</a>
+        </div>
+        <div>
+          <h4>Club</h4>
+          <a href="#stories">Culture nights</a>
+          <a href="#recover">Recovery</a>
+          <a href="#visit">Visit</a>
+        </div>
+      </div>
+    </div>
+    <p class="region"><span class="dot" aria-hidden="true"></span> The Foundry District · Open 05:00–23:00, seven days</p>
+    <div class="legal">
+      <span class="copy">© 2026 Core Culture</span>
+      <a href="#top">Back to top</a>
+      <a href="#join">Membership terms</a>
+      <a href="#visit">Privacy</a>
+      <a href="#visit">Imprint</a>
+      <a href="#visit">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<dialog class="join-dlg" id="joinDlg" style="border:0;border-radius:16px;padding:0;max-width:440px;width:calc(100% - 48px);box-shadow:0 24px 64px rgba(0,0,0,.3)" aria-labelledby="dlgTitle">
+  <div style="padding:32px">
+    <div id="dlgForm">
+      <h3 id="dlgTitle" style="font-size:26px;font-weight:700;letter-spacing:-.02em;color:var(--ink)">Claim your first session</h3>
+      <p style="color:var(--gray);font-size:14.5px;margin:8px 0 4px">Free trial, no card. We'll hold a spot on the floor.</p>
+      <form id="joinForm" novalidate>
+        <label for="jfName" style="display:block;font-size:13px;font-weight:500;margin:14px 0 6px">Name</label>
+        <input id="jfName" type="text" autocomplete="name" required style="width:100%;font:inherit;padding:12px 14px;border:1.5px solid #cfcfcf;border-radius:10px">
+        <label for="jfEmail" style="display:block;font-size:13px;font-weight:500;margin:14px 0 6px">Email</label>
+        <input id="jfEmail" type="email" autocomplete="email" required style="width:100%;font:inherit;padding:12px 14px;border:1.5px solid #cfcfcf;border-radius:10px">
+        <p class="err" id="jfErr" style="color:#b4241a;font-size:13px;margin-top:10px;display:none">Please add your name and a valid email.</p>
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:22px">
+          <button type="button" class="pill" id="dlgCancel" style="background:var(--field);color:var(--ink)">Not now</button>
+          <button type="submit" class="pill pill-black">Claim it <span class="arr">→</span></button>
+        </div>
+      </form>
+    </div>
+    <div id="dlgOk" style="display:none;text-align:center;padding:16px 0 8px">
+      <p style="font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px">You're in.</p>
+      <p id="okMsg" style="color:var(--gray)"></p>
+      <div style="margin-top:20px"><button class="pill pill-black" id="dlgDone">Done</button></div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* header solid state */
+  var header = document.getElementById("siteHeader");
+  var hero = document.querySelector(".hero");
+  function headerState(){
+    header.classList.toggle("solid", window.scrollY > hero.offsetHeight - 80);
+  }
+  window.addEventListener("scroll", headerState, {passive:true});
+  headerState();
+
+  /* discipline index */
+  var tabs = [].slice.call(document.querySelectorAll(".index-list button"));
+  var media = document.getElementById("indexMedia");
+  var imgs = [].slice.call(media.querySelectorAll("img"));
+  var cap = document.getElementById("mediaCap");
+  var caps = [
+    "Sled pushes, racks that fit biomechanics.",
+    "Treadmills with Netflix. Speed where you are.",
+    "Dance, yoga, Zumba — for people who train.",
+    "Ice bath + steam. Cold, then warm, then quiet.",
+    "Lounge desks, field tables, people who wave at you by name.",
+    "Ample parking outside. No parking-lot cardio required."
+  ];
+  var cur = 0;
+  function select(i, focus){
+    cur = i;
+    tabs.forEach(function(t, k){
+      t.setAttribute("aria-selected", k === i ? "true" : "false");
+      t.tabIndex = k === i ? 0 : -1;
+    });
+    imgs.forEach(function(m, k){ m.classList.toggle("current", k === i); });
+    cap.textContent = caps[i];
+    if (focus) tabs[i].focus();
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener("click", function(){ select(i, false); });
+    t.addEventListener("mouseenter", function(){ select(i, false); });
+    t.addEventListener("keydown", function(e){
+      var n = null;
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") n = (i + 1) % tabs.length;
+      if (e.key === "ArrowUp" || e.key === "ArrowLeft") n = (i - 1 + tabs.length) % tabs.length;
+      if (e.key === "Home") n = 0;
+      if (e.key === "End") n = tabs.length - 1;
+      if (n !== null){ e.preventDefault(); select(n, true); }
+    });
+  });
+
+  if (location.hash === "#recover"){
+    select(3, false);
+  }
+  window.addEventListener("hashchange", function(){
+    if (location.hash === "#recover") select(3, false);
+  });
+
+  /* class carousel */
+  var track = document.getElementById("classTrack");
+  var bar = document.getElementById("clsBar");
+  function step(){
+    var card = track.querySelector(".class-card");
+    return card ? card.getBoundingClientRect().width + 16 : 320;
+  }
+  function sync(){
+    var max = track.scrollWidth - track.clientWidth;
+    document.getElementById("clsPrev").disabled = track.scrollLeft <= 2;
+    document.getElementById("clsNext").disabled = track.scrollLeft >= max - 2;
+    var f = max > 0 ? track.scrollLeft / max : 0;
+    bar.style.width = (25 + f * 75) + "%";
+    bar.style.transform = "translateX(" + (f * (max > 0 ? 0 : 0)) + "px)";
+  }
+  document.getElementById("clsPrev").addEventListener("click", function(){ track.scrollBy({left: -step(), behavior: reduced ? "auto" : "smooth"}); });
+  document.getElementById("clsNext").addEventListener("click", function(){ track.scrollBy({left: step(), behavior: reduced ? "auto" : "smooth"}); });
+  track.addEventListener("scroll", sync, {passive:true});
+  window.addEventListener("resize", sync);
+  sync();
+
+  /* search */
+  var index = [
+    {t: "Iron Technique", k: "Strength · 60 min", h: "#classes"},
+    {t: "Engine Room", k: "Hybrid · 45 min", h: "#classes"},
+    {t: "Neon Groove", k: "Dance · 60 min", h: "#classes"},
+    {t: "Cold Start", k: "Recovery · 20 min", h: "#classes"},
+    {t: "Night Shift Cardio", k: "Conditioning · 45 min", h: "#classes"},
+    {t: "Breath + Frost", k: "Mobility · 30 min", h: "#classes"},
+    {t: "Ice bath + steam", k: "Recovery", h: "#recover"},
+    {t: "Lounge desks", k: "Community", h: "#stories"},
+    {t: "Parking", k: "Arrival", h: "#visit"},
+    {t: "Membership", k: "Join Core Culture", h: "#join"},
+    {t: "Hours", k: "Open 05:00–23:00 daily", h: "#visit"}
+  ];
+  var so = document.getElementById("searchOverlay"),
+      si = document.getElementById("searchInput"),
+      sr = document.getElementById("searchResults"),
+      soOpener = document.getElementById("searchOpen");
+  function render(q){
+    sr.innerHTML = "";
+    var list = index.filter(function(x){ return !q || (x.t + " " + x.k).toLowerCase().indexOf(q.toLowerCase()) !== -1; });
+    if (!list.length){
+      var p = document.createElement("p");
+      p.className = "none";
+      p.textContent = "Nothing in the club matches “" + q + "”.";
+      sr.appendChild(p); return;
+    }
+    list.slice(0, 8).forEach(function(x, i){
+      var a = document.createElement("a");
+      a.href = x.h; if (i === 0) a.className = "active";
+      var b = document.createElement("b"); b.textContent = x.t;
+      var s = document.createElement("span"); s.textContent = x.k;
+      a.appendChild(b); a.appendChild(s);
+      a.addEventListener("click", closeSearch);
+      sr.appendChild(a);
+    });
+  }
+  function openSearch(){
+    so.classList.add("open");
+    document.body.style.overflow = "hidden";
+    si.value = ""; render("");
+    si.focus();
+  }
+  function closeSearch(){
+    so.classList.remove("open");
+    document.body.style.overflow = "";
+    soOpener.focus();
+  }
+  soOpener.addEventListener("click", openSearch);
+  document.getElementById("searchClose").addEventListener("click", closeSearch);
+  si.addEventListener("input", function(){ render(si.value.trim()); });
+  si.addEventListener("keydown", function(e){
+    if (e.key === "Enter"){
+      var first = sr.querySelector("a");
+      if (first){ closeSearch(); location.hash = first.getAttribute("href"); }
+    }
+  });
+
+  /* mobile nav */
+  var mnav = document.getElementById("mnav");
+  document.getElementById("mnavOpen").addEventListener("click", function(){
+    mnav.classList.add("open");
+    this.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mnav.querySelector("a").focus();
+  });
+  function closeMnav(){
+    mnav.classList.remove("open");
+    document.getElementById("mnavOpen").setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+  document.getElementById("mnavClose").addEventListener("click", closeMnav);
+  [].forEach.call(mnav.querySelectorAll("nav a"), function(a){ a.addEventListener("click", closeMnav); });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape"){
+      if (so.classList.contains("open")) closeSearch();
+      if (mnav.classList.contains("open")) closeMnav();
+    }
+  });
+
+  /* join dialog */
+  var dlg = document.getElementById("joinDlg");
+  document.getElementById("joinOpen").addEventListener("click", function(){
+    document.getElementById("dlgForm").style.display = "";
+    document.getElementById("dlgOk").style.display = "none";
+    document.getElementById("jfErr").style.display = "none";
+    dlg.showModal();
+  });
+  document.getElementById("dlgCancel").addEventListener("click", function(){ dlg.close(); });
+  document.getElementById("dlgDone").addEventListener("click", function(){ dlg.close(); });
+  document.getElementById("joinForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("jfName").value.trim();
+    var email = document.getElementById("jfEmail").value.trim();
+    if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      document.getElementById("jfErr").style.display = "block"; return;
+    }
+    document.getElementById("okMsg").textContent = "Check your inbox, " + name.split(" ")[0] + " — your first session is on us.";
+    document.getElementById("dlgForm").style.display = "none";
+    document.getElementById("dlgOk").style.display = "block";
+  });
+
+  /* newsletter */
+  document.getElementById("newsForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = document.getElementById("newsEmail").value.trim();
+    var msg = document.getElementById("newsMsg");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      msg.textContent = "That email doesn't look right.";
+      msg.className = "news-msg err"; return;
+    }
+    msg.textContent = "Signed up. One letter a month, zero spam.";
+    msg.className = "news-msg ok";
+  });
+})();
+</script>
+</body>
+</html>
