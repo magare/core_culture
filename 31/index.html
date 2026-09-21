@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — The Well</title>
+<meta name="description" content="Core Culture — recovery as deep water. Everything floats. Drop a stone, watch it settle.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2302070a'/%3E%3Cpath d='M4 20 Q10 16 16 20 T28 20' stroke='%23bfe6f5' stroke-width='1.4' fill='none'/%3E%3Ccircle cx='22' cy='9' r='3' fill='%23e8f4ff' opacity='.7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#02070a;
+  --ink:#dfeef5;
+  --dim:rgba(223,238,245,.55);
+  --faint:rgba(223,238,245,.26);
+  --moon:#e8f4ff;
+  --teal:#8fd8e8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--deep);color:var(--ink);
+  font-family:"Nunito Sans",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--teal);color:#02070a}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--teal);color:#02070a;padding:10px 16px;z-index:300;font-weight:700}
+.skip:focus{left:10px}
+
+#water{position:fixed;inset:0;z-index:0}
+#water canvas{position:absolute;inset:0;width:100%;height:100%}
+#moonglow{
+  position:absolute;right:8vw;top:6vh;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle, rgba(232,244,255,.16), transparent 62%);
+  filter:blur(8px);pointer-events:none;
+}
+
+.wrap{position:relative;z-index:1}
+header.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(20px,6vw,110px);pointer-events:none;
+}
+.kicker{font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--teal);margin-bottom:26px}
+h1{
+  font-family:"Instrument Serif",serif;font-weight:400;
+  font-size:clamp(48px,8vw,132px);line-height:.98;
+}
+h1 em{font-style:italic;color:var(--teal)}
+.hero .lede{margin-top:30px;max-width:32em;color:var(--dim);font-size:14.5px;line-height:2.05;font-weight:300;pointer-events:auto}
+.hero .lede b{color:var(--ink);font-weight:600}
+.cue{
+  margin-top:36px;display:inline-flex;align-items:center;gap:12px;pointer-events:auto;
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);
+}
+.cue i{display:block;width:1px;height:40px;background:linear-gradient(to bottom,var(--teal),transparent)}
+
+/* floating buoys */
+.flota{
+  min-height:100vh;padding:8vh clamp(20px,6vw,110px);
+  display:flex;flex-direction:column;gap:clamp(40px,8vh,90px);justify-content:center;
+}
+.buoy{
+  max-width:640px;border:1px solid rgba(223,238,245,.14);
+  background:rgba(4,12,16,.55);backdrop-filter:blur(10px);
+  padding:clamp(24px,3vw,42px);
+  will-change:transform;
+}
+.buoy:nth-child(2){margin-left:auto}
+.buoy:nth-child(4){margin-left:auto}
+.buoy .tag{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;
+}
+.buoy .tag i{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px rgba(143,216,232,.8)}
+.buoy h2{
+  font-family:"Instrument Serif",serif;font-weight:400;
+  font-size:clamp(26px,3.4vw,44px);line-height:1.1;
+}
+.buoy p{margin-top:14px;color:var(--dim);font-size:13.5px;line-height:2.05;font-weight:300}
+.buoy p b{color:var(--ink);font-weight:600}
+
+/* ladder CTA */
+.ladder{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:14vh clamp(20px,6vw,110px);
+}
+.ladder h2{
+  font-family:"Instrument Serif",serif;font-weight:400;
+  font-size:clamp(36px,5.6vw,86px);line-height:1.02;
+}
+.ladder h2 em{font-style:italic;color:var(--teal)}
+.ladder p{margin-top:26px;max-width:32em;color:var(--dim);font-size:13.5px;line-height:2.1;font-weight:300}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:40px;
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;font-weight:700;
+  background:var(--teal);color:#04222b;padding:20px 44px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 46px rgba(143,216,232,.35)}
+.depth{
+  margin-top:60px;display:flex;gap:26px;flex-wrap:wrap;justify-content:center;
+  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+}
+.depth span{display:flex;align-items:center;gap:8px}
+.depth i{width:1px;height:26px;background:linear-gradient(to bottom,transparent,var(--teal));display:block}
+footer{
+  padding:26px clamp(20px,6vw,110px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(223,238,245,.08);
+}
+@media (max-width:760px){
+  .buoy{max-width:none}
+  header.hero{padding-top:14vh}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="water" aria-hidden="true">
+  <canvas id="sea"></canvas>
+  <div id="moonglow"></div>
+</div>
+
+<div class="wrap">
+<main id="main">
+  <header class="hero">
+    <p class="kicker">Core Culture · Below the waterline</p>
+    <h1>Recovery is<br>a kind of <em>depth.</em></h1>
+    <p class="lede">After the noise of the weights, the club goes quiet the way a lake goes quiet. This page floats. <b>Move your cursor across it — drop a stone (click) — and watch the surface settle</b>, the way you will.</p>
+    <p class="cue"><i></i> disturb the surface · scroll to sink</p>
+  </header>
+
+  <section class="flota" aria-label="What floats here">
+    <article class="buoy">
+      <p class="tag"><i></i> Buoy 01 · Cold plunge</p>
+      <h2>Three degrees of honesty</h2>
+      <p>The tub holds you at 3° until your breath forgets to panic. <b>Ninety seconds in</b>, and the rest of your day moves slower, deeper, calmer.</p>
+    </article>
+    <article class="buoy">
+      <p class="tag"><i></i> Buoy 02 · Steam &amp; sauna</p>
+      <h2>Warm current</h2>
+      <p>Heat that loosens the week from your shoulders, one degree at a time. Sit long enough and the water clock on the wall stops mattering.</p>
+    </article>
+    <article class="buoy">
+      <p class="tag"><i></i> Buoy 03 · Breathwork</p>
+      <h2>The long exhale</h2>
+      <p>Guided breath sessions on the warm floor — <b>the cheapest performance upgrade there is</b>, and the only one you can take anywhere.</p>
+    </article>
+    <article class="buoy">
+      <p class="tag"><i></i> Buoy 04 · The still lounge</p>
+      <h2>Where ripples end</h2>
+      <p>Low light, deep chairs, conversations that go nowhere on purpose. Every training culture needs a place where doing nothing is the program.</p>
+    </article>
+  </section>
+
+  <section class="ladder" aria-label="Join">
+    <h2>The ladder goes <em>down.</em><br>Everything else goes up.</h2>
+    <p>One membership, the whole well: plunge, steam, breath and stillness — alongside every floor of training. First week free. Come down; see how high you've been living.</p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Take the ladder — free week</a>
+    <div class="depth" aria-hidden="true">
+      <span><i></i> 3° plunge</span>
+      <span><i></i> 42° sauna</span>
+      <span><i></i> 100% stillness</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 31 · The Well</span>
+  </footer>
+</main>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv=document.getElementById('sea');
+  const ctx=cv.getContext('2d');
+  let W=0,H=0,DPR=Math.min(1.75,devicePixelRatio||1);
+  function size(){
+    W=innerWidth;H=innerHeight;
+    cv.width=W*DPR;cv.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  size();addEventListener('resize',size);
+
+  // water surface: 1D height field columns with spring propagation
+  const COLS=160;
+  const cols=new Float32Array(COLS);
+  const vel=new Float32Array(COLS);
+  const k=0.022, damp=0.965, spread=0.24;
+  let time=0;
+
+  function disturb(xn,power){
+    const idx=Math.floor(xn*(COLS-1));
+    for(let i=-4;i<=4;i++){
+      const j=idx+i;
+      if(j>=0&&j<COLS)cols[j]+=power*(1-Math.abs(i)/5);
+    }
+  }
+  addEventListener('pointermove',e=>{
+    if(Math.random()<0.1)disturb(e.clientX/W,1.2+Math.random()*1.6);
+  },{passive:true});
+  addEventListener('pointerdown',e=>{disturb(e.clientX/W,10);},{passive:true});
+
+  function frame(){
+    time+=0.016;
+    // spring physics for ripples only (ambient swell is render-side)
+    for(let i=0;i<COLS;i++){
+      vel[i]+=(-cols[i])*k;
+      vel[i]*=damp;
+      cols[i]+=vel[i];
+      if(cols[i]>18)cols[i]=18;else if(cols[i]<-18)cols[i]=-18;
+    }
+    // spread neighbours
+    const d=new Float32Array(COLS);
+    for(let pass=0;pass<2;pass++){
+      for(let i=0;i<COLS;i++){
+        const l=i>0?cols[i-1]:cols[i], r=i<COLS-1?cols[i+1]:cols[i];
+        d[i]=(r-l)*spread*0.5;
+      }
+      for(let i=0;i<COLS;i++){vel[i]+=d[i];}
+    }
+
+    const wave=i=>Math.sin(time*0.9+i*0.35)*2.4+Math.sin(time*0.53+i*0.13)*1.7;
+
+    // render: horizon line + reflective body
+    ctx.clearRect(0,0,W,H);
+    const base=H*0.42;
+    // deep water fill
+    const g=ctx.createLinearGradient(0,base,0,H);
+    g.addColorStop(0,'rgba(8,26,34,.55)');
+    g.addColorStop(1,'rgba(1,4,6,.9)');
+    ctx.beginPath();
+    ctx.moveTo(0,H);
+    for(let i=0;i<COLS;i++){
+      const x=i/(COLS-1)*W;
+      const y=base+(cols[i]+wave(i))*0.9;
+      ctx.lineTo(x,y);
+    }
+    ctx.lineTo(W,H);ctx.closePath();
+    ctx.fillStyle=g;ctx.fill();
+    // surface line
+    ctx.beginPath();
+    for(let i=0;i<COLS;i++){
+      const x=i/(COLS-1)*W;
+      const y=base+(cols[i]+wave(i))*0.9;
+      if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle='rgba(191,230,245,.5)';
+    ctx.lineWidth=1.4;
+    ctx.stroke();
+    // moon pillar reflection (shimmers with the field)
+    const mx=W*0.86;
+    ctx.beginPath();
+    for(let i=0;i<COLS;i++){
+      const x=i/(COLS-1)*W;
+      const y=base+(cols[i]+wave(i))*0.9;
+      const near=Math.exp(-Math.pow((x-mx)/(W*0.05),2));
+      if(i===0)ctx.moveTo(x,y-near*46);else ctx.lineTo(x,y-near*46);
+    }
+    ctx.strokeStyle='rgba(232,244,255,.22)';
+    ctx.lineWidth=2.4;
+    ctx.stroke();
+    if(!reduced)requestAnimationFrame(frame);
+  }
+  if(!reduced){requestAnimationFrame(frame);}
+  else{time=2;frame();}
+
+  // buoys bob on the swell
+  if(!reduced){
+    const buoys=[...document.querySelectorAll('.buoy')];
+    let t0=performance.now();
+    (function bob(now){
+      const t=(now-t0)/1000;
+      buoys.forEach((b,i)=>{
+        const y=Math.sin(t*0.8+i*1.7)*7;
+        const r=Math.sin(t*0.6+i)*0.35;
+        b.style.transform=`translateY(${y.toFixed(1)}px) rotate(${r.toFixed(2)}deg)`;
+      });
+      requestAnimationFrame(bob);
+    })(t0);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Red on Grey</title>
+<meta name="description" content="Core Culture — a film in greyscale. One red element per scene. Find it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121212'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23e0231e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --grey0:#0d0d0d;
+  --grey1:#161616;
+  --grey2:#242424;
+  --g-text:#e6e6e6;
+  --g-dim:rgba(230,230,230,.55);
+  --red:#e0231e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--grey0);
+  color:var(--g-text);
+  font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+.serif{font-family:"Playfair Display",Didot,serif}
+::selection{background:var(--red);color:#fff}
+img{display:block;max-width:100%;filter:grayscale(1) contrast(1.12)}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:8px;background:var(--red);color:#fff;padding:10px 16px;z-index:500;font-weight:600}
+.skip:focus{left:8px}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
+/* letterbox bars */
+.bar{position:fixed;left:0;right:0;height:26px;background:#000;z-index:200}
+.bar.top{top:0;border-bottom:1px solid #000}
+.bar.bot{bottom:0;border-top:1px solid #000}
+.bar .reel{
+  position:absolute;top:50%;transform:translateY(-50%);
+  display:flex;gap:16px;
+  font-family:"Inter Tight";font-size:8.5px;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.35);
+  white-space:nowrap;overflow:hidden;width:100%;padding:0 20px;
+}
+.bar.bot .mono-cap{
+  position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-family:"Inter Tight";font-size:8.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);
+}
+
+/* title card */
+.titlecard{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:90px clamp(20px,6vw,90px);
+  background:radial-gradient(90% 70% at 50% 30%, var(--grey2), var(--grey0) 80%);
+  position:relative;
+}
+.titlecard .studio{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--g-dim);margin-bottom:30px}
+.titlecard h1{
+  font-family:"Playfair Display",serif;font-weight:500;
+  font-size:clamp(46px,8.6vw,128px);line-height:1.02;
+}
+.titlecard h1 em{font-style:italic}
+.titlecard h1 .red{color:var(--red)}
+.titlecard .sub{
+  margin-top:26px;font-size:clamp(14px,1.5vw,18px);font-weight:300;color:var(--g-dim);max-width:46ch;line-height:1.9;
+}
+.titlecard .sub b{color:var(--g-text);font-weight:500}
+.titlecard .count{
+  position:absolute;bottom:44px;right:clamp(20px,5vw,70px);
+  font-family:"Inter Tight";font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--g-dim);
+}
+.titlecard .count i{font-style:normal;color:var(--red)}
+
+/* scenes */
+.scene{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+.scene .bg{position:absolute;inset:0}
+.scene .bg img{width:100%;height:100%;object-fit:cover;opacity:.5}
+.scene .bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(13,13,13,.97) 12%, rgba(13,13,13,.45) 55%, rgba(13,13,13,.25) 100%);
+}
+.scene .content{
+  position:relative;z-index:2;
+  padding:0 clamp(20px,6vw,90px) clamp(70px,12vh,120px);
+  max-width:1000px;
+}
+.slug{
+  font-family:"Inter Tight";font-weight:600;font-size:clamp(12px,1.3vw,15px);
+  letter-spacing:.34em;text-transform:uppercase;color:var(--g-dim);
+  display:flex;align-items:center;gap:16px;margin-bottom:22px;
+}
+.slug::before{content:"";width:38px;height:1px;background:var(--g-dim)}
+.scene h2{
+  font-family:"Playfair Display",serif;font-weight:400;
+  font-size:clamp(34px,5.4vw,80px);line-height:1.08;
+  margin-bottom:20px;
+}
+.scene h2 em{font-style:italic}
+.scene .super{
+  font-size:clamp(15px,1.7vw,20px);font-weight:300;line-height:1.9;color:var(--g-dim);max-width:58ch;
+}
+.scene .super b{color:var(--g-text);font-weight:500}
+.red-el{color:var(--red)}
+.cast-list{margin-top:26px;display:flex;gap:30px;flex-wrap:wrap;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--g-dim)}
+.cast-list span b{display:block;color:var(--g-text);font-weight:500;margin-top:4px;letter-spacing:.14em}
+.scene .findred{
+  position:absolute;top:34px;right:clamp(20px,5vw,70px);
+  font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--g-dim);
+}
+.scene .findred i{font-style:normal;color:var(--red)}
+
+/* dialogue interlude */
+.dialogue{
+  border-top:1px solid #000;border-bottom:1px solid #000;
+  background:var(--grey1);
+  padding:clamp(46px,9vh,100px) clamp(20px,6vw,90px);
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);
+}
+@media (max-width:820px){.dialogue{grid-template-columns:1fr}}
+.dline{display:flex;gap:20px;align-items:baseline}
+.dline .who{
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--g-dim);
+  min-width:86px;text-align:right;
+}
+.dline .what{font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(19px,2vw,27px);line-height:1.5}
+.dline .what .red-el{font-style:normal;font-weight:500}
+
+/* credits */
+.credits{
+  background:#000;
+  padding:clamp(60px,12vh,130px) clamp(20px,6vw,90px);
+  text-align:center;
+}
+.credits .rcap{font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:var(--g-dim);margin-bottom:34px}
+.credits h2{
+  font-family:"Playfair Display",serif;font-weight:400;font-style:italic;
+  font-size:clamp(30px,4.6vw,64px);line-height:1.2;
+}
+.credits .roles{
+  max-width:760px;margin:44px auto 0;display:grid;gap:14px;text-align:left;
+}
+.credits .role{
+  display:grid;grid-template-columns:1fr auto;gap:14px;align-items:baseline;
+  border-bottom:1px dotted rgba(255,255,255,.25);padding-bottom:10px;
+  font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--g-dim);
+}
+.credits .role span:last-child{color:var(--g-text);font-weight:500}
+.credits .role.hot span:last-child{color:var(--red)}
+.credits a.cta{
+  display:inline-block;margin-top:50px;text-decoration:none;
+  border:1px solid var(--red);color:var(--red);
+  font-size:11px;letter-spacing:.4em;text-transform:uppercase;font-weight:600;
+  padding:16px 40px;
+  transition:background .25s ease,color .25s ease;
+}
+.credits a.cta:hover{background:var(--red);color:#fff}
+.credits .legal{
+  margin-top:56px;font-size:8.5px;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.3);
+  display:flex;gap:22px;flex-wrap:wrap;justify-content:center;
+}
+
+/* slow cinematic reveal */
+.cine{opacity:0;transform:translateY(14px);transition:opacity 1.4s ease,transform 1.6s ease}
+.cine.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .cine{opacity:1;transform:none;transition:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="bar top" aria-hidden="true"><div class="reel"><span>Core Culture</span><span>●</span><span>A training club in greyscale</span><span>●</span><span>Shot on the premises</span><span>●</span><span>Colour deleted</span><span>●</span><span>Except one</span><span>●</span><span>Core Culture</span><span>●</span><span>A training club in greyscale</span><span>●</span><span>Shot on the premises</span><span>●</span><span>Colour deleted</span><span>●</span><span>Except one</span><span>●</span></div></div>
+
+<main id="main">
+
+  <!-- TITLE CARD -->
+  <section class="titlecard" aria-label="Title card">
+    <div class="studio">Core Culture — Training Club presents</div>
+    <h1 class="serif cine in">Red <em>on</em> <span class="red">grey.</span></h1>
+    <p class="sub cine in">A film about a training club, shot in greyscale — <b>with exactly one red element per scene.</b> Iron, ice, neon and long Sundays. The colour returns for the ending.</p>
+    <span class="count">Red elements on screen: <i>1</i> — the title</span>
+  </section>
+
+  <!-- SCENE 01 -->
+  <section class="scene" aria-labelledby="s1h">
+    <div class="bg"><img src="../crops/p04-sled.jpg" alt="Greyscale still: an athlete driving a sled in the dark, heat of effort in the grain"></div>
+    <span class="findred">Red elements in this scene: <i>1 — the rec dot</i></span>
+    <div class="content cine">
+      <div class="slug">Scene 01 · Ext. Iron room — dawn</div>
+      <h2 id="s1h" class="serif">The barbell does not <em>negotiate.</em></h2>
+      <p class="super">Five-thirty. Twelve racks. A sled track that <b>squeaks under load.</b> The coached hour starts when the chalk goes up — <span class="red-el">and it goes up at 05:30 sharp.</span></p>
+      <div class="cast-list">
+        <span>Coach<b>V.</b></span>
+        <span>Wing<b>Iron room, floor 1</b></span>
+        <span>Take<b>daily, 05:30</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 02 -->
+  <section class="scene" aria-labelledby="s2h">
+    <div class="bg"><img src="../crops/p02-dancer.jpg" alt="Greyscale still: a dancer mid-phrase under studio light"></div>
+    <span class="findred">Red elements in this scene: <i>1 — the neon tube</i></span>
+    <div class="content cine">
+      <div class="slug">Scene 02 · Int. Studio B — dusk</div>
+      <h2 id="s2h" class="serif">Cardio, <em>restyled.</em></h2>
+      <p class="super">Zumba, yoga, hobby clubs — the choreography is optional and the sweat is not. <b>Every evening the studio becomes the last scene of a music video,</b> and everybody in it is cast.</p>
+      <div class="cast-list">
+        <span>Coach<b>May</b></span>
+        <span>Wing<span>studio, floor 2</span></span>
+        <span>Take<b>evenings, 19:30</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 03 -->
+  <section class="scene" aria-labelledby="s3h">
+    <div class="bg"><img src="../crops/p12-f04.jpg" alt="Greyscale still: ice piled above the rim of the remedy tub"></div>
+    <span class="findred">Red elements in this scene: <i>1 — the thermometer line</i></span>
+    <div class="content cine">
+      <div class="slug">Scene 03 · Int. Remedy wing — night</div>
+      <h2 id="s3h" class="serif">Three minutes at <em>four degrees.</em></h2>
+      <p class="super">The quietest scene in the film. <b>Sit. Breathe slow enough to be bored.</b> Steam next door at sixty-five. The cold coaches everyone the same way: without a single word, <span class="red-el">at exactly 4°C.</span></p>
+      <div class="cast-list">
+        <span>Cast<b>you, optional witness</b></span>
+        <span>Wing<b>remedy wing, B1</b></span>
+        <span>Take<b>bookable</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIALOGUE INTERLUDE -->
+  <section class="dialogue" aria-label="Interlude — overheard">
+    <div class="dline cine">
+      <span class="who">Member 0417</span>
+      <span class="what">I came for the racks. I stayed because nobody here asks what you're training for.</span>
+    </div>
+    <div class="dline cine">
+      <span class="who">The desk</span>
+      <span class="what">First week is free. After that it's <span class="red-el">89 a month</span> — and the parking has never once argued.</span>
+    </div>
+  </section>
+
+  <!-- SCENE 04 -->
+  <section class="scene" aria-labelledby="s4h">
+    <div class="bg"><img src="../crops/p10-field.jpg" alt="Greyscale still: a figure working at a desk in an open field"></div>
+    <span class="findred">Red elements in this scene: <i>1 — the last word</i></span>
+    <div class="content cine">
+      <div class="slug">Scene 04 · Ext. The lounge — last light</div>
+      <h2 id="s4h" class="serif">The credits roll <em>slowly here.</em></h2>
+      <p class="super">Coffee unmetered. Chairs, soft. Meetings before the session, people after it. <b>Work-lift balance:</b> the scene that outlasts the film — the part that keeps everyone <span class="red-el">coming back.</span></p>
+      <div class="cast-list">
+        <span>Wing<b>lounge, floor 3</b></span>
+        <span>Duration<b>as long as you like</b></span>
+        <span>Colour<b>still deleted</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDITS -->
+  <section class="credits" aria-labelledby="cr-h">
+    <div class="rcap">End credits — Core Culture, Training Club</div>
+    <h2 id="cr-h" class="serif cine">The world was in greyscale.<br>You brought the red.</h2>
+    <div class="roles">
+      <div class="role"><span>Location</span><span>One space, six rooms</span></div>
+      <div class="role"><span>Weekly takes</span><span>43 classes</span></div>
+      <div class="role"><span>Trial</span><span>First week, free</span></div>
+      <div class="role hot"><span>Membership</span><span>From 89/mo</span></div>
+      <div class="role"><span>Parking</span><span>Solved, forever</span></div>
+    </div>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Book your first week</a>
+    <div class="legal">
+      <span>© MMXXVI Core Culture — Training Club</span>
+      <span>Concept 18 — Red on Grey</span>
+      <span>No colour was harmed</span>
+    </div>
+  </section>
+</main>
+
+<div class="bar bot"><span class="mono-cap" id="timecap">00:00:00 · 24 FPS ·Colour off</span></div>
+
+<script>
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.2});
+  document.querySelectorAll('.cine').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<innerHeight*.96) el.classList.add('in'); else io.observe(el);
+  });
+
+  // running timecode in the bottom letterbox bar
+  const tc=document.getElementById('timecap');
+  const start=Date.now();
+  function pad(n){return String(n).padStart(2,'0')}
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    setInterval(()=>{
+      const s=Math.floor((Date.now()-start)/1000);
+      tc.textContent=pad(Math.floor(s/3600))+':'+pad(Math.floor(s/60)%60)+':'+pad(s%60)+' · 24 FPS · COLOUR OFF';
+    },1000);
+  }
+</script>
+</body>
+</html>

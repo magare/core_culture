@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Sanctuary</title>
+<meta name="description" content="Core Culture — a sanctuary of training. Arrive, train, immerse, restore, gather.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ede4d3'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23b0603f' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#ede4d3;
+  --cream:#f7f0e3;
+  --clay:#b0603f;
+  --bark:#33261c;
+  --faint:rgba(51,38,28,.6);
+  --hair:rgba(51,38,28,.22);
+  --cool:#1d3a4a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--sand);
+  color:var(--bark);
+  font-family:"Figtree","Avenir Next","Segoe UI",sans-serif;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+.serif{font-family:"Cormorant Garamond",Garamond,serif}
+.caps{font-size:10.5px;letter-spacing:.42em;text-transform:uppercase;font-weight:500}
+::selection{background:var(--clay);color:var(--cream)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:10px;background:var(--bark);color:var(--cream);padding:10px 18px;z-index:300}
+.skip:focus{left:10px}
+:focus-visible{outline:2px solid var(--clay);outline-offset:3px}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px clamp(18px,4vw,48px);
+  background:linear-gradient(to bottom, rgba(237,228,211,.92), rgba(237,228,211,0));
+}
+.nav .mark{font-family:"Cormorant Garamond",serif;font-size:20px;font-style:italic}
+.nav .mark b{font-style:normal;font-weight:500}
+.nav ul{display:flex;list-style:none;gap:clamp(14px,2.6vw,34px)}
+.nav ul a{
+  text-decoration:none;font-size:10px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;
+  padding-bottom:3px;border-bottom:1px solid transparent;transition:border-color .3s ease,color .3s ease;
+}
+.nav ul a:hover{color:var(--clay);border-color:var(--clay)}
+@media (max-width:760px){.nav ul{display:none}}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:120px clamp(20px,6vw,80px) 80px;position:relative;
+}
+.hero .over{color:var(--clay);margin-bottom:30px}
+.hero h1{
+  font-family:"Cormorant Garamond",serif;font-weight:300;
+  font-size:clamp(44px,7.4vw,104px);line-height:1.08;
+}
+.hero h1 em{font-style:italic;color:var(--clay)}
+.hero .sub{max-width:52ch;margin:30px auto 0;font-size:clamp(14px,1.4vw,17px);line-height:1.85;color:var(--faint)}
+.hero .scrollcue{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  font-size:9.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--faint);
+}
+.hero .scrollcue::after{
+  content:"";display:block;width:1px;height:44px;background:var(--clay);margin:12px auto 0;
+}
+
+/* ---------- ritual chapters ---------- */
+.ritual{
+  max-width:1060px;margin:0 auto;
+  padding:clamp(60px,12vh,130px) clamp(20px,5vw,70px);
+  border-top:1px solid var(--hair);
+  display:grid;grid-template-columns:110px 1fr;gap:clamp(22px,4vw,60px);
+}
+.ritual .rn{font-family:"Cormorant Garamond",serif;font-weight:300;font-style:italic;font-size:34px;color:var(--clay);text-align:center}
+.ritual .rn small{display:block;font-family:"Figtree";font-style:normal;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--faint);margin-top:10px}
+.ritual .body{max-width:640px}
+.ritual h2{
+  font-family:"Cormorant Garamond",serif;font-weight:400;
+  font-size:clamp(30px,4vw,52px);line-height:1.15;margin-bottom:18px;
+}
+.ritual h2 em{font-style:italic;color:var(--clay)}
+.ritual p{font-size:15px;line-height:1.95;color:var(--faint)}
+.ritual .list{margin-top:22px;display:grid;gap:10px}
+.ritual .list div{
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  border-bottom:1px solid var(--hair);padding-bottom:10px;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+}
+.ritual .list div span:last-child{color:var(--clay);letter-spacing:.1em}
+@media (max-width:760px){.ritual{grid-template-columns:1fr;gap:16px}.ritual .rn{text-align:left}}
+
+/* wide plates */
+.plate{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,70px)}
+.plate .frame{border:1px solid var(--hair);padding:12px;background:var(--cream)}
+.plate img{width:100%;height:clamp(260px,52vh,520px);object-fit:cover}
+.plate figcaption{
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding-top:12px;font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--faint);
+}
+.plate.cool .frame img{filter:saturate(.6)}
+
+/* ---------- breathing circle ---------- */
+.breath{
+  border-top:1px solid var(--hair);
+  padding:clamp(70px,13vh,140px) clamp(20px,5vw,70px);
+  display:grid;grid-template-columns:1fr auto;gap:clamp(30px,6vw,90px);
+  align-items:center;max-width:1060px;margin:0 auto;
+}
+@media (max-width:820px){.breath{grid-template-columns:1fr;justify-items:center;text-align:center}}
+.breath .txt h2{
+  font-family:"Cormorant Garamond",serif;font-weight:400;
+  font-size:clamp(30px,4vw,52px);line-height:1.15;margin-bottom:18px;
+}
+.breath .txt h2 em{font-style:italic;color:var(--clay)}
+.breath .txt p{font-size:15px;line-height:1.95;color:var(--faint);max-width:44ch}
+.breath .toggle{
+  margin-top:26px;background:none;border:1px solid var(--bark);color:var(--bark);
+  font-family:"Figtree";font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;
+  padding:13px 26px;cursor:pointer;transition:background .3s ease,color .3s ease;
+}
+.breath .toggle:hover{background:var(--bark);color:var(--cream)}
+.circle{
+  --size:clamp(190px,26vw,260px);
+  width:var(--size);height:var(--size);border-radius:50%;
+  border:1px solid var(--clay);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.circle::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle, rgba(176,96,63,.18), transparent 70%);
+  animation:expand 12s ease-in-out infinite;
+}
+.circle.paused::before{animation-play-state:paused}
+.circle .phase{
+  font-family:"Cormorant Garamond",serif;font-style:italic;
+  font-size:22px;color:var(--clay);
+}
+@keyframes expand{
+  0%{transform:scale(.68)}      /* inhale 4s */
+  33%{transform:scale(1.02)}    
+  50%{transform:scale(1.02)}    /* hold 2s */
+  83%{transform:scale(.68)}     /* exhale 4s */
+  100%{transform:scale(.68)}
+}
+.phase-label{margin-top:16px;text-align:center;font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--faint)}
+@media (prefers-reduced-motion:reduce){
+  .circle::before{animation:none;transform:scale(.85)}
+}
+
+/* ---------- residency ---------- */
+.residency{
+  border-top:1px solid var(--hair);
+  padding:clamp(60px,12vh,120px) clamp(20px,5vw,70px);
+  text-align:center;
+}
+.residency h2{
+  font-family:"Cormorant Garamond",serif;font-weight:400;
+  font-size:clamp(32px,4.4vw,56px);
+}
+.residency h2 em{font-style:italic;color:var(--clay)}
+.residency .sub{color:var(--faint);margin:16px auto 0;max-width:52ch;font-size:14.5px;line-height:1.85}
+.tiers{
+  max-width:920px;margin:clamp(30px,6vh,54px) auto 0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);
+  border:1px solid var(--hair);
+}
+@media (max-width:820px){.tiers{grid-template-columns:1fr}}
+.tier{background:var(--sand);padding:30px 24px 34px;display:flex;flex-direction:column;gap:12px}
+.tier:hover{background:var(--cream)}
+.tier .tn{font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--clay);font-weight:500}
+.tier .tp{font-family:"Cormorant Garamond",serif;font-size:clamp(34px,3.6vw,48px);font-weight:400}
+.tier .tp small{font-size:.42em;color:var(--faint);font-family:"Figtree";letter-spacing:.08em}
+.tier .td{font-size:13px;line-height:1.8;color:var(--faint);flex:1}
+.tier a{
+  text-decoration:none;font-size:10px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;
+  border-bottom:1px solid var(--bark);align-self:center;padding-bottom:4px;
+  transition:color .3s ease,border-color .3s ease;
+}
+.tier a:hover{color:var(--clay);border-color:var(--clay)}
+
+/* ---------- closing ---------- */
+.closing{
+  background:var(--bark);color:var(--sand);
+  text-align:center;padding:clamp(70px,14vh,150px) clamp(20px,6vw,80px);
+}
+.closing .line{
+  font-family:"Cormorant Garamond",serif;font-weight:300;font-style:italic;
+  font-size:clamp(28px,4.2vw,58px);line-height:1.25;max-width:22em;margin:0 auto;
+}
+.closing .line b{font-weight:400;font-style:normal;color:#e2b291}
+.closing a.cta{
+  display:inline-block;margin-top:44px;text-decoration:none;
+  border:1px solid var(--sand);padding:16px 40px;
+  font-size:10px;letter-spacing:.36em;text-transform:uppercase;font-weight:500;
+  transition:background .35s ease,color .35s ease;
+}
+.closing a.cta:hover{background:var(--sand);color:var(--bark)}
+.closing .legal{
+  margin-top:60px;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(237,228,211,.45);
+  display:flex;gap:24px;flex-wrap:wrap;justify-content:center;
+}
+
+/* breathing reveals */
+.br{opacity:0;transform:translateY(24px);transition:opacity 1.5s ease,transform 1.7s cubic-bezier(.16,1,.3,1)}
+.br.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .br{opacity:1;transform:none;transition:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Ritual">
+  <div class="mark"><b>Core</b> Culture</div>
+  <ul>
+    <li><a href="#arrive">Arrive</a></li>
+    <li><a href="#train">Train</a></li>
+    <li><a href="#immerse">Immerse</a></li>
+    <li><a href="#restore">Restore</a></li>
+    <li><a href="#gather">Gather</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" aria-label="Welcome">
+    <div class="over caps br in">A sanctuary of training — Est. MMXXVI</div>
+    <h1 class="br in">Arrive as a visitor.<br><em>Leave as a regular.</em></h1>
+    <p class="sub br in">Core Culture is a training club practised like a ritual: strength without spectacle, water at four degrees, evenings that end in conversation. Take the tour slowly. Nothing here is urgent — everything here matters.</p>
+    <div class="scrollcue">Begin</div>
+  </section>
+
+  <!-- I ARRIVE -->
+  <section class="ritual" id="arrive" aria-labelledby="arrive-h">
+    <div class="rn" aria-hidden="true">i.<small>Arrive</small></div>
+    <div class="body br">
+      <h2 id="arrive-h" class="serif">The doors open early, <em>on purpose.</em></h2>
+      <p>Five-thirty, before the city insists on itself. Park without circling. Hang your coat beside somebody's chalk bag. The lighting is warm, the air conditioning is quiet and industrial, and nobody will ask what you're training for.</p>
+      <div class="list">
+        <div><span>Doors</span><span>05:30 — 23:00</span></div>
+        <div><span>Parking</span><span>Plentiful, free</span></div>
+        <div><span>Welcome</span><span>Unhurried</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- II TRAIN -->
+  <section class="ritual" id="train" aria-labelledby="train-h">
+    <div class="rn" aria-hidden="true">ii.<small>Train</small></div>
+    <div class="body br">
+      <h2 id="train-h" class="serif">Strength, practised <em>quietly well.</em></h2>
+      <p>Twelve racks, calibrated plates and machines chosen for biomechanics rather than theatre. Coached barbell hours from the first pull. Hybrid athletes prepare for HYROX on sled tracks and ergs; treadmills screen entire series for the long, slow miles.</p>
+      <div class="list">
+        <div><span>Iron room</span><span>Daily from 05:30</span></div>
+        <div><span>Coached hours</span><span>Mon — Sat</span></div>
+        <div><span>Hybrid engine</span><span>Tue · Thu · Sat</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- III IMMERSE -->
+  <section class="plate cool" id="immerse" aria-labelledby="immerse-h">
+    <figure class="frame br">
+      <img src="../crops/p10-ice.jpg" alt="Ice bath in black and white — ice piled above the steel rim">
+      <figcaption><span>iii. Immerse — the remedy wing</span><span>4°C, precisely</span></figcaption>
+    </figure>
+  </section>
+  <section class="ritual" aria-labelledby="immerse-h2">
+    <div class="rn" aria-hidden="true">iii.<small>Immerse</small></div>
+    <div class="body">
+      <h2 id="immerse-h2" class="serif">Three minutes at <em>four degrees.</em></h2>
+      <p>The coldest room in the sanctuary is also the stillest. Steel, ice, steam next door. Sit down, breathe slowly enough to bore yourself calm, and let the cold do the coaching. Excuses, you will find, do not fit in the water.</p>
+      <div class="list">
+        <div><span>Tub</span><span>4°C</span></div>
+        <div><span>Steam</span><span>Adjacent</span></div>
+        <div><span>Protocol</span><span>Three minutes</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV RESTORE / breathing -->
+  <section class="breath" id="restore" aria-labelledby="restore-h">
+    <div class="txt br">
+      <h2 id="restore-h" class="serif">Restoration is a <em>skill.</em></h2>
+      <p>Practise it here. Four counts in, hold, six counts out — the same breath you will need at the bottom of a heavy lift, or at the edge of the tub. Start the circle. Follow it for a minute. The whole club runs on this rhythm.</p>
+      <button class="toggle" id="breathToggle" aria-pressed="true">Pause the circle</button>
+    </div>
+    <div>
+      <div class="circle" id="circle" role="img" aria-label="Animated breathing circle — inhale, hold, exhale">
+        <span class="phase serif" id="phaseTxt">inhale</span>
+      </div>
+      <div class="phase-label" id="countLabel">4 in · 2 hold · 6 out</div>
+    </div>
+  </section>
+
+  <!-- V GATHER -->
+  <section class="plate" aria-labelledby="gather-img">
+    <figure class="frame br">
+      <img src="../crops/p10-field.jpg" alt="A member working quietly at a desk — the lounge, wherever it takes you" id="gather-img">
+      <figcaption><span>v. Gather — the lounge, eventually</span><span>Coffee unmetered</span></figcaption>
+    </figure>
+  </section>
+  <section class="ritual" id="gather" aria-labelledby="gather-h">
+    <div class="rn" aria-hidden="true">v.<small>Gather</small></div>
+    <div class="body br">
+      <h2 id="gather-h" class="serif">The workout ends. <em>The evening doesn't.</em></h2>
+      <p>Work-lift balance: meetings before the session, people after it. The lounge keeps the chairs soft, the coffee coming and the opinions warm. Most memberships are justified here — nobody counts your sets at dinner.</p>
+      <div class="list">
+        <div><span>Lounge</span><span>Always open</span></div>
+        <div><span>Hobby clubs</span><span>Dance · yoga · zumba</span></div>
+        <div><span>Company</span><span>Included</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESIDENCY -->
+  <section class="residency" aria-labelledby="res-h">
+    <h2 id="res-h" class="br">Residency, <em>from one week.</em></h2>
+    <p class="sub br">Every residency includes the whole sanctuary — iron, engines, remedy wing, lounge and the company that comes with it. Parking is solved; the air conditioning is quiet and serious about it.</p>
+    <div class="tiers">
+      <div class="tier br">
+        <span class="tn">Trial — one week</span>
+        <span class="tp serif">Free</span>
+        <span class="td">Every wing, every class. No card, no contract. The desk will ask how it went.</span>
+        <a href="mailto:front.desk@coreculture.club">Begin</a>
+      </div>
+      <div class="tier br">
+        <span class="tn">Resident — monthly</span>
+        <span class="tp serif">89<small> / mo</small></span>
+        <span class="td">Full sanctuary access, all classes, remedy slots bookable. Culture included.</span>
+        <a href="mailto:front.desk@coreculture.club">Reside</a>
+      </div>
+      <div class="tier br">
+        <span class="tn">House — annual</span>
+        <span class="tp serif">890<small> / yr</small></span>
+        <span class="td">A year of everything. The desk learns your name; the tub learns your excuses.</span>
+        <a href="mailto:front.desk@coreculture.club">Stay</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <footer class="closing">
+    <p class="line br">Training is only part of the culture.<br><b>The rest is staying.</b></p>
+    <a class="cta br" href="mailto:front.desk@coreculture.club">Request your first week</a>
+    <div class="legal">
+      <span>© MMXXVI Core Culture — Training Club</span>
+      <span>Concept 10 — Sanctuary</span>
+      <span>front.desk@coreculture.club</span>
+    </div>
+  </footer>
+</main>
+
+<script>
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.br').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<innerHeight*.96) el.classList.add('in'); else io.observe(el);
+  });
+
+  // breathing circle phase label sync + pause toggle
+  const circle=document.getElementById('circle');
+  const phaseTxt=document.getElementById('phaseTxt');
+  const toggle=document.getElementById('breathToggle');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let paused=false;
+  if(!reduced){
+    setInterval(()=>{
+      if(paused) return;
+      const t=(Date.now()/1000)%12;
+      phaseTxt.textContent = t<4 ? 'inhale' : t<6 ? 'hold' : 'exhale';
+    },200);
+  } else { phaseTxt.textContent='breathe'; }
+  toggle.addEventListener('click',()=>{
+    paused=!paused;
+    circle.classList.toggle('paused',paused);
+    toggle.textContent=paused?'Resume the circle':'Pause the circle';
+    toggle.setAttribute('aria-pressed',String(!paused));
+    if(paused) phaseTxt.textContent='paused';
+  });
+</script>
+</body>
+</html>

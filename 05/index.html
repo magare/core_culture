@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — The Training Issue</title>
+<meta name="description" content="Core Culture — The Training Issue. A fashion editorial about a gym.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f5f1ea'/%3E%3Ctext x='16' y='23' font-family='Didot,Georgia,serif' font-size='20' fill='%23141210' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#f5f1ea;
+  --ivory2:#efe9df;
+  --ink:#141210;
+  --rose:#b96a5c;
+  --dim:rgba(20,18,16,.62);
+  --hair:rgba(20,18,16,.25);
+  --gut:clamp(22px,4.5vw,70px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ivory);
+  color:var(--ink);
+  font-family:"Jost","Century Gothic",Futura,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--rose);color:var(--ivory)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.didone{font-family:"Bodoni Moda",Didot,"Times New Roman",serif}
+
+.skip{position:absolute;left:-999px;top:10px;background:var(--ink);color:var(--ivory);padding:10px 18px;z-index:300;letter-spacing:.14em;font-size:12px;text-transform:uppercase}
+.skip:focus{left:10px}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+
+.caps{ text-transform:uppercase;letter-spacing:.32em;font-size:10.5px;font-weight:500 }
+
+/* ---------- cover ---------- */
+.cover{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;
+  padding:clamp(18px,3vh,34px) var(--gut) 0;
+  overflow:hidden;
+}
+.cover .topline{
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding-bottom:14px;border-bottom:1px solid var(--ink);
+}
+.cover h1{
+  font-family:"Bodoni Moda",serif;font-weight:500;
+  font-size:clamp(58px,10.4vw,168px);
+  line-height:.9;letter-spacing:.01em;
+  text-transform:uppercase;text-align:center;
+  margin:clamp(18px,3.4vh,40px) 0 0;
+}
+.cover h1 .thin{font-weight:400;font-style:italic;text-transform:none;letter-spacing:0}
+.cover .issuebar{
+  display:flex;justify-content:center;gap:22px;flex-wrap:wrap;
+  margin-top:clamp(12px,2vh,22px);
+  font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;font-weight:500;
+}
+.cover .issuebar b{color:var(--rose)}
+.coverstage{position:relative;flex:1;margin-top:clamp(14px,2.4vh,28px);min-height:340px}
+.coverstage img{
+  position:absolute;inset:-40px 0;width:100%;height:calc(100% + 80px);object-fit:cover;object-position:center 30%;
+}
+.coverstage::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(20,18,16,.42), transparent 45%);
+}
+.coverlines{
+  position:absolute;z-index:3;right:clamp(12px,2.4vw,36px);top:clamp(12px,3vh,32px);
+  text-align:right;color:var(--ivory);
+  display:flex;flex-direction:column;gap:14px;
+}
+.coverlines span{font-size:12px;letter-spacing:.3em;text-transform:uppercase}
+.coverlines b{font-family:"Bodoni Moda",serif;font-style:italic;font-weight:500;font-size:clamp(19px,2.2vw,30px);letter-spacing:.02em;text-transform:none;display:block;margin-top:2px}
+.cover .bottomline{
+  position:absolute;z-index:3;left:0;right:0;bottom:0;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:16px var(--gut);color:var(--ivory);
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+}
+
+/* ---------- editor's letter ---------- */
+.letter{
+  max-width:880px;margin:0 auto;
+  padding:clamp(60px,12vh,130px) var(--gut);
+  text-align:center;
+}
+.letter .kicker{color:var(--rose);margin-bottom:26px}
+.letter p.big{
+  font-family:"Bodoni Moda",serif;font-weight:400;
+  font-size:clamp(22px,3vw,36px);line-height:1.5;
+}
+.letter p.big::first-letter{
+  font-size:2.6em;line-height:.8;float:left;
+  padding:6px 14px 0 0;color:var(--rose);font-style:italic;
+}
+.letter p.big i{color:var(--rose)}
+.letter .sig{
+  margin-top:34px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);
+}
+
+/* ---------- stacked spreads ---------- */
+.stack{position:relative}
+.spread{
+  position:sticky;top:0;
+  min-height:100vh;
+  background:var(--ivory);
+  border-top:1px solid var(--hair);
+  display:flex;flex-direction:column;
+  padding:clamp(16px,2.6vh,30px) var(--gut) clamp(20px,3.4vh,40px);
+}
+.spread .folio{
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);
+  padding-bottom:12px;border-bottom:1px solid var(--hair);
+}
+.spread .folio b{color:var(--rose)}
+.spread .inner{
+  flex:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,70px);
+  align-items:center;padding-top:clamp(18px,3.4vh,38px);
+}
+.spread.flip .inner>.art{order:-1}
+.spread .art{position:relative;overflow:hidden}
+.spread .art img{width:100%;height:clamp(300px,58vh,600px);object-fit:cover}
+.spread .art figcaption{
+  position:absolute;left:0;bottom:0;background:var(--ivory);
+  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;
+  padding:8px 14px;color:var(--dim);
+}
+.spread .txt{max-width:56ch}
+.spread .fno{
+  font-family:"Bodoni Moda",serif;font-style:italic;font-weight:400;
+  font-size:clamp(40px,5vw,74px);color:var(--rose);line-height:1;
+}
+.spread h2{
+  font-family:"Bodoni Moda",serif;font-weight:500;
+  font-size:clamp(34px,4.6vw,68px);line-height:1.02;
+  margin:14px 0 18px;
+}
+.spread h2 em{font-style:italic;color:var(--rose)}
+.spread .standfirst{
+  font-size:clamp(15px,1.3vw,18px);line-height:1.7;color:var(--dim);
+}
+.spread .byline{
+  margin-top:22px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);
+  display:flex;gap:16px;flex-wrap:wrap;
+}
+.spread .byline b{color:var(--ink)}
+.spread .quote{
+  margin-top:26px;border-left:2px solid var(--rose);padding-left:18px;
+  font-family:"Bodoni Moda",serif;font-style:italic;font-size:clamp(17px,1.6vw,22px);line-height:1.5;
+}
+.spread.alt{background:var(--ivory2)}
+@media (max-width:900px){
+  .spread .inner{grid-template-columns:1fr;gap:20px;align-items:start}
+  .spread.flip .inner>.art{order:0}
+  .spread{min-height:auto;position:relative}
+  .spread .art img{height:min(52vh,420px)}
+}
+
+/* ---------- directory ---------- */
+.directory{
+  border-top:1px solid var(--hair);
+  padding:clamp(56px,10vh,110px) var(--gut);
+}
+.directory h2{
+  font-family:"Bodoni Moda",serif;font-weight:500;text-align:center;
+  font-size:clamp(34px,5vw,64px);
+}
+.directory .sub{text-align:center;color:var(--dim);margin-top:12px;font-size:14px;letter-spacing:.06em}
+.dirlist{max-width:940px;margin:clamp(30px,5vh,56px) auto 0}
+.dirrow{
+  display:grid;grid-template-columns:auto 1fr auto auto;gap:clamp(12px,2.6vw,34px);
+  align-items:baseline;padding:16px 6px;border-bottom:1px solid var(--hair);
+  text-decoration:none;
+  transition:background .16s ease;
+}
+.dirrow:first-child{border-top:1px solid var(--hair)}
+.dirrow:hover{background:var(--ivory2)}
+.dirrow .nm{transition:color .16s ease,transform .25s ease;display:inline-block}
+.dirrow:hover .nm{color:var(--rose);transform:translateX(6px)}
+.dirrow .no{font-family:"Bodoni Moda",serif;font-style:italic;color:var(--rose);font-size:17px}
+.dirrow .nm{font-family:"Bodoni Moda",serif;font-weight:500;font-size:clamp(19px,2.2vw,28px)}
+.dirrow .ds{font-size:12px;color:var(--dim);letter-spacing:.04em}
+.dirrow .pg{font-size:10px;letter-spacing:.26em;color:var(--dim);text-transform:uppercase;white-space:nowrap}
+@media (max-width:700px){
+  .dirrow{grid-template-columns:auto 1fr auto}
+  .dirrow .ds{display:none}
+}
+
+/* ---------- back cover ---------- */
+.backcover{
+  background:var(--ink);color:var(--ivory);
+  min-height:88vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:clamp(40px,8vh,90px) var(--gut);
+}
+.backcover .line{
+  font-family:"Bodoni Moda",serif;font-weight:400;
+  font-size:clamp(30px,4.6vw,66px);line-height:1.15;max-width:18em;
+}
+.backcover .line em{font-style:italic;color:var(--rose)}
+.backcover .bcaps{margin-top:26px;color:rgba(245,241,234,.6)}
+.backcover a.cta{
+  margin-top:40px;display:inline-block;text-decoration:none;
+  border:1px solid var(--ivory);color:var(--ivory);
+  padding:18px 44px;font-size:11px;letter-spacing:.34em;text-transform:uppercase;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.backcover a.cta:hover{background:var(--rose);border-color:var(--rose);color:var(--ivory)}
+.backcover .legal{
+  margin-top:clamp(40px,9vh,90px);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,241,234,.4);
+  display:flex;gap:26px;flex-wrap:wrap;justify-content:center;
+}
+
+/* reveal: slow lux */
+.lux{opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.2s cubic-bezier(.16,1,.3,1)}
+.lux.in{opacity:1;transform:none}
+.luximg{clip-path:inset(12% 8% 12% 8%);opacity:0;transition:clip-path 1.4s cubic-bezier(.6,0,.2,1),opacity 1.1s ease}
+.luximg.in{clip-path:inset(0 0 0 0);opacity:1}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .lux,.luximg{opacity:1;transform:none;clip-path:none;transition:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main">
+
+  <!-- COVER -->
+  <section class="cover" aria-label="Cover — The Training Issue">
+    <div class="topline caps"><span>Nº 001</span><span>The Training Issue</span><span>Season MMXXVI</span></div>
+    <h1>Core<span class="thin"> culture</span></h1>
+    <div class="issuebar"><span>Train</span><b>/</b><span>Move</span><b>/</b><span>Recover</span><b>/</b><span>Connect</span></div>
+    <div class="coverstage">
+      <img src="../crops/p05-cover.jpg" alt="Dancer silhouetted in rose light, mid-phrase — cover of the Training Issue">
+      <div class="coverlines" aria-label="Cover lines">
+        <span>Inside<b>The Weight Room Diaries</b></span>
+        <span>The film<b>Cold Water Therapy</b></span>
+        <span>Plus<b>Main Character Energy</b></span>
+      </div>
+      <div class="bottomline"><span>A training club, edited like a magazine</span><span>Price: one workout</span></div>
+    </div>
+  </section>
+
+  <!-- EDITOR'S LETTER -->
+  <section class="letter" aria-label="Editor's letter">
+    <div class="kicker caps">Editor's letter</div>
+    <p class="big lux">We were tired of gyms that photograph like warehouses and behave like warehouses. So we commissioned a club the way you commission an issue: <i>strength as the cover story</i>, dance as the fashion pages, recovery as the back-page ritual — and a lounge that reads like the letters section, because that is where everybody writes in.</p>
+    <div class="sig">— The editors, Core Culture</div>
+  </section>
+
+  <!-- FEATURE SPREADS -->
+  <div class="stack">
+
+    <section class="spread" aria-labelledby="f1h">
+      <div class="folio"><span>Core Culture — Nº 001</span><b>F·01</b><span>The Training Issue</span></div>
+      <div class="inner">
+        <div class="txt">
+          <div class="fno">F·01</div>
+          <h2 id="f1h" class="lux">The weight room <em>diaries.</em></h2>
+          <p class="standfirst lux">Under the mezzanine, twelve racks behave like a private atelier — chalk instead of charcoal, calibrated plates instead of clay. Coached barbell hours run from first pull to competition plate, and the only thing we photograph is your progress.</p>
+          <div class="byline lux"><span>Words — <b>The floor</b></span><span>Hours — <b>05:30 daily</b></span></div>
+          <div class="quote lux">"Strength is the cover story. Everything else is editorial."</div>
+        </div>
+        <figure class="art luximg">
+          <img src="../crops/p05-machine.jpg" alt="Plate-loaded training machine photographed against a bright studio wall" style="object-position:center 55%">
+          <figcaption>Plate-loaded, biomechanics-approved</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="spread flip alt" aria-labelledby="f2h">
+      <div class="folio"><span>Core Culture — Nº 001</span><b>F·02</b><span>The Training Issue</span></div>
+      <div class="inner">
+        <div class="txt">
+          <div class="fno">F·02</div>
+          <h2 id="f2h" class="lux">Choreography <em>after dark.</em></h2>
+          <p class="standfirst lux">The running report: monotony is out of season. Treadmills screen entire series; the studio runs dance, zumba and yoga under club lights until the mirrors fog. Cardio, this season, is a side effect of enjoying yourself.</p>
+          <div class="byline lux"><span>Shoot — <b>Studio B, 19:30</b></span><span>Soundtrack — <b>Provided</b></span></div>
+          <div class="quote lux">"Nobody counts beats. Everybody stays for the last song."</div>
+        </div>
+        <figure class="art luximg">
+          <img src="../crops/p05-run.jpg" alt="Long-exposure light streaks in red, violet and white" style="object-position:center 40%">
+          <figcaption>Long exposure — engine room</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="spread" aria-labelledby="f3h">
+      <div class="folio"><span>Core Culture — Nº 001</span><b>F·03</b><span>The Training Issue</span></div>
+      <div class="inner">
+        <div class="txt">
+          <div class="fno">F·03</div>
+          <h2 id="f3h" class="lux">Cold water <em>therapy.</em></h2>
+          <p class="standfirst lux">The remedy wing is the quietest room in the issue: steel, ice, steam. Three minutes at four degrees, breathing slowly enough to bore yourself calm. Athletes book it like a spa appointment; the spa books it like a dare.</p>
+          <div class="byline lux"><span>Location — <b>Remedy wing</b></span><span>Temperature — <b>4°C</b></span></div>
+          <div class="quote lux">"Recover like an athlete. Perform like one."</div>
+        </div>
+        <figure class="art luximg">
+          <img src="../crops/p05-cold.jpg" alt="Ice bath photographed in black and white, ice piled above the rim" style="object-position:center 30%">
+          <figcaption>The cold list, open daily</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="spread flip alt" aria-labelledby="f4h">
+      <div class="folio"><span>Core Culture — Nº 001</span><b>F·04</b><span>The Training Issue</span></div>
+      <div class="inner">
+        <div class="txt">
+          <div class="fno">F·04</div>
+          <h2 id="f4h" class="lux">Main character <em>energy.</em></h2>
+          <p class="standfirst lux">A gym should not look like a room full of machines; it should look like the third act of a music video. Pop culture on the walls, playlists on the floor, lighting that assumes someone is about to do something worth watching.</p>
+          <div class="byline lux"><span>Art — <b>House commission</b></span><span>Mood — <b>Main character</b></span></div>
+          <div class="quote lux">"Tired of gyms that look like a room full of machines? Us too."</div>
+        </div>
+        <figure class="art luximg">
+          <img src="../crops/p05-art.jpg" alt="Pop-art painting of a figure striding across a blue circle, painted in red, yellow and black brush strokes">
+          <figcaption>Commissioned for the main floor</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="spread" aria-labelledby="f5h">
+      <div class="folio"><span>Core Culture — Nº 001</span><b>F·05</b><span>The Training Issue</span></div>
+      <div class="inner">
+        <div class="txt">
+          <div class="fno">F·05</div>
+          <h2 id="f5h" class="lux">The lounge <em>edit.</em></h2>
+          <p class="standfirst lux">Work-life balance? Try work-lift balance. Meetings before the session, people after it — a lounge with unmetered coffee, strong opinions and no clocks. The workout ends; the culture does not.</p>
+          <div class="byline lux"><span>Setting — <b>The lounge</b></span><span>Duration — <b>As long as you like</b></span></div>
+          <div class="quote lux">"Got a meeting before your workout? Or work to finish after?"</div>
+        </div>
+        <figure class="art luximg">
+          <img src="../crops/p05-field.jpg" alt="A lone figure working at a desk in the middle of a green field" style="object-position:center 40%">
+          <figcaption>Remote work, remote everything</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- DIRECTORY -->
+  <section class="directory" aria-labelledby="dirh">
+    <h2 id="dirh" class="lux">The Directory</h2>
+    <p class="sub lux">Everything in the issue, and where to find it. Subscriptions open at the front desk.</p>
+    <div class="dirlist">
+      <a class="dirrow lux" href="mailto:front.desk@coreculture.club">
+        <span class="no">i.</span><span class="nm">Weight &amp; Strength</span><span class="ds">Racks, platforms, coached hours</span><span class="pg">F·01 — daily</span>
+      </a>
+      <a class="dirrow lux" href="mailto:front.desk@coreculture.club">
+        <span class="no">ii.</span><span class="nm">Hybrid Engine</span><span class="ds">Sleds, ergs, screens on treadmills</span><span class="pg">F·02 — Tue/Thu/Sat</span>
+      </a>
+      <a class="dirrow lux" href="mailto:front.desk@coreculture.club">
+        <span class="no">iii.</span><span class="nm">Dance &amp; Hobby Clubs</span><span class="ds">Zumba, yoga, club lights</span><span class="pg">F·02 — evenings</span>
+      </a>
+      <a class="dirrow lux" href="mailto:front.desk@coreculture.club">
+        <span class="no">iv.</span><span class="nm">Recovery</span><span class="ds">Ice bath, steam, four degrees</span><span class="pg">F·03 — bookable</span>
+      </a>
+      <a class="dirrow lux" href="mailto:front.desk@coreculture.club">
+        <span class="no">v.</span><span class="nm">Lounge &amp; Parking</span><span class="ds">Coffee, community, your ride is safe</span><span class="pg">F·05 — always</span>
+      </a>
+      <a class="dirrow lux" href="mailto:front.desk@coreculture.club">
+        <span class="no">vi.</span><span class="nm">Subscription</span><span class="ds">Membership — from 89 a month, first week free</span><span class="pg">Front desk</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- BACK COVER -->
+  <footer class="backcover" aria-label="Back cover">
+    <p class="line lux">This is not just a gym.<br><em>Become part of the culture.</em></p>
+    <div class="bcaps caps lux">Train · Move · Recover · Connect</div>
+    <a class="cta lux" href="mailto:front.desk@coreculture.club">Subscribe — first week free</a>
+    <div class="legal">
+      <span>© MMXXVI Core Culture — Training Club</span>
+      <span>Concept 05 — The Edit</span>
+      <span>Printed on screens</span>
+    </div>
+  </footer>
+</main>
+
+<script>
+  const coverImg=document.querySelector('.coverstage img');
+  if(coverImg && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    addEventListener('scroll',()=>{
+      const y=Math.min(window.scrollY, innerHeight);
+      coverImg.style.transform='translateY('+(y*0.12)+'px) scale(1.06)';
+    },{passive:true});
+  }
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.18});
+  document.querySelectorAll('.lux,.luximg').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<innerHeight*.95) el.classList.add('in'); else io.observe(el);
+  });
+</script>
+</body>
+</html>

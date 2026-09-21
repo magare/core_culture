@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Night Haul</title>
+<meta name="description" content="Core Culture — the drive to the club. Scroll to cover the last four kilometres.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070707'/%3E%3Crect x='14' y='6' width='4' height='8' fill='%23ffb454'/%3E%3Crect x='14' y='18' width='4' height='8' fill='%23ffb454'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;600;800&family=Overpass+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#070707;
+  --amber:#ffb454;
+  --amber-dim:rgba(255,180,84,.5);
+  --tail:#ff3b30;
+  --ink:#f2efe6;
+  --dim:rgba(242,239,230,.55);
+  --faint:rgba(242,239,230,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--night);color:var(--ink);
+  font-family:"Overpass",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--amber);color:#070707}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--amber);color:#070707;padding:10px 16px;z-index:300;font-weight:600}
+.skip:focus{left:10px}
+
+/* ================= fixed night drive scene ================= */
+#scene{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+#field{
+  position:absolute;left:0;right:0;top:0;height:52%;
+  background:url(../crops/p26-field.jpg) center 30%/cover no-repeat;
+  filter:brightness(.8);
+}
+#field::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,7,.75),rgba(7,7,7,.12) 55%,var(--night) 100%)}
+#horizonlights{
+  position:absolute;left:0;right:0;top:50%;height:2px;
+  background:linear-gradient(90deg,transparent, rgba(255,180,84,.5) 18%, rgba(242,239,230,.65) 50%, rgba(255,180,84,.5) 82%, transparent);
+  filter:blur(.6px);
+  opacity:.7;
+}
+#roadbox{position:absolute;left:0;right:0;top:52%;bottom:0;perspective:520px;perspective-origin:50% 0;overflow:hidden}
+#plane{
+  position:absolute;left:50%;top:0;width:2400px;height:4000px;
+  transform:translateX(-50%) rotateX(72deg);transform-origin:50% 0;
+  will-change:transform;
+}
+#mover{position:absolute;inset:0;will-change:transform}
+#mover .asphalt{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(90deg,
+      transparent 0 35.5%, rgba(242,239,230,.4) 35.5% 36.2%, transparent 36.2% 63.8%,
+      rgba(242,239,230,.4) 63.8% 64.5%, transparent 64.5% 100%),
+    repeating-linear-gradient(180deg, rgba(255,200,120,.85) 0 58px, transparent 58px 148px),
+    linear-gradient(180deg,#141415 0%,#0b0b0c 3%,#09090a 100%);
+  background-size:100% 100%, 5px 148px, auto;
+  background-position:0 0, 50% 0, 0 0;
+  background-repeat:no-repeat, repeat-y, no-repeat;
+}
+#glowroad{
+  position:absolute;left:0;right:0;top:52%;bottom:0;
+  background:radial-gradient(70% 90% at 50% 0%, rgba(255,180,84,.10), transparent 60%);
+  mix-blend-mode:screen;
+}
+.pole{
+  position:absolute;width:5px;height:420px;left:calc(50% - 430px);
+  background:linear-gradient(180deg,#26221c,#0c0b0a);
+  transform-origin:50% 100%;
+}
+.pole::before{
+  content:"";position:absolute;top:-6px;left:-16px;width:36px;height:12px;border-radius:6px;
+  background:linear-gradient(180deg,#ffd9a0,#7a5426);
+  box-shadow:0 6px 30px 8px rgba(255,180,84,.45);
+}
+.pole.r{left:auto;right:calc(50% - 430px)}
+.pole.r::before{left:auto;right:-16px}
+
+/* ================= dashboard HUD ================= */
+#hud{
+  position:fixed;top:0;left:0;right:0;z-index:20;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:14px;
+  padding:20px clamp(16px,3vw,40px);pointer-events:none;
+}
+#hud .cluster{
+  display:flex;gap:0;border:1px solid rgba(242,239,230,.18);
+  background:rgba(7,7,7,.55);backdrop-filter:blur(6px);
+}
+#hud .g{padding:12px 20px;border-right:1px solid rgba(242,239,230,.12);text-align:right}
+#hud .g:last-child{border-right:0}
+#hud .lbl{font-size:8.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+#hud .big{
+  font-family:"Overpass Mono";font-weight:600;font-size:clamp(22px,2.6vw,34px);line-height:1;
+  font-variant-numeric:tabular-nums;color:var(--amber);
+}
+#hud .km{color:var(--ink)}
+#sign{
+  pointer-events:auto;
+  background:#0b1f12;border:2px solid #e8e4d2;border-radius:8px;
+  padding:12px 20px;text-align:center;
+  box-shadow:0 10px 34px rgba(0,0,0,.6);
+}
+#sign .top{font-size:9px;letter-spacing:.34em;color:#9fd6a8;text-transform:uppercase}
+#sign .name{
+  font-weight:800;font-size:clamp(17px,1.9vw,24px);letter-spacing:.08em;color:#f4f1e6;text-transform:uppercase;margin-top:3px;
+}
+#sign .exit{font-family:"Overpass Mono";font-size:10px;color:#cfe6c9;margin-top:3px;letter-spacing:.16em}
+
+/* ================= content over the road ================= */
+.content{position:relative;z-index:10}
+.story{min-height:100vh;display:flex;align-items:center;justify-content:flex-start;padding:16vh clamp(18px,6vw,110px)}
+.story.right{justify-content:flex-end}
+.kmcard{
+  max-width:520px;background:rgba(7,7,7,.72);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,180,84,.35);padding:clamp(24px,3vw,44px);
+  box-shadow:0 30px 70px rgba(0,0,0,.55);
+}
+.kmcard .marker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:"Overpass Mono";font-size:10px;letter-spacing:.3em;color:var(--amber);text-transform:uppercase;
+  border:1px solid rgba(255,180,84,.4);padding:6px 12px;margin-bottom:20px;
+}
+.kmcard h1,.kmcard h2{
+  font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:1.02;
+}
+.kmcard h1{font-size:clamp(34px,3.6vw,56px)}
+.kmcard h2{font-size:clamp(28px,3.2vw,48px)}
+.kmcard p{margin-top:18px;color:var(--dim);font-size:15px;line-height:1.9;font-weight:300}
+.kmcard p b{color:var(--ink);font-weight:600}
+.kmcard .list{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.kmcard .list span{
+  font-family:"Overpass Mono";font-size:11px;letter-spacing:.14em;color:var(--dim);
+  display:flex;gap:10px;align-items:baseline;text-transform:uppercase;
+}
+.kmcard .list span::before{content:"›";color:var(--amber)}
+
+/* arrival */
+.arrival{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:clip}
+.arrival .lot{
+  position:absolute;inset:0;
+  background:url(../crops/p26-park.jpg) center/cover no-repeat;
+  filter:brightness(1.7) contrast(1.05);
+}
+.arrival .lot::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,var(--night) 0%,rgba(7,7,7,.42) 45%,rgba(7,7,7,.62) 100%);
+}
+.arrival .in{
+  position:relative;padding:0 clamp(18px,6vw,110px) 14vh;max-width:900px;
+}
+.arrival .marker{
+  display:inline-flex;gap:10px;align-items:center;
+  font-family:"Overpass Mono";font-size:10px;letter-spacing:.3em;color:var(--amber);
+  text-transform:uppercase;margin-bottom:18px;
+}
+.arrival h2{font-weight:800;text-transform:uppercase;font-size:clamp(48px,7.6vw,120px);line-height:.95}
+.arrival p{margin-top:20px;color:var(--dim);font-size:16px;line-height:1.9;max-width:34em;font-weight:300}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:34px;
+  font-family:"Overpass Mono";font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;
+  background:var(--amber);color:#231502;padding:20px 44px;font-weight:600;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(255,180,84,.3)}
+footer{
+  position:relative;z-index:10;
+  padding:26px clamp(18px,6vw,110px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-family:"Overpass Mono";font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(242,239,230,.08);
+}
+@media (max-width:760px){
+  #hud{padding:12px}
+  #hud .g{padding:9px 12px}
+  #sign{display:none}
+  .story{padding:12vh 18px;align-items:flex-end}
+  .pole{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip the drive</a>
+
+<!-- night drive scene -->
+<div id="scene" aria-hidden="true">
+  <div id="field"></div>
+  <div id="horizonlights"></div>
+  <div id="roadbox">
+    <div id="plane">
+      <div id="mover">
+        <div class="asphalt"></div>
+        <div class="pole" style="top:150px"></div>
+        <div class="pole r" style="top:470px"></div>
+        <div class="pole" style="top:790px"></div>
+        <div class="pole r" style="top:1110px"></div>
+        <div class="pole" style="top:1430px"></div>
+        <div class="pole r" style="top:1750px"></div>
+        <div class="pole" style="top:2070px"></div>
+        <div class="pole r" style="top:2390px"></div>
+        <div class="pole" style="top:2710px"></div>
+        <div class="pole r" style="top:3030px"></div>
+        <div class="pole" style="top:3350px"></div>
+        <div class="pole r" style="top:3670px"></div>
+      </div>
+    </div>
+  </div>
+  <div id="glowroad"></div>
+</div>
+
+<!-- dashboard -->
+<div id="hud">
+  <div class="cluster" aria-label="Drive telemetry">
+    <div class="g"><div class="lbl">Speed</div><div class="big"><span id="speed">0</span><small style="font-size:.45em;color:var(--dim)"> KM/H</small></div></div>
+    <div class="g"><div class="lbl">To the door</div><div class="big km"><span id="odo">4.20</span><small style="font-size:.45em;color:var(--dim)"> KM</small></div></div>
+    <div class="g"><div class="lbl">Gear</div><div class="big" id="gear" style="color:var(--ink)">D</div></div>
+  </div>
+  <div id="sign">
+    <div class="top">Next exit</div>
+    <div class="name">Core Culture</div>
+    <div class="exit">EXIT 23 — THE CULTURE</div>
+  </div>
+</div>
+
+<div class="content">
+<main id="main">
+
+  <section class="story right" aria-label="Kilometre four — why drive">
+    <div class="kmcard">
+      <span class="marker">KM 4 · The reason</span>
+      <h1>Some gyms are on the way.<br>This one is the destination.</h1>
+      <p>You don't end up at Core Culture by accident. You come for a club that trains every part of the life around the barbell — <b>iron, engine, dance floor, cold plunge, lounge</b> — and for the people who wait for you there. Four kilometres. Worth every one.</p>
+    </div>
+  </section>
+
+  <section class="story" aria-label="Kilometre three — the crew">
+    <div class="kmcard">
+      <span class="marker">KM 3 · The crew</span>
+      <h2>Train alone<br>on the road.<br>Never in the club.</h2>
+      <p>Run club at dawn, sled relays at dusk, a lounge that fills up after the last set. The culture isn't a slogan on the wall — <b>it's the regulars who learn your name and your one-rep max</b>, in that order.</p>
+      <div class="list">
+        <span>Run club — Saturdays, all paces</span>
+        <span>Sled league — teams of two</span>
+        <span>Member nights — monthly, lounge</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="story right" aria-label="Kilometre two — the plan">
+    <div class="kmcard">
+      <span class="marker">KM 2 · The plan</span>
+      <h2>Every engine<br>needs a map.</h2>
+      <p>Coaches on the floor, programs on the rack, and a first week built around finding <b>your</b> starting line — strength, hybrid, dance or pure recovery. Steer; we navigate.</p>
+      <div class="list">
+        <span> coached floors — all opening hours</span>
+        <span>programs — strength · hybrid · dance</span>
+        <span>first week — on the house</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="story" aria-label="Kilometre one — the pit stop">
+    <div class="kmcard">
+      <span class="marker">KM 1 · Pit stop</span>
+      <h2>Recovery<br>is a fuel stop.</h2>
+      <p>Every serious route has one: <b>3° plunge, steam, sauna</b>. Three minutes in the tub and the whole week drives better. Refuelling isn't weakness — it's the second half of training.</p>
+    </div>
+  </section>
+
+  <section class="arrival" aria-label="Arrival — join">
+    <div class="lot" role="img" aria-label="A snow-dusted car park at night, tail lights glowing"></div>
+    <div class="in">
+      <span class="marker">KM 0 · You've arrived</span>
+      <h2>Parked.<br>Finally.</h2>
+      <p>No circling the block, no parking-lot cardio. Space for you and your ride, a front desk that knows your name, and a club that's warmer than this car park looks. Kill the engine. Come find your core.</p>
+      <a class="cta" href="mailto:front.desk@coreculture.club">Take exit 23 — free first week</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 26 · Night Haul</span>
+  </footer>
+</main>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mover=document.getElementById('mover');
+  const speedEl=document.getElementById('speed');
+  const odoEl=document.getElementById('odo');
+  const gearEl=document.getElementById('gear');
+
+  // road loop: mover translates within one pole spacing (320px)
+  const LOOP=320;
+  let pos=0, lastY=scrollY, lastT=performance.now(), vel=0, shownSpeed=0, raf=null;
+
+  function readScroll(){
+    const dy=scrollY-lastY;lastY=scrollY;
+    const now=performance.now();
+    const dt=Math.max(1,now-lastT);lastT=now;
+    const v=dy/dt;                       // px per ms
+    vel=vel*0.9+v*0.1;
+    if(!reduced){
+      pos+=dy*0.9;
+      // odometer: page scroll 0..max maps 4.20km..0
+      const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
+      const km=Math.max(0,4.2*(1-scrollY/max));
+      odoEl.textContent=km.toFixed(2);
+    }
+    if(raf===null) raf=requestAnimationFrame(frame);
+  }
+
+  function frame(now){
+    // decay velocity toward 0
+    vel*=0.94;
+    pos+=vel*16*0.9;                     // coast even when not scrolling
+    const wrapped=((pos%LOOP)+LOOP)%LOOP;
+    mover.style.transform=`translateY(${-wrapped}px)`;
+    // speedometer: map |vel| px/ms → km/h (theatrical)
+    const target=Math.min(140,Math.abs(vel)*16000*0.02);
+    shownSpeed+=(target-shownSpeed)*0.12;
+    speedEl.textContent=String(Math.round(shownSpeed)).padStart(2,'0');
+    gearEl.textContent=shownSpeed<1?'N':shownSpeed<40?'D':shownSpeed<90?'D':'D';
+    raf=requestAnimationFrame(frame);
+    if(Math.abs(vel)<0.0005&&shownSpeed<0.5){/* keep running; cheap */}
+  }
+
+  if(reduced){
+    // static scene, no motion, honest zero
+    mover.style.transform='translateY(0)';
+    odoEl.textContent='4.20';
+  }else{
+    addEventListener('scroll',readScroll,{passive:true});
+    raf=requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>

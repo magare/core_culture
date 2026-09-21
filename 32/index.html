@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Gimbal</title>
+<meta name="description" content="Core Culture — balance is a machine. Spin the gimbal; watch the core stay level.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0c'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23c9a24d' stroke-width='1.4'/%3E%3Cellipse cx='16' cy='16' rx='11' ry='5' fill='none' stroke='%23c9a24d' stroke-width='.8' opacity='.6'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23ffd9a0'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0c;
+  --ink:#eceae2;
+  --dim:rgba(236,234,226,.55);
+  --faint:rgba(236,234,226,.26);
+  --brass:#c9a24d;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Manrope",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+::selection{background:var(--brass);color:#0a0a0c}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--brass);color:#0a0a0c;padding:10px 16px;z-index:200;font-weight:600}
+.skip:focus{left:10px}
+
+#stage{position:fixed;inset:0;touch-action:none;cursor:grab}
+#stage.grabbing{cursor:grabbing}
+#gnd{
+  position:fixed;left:50%;bottom:6vh;transform:translateX(-50%);
+  width:60vw;height:120px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(201,162,77,.13), transparent 70%);
+  filter:blur(10px);
+}
+
+.ui{position:fixed;z-index:5;pointer-events:none}
+.ui a,.ui button{pointer-events:auto}
+.tl{top:clamp(18px,3.4vh,38px);left:clamp(18px,3.4vw,44px);max-width:min(560px,86vw)}
+.brand{font-size:9.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--faint);margin-bottom:20px}
+h1{
+  font-family:"Krona One",sans-serif;font-weight:400;text-transform:uppercase;
+  font-size:clamp(24px,3.4vw,50px);line-height:1.18;letter-spacing:.01em;
+}
+h1 b{color:var(--brass);font-weight:400}
+.lede{margin-top:22px;color:var(--dim);font-size:13.5px;line-height:2.05;font-weight:300;max-width:34em}
+.lede b{color:var(--ink);font-weight:600}
+
+.tr{top:clamp(18px,3.4vh,38px);right:clamp(18px,3.4vw,44px);text-align:right}
+.tr .lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+.tr .rows{display:flex;flex-direction:column;gap:9px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.tr .rows span{display:flex;justify-content:flex-end;gap:10px;align-items:center}
+.tr .rows i{width:8px;height:8px;border-radius:50%;background:var(--brass);display:inline-block;box-shadow:0 0 8px rgba(201,162,77,.7)}
+.tr .rows .lv{font-variant-numeric:tabular-nums;color:var(--ink);min-width:4ch;text-align:right}
+
+.bl{bottom:clamp(18px,3.4vh,38px);left:clamp(18px,3.4vw,44px)}
+.cta{
+  display:inline-block;text-decoration:none;
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+  background:var(--brass);color:#171103;padding:17px 34px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(201,162,77,.3)}
+.hint{margin-top:14px;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint)}
+
+.br{bottom:clamp(18px,3.4vh,38px);right:clamp(18px,3.4vw,44px);text-align:right}
+.br .specs{display:flex;flex-direction:column;gap:8px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
+.br .specs b{color:var(--dim);font-weight:500}
+
+@media (max-width:860px){
+  body{overflow:auto}
+  #stage{position:fixed}
+  .tl{max-width:86vw}
+  .tr{display:none}
+  .br{display:none}
+  .bl{bottom:clamp(18px,3.4vh,38px)}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#join">Skip to membership</a>
+
+<div id="stage" aria-label="Interactive brass gyroscope — drag to spin"></div>
+<div id="gnd" aria-hidden="true"></div>
+
+<div class="ui tl">
+  <p class="brand">Core Culture · Instrument 03</p>
+  <h1>Balance is<br>a <b>machine.</b></h1>
+  <p class="lede">Three rings, one core. However hard the world spins it, the centre holds level. <b>That is the whole method</b> — heavy training, fast engine work, deep recovery — three motions around a core that stays you. Grab the gimbal. It can take it.</p>
+</div>
+
+<div class="ui tr">
+  <p class="lbl">Ring telemetry</p>
+  <div class="rows">
+    <span><i></i> Outer — Train <b class="lv" id="rpmA">42</b></span>
+    <span><i></i> Middle — Move <b class="lv" id="rpmB">31</b></span>
+    <span><i></i> Inner — Recover <b class="lv" id="rpmC">19</b></span>
+    <span><i></i> Core — You <b class="lv">LEVEL</b></span>
+  </div>
+</div>
+
+<div class="ui bl" id="join">
+  <a class="cta" href="mailto:front.desk@coreculture.club">Calibrate your first week — free</a>
+  <p class="hint">Drag to spin · scroll to zoom</p>
+</div>
+
+<div class="ui br">
+  <div class="specs">
+    <span>Build — <b>gimbal, three axes</b></span>
+    <span>Frame — <b>aged brass</b></span>
+    <span>Core — <b>warm lamplight</b></span>
+    <span>Service — <b>all hours</b></span>
+  </div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const stage=document.getElementById('stage');
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(2,devicePixelRatio||1));
+renderer.setSize(innerWidth,innerHeight);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.12;
+stage.appendChild(renderer.domElement);
+
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x0a0a0c,0.045);
+
+// real reflections for the metal
+const pmrem=new THREE.PMREMGenerator(renderer);
+scene.environment=pmrem.fromScene(new RoomEnvironment(renderer),0.06).texture;
+
+const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,0.1,100);
+camera.position.set(0,0.35,10.8);
+
+// lights (env does most of the work; these add drama)
+scene.add(new THREE.AmbientLight(0x2e2b25,0.7));
+const key=new THREE.DirectionalLight(0xfff1d6,2.4); key.position.set(4,7,5); scene.add(key);
+const rim=new THREE.DirectionalLight(0x8fb7ff,1.3); rim.position.set(-7,-2,-5); scene.add(rim);
+const ember=new THREE.PointLight(0xffb46a,30,20); ember.position.set(-3,1.5,3.4); scene.add(ember);
+
+// ---- materials: oiled brass + dark cast steel, with a procedural roughness break
+function grimeTex(){
+  const c=document.createElement('canvas');c.width=c.height=256;
+  const g=c.getContext('2d');
+  g.fillStyle='#7a7a7a';g.fillRect(0,0,256,256);
+  for(let i=0;i<2600;i++){
+    const v=90+Math.random()*110;
+    g.fillStyle=`rgb(${v},${v},${v})`;
+    g.globalAlpha=0.16;
+    g.fillRect(Math.random()*256,Math.random()*256,1.6,1.6);
+  }
+  const t=new THREE.CanvasTexture(c);
+  t.wrapS=t.wrapT=THREE.RepeatWrapping;
+  return t;
+}
+const grime=grimeTex();
+const brass=new THREE.MeshPhysicalMaterial({color:0xc9a24d,metalness:1,roughness:0.22,roughnessMap:grime,clearcoat:0.55,clearcoatRoughness:0.25});
+const brassDark=new THREE.MeshPhysicalMaterial({color:0x8a6a30,metalness:1,roughness:0.38,roughnessMap:grime});
+const steel=new THREE.MeshPhysicalMaterial({color:0x61686f,metalness:1,roughness:0.3,roughnessMap:grime,clearcoat:0.3});
+const iron=new THREE.MeshStandardMaterial({color:0x17181b,metalness:0.85,roughness:0.55});
+
+// ---- instrument: cast-iron base + column + fork, gimbal hangs in the fork
+const instrument=new THREE.Group(); scene.add(instrument);
+
+const base=new THREE.Mesh(new THREE.CylinderGeometry(1.75,1.95,0.22,48),iron);
+base.position.y=-3.15; instrument.add(base);
+const baseRing=new THREE.Mesh(new THREE.TorusGeometry(1.78,0.045,10,60),brassDark);
+baseRing.rotation.x=Math.PI/2; baseRing.position.y=-3.06; instrument.add(baseRing);
+const column=new THREE.Mesh(new THREE.CylinderGeometry(0.13,0.17,1.5,20),steel);
+column.position.y=-2.35; instrument.add(column);
+const columnCap=new THREE.Mesh(new THREE.SphereGeometry(0.16,18,14),brass);
+columnCap.position.y=-1.6; instrument.add(columnCap);
+
+// cantilever arm from the column up to the outer ring's front pivot
+// gimbal is tilted rotation.x=0.38 → front pin sits at (0, -1.16, 2.91) in instrument space
+const arm=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.09,2.95,14),steel);
+arm.rotation.x=Math.atan2(2.91,0.44);
+arm.position.set(0,-1.38,1.46);
+instrument.add(arm);
+const armBoss=new THREE.Mesh(new THREE.CylinderGeometry(0.13,0.13,0.3,16),brassDark);
+armBoss.rotation.x=Math.PI/2; armBoss.position.set(0,-1.16,2.95);
+instrument.add(armBoss);
+
+// ---- gimbal: nested ring ASSEMBLIES (ring + weighted rim + spokes), pivots on fixed pins
+const gimbal=new THREE.Group(); instrument.add(gimbal);
+
+function pinPair(group,len,rad,dir){ // dir: 'x' | 'y' — pins on the rotation axis stay fixed
+  for(const s of [1,-1]){
+    const pin=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,len,14),brassDark);
+    if(dir==='x')pin.rotation.z=Math.PI/2;
+    pin.position.set(dir==='x'?s*len/2:0,dir==='y'?s*len/2:0,0);
+    group.add(pin);
+    const capEnd=new THREE.Mesh(new THREE.SphereGeometry(rad*1.5,14,12),brass);
+    capEnd.position.set(dir==='x'?s*len:0,dir==='y'?s*len:0,0);
+    group.add(capEnd);
+  }
+}
+function spokes(group,r,n,mat){
+  for(let i=0;i<n;i++){
+    const ang=(i/n)*Math.PI;
+    const sp=new THREE.Mesh(new THREE.CylinderGeometry(0.028,0.028,r*0.42,8),mat);
+    // short ribs hanging inward from the ring, not crossing the centre
+    sp.position.set(Math.cos(ang)*r*0.79,Math.sin(ang)*r*0.79,0);
+    sp.rotation.z=ang+Math.PI/2;
+    group.add(sp);
+  }
+}
+
+// outer ring assembly: spins about Z (pins on ±Z are its fixed pivots)
+const rA=new THREE.Group();
+const rAring=new THREE.Mesh(new THREE.TorusGeometry(3.05,0.085,20,140),brass);
+rA.add(rAring);
+const rArim=new THREE.Mesh(new THREE.TorusGeometry(3.05,0.16,14,60,Math.PI*0.62),brassDark); // weighted bottom rim arc
+rArim.rotation.z=Math.PI+Math.PI*0.19;
+rA.add(rArim);
+spokes(rA,2.6,4,brassDark);
+pinPair(rA,0.5,0.055,'z');                    // fixed pivots on the ring's axis
+gimbal.add(rA);
+
+// middle ring: spins about X
+const rB=new THREE.Group();
+const rBring=new THREE.Mesh(new THREE.TorusGeometry(2.42,0.07,18,120),brassDark);
+rB.add(rBring);
+const rBrim=new THREE.Mesh(new THREE.TorusGeometry(2.42,0.13,12,48,Math.PI*0.5),steel);
+rBrim.rotation.z=Math.PI*0.25;
+rB.add(rBrim);
+pinPair(rB,0.42,0.045,'x');
+gimbal.add(rB);
+
+// inner ring: spins about Y
+const rC=new THREE.Group();
+const rCring=new THREE.Mesh(new THREE.TorusGeometry(1.8,0.06,16,110),steel);
+rC.add(rCring);
+const rCrim=new THREE.Mesh(new THREE.TorusGeometry(1.8,0.11,12,44,Math.PI*0.45),brass);
+rCrim.rotation.z=Math.PI*0.6;
+rC.add(rCrim);
+pinPair(rC,0.38,0.04,'y');
+gimbal.add(rC);
+
+// core: warm lamp inside a glass shell + brass meridian band — always level
+const coreG=new THREE.Group(); gimbal.add(coreG);
+const core=new THREE.Mesh(new THREE.SphereGeometry(0.8,40,32),
+  new THREE.MeshStandardMaterial({color:0x584022,metalness:0.4,roughness:0.4,emissive:0xffc98a,emissiveIntensity:1.35}));
+coreG.add(core);
+const shell=new THREE.Mesh(new THREE.SphereGeometry(0.98,40,32),
+  new THREE.MeshPhysicalMaterial({color:0xfff2dc,transmission:0.72,thickness:0.5,roughness:0.06,ior:1.4,clearcoat:1,transparent:true,opacity:0.9}));
+coreG.add(shell);
+const meridian=new THREE.Mesh(new THREE.TorusGeometry(0.99,0.028,10,70),brass);
+meridian.rotation.x=0.5; coreG.add(meridian);
+const meridian2=meridian.clone(); meridian2.rotation.x=-0.5; meridian2.rotation.y=1.05; coreG.add(meridian2);
+coreG.position.z=0;
+
+// assembly stance + slow presentation spin lives on the instrument
+instrument.rotation.set(0.06,-0.45,0);
+gimbal.rotation.set(0.38,0,0.1);
+
+// reflective dark floor disc
+const floorDisc=new THREE.Mesh(new THREE.CircleGeometry(7.5,56),
+  new THREE.MeshStandardMaterial({color:0x0c0c0e,metalness:0.7,roughness:0.42}));
+floorDisc.rotation.x=-Math.PI/2; floorDisc.position.y=-3.28; scene.add(floorDisc);
+const grid=new THREE.PolarGridHelper(9,12,4,48,0x2c2820,0x1b1815);
+grid.position.y=-3.27; scene.add(grid);
+
+// interaction: drag = angular velocity, wheel = zoom
+let dragging=false,px=0,py=0;
+let vA=0.35,vB=-0.55,vC=0.9;
+let userX=0,userY=0;
+let dist=10.8;
+stage.addEventListener('pointerdown',e=>{dragging=true;px=e.clientX;py=e.clientY;stage.classList.add('grabbing');stage.setPointerCapture(e.pointerId);});
+stage.addEventListener('pointermove',e=>{
+  if(!dragging)return;
+  const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;
+  userX+=dx*0.0035; userY+=dy*0.003;
+});
+const end=()=>{dragging=false;stage.classList.remove('grabbing')};
+stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
+addEventListener('wheel',e=>{
+  dist=Math.max(7.5,Math.min(15,dist+e.deltaY*0.004));
+},{passive:true});
+
+addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+
+const rpmA=document.getElementById('rpmA'),rpmB=document.getElementById('rpmB'),rpmC=document.getElementById('rpmC');
+let rpmT=0;
+
+let last=performance.now();
+function frame(now){
+  const dt=Math.min(0.05,(now-last)/1000);last=now;
+  userX*=0.94;userY*=0.9;
+  rA.rotation.z+=(vA*dt)+userX;
+  rB.rotation.x+=(vB*dt)+userY*0.7;
+  rC.rotation.y+=(vC*dt)+userX*1.6;
+  coreG.rotation.y-=dt*0.2;
+  coreG.quaternion.slerp(new THREE.Quaternion(),0.02);
+  instrument.rotation.y+=dt*0.05;
+  camera.position.z+=(dist-camera.position.z)*0.06;
+  camera.position.y=0.35+Math.sin(now*0.0004)*0.1;
+  camera.lookAt(0,-0.4,0);
+  rpmT+=dt;
+  if(rpmT>0.25){
+    rpmT=0;
+    rpmA.textContent=String(Math.round(42+userX*900)).padStart(2,'0');
+    rpmB.textContent=String(Math.round(31+userY*700)).padStart(2,'0');
+    rpmC.textContent=String(Math.round(19+userX*500)).padStart(2,'0');
+  }
+  renderer.render(scene,camera);
+  if(!reduced||dragging||Math.abs(userX)>0.001||Math.abs(userY)>0.001){
+    requestAnimationFrame(frame);
+  }
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

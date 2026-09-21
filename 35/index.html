@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — The Relay</title>
+<meta name="description" content="Core Culture — nobody trains alone. Four legs are already run; the final baton is yours.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070708'/%3E%3Cpath d='M8 24 Q16 20 24 10' stroke='%23ff4632' stroke-width='2' fill='none'/%3E%3Ccircle cx='24' cy='10' r='3' fill='%23e9e7e0'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@300;400;600;800&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070708;
+  --ink:#e9e7e0;
+  --dim:rgba(233,231,224,.52);
+  --faint:rgba(233,231,224,.24);
+  --red:#ff4632;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Encode Sans Condensed",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--red);color:var(--ink)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--red);color:var(--ink);padding:10px 16px;z-index:300;font-weight:600}
+.skip:focus{left:10px}
+
+header.hero{
+  min-height:88vh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(20px,6vw,110px);
+}
+.kicker{font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--red);margin-bottom:24px}
+h1{
+  font-weight:800;text-transform:uppercase;
+  font-size:clamp(46px,8vw,128px);line-height:.94;letter-spacing:-.005em;
+}
+h1 em{font-style:normal;color:var(--faint)}
+.lede{margin-top:26px;max-width:32em;color:var(--dim);font-size:14.5px;line-height:2;font-weight:300}
+.lede b{color:var(--ink);font-weight:600}
+
+/* the course */
+.course{position:relative;padding:6vh 0 10vh}
+#pathsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#trail{fill:none;stroke:rgba(233,231,224,.14);stroke-width:1.5}
+#route{fill:none;stroke:var(--red);stroke-width:2.5}
+#baton,#ghosts span{position:absolute;left:0;top:0;pointer-events:none;will-change:transform}
+#baton{
+  width:34px;height:14px;margin:-7px 0 0 -17px;border-radius:7px;
+  background:linear-gradient(90deg,#f4f1e8,#b9b4a4);
+  box-shadow:0 0 18px rgba(233,231,224,.55);
+}
+#baton::after{content:"";position:absolute;right:4px;top:3px;width:6px;height:8px;border-radius:3px;background:var(--red)}
+#ghosts span{width:5px;height:5px;margin:-2px 0 0 -2px;border-radius:50%;background:rgba(233,231,224,.35)}
+
+.legs{position:relative;z-index:2;display:flex;flex-direction:column}
+.leg{
+  min-height:78vh;display:flex;align-items:center;
+  padding:6vh clamp(20px,6vw,110px);
+}
+.leg:nth-child(even){justify-content:flex-end}
+.legcard{
+  max-width:480px;background:rgba(7,7,8,.82);backdrop-filter:blur(4px);
+  border:1px solid rgba(233,231,224,.14);
+  padding:clamp(24px,3vw,44px);
+  position:relative;
+}
+.legcard .marker{
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;
+  font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.3em;color:var(--red);text-transform:uppercase;
+}
+.legcard .marker::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 12px rgba(255,70,50,.8)}
+.legcard h2{
+  font-weight:800;text-transform:uppercase;
+  font-size:clamp(26px,3.2vw,46px);line-height:.98;
+}
+.legcard p{margin-top:16px;color:var(--dim);font-size:13.5px;line-height:2;font-weight:300}
+.legcard p b{color:var(--ink);font-weight:600}
+.legcard .split{
+  margin-top:18px;padding-top:14px;border-top:1px dashed rgba(233,231,224,.18);
+  display:flex;justify-content:space-between;gap:10px;
+  font-family:"IBM Plex Mono";font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);
+}
+.legcard .split b{color:var(--ink);font-weight:400}
+
+.leg.final .legcard{border-color:rgba(255,70,50,.5)}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:22px;
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+  background:var(--red);color:#1c0603;padding:17px 36px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(255,70,50,.35)}
+footer{
+  padding:26px clamp(20px,6vw,110px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(233,231,224,.08);
+}
+@media (max-width:760px){
+  .leg{min-height:64vh}
+  .leg:nth-child(even){justify-content:flex-start}
+  #ghosts{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main">
+  <header class="hero">
+    <p class="kicker">Core Culture · Relay season</p>
+    <h1>Nobody here<br>trains <em>alone.</em></h1>
+    <p class="lede">The club runs like a relay: handoffs, not heroics. Four legs are already in motion below — <b>follow the baton down the course</b>. The final leg has no runner yet. Scroll, and see whose name is on it.</p>
+  </header>
+
+  <section class="course" aria-label="The relay course">
+    <svg id="pathsvg" aria-hidden="true">
+      <path id="trail"></path>
+      <path id="route"></path>
+    </svg>
+    <div id="ghosts" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div id="baton" aria-hidden="true"></div>
+
+    <div class="legs">
+      <article class="leg">
+        <div class="legcard">
+          <p class="marker">Leg 1 · 06:40 · riverside</p>
+          <h2>The run club</h2>
+          <p>Saturday, all paces, zero egos. The fast ones loop back — <b>that's the rule, not politeness</b>. First-timers get a route buddy and a name to shout across the park.</p>
+          <div class="split"><span>Handoff to</span><b>Sled league</b></div>
+        </div>
+      </article>
+
+      <article class="leg">
+        <div class="legcard">
+          <p class="marker">Leg 2 · 18:30 · the track</p>
+          <h2>Sled league</h2>
+          <p>Teams of two, one sled, forty metres of honest argument with friction. <b>You push, they rest; they push, you scream encouragement</b> — technically a training stimulus.</p>
+          <div class="split"><span>Handoff to</span><b>Member nights</b></div>
+        </div>
+      </article>
+
+      <article class="leg">
+        <div class="legcard">
+          <p class="marker">Leg 3 · 20:00 · the lounge</p>
+          <h2>Member nights</h2>
+          <p>Once a month the lounge belongs to the members: playlists by the run club, films from the sled league, <b>stories that get one rep heavier every telling</b>.</p>
+          <div class="split"><span>Handoff to</span><b>Coach's corner</b></div>
+        </div>
+      </article>
+
+      <article class="leg">
+        <div class="legcard">
+          <p class="marker">Leg 4 · all week · the floor</p>
+          <h2>Coach's corner</h2>
+          <p>Coaches who learn your name before your numbers. A program on a card, a correction you'll hear for years, <b>and someone who notices when you skip a Tuesday</b>.</p>
+          <div class="split"><span>Handoff to</span><b>Leg 5 — unassigned</b></div>
+        </div>
+      </article>
+
+      <article class="leg final">
+        <div class="legcard">
+          <p class="marker">Leg 5 · unassigned</p>
+          <h2>The baton<br>is yours.</h2>
+          <p>Four legs run every week by people who were all beginners once. The final leg fits any shoe size. <b>First week free</b> — take the baton and find out who you hand it to.</p>
+          <a class="cta" href="mailto:front.desk@coreculture.club">Take the baton — free week</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 35 · The Relay</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const course=document.querySelector('.course');
+  const svg=document.getElementById('pathsvg');
+  const route=document.getElementById('route');
+  const trail=document.getElementById('trail');
+  const baton=document.getElementById('baton');
+  const ghosts=[...document.querySelectorAll('#ghosts span')];
+
+  let L=0;
+  function build(){
+    const w=course.clientWidth,h=course.clientHeight;
+    svg.setAttribute('width',w);svg.setAttribute('height',h);
+    svg.setAttribute('viewBox','0 0 '+w+' '+h);
+    // anchor points at each leg card, alternating sides
+    const legs=[...document.querySelectorAll('.leg')];
+    const pts=legs.map((leg,i)=>{
+      const r=leg.getBoundingClientRect(), c=course.getBoundingClientRect();
+      const card=leg.querySelector('.legcard').getBoundingClientRect();
+      const x=(leg.classList.contains('final')?0.5:(i%2===0?0.30:0.70))*w;
+      const y=r.top-c.top+r.height/2;
+      return {x,y};
+    });
+    // prepend hero exit point
+    pts.unshift({x:w*0.5,y:0});
+    // build smooth path through pts
+    let d=`M ${pts[0].x} ${pts[0].y}`;
+    for(let i=1;i<pts.length;i++){
+      const p0=pts[i-1],p1=pts[i];
+      const mx=(p0.x+p1.x)/2;
+      d+=` C ${mx} ${p0.y+60}, ${mx} ${p1.y-60}, ${p1.x} ${p1.y}`;
+    }
+    route.setAttribute('d',d);
+    trail.setAttribute('d',d);
+    L=route.getTotalLength();
+    route.style.strokeDasharray=L;
+    trail.style.strokeDasharray=L;
+  }
+  build();
+  addEventListener('resize',()=>{build();update();});
+
+  let cur=0;
+  function update(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    const p=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+    route.style.strokeDashoffset=L*(1-p);
+    const pt=route.getPointAtLength(L*p);
+    cur=pt;
+    baton.style.transform=`translate(${pt.x}px,${pt.y}px) rotate(${(Math.sin(p*20)*6).toFixed(1)}deg)`;
+    ghosts.forEach((g,i)=>{
+      const q=Math.max(0,L*(p-i*0.012));
+      const gp=route.getPointAtLength(q);
+      g.style.opacity=(0.4-i*0.06).toFixed(2);
+      g.style.transform=`translate(${gp.x}px,${gp.y}px)`;
+    });
+  }
+  update();
+  if(!reduced){
+    (function raf(){
+      update();
+      requestAnimationFrame(raf);
+    })();
+  }else{
+    addEventListener('scroll',update,{passive:true});
+  }
+})();
+</script>
+</body>
+</html>

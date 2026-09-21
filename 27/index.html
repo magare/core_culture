@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Wind Tunnel</title>
+<meta name="description" content="Core Culture — every class tested in the tunnel. Push the throttle, watch the airflow.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050607'/%3E%3Cpath d='M4 10h16M8 16h20M4 22h16' stroke='%23ff5a1f' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050607;
+  --ink:#e6ecef;
+  --dim:rgba(230,236,239,.52);
+  --faint:rgba(230,236,239,.26);
+  --orange:#ff5a1f;
+  --steel:rgba(230,236,239,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Share Tech Mono",monospace;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--orange);color:#050607}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--orange);color:#050607;padding:10px 16px;z-index:300;font-weight:400}
+.skip:focus{left:10px}
+
+/* ---------- test cell ---------- */
+.cell{
+  min-height:100vh;display:grid;
+  grid-template-columns:minmax(260px,340px) minmax(0,1fr) minmax(220px,280px);
+  gap:clamp(16px,2.4vw,34px);
+  padding:12vh clamp(16px,3vw,44px) 8vh;
+  align-items:stretch;
+}
+.kicker{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+h1{
+  font-family:"Michroma",sans-serif;font-weight:400;text-transform:uppercase;
+  font-size:clamp(22px,2.5vw,38px);line-height:1.28;letter-spacing:.02em;
+}
+.brief{margin-top:20px;color:var(--dim);font-size:12px;line-height:2.05}
+.brief b{color:var(--ink)}
+
+/* throttle */
+.throttle{
+  margin-top:auto;border:1px solid var(--steel);padding:22px 18px 18px;background:rgba(230,236,239,.02);
+}
+.throttle .lbl{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between;margin-bottom:16px}
+.throttle .lbl b{color:var(--orange);font-weight:400}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:34px;background:transparent;cursor:ew-resize;
+}
+input[type=range]::-webkit-slider-runnable-track{
+  height:6px;background:
+    repeating-linear-gradient(90deg, var(--steel) 0 2px, transparent 2px 24px),
+    linear-gradient(90deg,#20262b,#14181c);
+  border:1px solid var(--steel);
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:18px;height:30px;margin-top:-13px;
+  background:linear-gradient(180deg,var(--orange),#8a2a08);
+  border:1px solid #ffb28c;box-shadow:0 0 16px rgba(255,90,31,.5);
+}
+input[type=range]::-moz-range-track{height:6px;background:#20262b;border:1px solid var(--steel)}
+input[type=range]::-moz-range-thumb{width:18px;height:30px;border-radius:0;background:var(--orange);border:1px solid #ffb28c}
+.throttle .scale{
+  display:flex;justify-content:space-between;font-size:8.5px;color:var(--faint);letter-spacing:.14em;margin-top:10px;
+}
+
+/* tunnel viewport */
+.bay{position:relative;border:1px solid var(--steel);background:#030405;display:flex;flex-direction:column;min-height:56vh}
+.bay .head{
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding:10px 14px;border-bottom:1px solid var(--steel);
+  font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+}
+.bay .head b{color:var(--orange);font-weight:400}
+#stage{position:relative;flex:1;overflow:hidden}
+#stage img{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  height:100%;width:100%;object-fit:cover;opacity:.85;
+  filter:grayscale(.75) contrast(1.1) brightness(.82);
+}
+#streaks{position:absolute;inset:0;mix-blend-mode:screen}
+#stage .grid{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(rgba(230,236,239,.05) 1px, transparent 1px) 0 0/100% 25%,
+    linear-gradient(90deg, rgba(230,236,239,.05) 1px, transparent 1px) 0 0/25% 100%;
+}
+#stage .brackets{position:absolute;inset:14px;pointer-events:none}
+#stage .brackets i{position:absolute;width:22px;height:22px;border:2px solid var(--orange)}
+#stage .brackets i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}
+#stage .brackets i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
+#stage .brackets i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}
+#stage .brackets i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
+.bay .foot{
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding:10px 14px;border-top:1px solid var(--steel);
+  font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+}
+
+/* readout column */
+.readout{display:flex;flex-direction:column;gap:14px}
+.gauge{
+  border:1px solid var(--steel);padding:16px;background:rgba(230,236,239,.02);
+}
+.gauge .lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.gauge .val{
+  font-size:clamp(26px,2.6vw,38px);line-height:1;color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.gauge .val small{font-size:11px;color:var(--dim)}
+.gauge.hot .val{color:var(--orange)}
+.gauge .bar{margin-top:12px;height:4px;background:#14181c;position:relative}
+.gauge .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--orange);width:0%}
+.subjects{border:1px solid var(--steel);padding:16px;background:rgba(230,236,239,.02)}
+.subjects .lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+.subjects button{
+  display:flex;justify-content:space-between;width:100%;gap:10px;align-items:center;
+  background:transparent;border:1px solid var(--steel);color:var(--dim);
+  font-family:"Share Tech Mono";font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  padding:11px 12px;margin-bottom:8px;cursor:pointer;transition:all .2s ease;
+}
+.subjects button:last-child{margin-bottom:0}
+.subjects button:hover{color:var(--ink);border-color:rgba(230,236,239,.4)}
+.subjects button[aria-pressed="true"]{color:#050607;background:var(--orange);border-color:var(--orange)}
+.subjects button .k{font-size:8.5px;color:inherit;opacity:.7}
+
+/* ---------- chapters: findings ---------- */
+.findings{border-top:1px solid var(--steel);padding:12vh clamp(16px,3vw,44px)}
+.findings .kicker{margin-bottom:10px}
+h2{
+  font-family:"Michroma";font-weight:400;text-transform:uppercase;
+  font-size:clamp(20px,2.6vw,36px);line-height:1.3;margin-bottom:8vh;
+}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,26px)}
+.find{
+  border:1px solid var(--steel);padding:26px 22px 30px;background:rgba(230,236,239,.015);
+  transition:border-color .25s ease,transform .25s ease;
+}
+.find:hover{border-color:rgba(255,90,31,.55);transform:translateY(-4px)}
+.find .no{font-size:10px;letter-spacing:.3em;color:var(--orange);text-transform:uppercase}
+.find h3{
+  font-family:"Michroma";font-weight:400;font-size:15px;text-transform:uppercase;
+  letter-spacing:.04em;margin:16px 0 14px;line-height:1.5;
+}
+.find p{color:var(--dim);font-size:12px;line-height:2.05}
+.find .tag{margin-top:18px;font-size:9px;letter-spacing:.24em;color:var(--faint);text-transform:uppercase;border-top:1px solid var(--steel);padding-top:14px}
+
+/* CTA strip */
+.ctastrip{
+  border-top:1px solid var(--steel);
+  padding:10vh clamp(16px,3vw,44px);
+  display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;
+}
+.ctastrip h2{margin-bottom:0;font-size:clamp(20px,2.4vw,32px);max-width:22em}
+.cta{
+  text-decoration:none;font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  background:var(--orange);color:#050607;padding:20px 42px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(255,90,31,.35)}
+footer{
+  padding:26px clamp(16px,3vw,44px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--steel);
+}
+@media (max-width:1060px){
+  .cell{grid-template-columns:1fr;min-height:auto;gap:18px}
+  .throttle{order:2;margin-top:0}
+  .bay{order:1;min-height:52vh}
+  .readout{order:3;flex-direction:row;flex-wrap:wrap}
+  .readout .gauge{flex:1 1 140px}
+  .subjects{order:4}
+  .fgrid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main">
+  <section class="cell" aria-label="The wind tunnel">
+    <div style="display:flex;flex-direction:column">
+      <p class="kicker">Core Culture · Aerodynamics lab</p>
+      <h1>Every class,<br>tested in<br>the tunnel.</h1>
+      <p class="brief">Drag is resistance. Drafting is community. Laminar flow is a recovery breath. Push the throttle and feel the physics behind the programming — <b>then come feel it in the building</b>.</p>
+      <div class="throttle">
+        <div class="lbl"><span>Throttle</span><b id="thrval">40%</b></div>
+        <label for="thr" class="sr" style="position:absolute;left:-999px">Fan throttle</label>
+        <input type="range" id="thr" min="0" max="100" value="40">
+        <div class="scale"><span>IDLE</span><span>CRUISE</span><span>MAX Q</span></div>
+      </div>
+    </div>
+
+    <div class="bay">
+      <div class="head"><span>Test section · <b id="subjectname">SLED</b></span><span>Section 04-B</span><span id="qval">q 0.42 kPa</span></div>
+      <div id="stage">
+        <img id="subject" src="../crops/p04-sled.jpg" alt="Test subject — an athlete driving a sled">
+        <canvas id="streaks" aria-hidden="true"></canvas>
+        <div class="grid" aria-hidden="true"></div>
+        <div class="brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="foot"><span>Air temp 19°</span><span>Static — walls rated</span><span>Cam 02</span></div>
+    </div>
+
+    <div class="readout">
+      <div class="gauge hot"><div class="lbl">Airspeed</div><div class="val"><span id="wind">96</span><small> KM/H</small></div><div class="bar"><i id="windbar"></i></div></div>
+      <div class="gauge"><div class="lbl">Fan RPM</div><div class="val"><span id="rpm">640</span></div><div class="bar"><i id="rpmbar"></i></div></div>
+      <div class="gauge"><div class="lbl">Drag coefficient</div><div class="val" id="cd">0.72</div><div class="bar"><i id="cdbar"></i></div></div>
+      <div class="subjects">
+        <div class="lbl">Test subjects</div>
+        <button data-img="../crops/p04-sled.jpg" data-name="SLED" data-cd="0.72" aria-pressed="true">Sled push <span class="k">04-B</span></button>
+        <button data-img="../crops/p02-dancer.jpg" data-name="DANCER" data-cd="0.41" aria-pressed="false">Dancer <span class="k">07-A</span></button>
+        <button data-img="../crops/p02-streaks.jpg" data-name="RUNNER" data-cd="0.55" aria-pressed="false">Runner <span class="k">12-C</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="findings" aria-label="Findings">
+    <p class="kicker">Findings</p>
+    <h2>What the airflow<br>tells us about training.</h2>
+    <div class="fgrid">
+      <article class="find">
+        <div class="no">Finding 01</div>
+        <h3>Drag builds engines</h3>
+        <p>Resistance is just air that argues back. Sleds, bikes and heavy bars — the club's whole point is controlled drag you can slowly defeat.</p>
+        <div class="tag">→ hybrid &amp; strength floors</div>
+      </article>
+      <article class="find">
+        <div class="no">Finding 02</div>
+        <h3>Drafting is culture</h3>
+        <p>Ride behind someone slightly faster and you both go further. Every class is a peloton — the room's job is to make your pace contagious.</p>
+        <div class="tag">→ group classes &amp; run club</div>
+      </article>
+      <article class="find">
+        <div class="no">Finding 03</div>
+        <h3>Laminar is recovery</h3>
+        <p>Smooth airflow runs cooler. So do you: plunge, steam, slow breathing — the sessions that return your body to laminar before the next gust.</p>
+        <div class="tag">→ remedy wing</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="ctastrip">
+    <h2>Schedule a test slot. First session blows free.</h2>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Book a wind slot</a>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 27 · Wind Tunnel</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stage=document.getElementById('stage'),
+        cv=document.getElementById('streaks'),
+        ctx=cv.getContext('2d'),
+        thr=document.getElementById('thr'),
+        thrval=document.getElementById('thrval'),
+        windEl=document.getElementById('wind'),
+        windbar=document.getElementById('windbar'),
+        rpmEl=document.getElementById('rpm'),
+        rpmbar=document.getElementById('rpmbar'),
+        cdEl=document.getElementById('cd'),
+        cdbar=document.getElementById('cdbar'),
+        qval=document.getElementById('qval'),
+        subjectImg=document.getElementById('subject');
+
+  let W=0,H=0,DPR=Math.min(2,devicePixelRatio||1);
+  function size(){
+    W=stage.clientWidth;H=stage.clientHeight;
+    cv.width=W*DPR;cv.height=H*DPR;
+    cv.style.width=W+'px';cv.style.height=H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  size();addEventListener('resize',size);
+
+  // streak particles in a 3D box (x,y in [-1,1], z in (0,1])
+  const N=170;
+  const P=[];
+  function spawn(p,init){
+    p.x=Math.random()*2-1;p.y=Math.random()*2-1;
+    p.z=init?Math.random()*1:1;
+    p.px=null;p.py=null;
+    return p;
+  }
+  for(let i=0;i<N;i++)P.push(spawn({},true));
+
+  let speed=reduced?0.35:0.12*(+thr.value/100)+0.02;  // normalized flow speed
+  function setSpeed(){speed=0.02+(+thr.value/100)*0.55;}
+  setSpeed();
+  thr.addEventListener('input',()=>{
+    setSpeed();
+    const v=+thr.value;
+    thrval.textContent=v+'%';
+    const kmh=Math.round(v*2.4);
+    windEl.textContent=kmh;
+    windbar.style.width=v+'%';
+    const rpm=Math.round(160+v*22.4);
+    rpmEl.textContent=rpm;
+    rpmbar.style.width=v+'%';
+    qval.textContent='q '+(v*0.0105).toFixed(2)+' kPa';
+  });
+  thr.dispatchEvent(new Event('input'));
+
+  // drag coefficient varies gently with speed for life
+  const baseCD=0.72;
+  let t=0,last=performance.now();
+  function frame(now){
+    const dt=Math.min(0.05,(now-last)/1000);last=now;
+    t+=dt;
+    // fade previous frame → comet trails (black is neutral in screen blend)
+    ctx.globalCompositeOperation='destination-out';
+    ctx.fillStyle='rgba(0,0,0,0.28)';
+    ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation='source-over';
+    const f=0.9;                    // focal
+    for(const p of P){
+      const pz=p.z;
+      p.z-=speed*dt*9;
+      if(p.z<=0.04){spawn(p,false);continue;}
+      const x1=W/2+(p.x/(pz))*W*0.5*f;
+      const y1=H/2+(p.y/(pz))*H*0.5*f;
+      const x2=W/2+(p.x/(p.z))*W*0.5*f;
+      const y2=H/2+(p.y/(p.z))*H*0.5*f;
+      const a=Math.min(0.9,(1-p.z)*0.95+0.08);
+      const lw=0.4+(1-p.z)*2.6;
+      const hot=p.y>-0.12&&p.y<0.4&&Math.random()<0.05;
+      ctx.lineWidth=lw;
+      ctx.strokeStyle=hot?'rgba(255,90,31,'+a+')':'rgba(205,228,255,'+(a*0.5)+')';
+      ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+    }
+    const cd=baseCD+Math.sin(t*0.6)*0.04+(speed-0.12)*0.1;
+    cdEl.textContent=cd.toFixed(2);
+    cdbar.style.width=(cd/1.2*100)+'%';
+    if(!reduced)requestAnimationFrame(frame);
+  }
+  if(!reduced)requestAnimationFrame(frame);
+  else{
+    // static streak field for reduced motion
+    ctx.strokeStyle='rgba(200,225,255,.3)';
+    for(const p of P){
+      const x=W/2+(p.x/p.z)*W*0.45, y=H/2+(p.y/p.z)*H*0.45;
+      ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+34,y);ctx.stroke();
+    }
+  }
+
+  // subject swap
+  const nameEl=document.getElementById('subjectname');
+  document.querySelectorAll('.subjects button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.subjects button').forEach(x=>x.setAttribute('aria-pressed','false'));
+      b.setAttribute('aria-pressed','true');
+      subjectImg.src=b.dataset.img;
+      subjectImg.alt='Test subject — '+b.dataset.name.toLowerCase();
+      nameEl.textContent=b.dataset.name;
+      cdEl.textContent=(+b.dataset.cd).toFixed(2);
+    });
+  });
+})();
+</script>
+</body>
+</html>

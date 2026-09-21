@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — The Stack</title>
+<meta name="description" content="Core Culture — the club as a weight stack. Six plates, six floors of training. Pull the pin.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0c'/%3E%3Crect x='7' y='6' width='18' height='4' fill='%231f1f24'/%3E%3Crect x='7' y='12' width='18' height='4' fill='%231f1f24'/%3E%3Crect x='7' y='18' width='18' height='4' fill='%231f1f24'/%3E%3Crect x='14' y='24' width='4' height='4' fill='%23e03a2f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@500;600;700&family=Chivo+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b0c;
+  --machine:#131316;
+  --plate:#1a1a1f;
+  --plate-hi:#26262c;
+  --edge:#33333b;
+  --brass:#c9a24d;
+  --red:#e03a2f;
+  --ink:#ececec;
+  --dim:rgba(236,236,236,.55);
+  --faint:rgba(236,236,236,.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Chivo Mono",monospace;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--brass);color:#0b0b0c}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--brass);color:#0b0b0c;padding:10px 16px;z-index:300;font-weight:500}
+.skip:focus{left:10px}
+
+/* ============ fixed machine ============ */
+#machine{
+  position:fixed;top:0;left:0;bottom:0;width:44vw;z-index:1;
+  border-right:1px solid rgba(236,236,236,.07);
+  background:
+    radial-gradient(120% 60% at 30% 0%, rgba(236,236,236,.03), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 2px, transparent 2px 90px),
+    var(--bg);
+  overflow:hidden;
+}
+#machine .frame{
+  position:absolute;top:0;bottom:0;left:50%;width:min(300px,60%);
+  transform:translateX(-50%);
+}
+/* guide rods the plates slide on */
+#machine .rod{
+  position:absolute;top:96px;bottom:5vh;width:8px;
+  background:linear-gradient(90deg,#0a0a0c,#3c3c45 30%,#23232a 60%,#0a0a0c);
+  border-radius:4px;pointer-events:none;z-index:0;
+  box-shadow:0 0 10px rgba(0,0,0,.7);
+}
+#machine .rod.l{left:-18px}
+#machine .rod.r{right:-18px}
+#machine .rod::before,#machine .rod::after{
+  content:"";position:absolute;left:50%;transform:translateX(-50%);
+  width:14px;height:10px;border-radius:3px;background:#1d1d22;
+}
+#machine .rod::before{top:-4px}
+#machine .rod::after{bottom:-4px}
+#machine .rail-l,#machine .rail-r{
+  position:absolute;top:0;bottom:0;width:14px;
+  background:linear-gradient(90deg,#1d1d22,#101013 40%,#0c0c0e);
+  box-shadow:inset 0 0 20px rgba(0,0,0,.8);
+}
+#machine .rail-l{left:-30px}
+#machine .rail-r{right:-30px}
+#pulley{
+  position:absolute;top:24px;left:50%;transform:translateX(-50%);
+  width:74px;height:74px;border-radius:50%;
+  border:12px solid #202026;border-top-color:#2b2b33;
+  box-shadow:0 8px 22px rgba(0,0,0,.6), inset 0 2px 6px rgba(255,255,255,.05);
+}
+#pulley::before{
+  content:"";position:absolute;inset:-14px;border-radius:12px;z-index:-1;
+  background:linear-gradient(180deg,#232329,#131317);
+  border:1px solid #0d0d10;
+}
+#pulley::after{content:"";position:absolute;inset:26px;border-radius:50%;background:#0a0a0b}
+#cable{
+  position:absolute;top:98px;left:50%;width:3px;height:40px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,#3c3c44,#191a20);
+}
+/* shackle joining cable to the top plate */
+#cable::after{
+  content:"";position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);
+  width:14px;height:16px;
+  border:3px solid #6e6a5e;border-top-color:#8c877a;
+  border-radius:4px 4px 7px 7px;
+}
+#carriage{position:absolute;top:130px;left:50%;transform:translateX(-50%);will-change:transform;perspective:1100px;transform-style:preserve-3d;z-index:2}
+.plate{
+  width:min(300px,34vw);height:30px;margin-bottom:12px;position:relative;
+  transform:rotateX(64deg);transform-origin:50% 50%;
+  background-color:var(--plate);
+  background-image:
+    radial-gradient(circle 2.5px at 14px 9px, #4d4d57 40%, transparent 65%),
+    radial-gradient(circle 2.5px at calc(100% - 14px) 9px, #4d4d57 40%, transparent 65%),
+    radial-gradient(circle 2.5px at 14px calc(100% - 9px), #35353d 40%, transparent 65%),
+    radial-gradient(circle 2.5px at calc(100% - 14px) calc(100% - 9px), #35353d 40%, transparent 65%),
+    linear-gradient(180deg, rgba(255,255,255,.10) 0%, transparent 34%),
+    linear-gradient(180deg, var(--plate-hi) 0%, var(--plate) 55%, #101013 100%);
+  border:1px solid var(--edge);
+  border-top-color:#46464f;
+  box-shadow:0 16px 20px rgba(0,0,0,.55);
+  transition:transform .45s cubic-bezier(.3,1.4,.4,1), box-shadow .45s ease, border-color .3s ease;
+}
+/* machined front edge gives the slab its thickness */
+.plate::after{
+  content:"";position:absolute;left:-1px;right:-1px;top:100%;height:20px;
+  background:linear-gradient(180deg,#0f0f12,#08080a);
+  border:1px solid #060607;border-top:0;
+}
+.plate .num{
+  position:absolute;right:12px;top:-44px;
+  font-family:"Saira Extra Condensed",sans-serif;font-weight:700;
+  font-size:36px;letter-spacing:.02em;color:var(--faint);
+  transform:rotateX(-64deg);transform-origin:100% 100%;
+  transition:color .3s ease;
+}
+.plate .plate-name{
+  position:absolute;left:14px;top:-36px;
+  font-size:9.5px;letter-spacing:.24em;color:var(--faint);text-transform:uppercase;
+  transform:rotateX(-64deg);transform-origin:0 100%;
+  transition:color .3s ease;white-space:nowrap;
+}
+.plate.lift{box-shadow:0 40px 34px rgba(0,0,0,.75);border-top-color:#585864}
+.plate.lift::after{background:linear-gradient(180deg,#141417,#0b0b0d)}
+.plate.on .num{color:var(--brass)}
+.plate.on .plate-name{color:var(--ink)}
+.plate.top{border-top-color:var(--brass)}
+#pin{
+  position:absolute;left:50%;margin-left:calc(min(300px,34vw)/2 + 22px);
+  width:12px;height:52px;
+  background:linear-gradient(90deg,var(--red),#8f2018);
+  border-radius:3px;top:0;
+  box-shadow:0 6px 14px rgba(0,0,0,.6);
+  transition:top .5s cubic-bezier(.3,1.2,.4,1);
+}
+#pin::after{content:"";position:absolute;top:-9px;left:1px;width:10px;height:11px;background:var(--red);border-radius:4px 4px 0 0}
+#pinlabel{
+  position:absolute;left:50%;margin-left:calc(min(300px,34vw)/2 + 44px);
+  font-size:9.5px;letter-spacing:.26em;color:var(--red);text-transform:uppercase;white-space:nowrap;
+  transition:top .5s cubic-bezier(.3,1.2,.4,1);top:0;
+}
+#mshadow{
+  position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);
+  width:min(340px,40vw);height:26px;border-radius:50%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,.85), transparent 70%);
+  filter:blur(4px);
+}
+#machinelabel{
+  position:absolute;left:26px;top:26px;font-size:10px;letter-spacing:.3em;color:var(--faint);text-transform:uppercase;
+}
+#machinereadout{
+  position:absolute;left:26px;bottom:26px;font-size:10px;letter-spacing:.22em;color:var(--dim);
+  text-transform:uppercase;line-height:2;
+}
+#machinereadout b{color:var(--brass);font-weight:500}
+
+/* ============ content ============ */
+.content{position:relative;z-index:2;margin-left:44vw}
+header.top{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(26px,5vw,90px);
+}
+.kicker{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--brass);margin-bottom:22px}
+h1{
+  font-family:"Saira Extra Condensed",sans-serif;font-weight:600;text-transform:uppercase;
+  font-size:clamp(58px,7.2vw,128px);line-height:.92;letter-spacing:.01em;
+}
+h1 .thin{color:var(--faint)}
+.lede{max-width:36em;margin-top:30px;color:var(--dim);font-size:14px;line-height:2}
+.lede b{color:var(--ink);font-weight:500}
+.scrollcue{margin-top:7vh;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:12px}
+.scrollcue::after{content:"";width:60px;height:1px;background:linear-gradient(90deg,var(--brass),transparent)}
+
+.chapters{display:flex;flex-direction:column}
+.chap{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:12vh clamp(26px,5vw,90px);
+  border-top:1px solid rgba(236,236,236,.06);
+  position:relative;
+}
+.chap .chip{
+  display:inline-flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:18px;
+}
+.chap .chip i{width:9px;height:9px;background:var(--edge);transform:rotate(45deg);transition:background .3s}
+.chap.active .chip i{background:var(--brass)}
+.chap .chip b{color:var(--brass);font-weight:500}
+.chap h2{
+  font-family:"Saira Extra Condensed",sans-serif;font-weight:600;text-transform:uppercase;
+  font-size:clamp(40px,4.6vw,84px);line-height:.94;letter-spacing:.01em;
+}
+.chap p{max-width:36em;margin-top:20px;color:var(--dim);font-size:13.5px;line-height:2.05}
+.chap .meta{
+  margin-top:26px;display:flex;flex-wrap:wrap;gap:8px;
+}
+.chap .meta span{
+  font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
+  border:1px solid rgba(236,236,236,.16);padding:8px 14px;
+}
+.chap .ghostnum{
+  position:absolute;right:clamp(16px,4vw,70px);top:50%;transform:translateY(-50%);
+  font-family:"Saira Extra Condensed",sans-serif;font-weight:700;
+  font-size:clamp(120px,16vw,260px);line-height:1;color:rgba(236,236,236,.045);
+  pointer-events:none;user-select:none;
+}
+.chap.active .ghostnum{color:rgba(201,162,77,.10)}
+
+/* CTA */
+.join{border-top:1px solid rgba(236,236,236,.08);align-items:flex-start}
+.cta{
+  margin-top:34px;display:inline-block;text-decoration:none;
+  font-family:"Chivo Mono";font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:500;
+  color:#0b0b0c;background:var(--brass);padding:20px 40px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(201,162,77,.25)}
+footer{
+  padding:30px clamp(26px,5vw,90px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(236,236,236,.06);
+}
+
+/* progress = pin travel marker */
+#progress{
+  position:fixed;top:0;right:0;bottom:0;width:4px;z-index:5;background:rgba(236,236,236,.06);
+}
+#progress i{position:absolute;top:0;left:0;right:0;height:0%;background:var(--brass)}
+
+@media (max-width:900px){
+  #machine{width:100vw;height:34vh;bottom:auto;border-right:0;border-bottom:1px solid rgba(236,236,236,.1);background:var(--bg);z-index:6}
+  #machine .frame{left:27%;width:min(210px,50vw)}
+  .plate{width:min(210px,50vw);height:22px;margin-bottom:9px}
+  .plate::after{height:13px}
+  .plate .num{font-size:22px;top:-28px}
+  .plate .plate-name{display:none}
+  #pulley{width:44px;height:44px;top:12px;border-width:9px}
+  #pulley::after{inset:15px}
+  #cable{top:56px}
+  #carriage{top:82px}
+  #pin{margin-left:calc(min(210px,50vw)/2 + 16px);width:9px;height:38px}
+  #pinlabel{display:none}
+  #mshadow{bottom:3vh;width:min(230px,48vw)}
+  #machinelabel{left:16px;top:14px}
+  #machinereadout{left:16px;bottom:12px;line-height:1.7}
+  #machinereadout .hide-s{display:none}
+  .content{margin-left:0;padding-top:34vh;z-index:1}
+  header.top{min-height:auto;padding:7vh 22px 9vh}
+  .chap{min-height:auto;padding:8vh 22px;display:block}
+  .chap .ghostnum{display:none}
+  .chap h2{font-size:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .plate,#pin,#pinlabel{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- fixed weight-stack machine -->
+<aside id="machine" aria-label="The stack — page progress as a weight stack">
+  <div class="frame">
+    <div id="pulley"></div>
+    <div id="cable"></div>
+    <div class="rod l" aria-hidden="true"></div>
+    <div class="rod r" aria-hidden="true"></div>
+    <div id="carriage"><!-- plates injected --></div>
+    <div id="pin" aria-hidden="true"></div>
+    <div id="pinlabel" aria-hidden="true">PIN</div>
+    <div id="mshadow"></div>
+  </div>
+  <div id="machinelabel">CORE CULTURE · THE STACK</div>
+  <div id="machinereadout">
+    SELECTED — <b id="readplate">20</b><br>
+    <span class="hide-s">SCROLL TO RACK THE PLATES</span>
+  </div>
+</aside>
+<div id="progress" aria-hidden="true"><i></i></div>
+
+<div class="content">
+<main id="main">
+  <header class="top">
+    <p class="kicker">Core Culture · Six plates</p>
+    <h1>Every floor<br>of the club,<br><span class="thin">weighted honestly.</span></h1>
+    <p class="lede">This page is a cable stack. Six plates, six disciplines. Scrolling pulls the pin and lifts the weight — the deeper you go, the more of the club you carry. <b>No plate is optional. The culture is the whole stack.</b></p>
+    <p class="scrollcue">Start with plate 20 — pull</p>
+  </header>
+
+  <section class="chapters" aria-label="The six plates">
+    <article class="chap" data-plate="0">
+      <span class="ghostnum" aria-hidden="true">20</span>
+      <p class="chip"><i></i> Plate 20 · <b>Heaviest</b></p>
+      <h2>Weight Training</h2>
+      <p>Racks, platforms and a full free-weight floor. The 20 is the honest one — progressive overload, real barbells, chalk in the air. Bring a program or borrow one of ours.</p>
+      <div class="meta"><span>Free weights</span><span>Platforms</span><span>Coached hours</span></div>
+    </article>
+
+    <article class="chap" data-plate="1">
+      <span class="ghostnum" aria-hidden="true">15</span>
+      <p class="chip"><i></i> Plate 15 · <b>Strength</b></p>
+      <h2>Strength Blocks</h2>
+      <p>Structured strength cycles — squat, hinge, press, pull — periodised across the season. For members who want a number to go up and a body that holds up.</p>
+      <div class="meta"><span>5×5 &amp; beyond</span><span>Technique labs</span><span>Testing weeks</span></div>
+    </article>
+
+    <article class="chap" data-plate="2">
+      <span class="ghostnum" aria-hidden="true">10</span>
+      <p class="chip"><i></i> Plate 10 · <b>Engine</b></p>
+      <h2>Hybrid Engine</h2>
+      <p>Sled track, assault bikes, ski ergs and a lane for intervals. Lift heavy, run fast, repeat — built for hybrid races and for people who refuse to pick a lane.</p>
+      <div class="meta"><span>Sled track</span><span>Intervals</span><span>Race prep</span></div>
+    </article>
+
+    <article class="chap" data-plate="3">
+      <span class="ghostnum" aria-hidden="true">08</span>
+      <p class="chip"><i></i> Plate 08 · <b>Rhythm</b></p>
+      <h2>Dance Studio</h2>
+      <p>A sprung floor, a proper sound system and choreography from house to hip-hop. Cardio that forgets it is cardio — the steamiest room per square metre.</p>
+      <div class="meta"><span>Sprung floor</span><span>Beginner friendly</span><span>Night sessions</span></div>
+    </article>
+
+    <article class="chap" data-plate="4">
+      <span class="ghostnum" aria-hidden="true">06</span>
+      <p class="chip"><i></i> Plate 06 · <b>Recovery</b></p>
+      <h2>Recovery Wing</h2>
+      <p>Cold plunge, steam, sauna and a stretch bay. The plate everyone skips is the plate that makes the rest of the stack move. Three minutes cold. Longer conversations.</p>
+      <div class="meta"><span>3°C plunge</span><span>Steam + sauna</span><span>Stretch bay</span></div>
+    </article>
+
+    <article class="chap" data-plate="5">
+      <span class="ghostnum" aria-hidden="true">04</span>
+      <p class="chip"><i></i> Plate 04 · <b>Culture</b></p>
+      <h2>Lounge &amp; Community</h2>
+      <p>Good coffee, better playlists, a lounge built for the hour after training. Run clubs, workshops, member nights — the part of the gym that makes you come back.</p>
+      <div class="meta"><span>Barista bar</span><span>Member nights</span><span>Run club</span></div>
+    </article>
+  </section>
+
+  <section class="chap join" data-plate="6" aria-label="Join">
+    <p class="chip"><i></i> Stack complete · <b>Pin on the top plate</b></p>
+    <h2>Carry the<br>whole culture.</h2>
+    <p>One membership lifts every plate: iron, engine, studio, recovery, lounge. First week on the house — pull the pin.</p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Pull the pin — start your week</a>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 22 · The Stack</span>
+  </footer>
+</main>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const PLATES=[
+    ["20","WEIGHT"],["15","STRENGTH"],["10","ENGINE"],
+    ["08","DANCE"],["06","RECOVERY"],["04","LOUNGE"]
+  ];
+  const carriage=document.getElementById('carriage');
+  const pin=document.getElementById('pin');
+  const pinlabel=document.getElementById('pinlabel');
+  const cable=document.getElementById('cable');
+  const readplate=document.getElementById('readplate');
+  const prog=document.querySelector('#progress i');
+  const chaps=[...document.querySelectorAll('.chap')];
+
+  PLATES.forEach((p,i)=>{
+    const d=document.createElement('div');
+    d.className='plate';
+    d.innerHTML=`<span class="plate-name">${p[1]}</span><span class="num">${p[0]}</span>`;
+    carriage.appendChild(d);
+  });
+  const plates=[...carriage.children];
+  const plateH=()=>{const cs=getComputedStyle(plates[0]);return plates[0].offsetHeight+parseFloat(cs.marginBottom);};
+
+  let cur=0,target=0;
+  function read(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    target=max>0?scrollY/max:0;
+    prog.style.height=(target*100)+'%';
+    // active chapter
+    let active=0;
+    chaps.forEach((c,i)=>{
+      const r=c.getBoundingClientRect();
+      c.classList.toggle('active',r.top<innerHeight*0.55&&r.bottom>innerHeight*0.45);
+      if(r.top<innerHeight*0.55)active=i;
+    });
+    const level=Math.min(active,PLATES.length);
+    return level;
+  }
+  let level=read();
+  addEventListener('scroll',()=>{level=read();},{passive:true});
+
+  // lifted set: plates with index < level hang high; pin sits at plate `level`
+  function layout(){
+    const lift=plateH()*0.85;
+    plates.forEach((p,i)=>{
+      const up=i<level;
+      const ty=up?-Math.min(lift*(level-i),lift*3):0;
+      p.style.transform=`rotateX(64deg) translateY(${ty}px)`;
+      p.classList.toggle('lift',up);
+      p.classList.toggle('on',(i===Math.min(level,PLATES.length-1)&&!up)||(up&&i===level-1));
+      p.classList.toggle('top',level>=PLATES.length&&i===PLATES.length-1);
+    });
+    const pinIdx=level>=PLATES.length?0:Math.min(level,PLATES.length-1);
+    const base=carriage.offsetTop;
+    const cableTopY=cable.offsetTop;
+    const pinTop=base+pinIdx*plateH()+plateH()*0.35;
+    pin.style.top=pinTop+'px';
+    pinlabel.style.top=(pinTop+14)+'px';
+    readplate.textContent=level>=PLATES.length?'ALL':PLATES[Math.min(level,PLATES.length-1)][0];
+    // cable follows the highest lifted plate
+    const topY=base-Math.min(lift*Math.max(level,0),lift*3);
+    cable.style.height=Math.max(8,topY-cableTopY)+'px';
+  }
+  layout();
+
+  if(!reduced){
+    (function frame(){
+      layout();
+      requestAnimationFrame(frame);
+    })();
+  }else{
+    // static mid-state for reduced motion
+    level=3;layout();
+  }
+})();
+</script>
+</body>
+</html>

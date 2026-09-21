@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Field Notes</title>
+<meta name="description" content="Core Culture — field notes from a training club. Entry 047 and onwards.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f3efe4'/%3E%3Cpath d='M7 22l6-8 4 5 3-4 5 7z' fill='%232a2a2a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3efe4;
+  --paper2:#ece7d8;
+  --ink:#26241f;
+  --faint:rgba(38,36,31,.62);
+  --hair:rgba(38,36,31,.3);
+  --stamp:#b3402e;
+  --tape:rgba(38,36,31,.14);
+  --gut:clamp(20px,5vw,72px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"IBM Plex Serif",Georgia,serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+.hand{font-family:"Caveat","Segoe Script",cursive}
+::selection{background:var(--stamp);color:var(--paper)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:8px;background:var(--stamp);color:var(--paper);padding:10px 16px;z-index:300}
+.skip:focus{left:8px}
+:focus-visible{outline:2.5px solid var(--stamp);outline-offset:3px}
+
+/* ---------- journal header ---------- */
+.jhead{
+  padding:clamp(28px,6vh,64px) var(--gut) clamp(18px,3vh,30px);
+  border-bottom:2px solid var(--ink);
+  display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;
+}
+.jhead .t1{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
+.jhead h1{font-weight:600;font-size:clamp(28px,4.4vw,54px);line-height:1.05;margin-top:8px}
+.jhead h1 em{font-style:italic;color:var(--stamp)}
+.jhead .stampbox{
+  font-family:"IBM Plex Mono";color:var(--stamp);border:2.5px double var(--stamp);
+  padding:8px 14px;transform:rotate(4deg);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  text-align:center;font-weight:700;
+}
+
+/* ---------- entries ---------- */
+.entry{
+  max-width:980px;margin:0 auto;
+  padding:clamp(36px,7vh,76px) var(--gut);
+  display:grid;grid-template-columns:minmax(110px,150px) 1fr;gap:clamp(18px,3.4vw,48px);
+  border-bottom:1px solid var(--hair);
+}
+.entry .date{
+  font-family:"IBM Plex Mono";font-size:11.5px;line-height:1.9;color:var(--faint);
+  text-transform:uppercase;letter-spacing:.1em;
+  position:sticky;top:24px;align-self:start;
+}
+.entry .date b{display:block;color:var(--stamp);font-size:15px;letter-spacing:.06em}
+.entry .body{max-width:620px;min-width:0}
+.entry h2{font-weight:600;font-size:clamp(24px,3vw,38px);line-height:1.15;margin-bottom:14px}
+.entry .lede{font-size:15.5px;line-height:1.85;margin-bottom:14px}
+.entry .lede::first-letter{font-size:1.6em;font-weight:600}
+.entry .marg{
+  font-family:"Caveat";font-size:clamp(19px,2vw,24px);color:var(--stamp);
+  transform:rotate(-1.6deg);display:inline-block;margin:6px 0 2px;
+}
+.entry .kit{
+  margin-top:18px;border:1.5px solid var(--hair);
+}
+.entry .kit div{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:8px 12px;border-bottom:1px dotted var(--hair);
+  font-family:"IBM Plex Mono";font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;
+}
+.entry .kit div:last-child{border-bottom:0}
+.entry .kit span:last-child{color:var(--faint)}
+
+/* taped plates */
+.plate-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,34px);
+  margin-top:22px;
+}
+@media (max-width:700px){.plate-row{grid-template-columns:1fr}}
+.plate{
+  background:#fbf9f2;border:1px solid var(--hair);
+  padding:10px 10px 12px;position:relative;
+  box-shadow:3px 5px 14px rgba(38,36,31,.18);
+}
+.plate:nth-child(1){transform:rotate(-1.6deg)}
+.plate:nth-child(2){transform:rotate(1.2deg)}
+.plate::before{
+  content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-2deg);
+  width:86px;height:24px;background:var(--tape);
+  border-left:1px dashed rgba(38,36,31,.2);border-right:1px dashed rgba(38,36,31,.2);
+}
+.plate img{width:100%;aspect-ratio:5/4;object-fit:cover;filter:saturate(.85) contrast(1.04)}
+.plate figcaption{
+  margin-top:9px;font-family:"Caveat";font-size:19px;color:var(--faint);line-height:1.2;
+}
+
+/* ---------- joining slip ---------- */
+.slip-wrap{max-width:980px;margin:0 auto;padding:clamp(36px,7vh,76px) var(--gut);}
+.slip{
+  border:2px solid var(--ink);background:var(--paper2);
+  padding:clamp(22px,4vw,40px);
+  display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(18px,3.4vw,44px);
+  position:relative;
+}
+.slip::before{
+  content:"";position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(1.5deg);
+  width:110px;height:26px;background:var(--tape);
+}
+@media (max-width:760px){.slip{grid-template-columns:1fr}}
+.slip h2{font-weight:600;font-size:clamp(24px,3vw,38px);line-height:1.15}
+.slip h2 em{font-style:italic;color:var(--stamp)}
+.slip p{font-size:14.5px;line-height:1.85;margin-top:12px;color:var(--faint)}
+.slip .terms{
+  align-self:center;border:1.5px dashed var(--hair);padding:16px;
+  font-family:"IBM Plex Mono";font-size:11.5px;line-height:2;text-transform:uppercase;letter-spacing:.08em;
+}
+.slip .terms div{display:flex;justify-content:space-between;gap:10px}
+.slip .terms span:last-child{color:var(--stamp);font-weight:700}
+.slip .sign{
+  margin-top:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.slip .sign .hand{font-size:clamp(26px,3vw,38px);color:var(--stamp);transform:rotate(-3deg)}
+.slip .sign a{
+  text-decoration:none;font-family:"IBM Plex Mono";font-weight:700;
+  font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);padding:13px 22px;
+  transition:background .15s ease;
+}
+.slip .sign a:hover{background:var(--stamp)}
+
+/* footer */
+footer{
+  border-top:2px solid var(--ink);
+  padding:18px var(--gut) 34px;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);
+}
+footer b{color:var(--ink)}
+
+/* reveal: pencil underline draw */
+.entry .body,.slip-wrap,.jhead{opacity:0;transform:translateY(16px)}
+.entry .body.in,.slip-wrap.in,.jhead.in{opacity:1;transform:none;transition:opacity .6s ease,transform .7s ease}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .entry .body,.slip-wrap,.jhead{opacity:1;transform:none;transition:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#e47">Skip to entries</a>
+
+<header class="jhead">
+  <div>
+    <div class="t1">Core Culture — Training Club · Field Kit 002</div>
+    <h1>Field notes from <em>the training club.</em></h1>
+  </div>
+  <div class="stampbox">Expedition<br>047 — 050</div>
+</header>
+
+<main id="main">
+
+  <!-- ENTRY 047 -->
+  <article class="entry" id="e47" aria-labelledby="e47h">
+    <div class="date mono">Entry <b>047</b> Monday · 05:31 Weather: dark, then bright Wing: iron room</div>
+    <div class="body">
+      <h2 id="e47h">Arrived at the iron room before the birds.</h2>
+      <p class="lede">The lights were already on. Coach V was chalking a barbell like it was a ceremony. Twelve racks, all quiet, all waiting. By six there were nine of us lifting and nobody had said a full sentence — the good kind of quiet, the kind with intent underneath it.</p>
+      <span class="marg">← the chalk ritual, note for chapter two</span>
+      <div class="kit" role="table" aria-label="Kit list, entry 047">
+        <div><span>Plate load</span><span>40 — 120 kg</span></div>
+        <div><span>Temperature</span><span>19°C, industrial A/C</span></div>
+        <div><span>Sentence spoken</span><span>0 (perfect)</span></div>
+      </div>
+      <div class="plate-row">
+        <figure class="plate">
+          <img src="../crops/p01-sled.jpg" alt="Taped photograph: athlete gripping a sled in the dark">
+          <figcaption>fig. 47a — the 6AM shift grips back</figcaption>
+        </figure>
+        <figure class="plate">
+          <img src="../crops/p05-machine.jpg" alt="Taped photograph: plate-loaded machine, close detail">
+          <figcaption>fig. 47b — machines that behave themselves</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ENTRY 048 -->
+  <article class="entry" id="e48" aria-labelledby="e48h">
+    <div class="date mono">Entry <b>048</b> Thursday · 19:44 Weather: neon Wing: studio, second floor</div>
+    <div class="body">
+      <h2 id="e48h">The dance floor at dusk does not count reps.</h2>
+      <p class="lede">Thursday's yoga ran late so the zumba crowd warmed up in the corridor. By 19:45 the studio was pink light and hair. The instructor calls moves like weather warnings. A beginner in the corner went from suspicious to unstoppable in eleven minutes flat — logged, witnessed.</p>
+      <span class="marg">← "cardio is a byproduct" — write that down</span>
+      <div class="plate-row">
+        <figure class="plate">
+          <img src="../crops/p02-dancer.jpg" alt="Taped photograph: dancer silhouetted in magenta light">
+          <figcaption>fig. 48a — mid-phrase, lights doing their job</figcaption>
+        </figure>
+        <figure class="plate">
+          <img src="../crops/p03-plate.jpg" alt="Taped photograph: dancer photographed from the side">
+          <figcaption>fig. 48b — same room, different song</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ENTRY 049 -->
+  <article class="entry" id="e49" aria-labelledby="e49h">
+    <div class="date mono">Entry <b>049</b> Saturday · 11:12 Weather: 4°C, deliberately Wing: remedy</div>
+    <div class="body">
+      <h2 id="e49h">Notes from the cold, taken quickly.</h2>
+      <p class="lede">Three minutes is a long time when the water is right. Field protocol: sit, breathe slow enough to be bored, get out before you want to. The steam room afterwards is the whole reward. Ice, it turns out, is a excellent listener and a terrible conversationalist.</p>
+      <span class="marg">← cheapest coach in the building, confirm?</span>
+      <div class="kit" role="table" aria-label="Kit list, entry 049">
+        <div><span>Water</span><span>4°C exactly</span></div>
+        <div><span>Duration</span><span>3 minutes, no heroes</span></div>
+        <div><span>Words exchanged</span><span>1 ("ok")</span></div>
+      </div>
+      <div class="plate-row">
+        <figure class="plate">
+          <img src="../crops/p10-ice.jpg" alt="Taped photograph: the ice bath, black and white">
+          <figcaption>fig. 49a — the coldest room in the survey</figcaption>
+        </figure>
+        <figure class="plate">
+          <img src="../crops/p12-f04.jpg" alt="Taped photograph: ice and water at the tub rim">
+          <figcaption>fig. 49b — rim studies, minute two</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- ENTRY 050 -->
+  <article class="entry" id="e50" aria-labelledby="e50h">
+    <div class="date mono">Entry <b>050</b> Sunday · open-ended Weather: coffee Wing: lounge</div>
+    <div class="body">
+      <h2 id="e50h">Last light in the lounge, and the finding is this:</h2>
+      <p class="lede">The workout is the excuse; the club is the finding. Nobody leaves. The expedition concludes that a gym without a lounge is a filing cabinet without the files. Final entry of the kit — the next notebook belongs to whoever joins next week.</p>
+      <span class="marg">← work-lift balance. it's a real thing now.</span>
+      <div class="plate-row">
+        <figure class="plate">
+          <img src="../crops/p10-field.jpg" alt="Taped photograph: a figure at a desk in a green field">
+          <figcaption>fig. 50a — remote work, remote everything</figcaption>
+        </figure>
+        <figure class="plate">
+          <img src="../crops/p12-f11.jpg" alt="Taped photograph: parked cars at dusk">
+          <figcaption>fig. 50b — arrivals, winter pass</figcaption>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <!-- JOINING SLIP -->
+  <div class="slip-wrap">
+    <div class="slip">
+      <div>
+        <h2>Join the <em>expedition.</em></h2>
+        <p>The next field kit has your name on it — first week free, every wing included. Bring shoes, leave the excuses in the drawer marked 047.</p>
+        <div class="sign">
+          <span class="hand">signed — the whole floor</span>
+          <a href="mailto:front.desk@coreculture.club">Claim entry 051 →</a>
+        </div>
+      </div>
+      <div class="terms" role="table" aria-label="Expedition terms">
+        <div><span>Trial — one week</span><span>FREE</span></div>
+        <div><span>Resident — monthly</span><span>89/mo</span></div>
+        <div><span>House — annual</span><span>890/yr</span></div>
+        <div><span>Parking</span><span>solved</span></div>
+        <div><span>Judgement</span><span>none</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span><b>Core Culture</b> — Training Club · Field Kit 002</span>
+    <span>front.desk@coreculture.club</span>
+    <span>Concept 17 — Field Notes</span>
+  </footer>
+</main>
+
+<script>
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.14});
+  document.querySelectorAll('.entry .body,.slip-wrap,.jhead').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<innerHeight*.95) el.classList.add('in'); else io.observe(el);
+  });
+</script>
+</body>
+</html>

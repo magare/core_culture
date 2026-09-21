@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Pinball Culture</title>
+<meta name="description" content="Core Culture — what if the gym was actually fun? Five bumpers, one ball, the whole culture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0b'/%3E%3Ccircle cx='16' cy='13' r='4' fill='%23e8e2d4'/%3E%3Cpath d='M8 26 L16 19 L24 26' stroke='%23ff2e4d' stroke-width='2.4' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0b;
+  --ink:#efe9dc;
+  --dim:rgba(239,233,220,.55);
+  --faint:rgba(239,233,220,.28);
+  --arcade:#ff2e4d;
+  --cream:#f2e7c9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Rubik",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--arcade);color:var(--ink)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--arcade);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--arcade);color:var(--ink);padding:10px 16px;z-index:300;font-weight:700}
+.skip:focus{left:10px}
+
+.layout{
+  min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);
+  gap:clamp(16px,3vw,50px);align-items:center;
+  padding:clamp(16px,3vh,40px) clamp(16px,3.4vw,54px);
+}
+.copy .kicker{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--arcade);margin-bottom:20px}
+h1{
+  font-family:"Monoton",cursive;font-weight:400;
+  font-size:clamp(34px,4.6vw,72px);line-height:1.14;
+  color:var(--cream);text-shadow:0 0 26px rgba(255,46,77,.35);
+}
+h1 span{color:var(--arcade)}
+.sub{margin-top:24px;max-width:30em;color:var(--dim);font-size:14.5px;line-height:1.95}
+.sub b{color:var(--ink)}
+.menu{
+  margin-top:30px;border:1px solid rgba(239,233,220,.15);
+}
+.menu .row{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  padding:13px 18px;border-bottom:1px solid rgba(239,233,220,.1);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+}
+.menu .row:last-child{border-bottom:0}
+.menu .row b{color:var(--cream);font-weight:700;font-size:15px;letter-spacing:.06em}
+.menu .row .lit{color:var(--arcade)}
+.keys{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+.keys kbd{border:1px solid rgba(239,233,220,.25);padding:4px 9px;border-radius:4px;font-family:inherit;color:var(--dim)}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:30px;
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+  background:var(--cream);color:#0a0a0b;padding:17px 34px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(242,231,201,.25)}
+
+.tablewrap{position:relative;user-select:none;-webkit-user-select:none;touch-action:none}
+.backglass{
+  border:2px solid rgba(239,233,220,.2);border-bottom:0;border-radius:14px 14px 0 0;
+  background:linear-gradient(180deg,#161114,#0d0c0e);
+  padding:14px 18px 10px;display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.backglass .t{font-family:"Monoton";font-size:clamp(13px,1.2vw,17px);color:var(--cream);text-shadow:0 0 14px rgba(255,46,77,.5)}
+.backglass .msg{font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--arcade);text-align:right}
+canvas{display:block;border:2px solid rgba(239,233,220,.2);border-radius:0 0 14px 14px;background:#0d0d0f;touch-action:none}
+.tablewrap{max-width:520px}
+canvas{width:100%;height:auto}
+.touch{
+  margin-top:12px;display:flex;gap:12px;
+}
+.touch button{
+  flex:1;font-family:"Rubik";font-weight:700;font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+  background:#141316;color:var(--dim);border:1px solid rgba(239,233,220,.2);
+  padding:18px 10px;border-radius:10px;cursor:pointer;
+}
+.touch button:active{background:var(--arcade);color:var(--ink)}
+footer{
+  padding:22px clamp(16px,3.4vw,54px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(239,233,220,.08);
+}
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr;justify-items:center}
+  .copy{max-width:560px}
+}
+@media (prefers-reduced-motion:reduce){
+  canvas{display:none}
+  .tablewrap::after{
+    content:"The table needs motion to play — this page respects reduced motion. The club, however, is open: five floors, one ball of a good time.";
+    display:block;max-width:520px;border:2px solid rgba(239,233,220,.2);border-radius:0 0 14px 14px;
+    padding:40px 30px;color:var(--dim);font-size:13px;line-height:1.9;
+  }
+  .touch{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main" class="layout">
+  <section class="copy">
+    <p class="kicker">Core Culture · The fun department</p>
+    <h1>What if the gym<br>was actually<br><span>fun?</span></h1>
+    <p class="sub">Exactly. So we built a pinball table where every bumper is a floor of the club. <b>Light all five for the culture jackpot</b> — then come do it for real, standing up, with people who cheer.</p>
+    <div class="menu" role="status" aria-live="off">
+      <div class="row"><span>Fun points</span><b id="score">0</b></div>
+      <div class="row"><span>Balls left</span><b id="balls">3</b></div>
+      <div class="row"><span>Culture lit</span><b id="litcount" class="lit">0 / 5</b></div>
+      <div class="row"><span>Best run</span><b id="best">0</b></div>
+    </div>
+    <p class="keys"><kbd>←</kbd><kbd>→</kbd> flippers · <kbd>SPACE</kbd> hold &amp; release to launch · or tap the pads</p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Play the real thing — free week</a>
+  </section>
+
+  <section class="tablewrap" aria-label="Pinball table">
+    <div class="backglass">
+      <span class="t">CULTURE</span>
+      <span class="msg" id="msg">Press space to launch</span>
+    </div>
+    <canvas id="table" width="480" height="700" aria-hidden="true"></canvas>
+    <div class="touch">
+      <button id="padL" aria-label="Left flipper">◀ Flip</button>
+      <button id="plungerPad" aria-label="Launch ball">Launch</button>
+      <button id="padR" aria-label="Right flipper">Flip ▶</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Core Culture — train · move · recover · connect</span>
+  <span>Concept 33 · Pinball Culture</span>
+</footer>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced) return;
+  const cv=document.getElementById('table'),ctx=cv.getContext('2d');
+  const W=480,H=700;
+  const scoreEl=document.getElementById('score'),ballsEl=document.getElementById('balls'),
+        litEl=document.getElementById('litcount'),bestEl=document.getElementById('best'),
+        msgEl=document.getElementById('msg');
+
+  const WALL=14;
+  const bumpers=[
+    {x:150,y:170,r:34,name:'IRON',lit:false,pop:0},
+    {x:330,y:170,r:34,name:'ENGINE',lit:false,pop:0},
+    {x:240,y:300,r:36,name:'DANCE',lit:false,pop:0},
+    {x:130,y:420,r:32,name:'PLUNGE',lit:false,pop:0},
+    {x:350,y:420,r:32,name:'LOUNGE',lit:false,pop:0}
+  ];
+  // top corner arcs as circle colliders
+  const corners=[{x:WALL+62,y:70,r:62},{x:W-WALL-62,y:70,r:62}];
+
+  const ball={x:W-52,y:H-160,vx:0,vy:0,live:false,inLane:true};
+  let balls=3,score=0,best=0,charges=0,charging=false,msgT=0;
+  let litCount=0;
+
+  const flipL={x:118,y:H-64,len:78,ang:-0.52,rest:-0.52,up:0.62,dir:1,av:0,pressed:false};
+  const flipR={x:W-118,y:H-64,len:78,ang:Math.PI+0.52,rest:Math.PI+0.52,up:Math.PI-0.62,dir:-1,av:0,pressed:false};
+
+  function say(t){msgEl.textContent=t;msgT=2.4;}
+  function addScore(n){score+=n;scoreEl.textContent=score;if(score>best){best=score;bestEl.textContent=best;}}
+
+  function litAll(){
+    if(bumpers.every(b=>b.lit)){
+      addScore(1000);say('CULTURE JACKPOT +1000');
+      bumpers.forEach(b=>b.lit=false);litCount=0;
+    }
+    litEl.textContent=litCount+' / 5';
+  }
+
+  function launch(){
+    if(ball.live)return;
+    ball.x=W-52;ball.y=H-160;ball.vx=-2.1;ball.vy=-13-charges*0.55;ball.live=true;ball.inLane=false;
+    charges=0;say('ball '+(4-balls)+' live');
+  }
+
+  function endBall(){
+    ball.live=false;balls--;ballsEl.textContent=balls;
+    if(balls<=0){say('game over — book a free week');addScore(0);}
+    else say('press space to launch');
+    setTimeout(()=>{if(balls>0){ball.x=W-52;ball.y=H-160;}},600);
+  }
+
+  // flipper segment endpoints
+  function flipEnds(f){
+    const ex=f.x+Math.cos(f.ang)*f.len, ey=f.y+Math.sin(f.ang)*f.len;
+    return [f.x,f.y,ex,ey];
+  }
+
+  function collideBumper(b){
+    const dx=ball.x-b.x,dy=ball.y-b.y,d=Math.hypot(dx,dy);
+    if(d<b.r+7){
+      const nx=dx/d,ny=dy/d;
+      ball.x=b.x+nx*(b.r+7);ball.y=b.y+ny*(b.r+7);
+      const sp=10.5;
+      ball.vx=nx*sp;ball.vy=ny*sp;
+      b.pop=1;
+      if(!b.lit){b.lit=true;litCount++;addScore(100);litAll();}
+      else addScore(50);
+    }
+  }
+  function collideCircle(c){
+    const dx=ball.x-c.x,dy=ball.y-c.y,d=Math.hypot(dx,dy);
+    if(d<c.r+7&&d>0){
+      const nx=dx/d,ny=dy/d;
+      ball.x=c.x+nx*(c.r+7);ball.y=c.y+ny*(c.r+7);
+      const dot=ball.vx*nx+ball.vy*ny;
+      if(dot<0){ball.vx-=2*dot*nx;ball.vy-=2*dot*ny;}
+      ball.vx*=0.92;ball.vy*=0.92;
+    }
+  }
+  function collideFlipper(f){
+    const [x1,y1,x2,y2]=flipEnds(f);
+    const dx=x2-x1,dy=y2-y1;
+    const t=Math.max(0,Math.min(1,((ball.x-x1)*dx+(ball.y-y1)*dy)/(dx*dx+dy*dy)));
+    const cx=x1+dx*t,cy=y1+dy*t;
+    const ddx=ball.x-cx,ddy=ball.y-cy,d=Math.hypot(ddx,ddy);
+    if(d<16){
+      const nx=ddx/d,ny=ddy/d;
+      ball.x=cx+nx*16;ball.y=cy+ny*16;
+      const swing=f.pressed?9:2;
+      ball.vx=nx*Math.abs(swing)+ (f.dir<0?2.4:-2.4)*0.4;
+      ball.vy=ny*Math.abs(swing)-3.2;
+      if(f.pressed)addScore(1);
+    }
+  }
+
+  function step(){
+    // flipper angles
+    [flipL,flipR].forEach(f=>{
+      const target=f.pressed?f.up:f.rest;
+      const prev=f.ang;
+      f.ang+=(target-f.ang)*(f.pressed?0.55:0.25);
+      f.av=(f.ang-prev);
+    });
+    if(ball.live){
+      ball.vy+=0.19;
+      ball.x+=ball.vx;ball.y+=ball.vy;
+      // walls
+      if(ball.x<WALL+7){ball.x=WALL+7;ball.vx=Math.abs(ball.vx)*0.8;}
+      if(ball.x>W-WALL-7){ball.x=W-WALL-7;ball.vx=-Math.abs(ball.vx)*0.8;}
+      if(ball.y<70&&ball.y<H*0.4&&ball.x<WALL+70){ball.x=WALL+70+ (62-Math.hypot(ball.x-(WALL+62),ball.y-70))+0;} // noop guard
+      corners.forEach(collideCircle);
+      bumpers.forEach(collideBumper);
+      collideFlipper(flipL);collideFlipper(flipR);
+      // plunger lane wall
+      if(!ball.inLane&&ball.x>W-56&&ball.y>H-240){/* open lane */}
+      // drain
+      if(ball.y>H+20){endBall();}
+      // nudge score nothing
+    }
+    bumpers.forEach(b=>{b.pop*=0.9;});
+    if(msgT>0)msgT-=0.016;
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // playfield bg
+    const g=ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#141116');g.addColorStop(1,'#0b0b0d');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    // faint guide arcs
+    ctx.strokeStyle='rgba(239,233,220,.07)';ctx.lineWidth=2;
+    corners.forEach(c=>{ctx.beginPath();ctx.arc(c.x,c.y,c.r,0,7);ctx.stroke();});
+    // walls
+    ctx.strokeStyle='rgba(239,233,220,.3)';ctx.lineWidth=WALL;
+    ctx.beginPath();ctx.moveTo(WALL/2,H);ctx.lineTo(WALL/2,120);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(W-WALL/2,H);ctx.lineTo(W-WALL/2,120);ctx.stroke();
+    // plunger lane wall
+    ctx.beginPath();ctx.moveTo(W-42,H);ctx.lineTo(W-42,H-210);ctx.stroke();
+    // outlane guides
+    ctx.lineWidth=3;ctx.strokeStyle='rgba(255,46,77,.5)';
+    ctx.beginPath();ctx.moveTo(70,H-52);ctx.lineTo(30,H-110);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(W-70,H-52);ctx.lineTo(W-30,H-110);ctx.stroke();
+    // bumpers
+    bumpers.forEach(b=>{
+      const r=b.r+(b.pop*6);
+      ctx.beginPath();ctx.arc(b.x,b.y,r,0,7);
+      ctx.fillStyle=b.lit?'rgba(255,46,77,.22)':'rgba(239,233,220,.05)';
+      ctx.fill();
+      ctx.lineWidth=3;ctx.strokeStyle=b.lit?'#ff2e4d':'rgba(239,233,220,.5)';
+      ctx.stroke();
+      ctx.fillStyle=b.lit?'#ffd9df':'rgba(239,233,220,.75)';
+      ctx.font='700 9px Rubik';ctx.textAlign='center';
+      ctx.fillText(b.name,b.x,b.y+3);
+    });
+    // flippers
+    [flipL,flipR].forEach(f=>{
+      const [x1,y1,x2,y2]=flipEnds(f);
+      ctx.lineCap='round';
+      ctx.strokeStyle='#f2e7c9';ctx.lineWidth=13;
+      ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+      ctx.strokeStyle='#ff2e4d';ctx.lineWidth=4;
+      ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+    });
+    // plunger
+    ctx.fillStyle='#f2e7c9';
+    const ph=30+charges*1.1;
+    ctx.fillRect(W-36,H-90-ph,22,ph);
+    ctx.strokeStyle='rgba(239,233,220,.4)';ctx.lineWidth=2;
+    ctx.strokeRect(W-38,H-92-ph,26,ph+6);
+    // ball
+    if(ball.live||balls>0){
+      const bg=ctx.createRadialGradient(ball.x-3,ball.y-4,1,ball.x,ball.y,8);
+      bg.addColorStop(0,'#fff');bg.addColorStop(0.5,'#cfd2d6');bg.addColorStop(1,'#5e6165');
+      ctx.beginPath();ctx.arc(ball.x,ball.y,7.5,0,7);
+      ctx.fillStyle=bg;ctx.fill();
+    }
+    // drain arrows
+    ctx.fillStyle='rgba(239,233,220,.2)';
+    ctx.font='700 10px Rubik';ctx.textAlign='center';
+    ctx.fillText('DRAIN',W/2,H-14);
+  }
+
+  function loop(){
+    step();draw();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  // input
+  addEventListener('keydown',e=>{
+    if(e.repeat)return;
+    if(e.code==='ArrowLeft'){flipL.pressed=true;e.preventDefault();}
+    if(e.code==='ArrowRight'){flipR.pressed=true;e.preventDefault();}
+    if(e.code==='Space'){
+      e.preventDefault();
+      if(!ball.live){charging=true;}
+      else{charging=true;}
+    }
+  });
+  addEventListener('keyup',e=>{
+    if(e.code==='ArrowLeft')flipL.pressed=false;
+    if(e.code==='ArrowRight')flipR.pressed=false;
+    if(e.code==='Space'){
+      charging=false;
+      if(!ball.live&&balls>0){if(charges<1)charges=26;launch();}
+      else charges=0;
+    }
+  });
+  // charging animation while holding
+  setInterval(()=>{if(charging&&charges<40)charges+=1.6;},30);
+  // touch pads
+  const padL=document.getElementById('padL'),padR=document.getElementById('padR'),padP=document.getElementById('plungerPad');
+  padL.addEventListener('pointerdown',()=>flipL.pressed=true);
+  padL.addEventListener('pointerup',()=>flipL.pressed=false);
+  padL.addEventListener('pointerleave',()=>flipL.pressed=false);
+  padR.addEventListener('pointerdown',()=>flipR.pressed=true);
+  padR.addEventListener('pointerup',()=>flipR.pressed=false);
+  padR.addEventListener('pointerleave',()=>flipR.pressed=false);
+  padP.addEventListener('pointerdown',()=>{if(!ball.live&&balls>0)launch();});
+  // click table = launch too
+  cv.addEventListener('pointerdown',()=>{if(!ball.live&&balls>0)launch();});
+})();
+</script>
+</body>
+</html>

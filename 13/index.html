@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — The Timetable</title>
+<meta name="description" content="Core Culture — the timetable. One space, one week, every way to move.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141414'/%3E%3Crect x='6' y='6' width='20' height='6' fill='%23ff5a1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f3ee;
+  --ink:#141414;
+  --orange:#ff5a1f;
+  --dim:rgba(20,20,20,.55);
+  --hair:rgba(20,20,20,.28);
+  --gut:clamp(18px,3.6vw,54px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+::selection{background:var(--orange);color:var(--paper)}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:8px;background:var(--orange);color:var(--paper);padding:10px 16px;z-index:300;font-weight:700}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+
+/* top bar */
+.bar{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:14px var(--gut);border-bottom:2px solid var(--ink);
+  font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+}
+.bar .wm{font-weight:800;font-size:15px;letter-spacing:.02em}
+.bar .wm em{font-style:normal;color:var(--orange)}
+.bar .wk{color:var(--dim)}
+
+/* hero */
+.hero{padding:clamp(30px,6vh,70px) var(--gut) clamp(20px,3.6vh,40px);border-bottom:2px solid var(--ink)}
+.fillword{
+  font-weight:900;text-transform:uppercase;
+  font-size:clamp(88px,19vw,300px);
+  line-height:.82;letter-spacing:-.02em;
+  background-image:url("../crops/p02-streaks.jpg");
+  background-size:cover;background-position:center 60%;
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+  -webkit-text-stroke:0;
+  user-select:none;
+}
+.fallback .fillword{color:var(--orange)}
+.hero .row2{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;
+  margin-top:clamp(16px,3vh,34px);
+}
+.hero .row2 p{max-width:46ch;font-size:clamp(14px,1.4vw,18px);line-height:1.6;font-weight:500}
+.hero .row2 p b{color:var(--orange)}
+.hero .stats{display:flex;gap:26px;flex-wrap:wrap;font-family:"IBM Plex Mono";font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+.hero .stats span b{display:block;font-size:17px;color:var(--orange)}
+
+/* day tabs */
+.tabs{
+  display:flex;gap:0;overflow-x:auto;scrollbar-width:none;
+  border-bottom:2px solid var(--ink);
+  position:sticky;top:0;z-index:50;background:var(--paper);
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  flex:1 0 auto;min-width:96px;text-align:center;
+  background:none;border:0;border-right:2px solid var(--ink);cursor:pointer;
+  font-family:"Inter Tight";font-weight:800;text-transform:uppercase;
+  font-size:clamp(14px,1.6vw,20px);letter-spacing:.02em;
+  padding:16px 18px;
+  transition:background .15s ease,color .15s ease;
+}
+.tab:last-child{border-right:0}
+.tab:hover{color:var(--orange)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.tab[aria-selected="true"] .cnt{color:var(--orange)}
+.tab .cnt{display:block;font-family:"IBM Plex Mono";font-size:9.5px;letter-spacing:.2em;font-weight:500;margin-top:3px;opacity:.65}
+
+/* timetable rows */
+.tt{min-height:50vh}
+.day-sect{border-bottom:2px solid var(--ink)}
+.day-sect.hide{display:none}
+.day-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;
+  padding:12px var(--gut);
+  font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+}
+.day-head b{color:var(--ink);font-size:15px;letter-spacing:.04em}
+.cls{
+  width:100%;display:grid;grid-template-columns:130px 1fr auto auto auto;gap:clamp(10px,2.6vw,34px);
+  align-items:baseline;text-align:left;
+  background:none;border:0;border-top:1px solid var(--hair);
+  padding:clamp(12px,2vh,20px) var(--gut);
+  font-family:"Inter Tight";color:var(--ink);cursor:pointer;
+  transition:background .14s ease,color .14s ease;
+}
+.cls:hover{background:var(--ink);color:var(--paper)}
+.cls:hover .mono,.cls:hover .wing{color:inherit;opacity:.8}
+.cls .mono{font-size:13px;font-weight:700;color:var(--orange)}
+.cls .name{font-weight:800;text-transform:uppercase;font-size:clamp(22px,3.4vw,46px);letter-spacing:-.015em;line-height:1}
+.cls .coach{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.cls .wing{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.cls .chev{font-family:"IBM Plex Mono";font-size:12px}
+.detail{
+  display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;
+  border-top:0;
+}
+.detail>div{overflow:hidden}
+.detail .inner{
+  padding:0 var(--gut) 18px calc(130px + clamp(10px,2.6vw,34px) + var(--gut));
+  font-size:14px;line-height:1.7;color:var(--dim);max-width:90ch;
+  border-top:1px dashed var(--hair);padding-top:14px;
+}
+.detail .inner b{color:var(--orange);text-transform:uppercase;letter-spacing:.1em;font-size:12px}
+.cls[aria-expanded="true"] + .detail{grid-template-rows:1fr}
+.cls[aria-expanded="true"]{background:var(--orange);color:var(--paper)}
+.cls[aria-expanded="true"] .mono{color:var(--paper)}
+@media (max-width:760px){
+  .cls{grid-template-columns:70px 1fr auto auto}
+  .cls .coach{display:none}
+  .detail .inner{padding-left:calc(70px + var(--gut))}
+}
+
+/* note band */
+.noteband{
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;
+  padding:18px var(--gut);
+  background:var(--ink);color:var(--paper);
+  font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.1em;
+}
+.noteband b{color:var(--orange)}
+.noteband a{color:var(--paper);text-decoration:none;border-bottom:2px solid var(--orange);padding-bottom:2px}
+.noteband a:hover{background:var(--orange);border-color:var(--orange)}
+
+/* footer */
+footer{
+  padding:clamp(26px,5vh,50px) var(--gut) 40px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+}
+footer b{color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .detail{transition:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#timetable">Skip to timetable</a>
+
+<div class="bar">
+  <span class="wm">Core <em>Culture</em> — The Timetable</span>
+  <span class="wk">Week 38 · all times local · amendments shouted, not posted</span>
+</div>
+
+<header class="hero" aria-label="Introduction">
+  <div class="fillword" id="fillword" role="img" aria-label="The word MOVE filled with a photograph of light streaks from the engine bay">Move</div>
+  <div class="row2">
+    <p>One space, one week, every way to move. This is the whole timetable — weights, engines, dance, cold water and the long unprogrammed hours in between. <b>Tap a class</b> for the details. Tap a day to narrow the week.</p>
+    <div class="stats">
+      <span><b>43</b> classes / wk</span>
+      <span><b>6</b> rooms</span>
+      <span><b>0</b> excuses</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Days">
+  <button class="tab" role="tab" aria-selected="true" data-day="all">All<span class="cnt" data-cnt></span></button>
+  <button class="tab" role="tab" aria-selected="false" data-day="mon">Mon<span class="cnt" data-cnt></span></button>
+  <button class="tab" role="tab" aria-selected="false" data-day="tue">Tue<span class="cnt" data-cnt></span></button>
+  <button class="tab" role="tab" aria-selected="false" data-day="wed">Wed<span class="cnt" data-cnt></span></button>
+  <button class="tab" role="tab" aria-selected="false" data-day="thu">Thu<span class="cnt" data-cnt></span></button>
+  <button class="tab" role="tab" aria-selected="false" data-day="fri">Fri<span class="cnt" data-cnt></span></button>
+  <button class="tab" role="tab" aria-selected="false" data-day="sat">Sat<span class="cnt" data-cnt></span></button>
+  <button class="tab" role="tab" aria-selected="false" data-day="sun">Sun<span class="cnt" data-cnt></span></button>
+</nav>
+
+<main class="tt" id="timetable">
+  <!-- MONDAY -->
+  <section class="day-sect" data-day="mon" aria-labelledby="mon-h">
+    <div class="day-head" id="mon-h"><b>Monday</b><span>the week starts heavy</span></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">06:00</span><span class="name">Barbell Club</span><span class="coach">Coach V</span><span class="wing">Iron room</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — coached barbell progressions, squat to snatch. Bring flat shoes and a beginner's mind; plates are calibrated, egos are not.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">12:15</span><span class="name">Express Engine</span><span class="coach">Coach D</span><span class="wing">Hybrid bay</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — 45 minutes of ergs, skis and sleds. Screens on. Series optional. Calories non-negotiable.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">18:30</span><span class="name">Sled League</span><span class="coach">Coach D</span><span class="wing">Turf lane</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — team-of-two sled relay. Loud, legal, undefeated since opening night.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">20:00</span><span class="name">Cold Open</span><span class="coach">Remedy staff</span><span class="wing">Remedy wing</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — guided three-minute immersion at 4°C, steam after. Breathing coached; excuses checked at the door.</div></div></div>
+  </section>
+
+  <!-- TUESDAY -->
+  <section class="day-sect" data-day="tue" aria-labelledby="tue-h">
+    <div class="day-head" id="tue-h"><b>Tuesday</b><span>engine day</span></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">07:00</span><span class="name">Dawn Engine</span><span class="coach">Coach D</span><span class="wing">Hybrid bay</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — zone-2 builds with sprint finishes. HYROX candidates welcome, coffee优先 after.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">19:00</span><span class="name">Zumba Nights</span><span class="coach">Coach May</span><span class="wing">Studio</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — club lights, full choreography, zero mirrors. The warm-up is a song you know.</div></div></div>
+  </section>
+
+  <!-- WEDNESDAY -->
+  <section class="day-sect" data-day="wed" aria-labelledby="wed-h">
+    <div class="day-head" id="wed-h"><b>Wednesday</b><span>the hinge of the week</span></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">06:00</span><span class="name">Barbell Club II</span><span class="coach">Coach V</span><span class="wing">Iron room</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — pull day, programmed. Progress logged on the house board, chalk provided, music loud.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">17:45</span><span class="name">Functional Circuits</span><span class="coach">Coach R</span><span class="wing">Turf lane</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — carries, ropes, boxes. Floors built to be used loudly.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">20:00</span><span class="name">Cold Open</span><span class="coach">Remedy staff</span><span class="wing">Remedy wing</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — three minutes at four degrees. The water is patient; be patient with yourself.</div></div></div>
+  </section>
+
+  <!-- THURSDAY -->
+  <section class="day-sect" data-day="thu" aria-labelledby="thu-h">
+    <div class="day-head" id="thu-h"><b>Thursday</b><span>long engine, long breath</span></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">07:00</span><span class="name">Threshold</span><span class="coach">Coach D</span><span class="wing">Hybrid bay</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — threshold intervals on erg and treadmill. The screens play; you supply the plot.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">19:45</span><span class="name">Yoga Under Neon</span><span class="coach">Coach May</span><span class="wing">Studio</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — slow flow under the club lights. The one class where loud is optional.</div></div></div>
+  </section>
+
+  <!-- FRIDAY -->
+  <section class="day-sect" data-day="fri" aria-labelledby="fri-h">
+    <div class="day-head" id="fri-h"><b>Friday</b><span>earn the weekend</span></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">06:00</span><span class="name">Barbell Club III</span><span class="coach">Coach V</span><span class="wing">Iron room</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — full-body strength finishers. The week ends the way it started: heavy.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">19:30</span><span class="name">Dance Floor Theory</span><span class="coach">Coach May</span><span class="wing">Studio</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — the flagship. Choreography, club lights, and the last song nobody skips.</div></div></div>
+  </section>
+
+  <!-- SATURDAY -->
+  <section class="day-sect" data-day="sat" aria-labelledby="sat-h">
+    <div class="day-head" id="sat-h"><b>Saturday</b><span>race day energy</span></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">09:00</span><span class="name">HYROX Prep</span><span class="coach">Coach D</span><span class="wing">Whole floor</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — full simulation stations. Run, pull, push, wall. Repeat with intent.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">11:00</span><span class="name">Cold &amp; Slow</span><span class="coach">Remedy staff</span><span class="wing">Remedy wing</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — open plunge, long steam. Sunday's proving ground.</div></div></div>
+  </section>
+
+  <!-- SUNDAY -->
+  <section class="day-sect" data-day="sun" aria-labelledby="sun-h">
+    <div class="day-head" id="sun-h"><b>Sunday</b><span>the culture day</span></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">10:00</span><span class="name">Long Slow Coffee</span><span class="coach">The lounge</span><span class="wing">Lounge</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — no coach, no clock. Read the paper, argue about training, stay for the refills.</div></div></div>
+    <button class="cls" aria-expanded="false">
+      <span class="mono">16:00</span><span class="name">Open Floor</span><span class="coach">—</span><span class="wing">Everywhere</span><span class="chev" aria-hidden="true">+</span>
+    </button>
+    <div class="detail"><div><div class="inner"><b>Format</b> — the building, empty-ish. Move whatever way the week didn't let you.</div></div></div>
+  </section>
+</main>
+
+<div class="noteband">
+  <span><b>Membership</b> — every class included. From 89/mo · first week free.</span>
+  <span>Booking at the desk or <a href="mailto:front.desk@coreculture.club">front.desk@coreculture.club</a></span>
+</div>
+
+<footer>
+  <span><b>Core Culture</b> — Training Club · Est. MMXXVI</span>
+  <span>Concept 13 — The Timetable</span>
+  <span>Set in Inter Tight &amp; IBM Plex Mono</span>
+</footer>
+
+<script>
+  // image-in-type fallback check
+  const fw=document.getElementById('fillword');
+  const test=document.createElement('canvas').getContext('2d');
+  // if background-clip:text unsupported, the class fallback paints it orange
+  if(CSS && !CSS.supports('-webkit-background-clip','text') && !CSS.supports('background-clip','text')){
+    document.body.classList.add('fallback');
+  }
+
+  // day tabs filter
+  const tabs=[...document.querySelectorAll('.tab')];
+  const sections=[...document.querySelectorAll('.day-sect')];
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.setAttribute('aria-selected','false'));
+    t.setAttribute('aria-selected','true');
+    const d=t.dataset.day;
+    sections.forEach(s=>s.classList.toggle('hide', d!=='all' && s.dataset.day!==d));
+  }));
+  // counts
+  tabs.forEach(t=>{
+    if(t.dataset.day==='all'){ t.querySelector('[data-cnt]').textContent=sections.length+' days'; return; }
+    const n=sections.filter(s=>s.dataset.day===t.dataset.day).reduce((a,s)=>a+s.querySelectorAll('.cls').length,0);
+    t.querySelector('[data-cnt]').textContent=n+' classes';
+  });
+
+  // class detail expand
+  document.querySelectorAll('.cls').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const open=b.getAttribute('aria-expanded')==='true';
+      b.setAttribute('aria-expanded',String(!open));
+      b.querySelector('.chev').textContent=open?'+':'−';
+    });
+  });
+</script>
+</body>
+</html>

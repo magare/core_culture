@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Totality</title>
+<meta name="description" content="Core Culture — a training club experienced as an eclipse. Everything noisy gets blocked out; what remains is you.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23ffe9bd' stroke-width='1.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505;
+  --ink:#f4ecd9;
+  --corona:#ffe9bd;
+  --gold:#d9bd8a;
+  --dim:rgba(244,236,217,.52);
+  --faint:rgba(244,236,217,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Instrument Sans",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--corona);color:#050505}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--corona);outline-offset:4px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--corona);color:#050505;padding:10px 16px;z-index:200;font-weight:600}
+.skip:focus{left:10px}
+
+/* ---------------- sky ---------------- */
+#sky{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+#stars{position:absolute;inset:-6%;opacity:0;transition:opacity 1.2s ease}
+#stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.7}
+.stars-bright{opacity:1!important}
+#glowring{
+  position:absolute;left:50%;top:50%;width:min(74vmin,640px);aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(255,233,189,0) 52.5%,
+    rgba(255,233,189,.55) 54.6%,
+    rgba(255,244,220,.95) 55.4%,
+    rgba(255,233,189,.4) 56.6%,
+    rgba(255,214,140,.12) 61%,
+    rgba(255,214,140,0) 72%);
+  filter:blur(1px);
+  opacity:0;
+}
+#sun{
+  position:absolute;left:50%;top:50%;
+  width:min(56vmin,480px);aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:
+    radial-gradient(circle at 44% 40%, #fffef8 0%, #fff3cf 38%, #f5d394 70%, #dda95e 100%);
+  box-shadow:0 0 90px rgba(255,224,160,.5), 0 0 240px rgba(255,214,140,.22), inset -8px -14px 60px rgba(216,160,80,.55);
+}
+#moon{
+  position:absolute;left:50%;top:50%;
+  width:min(56vmin,480px);aspect-ratio:1;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:
+    radial-gradient(circle at 38% 32%, #202020 0%, #0d0d0d 45%, #030303 100%);
+  box-shadow:
+    inset -14px -22px 48px rgba(0,0,0,.9),
+    inset 8px 10px 22px rgba(255,255,255,.025),
+    inset 2px 2px 3px -1px rgba(170,195,255,.07);
+}
+#moon::after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23m)' opacity='0.35'/%3E%3C/svg%3E"),
+    radial-gradient(26% 20% at 30% 58%, rgba(255,255,255,.045), transparent 70%),
+    radial-gradient(34% 26% at 64% 36%, rgba(255,255,255,.035), transparent 70%),
+    radial-gradient(22% 17% at 44% 76%, rgba(255,255,255,.03), transparent 70%),
+    radial-gradient(18% 14% at 70% 62%, rgba(255,255,255,.03), transparent 70%);
+  background-blend-mode: overlay, normal, normal, normal, normal;
+}
+#corona-flare{
+  position:absolute;left:50%;top:50%;width:min(120vmin,1050px);aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(255,236,200,.28) 40%,
+    rgba(255,236,200,.10) 52%,
+    rgba(255,236,200,0) 70%);
+  opacity:0;
+}
+/* horizon line anchors the ground so depth reads instantly */
+#horizon{
+  position:absolute;left:0;right:0;bottom:0;height:26vh;
+  background:linear-gradient(to top, #030303 0%, rgba(3,3,3,0) 100%);
+  border-top:1px solid rgba(244,236,217,.05);
+}
+
+/* ---------------- content ---------------- */
+.wrap{position:relative;z-index:auto}
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:14vh clamp(20px,6vw,96px)}
+.kicker{
+  font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:14px;margin-bottom:26px;
+}
+.kicker::before{content:"";width:34px;height:1px;background:var(--gold);opacity:.7}
+h1,h2{font-family:"Italiana",serif;font-weight:400;text-transform:uppercase}
+h1{font-size:clamp(52px,9.4vw,150px);line-height:.96;letter-spacing:.015em;mix-blend-mode:difference}
+h2{font-size:clamp(34px,5.4vw,76px);line-height:1.02;letter-spacing:.02em;margin-bottom:22px}
+.lede{max-width:34em;color:var(--dim);font-size:clamp(15px,1.5vw,18.5px);line-height:1.85;font-weight:400;mix-blend-mode:difference}
+.lede b{color:var(--ink);font-weight:500}
+.phase{font-family:"Instrument Sans";font-variant-numeric:tabular-nums}
+
+/* hero */
+.hero{align-items:flex-start;justify-content:center}
+.hero .lede{margin-top:34px}
+.hero .scrollcue{
+  margin-top:9vh;display:flex;align-items:center;gap:12px;
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);
+}
+.scrollcue i{display:block;width:1px;height:52px;background:linear-gradient(to bottom,var(--gold),transparent);animation:drip 2.4s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1)}100%{transform:scaleY(.2);transform-origin:top}}
+
+/* partial phases — discipline rows that align as the eclipse deepens */
+.phases{justify-content:flex-start;padding-top:18vh}
+.phase-row{
+  display:grid;grid-template-columns:110px 1fr;gap:clamp(14px,3vw,44px);
+  padding:clamp(22px,3.4vh,40px) 0;border-top:1px solid rgba(244,236,217,.1);
+  align-items:baseline;max-width:1080px;
+}
+.phase-row .pn{font-size:13px;letter-spacing:.22em;color:var(--gold)}
+.phase-row h3{font-family:"Italiana",serif;font-weight:400;font-size:clamp(26px,3.6vw,46px);text-transform:uppercase;letter-spacing:.03em;line-height:1}
+.phase-row p{grid-column:2;max-width:32em;color:var(--dim);font-size:14.5px;line-height:1.8;margin-top:10px}
+.phase-row{transition:opacity .5s ease}
+.veiled .phase-row{opacity:.42}
+.veiled .phase-row.lit{opacity:1}
+
+/* corona — amenities only visible at totality */
+.corona{align-items:center;text-align:center}
+.corona .lede{margin:0 auto}
+.corona-grid{
+  margin-top:7vh;display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(10px,2vw,18px);max-width:900px;
+}
+.corona-grid span{
+  font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;
+  border:1px solid rgba(255,233,189,.32);border-radius:999px;
+  padding:12px 22px;color:var(--ink);
+  background:rgba(255,233,189,.03);
+}
+
+/* totality CTA */
+.totality{align-items:center;text-align:center}
+.totality .lede{margin:0 auto}
+.totality h2{margin-bottom:18px}
+.timer{
+  margin-top:5vh;display:inline-flex;align-items:baseline;gap:14px;
+  font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);
+  background:rgba(5,5,5,.55);padding:14px 26px;border-radius:999px;
+  backdrop-filter:blur(6px);border:1px solid rgba(255,233,189,.18);
+}
+.timer b{font-family:"Italiana",serif;font-weight:400;font-size:clamp(26px,3.4vw,44px);letter-spacing:.08em;color:var(--corona)}
+.cta{
+  margin-top:6vh;display:inline-block;text-decoration:none;
+  font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:600;
+  color:#050505;background:var(--corona);padding:20px 44px;border-radius:999px;
+  transition:transform .35s cubic-bezier(.2,.9,.25,1.4), box-shadow .35s ease;
+  box-shadow:0 0 0 rgba(255,233,189,0);
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 44px rgba(255,233,189,.35)}
+footer{
+  position:relative;z-index:2;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding:26px clamp(20px,6vw,96px);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(244,236,217,.07);
+}
+
+/* phase readout rail */
+#rail{
+  position:fixed;right:clamp(14px,3vw,38px);top:50%;transform:translateY(-50%);z-index:5;
+  display:flex;flex-direction:column;gap:16px;align-items:center;
+}
+#rail .tick{width:1px;height:26px;background:rgba(244,236,217,.18);position:relative}
+#rail .tick.on{background:var(--corona)}
+#rail .tick span{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  font-size:9px;letter-spacing:.26em;color:var(--gold);white-space:nowrap;opacity:0;transition:opacity .3s;
+}
+#rail .tick.on span{opacity:1}
+#phasepct{
+  position:fixed;left:clamp(14px,3vw,38px);bottom:52px;z-index:5;
+  font-size:10px;letter-spacing:.3em;color:var(--faint);text-transform:uppercase;
+  font-variant-numeric:tabular-nums;
+}
+
+@media (max-width:760px){
+  section{padding:12vh 22px;min-height:88vh}
+  .phase-row{grid-template-columns:64px 1fr}
+  .phase-row p{grid-column:1/-1}
+  #rail{display:none}
+  #phasepct{bottom:auto;top:18px}
+  #moon{width:76vmin}
+  #glowring{width:100vmin}
+  #corona-flare{width:150vmin}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .scrollcue i{animation:none}
+  #glowring,#stars{transition:none}
+  *{transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="sky" aria-hidden="true">
+  <div id="stars"></div>
+  <div id="corona-flare"></div>
+  <div id="sun"></div>
+  <div id="glowring"></div>
+  <div id="moon"></div>
+  <div id="horizon"></div>
+</div>
+
+<div id="rail" aria-hidden="true">
+  <div class="tick" data-s="hero"><span>FIRST CONTACT</span></div>
+  <div class="tick" data-s="phases"><span>PARTIAL</span></div>
+  <div class="tick" data-s="corona"><span>CORONA</span></div>
+  <div class="tick" data-s="totality"><span>TOTALITY</span></div>
+</div>
+<div id="phasepct" aria-hidden="true">OCCULTATION 000%</div>
+
+<div class="wrap">
+<main id="main">
+
+  <section class="hero" id="hero" aria-label="First contact">
+    <p class="kicker">Core Culture · Eclipse Sessions</p>
+    <h1>The club goes<br>dark on purpose.</h1>
+    <p class="lede">Once the doors close, the noise of the day is blocked out — screens, streets, small talk. What is left under the black disc is the oldest instrument there is: <b>your own core</b>. Scroll to bring the moon across.</p>
+    <p class="scrollcue"><i></i> begin first contact</p>
+  </section>
+
+  <section class="phases" id="phases" aria-label="Partial phases — the disciplines">
+    <p class="kicker">Partial phase · The disciplines</p>
+    <div class="phase-row">
+      <span class="pn">PHASE I</span>
+      <h3>Weight &amp; Strength</h3>
+      <p>Iron does not care about the light. Bars, racks and plates — loaded honestly, lifted deliberately.</p>
+    </div>
+    <div class="phase-row">
+      <span class="pn">PHASE II</span>
+      <h3>Hybrid Engine</h3>
+      <p>Sleds, intervals and engine work for people who lift <em>and</em> run. Built for races, and for Tuesdays.</p>
+    </div>
+    <div class="phase-row">
+      <span class="pn">PHASE III</span>
+      <h3>Dance Studio</h3>
+      <p>Choreography under low light, where nobody watches and everybody moves. The loudest room is the quietest one.</p>
+    </div>
+    <div class="phase-row">
+      <span class="pn">PHASE IV</span>
+      <h3>Functional Floor</h3>
+      <p>Carry, climb, crawl, brace. Movement your body actually remembers from before chairs.</p>
+    </div>
+  </section>
+
+  <section class="corona" id="corona" aria-label="Corona — visible only at totality">
+    <p class="kicker" style="justify-content:center">Corona · Visible only at totality</p>
+    <h2>Some things you can<br>only see in the dark.</h2>
+    <p class="lede">The recovery wing appears when the light dies: cold plunge, steam, sauna, and a lounge that pours slower than your heart rate.</p>
+    <div class="corona-grid">
+      <span>Cold plunge</span><span>Steam room</span><span>Sauna</span><span>The lounge</span><span>Barista bar</span><span>Recovery bay</span>
+    </div>
+  </section>
+
+  <section class="totality" id="totality" aria-label="Totality — join">
+    <p class="kicker" style="justify-content:center">Totality</p>
+    <h2>Find your core.</h2>
+    <p class="lede">A week inside the dark — every floor, every class, every plunge. No contract, no noise. Just the culture.</p>
+    <p class="timer"><span>Totality holds for</span><b>ONE WEEK</b><span>free</span></p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Stand in totality — claim your week</a>
+  </section>
+
+</main>
+<footer>
+  <span>Core Culture — train · move · recover · connect</span>
+  <span>Concept 21 · Totality</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sky=document.getElementById('sky'),
+        moon=document.getElementById('moon'),
+        ring=document.getElementById('glowring'),
+        flare=document.getElementById('corona-flare'),
+        stars=document.getElementById('stars'),
+        pct=document.getElementById('phasepct'),
+        ticks=[...document.querySelectorAll('#rail .tick')],
+        rows=[...document.querySelectorAll('.phase-row')],
+        phasesSec=document.getElementById('phases');
+
+  // starfield — three depth layers
+  const frag=document.createDocumentFragment();
+  for(let i=0;i<130;i++){
+    const s=document.createElement('i');
+    const d=Math.random();
+    s.style.left=(Math.random()*100)+'%';
+    s.style.top=(Math.random()*100)+'%';
+    s.style.opacity=(0.25+d*0.6).toFixed(2);
+    s.style.width=s.style.height=(d>0.8?2.5:d>0.5?1.8:1.2)+'px';
+    s.dataset.z=d>0.8?'3':d>0.5?'2':'1';
+    frag.appendChild(s);
+  }
+  stars.appendChild(frag);
+  const starEls=[...stars.children];
+
+  let target=0,cur=0,mx=0,my=0,cmx=0,cmy=0;
+  const sun=document.getElementById('sun');
+  function readScroll(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    target=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+    // veil discipline rows until their phase
+    const r=phasesSec.getBoundingClientRect();
+    rows.forEach(row=>{
+      const rr=row.getBoundingClientRect();
+      row.classList.toggle('lit',rr.top<innerHeight*0.82);
+    });
+    phasesSec.classList.add('veiled');
+    ticks.forEach(t=>{
+      const el=document.getElementById(t.dataset.s);
+      const b=el.getBoundingClientRect();
+      t.classList.toggle('on',b.top<=innerHeight*0.5&&b.bottom>innerHeight*0.5);
+    });
+  }
+  addEventListener('scroll',readScroll,{passive:true});
+  readScroll();
+
+  if(!reduced){
+    addEventListener('pointermove',e=>{
+      mx=(e.clientX/innerWidth-0.5);my=(e.clientY/innerHeight-0.5);
+    },{passive:true});
+  }
+
+  function frame(){
+    cur+=(target-cur)*0.075;
+    cmx+=(mx-cmx)*0.05;cmy+=(my-cmy)*0.05;
+
+    // eclipse geometry: moon enters from the left, reaches totality at page end
+    const slide=-0.62+cur*0.62;                 // -0.62 .. 0
+    const cover=1-Math.min(1,Math.abs(slide)/0.56); // 0..1 occlusion
+    const maxShift=Math.min(innerWidth,innerHeight*1.4)*0.34;
+
+    sun.style.transform=
+      `translate(calc(-50% + ${cmx*8}px), calc(-50% + ${cmy*5 - cur*innerHeight*0.05}px))`;
+    moon.style.transform=
+      `translate(calc(-50% + ${slide*maxShift+cmx*22}px), calc(-50% + ${cmy*14 - cur*innerHeight*0.05}px))`;
+    stars.style.opacity=Math.max(0,(cover-0.72)/0.28);
+    ring.style.opacity=Math.pow(Math.max(0,(cover-0.86)/0.14),1.4);
+    flare.style.opacity=Math.pow(Math.max(0,(cover-0.8)/0.2),2)*0.85;
+
+    starEls.forEach(s=>{
+      const z=+s.dataset.z;
+      s.style.transform=`translate(${cmx*z*6}px,${cmy*z*4}px)`;
+    });
+
+    pct.textContent='OCCULTATION '+String(Math.round(cover*100)).padStart(3,'0')+'%';
+    requestAnimationFrame(frame);
+  }
+  if(!reduced){requestAnimationFrame(frame);}
+  else{
+    // static: show a dramatic near-totality frame
+    moon.style.transform='translate(-50%,-50%)';
+    stars.style.opacity=.9;ring.style.opacity=.9;flare.style.opacity=.5;
+    pct.textContent='OCCULTATION 100%';
+    starEls.forEach(s=>s.style.transform='none');
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Speakeasy</title>
+<meta name="description" content="Core Culture — after hours. Find the door. The lounge pours slower than your heart rate.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0805'/%3E%3Crect x='12' y='8' width='8' height='18' rx='1' fill='%23241a10'/%3E%3Ccircle cx='18' cy='17' r='1.2' fill='%23ffb454'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0b0805;
+  --amber:#ffb454;
+  --amber-d:rgba(255,180,84,.35);
+  --smoke:#7fa7c7;
+  --ink:#f0e9dc;
+  --dim:rgba(240,233,220,.55);
+  --faint:rgba(240,233,220,.26);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--night);color:var(--ink);
+  font-family:"Onest",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+::selection{background:var(--amber);color:#241a10}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--amber);color:#241a10;padding:10px 16px;z-index:400;font-weight:600}
+.skip:focus{left:10px}
+
+/* ---------- the interior (behind everything) ---------- */
+#inside{
+  position:fixed;inset:0;z-index:1;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:center;gap:clamp(20px,4vw,70px);
+  padding:0 clamp(20px,5vw,90px);
+  opacity:0;transition:opacity .8s ease .3s;
+}
+body.entered #inside{opacity:1}
+.inside-copy .brand{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:20px}
+.inside-copy h1{
+  font-family:"Limelight",serif;font-weight:400;
+  font-size:clamp(30px,4vw,60px);line-height:1.18;color:var(--ink);
+}
+.inside-copy h1 span{color:var(--amber)}
+.inside-copy p{margin-top:22px;max-width:30em;color:var(--dim);font-size:13.5px;line-height:2.05;font-weight:300}
+.inside-copy p b{color:var(--ink);font-weight:600}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:30px;
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;
+  background:var(--amber);color:#241a10;padding:18px 38px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 44px rgba(255,180,84,.35)}
+
+/* turntable */
+.deck{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:26px;
+  perspective:1000px;
+}
+.platter{
+  position:relative;width:min(360px,72vw);aspect-ratio:1;border-radius:50%;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, #0c0b0a 0 1.6px, #191715 1.6px 3.4px),
+    #111;
+  box-shadow:0 30px 70px rgba(0,0,0,.8), 0 0 60px rgba(255,180,84,.06);
+  animation:spin 5.5s linear infinite paused;
+}
+/* light sweep across the grooves */
+.platter::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 220deg,
+    transparent 0 38%, rgba(255,236,200,.09) 45%, rgba(255,236,200,.02) 52%, transparent 58% 100%);
+}
+.platter::after{
+  content:"";position:absolute;inset:11%;border-radius:50%;
+  background:radial-gradient(circle at 42% 38%, rgba(255,236,200,.05), transparent 60%);
+}
+body.entered .platter{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.platter .label{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:35%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 40% 36%, #ffc678, var(--amber) 55%, #8a5c1e);
+  display:grid;place-items:center;text-align:center;
+}
+.platter .label span{
+  font-family:"Limelight";font-size:clamp(10px,1.2vw,14px);color:#241a10;line-height:1.5;
+  transform:rotate(-8deg);
+}
+.platter .hole{
+  position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;
+  background:var(--night);transform:translate(-50%,-50%);
+}
+.tonearm{
+  position:absolute;right:6%;top:-9%;width:9px;height:46%;
+  background:linear-gradient(180deg,#d8d2c4,#6e675a);
+  border-radius:5px;transform-origin:50% 0;transform:rotate(18deg);
+  box-shadow:0 8px 20px rgba(0,0,0,.6);
+}
+.tonearm::before{ /* counterweight */
+  content:"";position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+  width:24px;height:16px;border-radius:5px;
+  background:linear-gradient(180deg,#3a362e,#191713);
+  box-shadow:0 4px 8px rgba(0,0,0,.6);
+}
+.tonearm::after{
+  content:"";position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
+  width:24px;height:28px;border-radius:5px;
+  background:linear-gradient(180deg,#c9c2b2,#565044);
+}
+.tracklist{
+  list-style:none;width:min(360px,72vw);
+  border-top:1px solid var(--amber-d);
+}
+.tracklist li{
+  display:flex;justify-content:space-between;gap:10px;align-items:baseline;
+  padding:11px 4px;border-bottom:1px solid rgba(255,180,84,.14);
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+.tracklist li b{color:var(--ink);font-weight:500}
+.tracklist li .no{color:var(--amber);font-variant-numeric:tabular-nums}
+.smoke{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(60% 40% at 70% 30%, rgba(127,167,199,.07), transparent 65%);
+}
+
+/* ---------- the facade (closed club) ---------- */
+#facade{
+  position:fixed;inset:0;z-index:10;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5vh;
+  transition:transform 1.1s cubic-bezier(.6,0,.2,1), opacity .9s ease;
+  background:
+    repeating-linear-gradient(90deg, rgba(240,233,220,.018) 0 2px, transparent 2px 120px),
+    linear-gradient(180deg,#0d0a07,#080605 60%,#0b0805);
+}
+#facade::before{ /* street lamp pool */
+  content:"";position:absolute;left:50%;bottom:0;width:70vw;height:40vh;transform:translateX(-50%);
+  background:radial-gradient(50% 60% at 50% 100%, rgba(255,180,84,.09), transparent 70%);
+  pointer-events:none;
+}
+body.entered #facade{
+  transform:translateY(-100%);
+  opacity:0;pointer-events:none;
+}
+.door{
+  position:relative;width:190px;height:340px;border-radius:4px 4px 0 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04) 0 2px, transparent 2px),
+    linear-gradient(90deg, rgba(0,0,0,.4) 0 6px, transparent 10px 92%, rgba(0,0,0,.45) 96%),
+    linear-gradient(180deg,#241a10,#191209);
+  border:2px solid #352716;border-bottom:0;
+  cursor:pointer;
+  box-shadow:
+    0 0 0 7px #221a11,
+    0 0 0 8px rgba(255,214,150,.09),
+    0 0 60px rgba(255,180,84,.14), inset 0 0 30px rgba(0,0,0,.6);
+  transition:box-shadow .4s ease;
+}
+.door:hover{box-shadow:
+    0 0 0 7px #221a11,
+    0 0 0 8px rgba(255,214,150,.12),
+    0 0 90px rgba(255,180,84,.3), inset 0 0 30px rgba(0,0,0,.6)}
+/* lower raised panel */
+.door::before{
+  content:"";position:absolute;left:16px;right:16px;top:60%;bottom:44px;
+  border:2px solid rgba(255,214,150,.13);border-radius:3px;
+  background:linear-gradient(165deg, rgba(255,180,84,.06), rgba(0,0,0,.3));
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.55), inset 0 -1px 0 rgba(255,214,150,.1);
+}
+/* brass kick plate */
+.door::after{
+  content:"";position:absolute;left:10px;right:10px;bottom:0;height:26px;
+  background:linear-gradient(180deg,#8a6a34 0%,#5f4720 55%,#33240f 100%);
+  border:1px solid rgba(255,214,150,.16);border-bottom:0;
+}
+.door .glass{
+  position:absolute;left:18px;right:18px;top:16px;height:110px;
+  background:linear-gradient(180deg, rgba(255,180,84,.32), rgba(255,180,84,.08));
+  border:2px solid #352716;
+}
+.door .glass::after{
+  content:"CORE CULTURE";position:absolute;inset:0;display:grid;place-items:center;
+  font-family:"Limelight";font-size:11px;letter-spacing:.24em;color:var(--amber);
+  text-shadow:0 0 14px rgba(255,180,84,.9);
+}
+.door .knob{
+  position:absolute;right:20px;top:52%;width:26px;height:9px;border-radius:4px;
+  background:linear-gradient(180deg,#ffe0ae,#c9a24d 60%,#6e5020);
+  box-shadow:0 0 12px rgba(255,180,84,.8);
+}
+.door .knob::after{
+  content:"";position:absolute;left:-9px;top:1px;width:11px;height:7px;border-radius:3px;
+  background:linear-gradient(180deg,#ffedb8,#8a6a34);
+}
+.facade-copy{text-align:center;position:relative;z-index:2}
+.facade-copy p{
+  font-family:"Limelight";font-size:clamp(22px,3vw,40px);color:var(--ink);
+  text-shadow:0 0 24px rgba(255,180,84,.25);
+}
+.facade-copy small{
+  display:block;margin-top:16px;font-family:"Onest";font-size:10px;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--faint);
+}
+.doorhint{
+  position:relative;z-index:2;font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--dim);
+}
+#exitchip{
+  position:fixed;left:clamp(14px,3vw,36px);bottom:clamp(14px,3vw,32px);z-index:20;
+  font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);
+  background:none;border:1px solid rgba(240,233,220,.16);padding:9px 14px;cursor:pointer;
+  opacity:0;pointer-events:none;transition:opacity .5s ease .5s;font-family:"Onest";
+}
+body.entered #exitchip{opacity:1;pointer-events:auto}
+#exitchip:hover{color:var(--ink);border-color:var(--ink)}
+@media (max-width:900px){
+  #inside{grid-template-columns:1fr;overflow-y:auto;align-content:center;gap:30px;padding-top:8vh;padding-bottom:10vh}
+  .deck{order:-1}
+}
+@media (prefers-reduced-motion:reduce){
+  #facade{transition:opacity .3s ease}
+  body.entered #facade{transform:none}
+  .platter{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#inside-main">Skip inside</a>
+
+<div class="smoke" aria-hidden="true"></div>
+
+<!-- interior -->
+<section id="inside" aria-label="The after-hours lounge" aria-hidden="true">
+  <div class="inside-copy">
+    <p class="brand">Core Culture · After hours</p>
+    <h1>The lounge pours<br><span>slower</span> than<br>your heart rate.</h1>
+    <p>Members only, and the members are anyone who trained this week. <b>Espresso tonic for the engine crowd, a slow cold brew for the iron</b>, vinyl on the deck and absolutely no mirrors. The record spins until the last regular leaves.</p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Get on the list — free week</a>
+  </div>
+
+  <div class="deck">
+    <div class="platter" aria-hidden="true">
+      <div class="label"><span>CORE<br>CULTURE<br>33⅓</span></div>
+      <div class="hole"></div>
+      <div class="tonearm"></div>
+    </div>
+    <ul class="tracklist" aria-label="Tonight's record">
+      <li><span><span class="no">A1</span> — <b>Espresso tonic</b></span><span>the engine crowd</span></li>
+      <li><span><span class="no">A2</span> — <b>Slow cold brew</b></span><span>the iron</span></li>
+      <li><span><span class="no">A3</span> — <b>Ginger &amp; lime, zero</b></span><span>the drivers</span></li>
+      <li><span><span class="no">B1</span> — <b>House playlist №7</b></span><span>dance floor reruns</span></li>
+      <li><span><span class="no">B2</span> — <b>Quiet hour</b></span><span>everyone, eventually</span></li>
+    </ul>
+  </div>
+</section>
+
+<button id="exitchip" aria-label="Leave the lounge — back to the street">← Back to the street</button>
+
+<!-- facade -->
+<section id="facade" aria-label="The street outside — find the door">
+  <div class="facade-copy">
+    <p>After hours,<br>the club plays records.</p>
+    <small>No sign · no queue · ask a member</small>
+  </div>
+  <button class="door" id="door" aria-label="The door — enter the lounge">
+    <span class="glass" aria-hidden="true"></span>
+    <span class="knob" aria-hidden="true"></span>
+  </button>
+  <p class="doorhint">That one. Try the handle — or press Enter.</p>
+</section>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const door=document.getElementById('door');
+  const exit=document.getElementById('exitchip');
+  function enter(){
+    document.body.classList.add('entered');
+    document.getElementById('inside').setAttribute('aria-hidden','false');
+    document.getElementById('facade').setAttribute('aria-hidden','true');
+  }
+  function leave(){
+    document.body.classList.remove('entered');
+    document.getElementById('inside').setAttribute('aria-hidden','true');
+    document.getElementById('facade').setAttribute('aria-hidden','false');
+    door.focus();
+  }
+  door.addEventListener('click',enter);
+  door.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();enter();}});
+  exit.addEventListener('click',leave);
+  // scrolling before entry is disabled (single scene); Enter key shortcut noted
+  document.addEventListener('keydown',e=>{
+    if(!document.body.classList.contains('entered')&&e.key==='Enter'&&document.activeElement===document.body)enter();
+  });
+  if(reduced){ /* facade still requires the click; transition is instant via CSS */ }
+})();
+</script>
+</body>
+</html>

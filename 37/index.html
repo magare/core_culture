@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Darkroom</title>
+<meta name="description" content="Core Culture — a club that develops weekly. Prints under the safelight, from the floor of the culture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070606'/%3E%3Crect x='7' y='9' width='18' height='14' fill='%23efece4'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23ff1f1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Reddit+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070606;
+  --ink:#e9e5da;
+  --dim:rgba(233,229,218,.55);
+  --faint:rgba(233,229,218,.26);
+  --safelight:rgba(255,31,31,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Reddit Mono",monospace;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--ink);color:#070606}
+a{color:inherit}
+:focus-visible{outline:2px dashed var(--ink);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--ink);color:#070606;padding:10px 16px;z-index:300;font-weight:600}
+.skip:focus{left:10px}
+
+/* safelight ambience */
+#safelight{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(90% 70% at 18% 12%, var(--safelight), transparent 60%),
+             radial-gradient(80% 60% at 85% 90%, rgba(255,31,31,.10), transparent 60%);
+  mix-blend-mode:screen;
+}
+#grain{
+  position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+}
+
+/* contact rail */
+#rail{
+  position:fixed;right:clamp(10px,2vw,26px);top:50%;transform:translateY(-50%);z-index:10;
+  display:flex;flex-direction:column;gap:10px;
+}
+#rail a{
+  display:block;width:44px;height:58px;border:1px solid rgba(233,229,218,.25);
+  padding:3px;background:#0d0c0c;transition:border-color .2s ease;
+}
+#rail a img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.75)}
+#rail a:hover,#rail a.on{border-color:var(--ink)}
+#rail .fn{
+  position:fixed;right:clamp(10px,2vw,26px);top:calc(50% + 130px);z-index:10;
+  font-size:8.5px;letter-spacing:.26em;color:var(--faint);writing-mode:vertical-rl;
+}
+
+.wrap{position:relative;z-index:3}
+header.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(20px,7vw,130px);
+}
+.kicker{font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--dim);margin-bottom:26px}
+h1{
+  font-family:"EB Garamond",serif;font-weight:500;
+  font-size:clamp(46px,7.6vw,124px);line-height:1.02;
+}
+h1 em{font-style:italic;color:rgba(255,120,110,.85)}
+.lede{margin-top:28px;max-width:34em;color:var(--dim);font-size:12.5px;line-height:2.15}
+.lede b{color:var(--ink);font-weight:600}
+.stamp{
+  display:inline-block;width:fit-content;margin-top:34px;padding:10px 16px;
+  border:1.5px solid rgba(255,80,70,.7);color:rgba(255,120,110,.9);
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  transform:rotate(-3deg);
+}
+
+/* prints */
+.prints{display:flex;flex-direction:column}
+.print{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:10vh clamp(20px,6vw,110px);
+}
+.sheet{
+  position:relative;background:#efece4;padding:clamp(14px,1.6vw,26px);
+  box-shadow:0 30px 80px rgba(0,0,0,.75);
+  max-width:min(860px,92vw);
+  transform:rotate(var(--tilt,-0.6deg));
+}
+.sheet img{
+  display:block;width:100%;max-height:66vh;object-fit:cover;
+  /* undeveloped: milky, low contrast, red-blind */
+  filter:grayscale(1) brightness(1.75) contrast(.32) sepia(.4) hue-rotate(-30deg) saturate(2.2);
+  transition:filter 2.6s ease;
+}
+.print.developed .sheet img{filter:grayscale(1) brightness(1.12) contrast(1.14)}
+.sheet .edge{
+  position:absolute;left:0;right:0;bottom:6px;text-align:center;
+  font-size:8.5px;letter-spacing:.34em;color:rgba(7,6,6,.45);text-transform:uppercase;
+}
+.note{
+  margin-top:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  max-width:min(860px,92vw);
+}
+.note .cap{font-family:"EB Garamond",serif;font-style:italic;font-size:clamp(17px,1.8vw,24px);color:var(--dim)}
+.note .data{font-size:9.5px;letter-spacing:.26em;color:var(--faint);text-transform:uppercase;text-align:right}
+
+/* loupe */
+#loupe{
+  position:fixed;z-index:5;width:190px;height:190px;border-radius:50%;
+  border:3px solid rgba(233,229,218,.6);pointer-events:none;
+  background-repeat:no-repeat;
+  box-shadow:0 20px 50px rgba(0,0,0,.6), inset 0 0 40px rgba(0,0,0,.35);
+  transform:translate(-50%,-50%);display:none;
+}
+#loupe.on{display:block}
+
+/* close */
+.close{
+  min-height:64vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:12vh clamp(20px,7vw,130px);
+}
+.close h2{
+  font-family:"EB Garamond",serif;font-weight:500;
+  font-size:clamp(30px,4.6vw,68px);line-height:1.1;
+}
+.close p{margin-top:22px;max-width:34em;color:var(--dim);font-size:12.5px;line-height:2.15}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:34px;
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;
+  background:var(--ink);color:#070606;padding:19px 40px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(233,229,218,.25)}
+footer{
+  padding:26px clamp(20px,7vw,130px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(233,229,218,.08);
+}
+@media (max-width:760px){
+  #rail,#rail .fn{display:none}
+  .print{padding:8vh 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .sheet img{transition:none}
+  .print.developed .sheet img,.sheet img{filter:grayscale(1) brightness(1.12) contrast(1.14)}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="safelight" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
+<div id="loupe" aria-hidden="true"></div>
+
+<nav id="rail" aria-label="Prints on the contact sheet">
+  <a href="#p1" aria-label="Print one"><img src="../crops/p01-sled.jpg" alt=""></a>
+  <a href="#p2" aria-label="Print two"><img src="../crops/p02-dancer.jpg" alt=""></a>
+  <a href="#p3" aria-label="Print three"><img src="../crops/p01-ice.jpg" alt=""></a>
+  <a href="#p4" aria-label="Print four"><img src="../crops/p11-art.jpg" alt=""></a>
+</nav>
+<span class="fn" aria-hidden="true">CONTACT · ROLL 07</span>
+
+<div class="wrap">
+<main id="main">
+  <header class="hero">
+    <p class="kicker">Core Culture · Community darkroom, after hours</p>
+    <h1>The club,<br>developed <em>weekly.</em></h1>
+    <p class="lede">Every Friday the members' prints come down off the wall and new ones go into the tray — sled nights, studio sessions, the 3-degree tub. <b>Nothing here is staged; nothing here is instant.</b> Prints need chemistry, time and a red light. So does training.</p>
+    <p class="stamp">Safelight on — do not open the door</p>
+  </header>
+
+  <section class="prints" aria-label="This week's prints">
+    <figure class="print" id="p1">
+      <div class="sheet" style="--tilt:-0.7deg">
+        <img src="../crops/p01-sled.jpg" alt="Print one — an athlete driving a weighted sled across the dark floor" loading="lazy">
+        <span class="edge">CORE CULTURE · ROLL 07 · FRAME 03</span>
+      </div>
+      <figcaption class="note" style="width:100%;max-width:min(860px,92vw)">
+        <span class="cap">“Sled night. Nobody spoke for forty minutes; everybody came back.”</span>
+        <span class="data">DEV · D-76 1:1 · 3 MIN<br>f/2.8 · 1/60</span>
+      </figcaption>
+    </figure>
+
+    <figure class="print" id="p2">
+      <div class="sheet" style="--tilt:0.8deg">
+        <img src="../crops/p02-dancer.jpg" alt="Print two — a dancer in motion through the studio haze" loading="lazy">
+        <span class="edge">CORE CULTURE · ROLL 07 · FRAME 11</span>
+      </div>
+      <figcaption class="note" style="width:100%;max-width:min(860px,92vw)">
+        <span class="cap">“Studio B, last light. The mirrors stay off; the music doesn't.”</span>
+        <span class="data">DEV · HC-110 · 4 MIN<br>f/1.8 · 1/125</span>
+      </figcaption>
+    </figure>
+
+    <figure class="print" id="p3">
+      <div class="sheet" style="--tilt:-0.5deg">
+        <img src="../crops/p01-ice.jpg" alt="Print three — ice water in the cold plunge tub" loading="lazy">
+        <span class="edge">CORE CULTURE · ROLL 07 · FRAME 19</span>
+      </div>
+      <figcaption class="note" style="width:100%;max-width:min(860px,92vw)">
+        <span class="cap">“The tub at 6 a.m. Three degrees. The water keeps the score.”</span>
+        <span class="data">DEV · D-76 1:1 · 3 MIN<br>f/4 · 1/250</span>
+      </figcaption>
+    </figure>
+
+    <figure class="print" id="p4">
+      <div class="sheet" style="--tilt:0.6deg">
+        <img src="../crops/p11-art.jpg" alt="Print four — a painterly member portrait from the culture wall" loading="lazy">
+        <span class="edge">CORE CULTURE · ROLL 07 · FRAME 27</span>
+      </div>
+      <figcaption class="note" style="width:100%;max-width:min(860px,92vw)">
+        <span class="cap">“From the culture wall — main characters only. That's everyone.”</span>
+        <span class="data">DEV · RODINAL 1:50 · 12 MIN<br>f/5.6 · 1/125</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="close">
+    <h2>Bring a roll of film.<br>Leave with the club in it.</h2>
+    <p>The darkroom comes with membership — chemistry, timers and the red light included. First week free: enough frames to learn the ritual, and somebody to develop them beside you.</p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Join the darkroom — free week</a>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 37 · Darkroom</span>
+  </footer>
+</main>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prints=[...document.querySelectorAll('.print')];
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting)e.target.classList.add('developed');
+      else if(!reduced)e.target.classList.remove('developed'); // re-develop on re-entry
+    });
+  },{threshold:0.45});
+  prints.forEach(p=>io.observe(p));
+
+  // rail highlight
+  const links=[...document.querySelectorAll('#rail a')];
+  const io2=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id));
+      }
+    });
+  },{threshold:0.5});
+  prints.forEach(p=>io2.observe(p));
+
+  // loupe: shows the developed image under the cursor while the print develops
+  const loupe=document.getElementById('loupe');
+  let active=null;
+  prints.forEach(p=>{
+    const img=p.querySelector('img');
+    p.addEventListener('pointerenter',()=>{active=img;loupe.classList.add('on');});
+    p.addEventListener('pointerleave',()=>{active=null;loupe.classList.remove('on');});
+  });
+  addEventListener('pointermove',e=>{
+    if(!active)return;
+    const r=active.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width)*100, y=((e.clientY-r.top)/r.height)*100;
+    loupe.style.left=e.clientX+'px';loupe.style.top=e.clientY+'px';
+    loupe.style.backgroundImage=`url(${active.src})`;
+    loupe.style.backgroundSize=r.width*1.9+'px '+r.height*1.9+'px';
+    loupe.style.backgroundPosition=`${x}% ${y}%`;
+    // the loupe sees the developed print
+    loupe.style.filter='grayscale(1) brightness(.94) contrast(1.14)';
+  },{passive:true});
+})();
+</script>
+</body>
+</html>

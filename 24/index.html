@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Blackout</title>
+<meta name="description" content="Core Culture — the club with the power cut. Move the light, find the rooms, then restore the power.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23ffe9c4' opacity='.25'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23ffe9c4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;
+  --ink:#e8e2d4;
+  --dim:rgba(232,226,212,.55);
+  --faint:rgba(232,226,212,.26);
+  --torch:255,233,196;
+  --exit:#ff2e1f;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"DM Mono",monospace;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+  cursor:crosshair;
+}
+::selection{background:var(--torch);color:#000;color:#141210}
+a{color:inherit}
+:focus-visible{outline:2px dashed var(--torch);outline-offset:4px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--torch);color:#141210;padding:10px 16px;z-index:120;font-weight:500}
+.skip:focus{left:10px}
+
+/* ---------- darkness overlay ---------- */
+#dark{
+  position:fixed;inset:0;z-index:40;pointer-events:none;
+  background:radial-gradient(circle 300px at var(--mx,-500px) var(--my,-500px),
+    rgba(var(--torch),.10) 0px,
+    rgba(var(--torch),.05) 120px,
+    rgba(0,0,0,.86) 210px,
+    rgba(0,0,0,.985) 320px,
+    #000 420px);
+  transition:opacity .5s ease;
+}
+#dark .flicker{
+  position:absolute;inset:0;
+  background:radial-gradient(circle 260px at var(--mx,-500px) var(--my,-500px),
+    rgba(var(--torch),.05), transparent 220px);
+  animation:flick 4s steps(1) infinite;
+}
+@keyframes flick{
+  0%,100%{opacity:1}
+  91%{opacity:1}
+  92%{opacity:.4}
+  93%{opacity:1}
+  96.5%{opacity:.55}
+  97%{opacity:1}
+}
+body.lit #dark{opacity:0}
+body.lit{cursor:auto}
+
+/* the beam's warm core sits above content for a light-in-fog feel */
+#core{
+  position:fixed;z-index:60;width:190px;height:190px;border-radius:50%;
+  left:0;top:0;pointer-events:none;mix-blend-mode:screen;
+  background:radial-gradient(circle, rgba(var(--torch),.14), transparent 62%);
+  transform:translate(-50%,-50%);
+  transition:opacity .5s ease;
+}
+body.lit #core{opacity:0}
+
+/* ---------- exit signs punch through the dark ---------- */
+.exit{
+  position:absolute;z-index:80;pointer-events:none;
+  font-size:9.5px;letter-spacing:.34em;color:var(--exit);
+  border:1px solid rgba(255,46,31,.55);padding:6px 10px 6px 13px;
+  text-shadow:0 0 12px rgba(255,46,31,.8);
+  box-shadow:0 0 22px rgba(255,46,31,.22), inset 0 0 14px rgba(255,46,31,.14);
+  background:rgba(20,0,0,.5);
+}
+.exit::before{content:"→ "}
+
+/* ---------- generator switch ---------- */
+#switch{
+  position:fixed;right:clamp(14px,3vw,34px);bottom:clamp(14px,3vw,30px);z-index:110;
+  font-family:"DM Mono";font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  background:#0d0c0a;color:var(--torch);border:1px solid rgba(var(--torch),.4);
+  padding:16px 20px 16px 52px;cursor:pointer;text-align:left;
+  box-shadow:0 0 26px rgba(var(--torch),.12), inset 0 0 16px rgba(0,0,0,.8);
+  transition:box-shadow .3s ease;
+}
+#switch::before{
+  content:"";position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  width:22px;height:22px;border-radius:3px;
+  background:linear-gradient(180deg,#2b2620,#151210);
+  border:1px solid rgba(var(--torch),.5);
+  box-shadow:inset 0 0 6px rgba(var(--torch),.35);
+}
+#switch:hover{box-shadow:0 0 40px rgba(var(--torch),.25), inset 0 0 16px rgba(0,0,0,.8)}
+#switch .state{display:block;margin-top:6px;color:var(--faint);letter-spacing:.2em;font-size:9px}
+body.lit #switch{color:var(--dim);border-color:rgba(232,226,212,.3)}
+body.lit #switch::before{background:linear-gradient(180deg,#efe8d6,#8f8a7c);box-shadow:0 0 14px rgba(var(--torch),.8)}
+#hint{
+  position:fixed;left:clamp(14px,3vw,34px);bottom:clamp(14px,3vw,30px);z-index:110;
+  font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+  transition:opacity .6s ease;pointer-events:none;
+}
+body.lit #hint{opacity:0}
+
+/* ---------- content ---------- */
+.wrap{position:relative;z-index:1}
+header.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(22px,6vw,100px);position:relative;
+}
+.kicker{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--dim);margin-bottom:24px}
+h1{
+  font-family:"Syne",sans-serif;font-weight:800;text-transform:uppercase;
+  font-size:clamp(46px,8.4vw,132px);line-height:.94;letter-spacing:-.01em;
+}
+h1 .off{color:var(--faint)}
+h1 .on{display:none}
+body.lit h1 .off{display:none}
+body.lit h1 .on{display:inline}
+.lede{margin-top:30px;max-width:36em;color:var(--dim);font-size:13.5px;line-height:2.1}
+.lede b{color:var(--ink)}
+.hero .meta{
+  margin-top:40px;display:flex;gap:26px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+}
+.hero .exit{top:18vh;right:clamp(22px,7vw,120px)}
+
+/* rooms */
+.rooms{display:flex;flex-direction:column}
+.room{
+  min-height:92vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(20px,4vw,60px);align-items:center;
+  padding:10vh clamp(22px,6vw,100px);
+  border-top:1px solid rgba(232,226,212,.06);
+  position:relative;
+}
+.room:nth-child(even){direction:rtl}
+.room>*{direction:ltr}
+.room .num{
+  font-family:"Syne";font-weight:800;font-size:clamp(90px,12vw,200px);line-height:.8;
+  color:transparent;-webkit-text-stroke:1px rgba(232,226,212,.2);
+}
+.room h2{
+  font-family:"Syne";font-weight:700;text-transform:uppercase;
+  font-size:clamp(28px,3.6vw,54px);line-height:1.02;margin:18px 0 20px;letter-spacing:.01em;
+}
+.room p{max-width:34em;color:var(--dim);font-size:13px;line-height:2.1}
+.room .tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
+.room .tags span{font-size:9px;letter-spacing:.22em;text-transform:uppercase;border:1px solid rgba(232,226,212,.16);padding:7px 12px;color:var(--dim)}
+.room figure{position:relative;margin:0;overflow:hidden;border:1px solid rgba(232,226,212,.08)}
+.room img{display:block;width:100%;height:clamp(260px,44vh,460px);object-fit:cover;filter:grayscale(.9) brightness(.6) contrast(1.12)}
+body.lit .room img{filter:grayscale(.9) brightness(.85) contrast(1.05)}
+.room figure figcaption{
+  position:absolute;left:0;bottom:0;right:0;padding:10px 14px;
+  font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+  background:linear-gradient(transparent, rgba(0,0,0,.85));
+}
+.room .exit{bottom:12vh}
+
+/* ending */
+.ending{
+  min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:14vh clamp(22px,6vw,100px);border-top:1px solid rgba(232,226,212,.06);
+  position:relative;
+}
+.ending h2{font-family:"Syne";font-weight:800;text-transform:uppercase;font-size:clamp(34px,5.4vw,84px);line-height:.98}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:36px;
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  background:var(--torch);color:#141210;padding:20px 40px;font-weight:500;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(var(--torch),.3)}
+footer{
+  padding:28px clamp(22px,6vw,100px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);border-top:1px solid rgba(232,226,212,.06);
+}
+
+@media (max-width:900px){
+  .room{grid-template-columns:1fr;min-height:auto;padding:9vh 22px;gap:26px}
+  .room .num{font-size:84px}
+  .hero .exit{top:12vh;right:20px}
+  #core{width:150px;height:150px}
+  #hint{max-width:46vw}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  #dark .flicker{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="dark" aria-hidden="true"><div class="flicker"></div></div>
+<div id="core" aria-hidden="true"></div>
+
+<button id="switch" aria-pressed="false" aria-describedby="hint">
+  MAIN SWITCH
+  <span class="state" id="switchstate">grid offline</span>
+</button>
+<p id="hint">move the light — find the rooms</p>
+
+<div class="wrap">
+<main id="main">
+  <header class="hero">
+    <p class="kicker">Core Culture · Power cut sessions</p>
+    <h1>
+      <span class="off">The club<br>before the<br>lights come on.</span>
+      <span class="on">Now you<br>see the<br>club.</span>
+    </h1>
+    <p class="lede">We cut the power for one week a season. No screens, no mirrors, no watching yourself train — <b>just you, the iron, and whatever your other senses bring</b>. Move the light to explore, or pull the main switch when you're ready.</p>
+    <div class="meta">
+      <span>Blackout week — seasonal</span>
+      <span>All floors open</span>
+      <span>Torches at the desk</span>
+    </div>
+    <span class="exit">EXIT</span>
+  </header>
+
+  <section class="rooms" aria-label="The rooms">
+    <article class="room">
+      <div>
+        <div class="num" aria-hidden="true">01</div>
+        <h2>Iron room</h2>
+        <p>In the dark, hand position finds the bar before your eyes do. Plates are loaded by feel, chalk pops in the beam, and every rep is loud in a way daylight never allows.</p>
+        <div class="tags"><span>Platforms</span><span>Chalk</span><span>Coached hours</span></div>
+      </div>
+      <figure>
+        <img src="../crops/p02-sled.jpg" alt="An athlete driving a weighted sled across the dark gym floor" loading="lazy">
+        <figcaption>fig. 01 — sled lane, blackout hour</figcaption>
+      </figure>
+      <span class="exit">EXIT</span>
+    </article>
+
+    <article class="room">
+      <div>
+        <div class="num" aria-hidden="true">02</div>
+        <h2>Engine bay</h2>
+        <p>Interval work with the displays covered. You stop watching numbers and start listening to breathing — mostly your own, occasionally the person next to you pretending it's fine.</p>
+        <div class="tags"><span>Sled track</span><span>Intervals</span><span>No clocks visible</span></div>
+      </div>
+      <figure>
+        <img src="../crops/p05-machine.jpg" alt="A training machine photographed against a pale studio background" loading="lazy">
+        <figcaption>fig. 02 — engine bay, machine no. 4</figcaption>
+      </figure>
+    </article>
+
+    <article class="room">
+      <div>
+        <div class="num" aria-hidden="true">03</div>
+        <h2>Studio</h2>
+        <p>Dance in near-darkness and the room gets honest. Nobody watches, everybody moves — the choreography lives in the count and the bass, not the mirror.</p>
+        <div class="tags"><span>Sprung floor</span><span>Bass</span><span>Zero mirrors</span></div>
+      </div>
+      <figure>
+        <img src="../crops/p02-dancer.jpg" alt="A dancer silhouetted in motion" loading="lazy">
+        <figcaption>fig. 03 — studio, last light</figcaption>
+      </figure>
+      <span class="exit">EXIT</span>
+    </article>
+
+    <article class="room">
+      <div>
+        <div class="num" aria-hidden="true">04</div>
+        <h2>Remedy wing</h2>
+        <p>Cold plunge, steam, sauna — the wing that never needed light in the first place. Count your three minutes by your heartbeat; the thermometer doesn't lie and neither does the tub.</p>
+        <div class="tags"><span>3° plunge</span><span>Steam</span><span>Sauna</span></div>
+      </div>
+      <figure>
+        <img src="../crops/p01-ice.jpg" alt="Ice water in a cold plunge tub, photographed in black and white" loading="lazy">
+        <figcaption>fig. 04 — remedy wing, 3°</figcaption>
+      </figure>
+    </article>
+  </section>
+
+  <section class="ending" aria-label="Join">
+    <p class="kicker">When the lights return</p>
+    <h2>Some things look<br>different in daylight.</h2>
+    <p class="lede">The training is the same. The excuse isn't. First week free — lights on or lights off, your call.</p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Claim a week — bring a torch</a>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 24 · Blackout</span>
+  </footer>
+</main>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root=document.documentElement;
+  const core=document.getElementById('core');
+  const sw=document.getElementById('switch');
+  const state=document.getElementById('switchstate');
+  let lit=false, raf=null, tx=-500, ty=-500, cx=-500, cy=-500;
+
+  function draw(){
+    cx+=(tx-cx)*0.18; cy+=(ty-cy)*0.18;
+    root.style.setProperty('--mx',cx.toFixed(1)+'px');
+    root.style.setProperty('--my',cy.toFixed(1)+'px');
+    core.style.left=cx.toFixed(1)+'px';
+    core.style.top=cy.toFixed(1)+'px';
+    if(!lit) raf=requestAnimationFrame(draw);
+  }
+
+  function move(x,y){ tx=x; ty=y; if(raf===null&&!lit) raf=requestAnimationFrame(draw); }
+  addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});
+  addEventListener('touchmove',e=>{const t=e.touches[0];if(t)move(t.clientX,t.clientY);},{passive:true});
+
+  function setLit(v){
+    lit=v;
+    document.body.classList.toggle('lit',v);
+    sw.setAttribute('aria-pressed',String(v));
+    state.textContent=v?'power restored':'grid offline';
+    if(!v){ raf=requestAnimationFrame(draw); }
+    else if(raf){ cancelAnimationFrame(raf); raf=null; }
+  }
+  sw.addEventListener('click',()=>setLit(!lit));
+  document.addEventListener('keydown',e=>{
+    if(e.key.toLowerCase()==='l' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) setLit(!lit);
+  });
+
+  if(reduced){
+    // start with the power on — no darkness gimmick
+    setLit(true);
+    document.body.classList.add('lit');
+  }else{
+    // initial light position: centre of the hero
+    tx=innerWidth*0.5; ty=innerHeight*0.42;
+    raf=requestAnimationFrame(draw);
+  }
+})();
+</script>
+</body>
+</html>

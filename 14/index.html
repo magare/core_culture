@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Floor by Floor</title>
+<meta name="description" content="Core Culture Training Club — ride the building. Basement to roof, floor by floor.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23232323'/%3E%3Crect x='12' y='5' width='8' height='22' fill='%23c9a227'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --char:#232323;
+  --char2:#2b2b2b;
+  --brass:#c9a227;
+  --paper:#efece4;
+  --dim:rgba(239,236,228,.55);
+  --line:rgba(239,236,228,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--char);
+  color:var(--paper);
+  font-family:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+::selection{background:var(--brass);color:var(--char)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:8px;background:var(--brass);color:var(--char);padding:10px 16px;z-index:400;font-weight:700}
+.skip:focus{left:8px}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+
+/* ---------- elevator dial ---------- */
+.dial{
+  position:fixed;right:clamp(12px,2.4vw,36px);top:50%;transform:translateY(-50%);
+  z-index:120;
+  background:var(--char2);
+  border:1px solid var(--line);
+  box-shadow:0 12px 30px rgba(0,0,0,.5);
+  padding:14px 10px 12px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.dial .arrow{font-size:11px;color:var(--dim);line-height:1}
+.dial a{
+  text-decoration:none;color:var(--dim);
+  font-family:"IBM Plex Mono";font-weight:700;font-size:11px;
+  width:34px;text-align:center;padding:4px 0;border-radius:2px;
+  transition:background .2s ease,color .2s ease;
+}
+.dial a.cur{background:var(--brass);color:var(--char)}
+.dial a:hover{color:var(--brass)}
+.dial a.cur:hover{color:var(--char)}
+.dial .counter{
+  margin-top:8px;font-family:"IBM Plex Mono";font-weight:700;font-size:12px;color:var(--brass);
+  border-top:1px solid var(--line);padding-top:8px;letter-spacing:.08em;
+}
+@media (max-width:900px){.dial{display:none}}
+
+/* ---------- top signage ---------- */
+.top{
+  position:fixed;top:0;left:0;right:0;z-index:110;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:12px clamp(16px,3vw,40px);
+  background:rgba(35,35,35,.94);border-bottom:1px solid var(--line);
+  font-size:12px;
+}
+.top .wm{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px}
+.top .wm b{color:var(--brass)}
+.top .info{font-family:"IBM Plex Mono";font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em}
+
+/* ---------- floors ---------- */
+main{padding-top:47px}
+.floor{
+  min-height:100vh;
+  border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:minmax(120px,220px) 1fr;
+  position:relative;
+}
+.floor .panel{
+  border-right:1px solid var(--line);
+  background:var(--char2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  padding:30px 10px;
+  position:sticky;top:47px;height:calc(100vh - 47px);
+}
+.floor .fno{
+  font-family:"Barlow Semi Condensed";font-weight:800;
+  font-size:clamp(46px,6vh,74px);line-height:1;color:var(--brass);
+  border:2px solid var(--brass);border-radius:4px;padding:6px 18px;
+}
+.floor .flbl{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);
+}
+.floor .content{
+  padding:clamp(80px,14vh,130px) clamp(20px,4vw,64px) clamp(50px,9vh,90px);
+  display:flex;flex-direction:column;justify-content:center;gap:22px;
+  max-width:900px;
+}
+.floor .ding{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
+}
+.floor .ding .lamp{width:9px;height:9px;border-radius:50%;background:var(--brass);box-shadow:0 0 8px var(--brass)}
+.floor h2{
+  font-weight:800;text-transform:uppercase;letter-spacing:.01em;
+  font-size:clamp(40px,6.4vw,96px);line-height:.92;
+}
+.floor h2 .thin{font-weight:500;color:var(--brass)}
+.floor .dir{font-size:clamp(15px,1.6vw,19px);line-height:1.7;color:var(--dim);max-width:52ch;font-weight:400}
+.floor .dir b{color:var(--paper);font-weight:600}
+.floor .wayfinding{
+  display:flex;gap:clamp(16px,3vw,38px);flex-wrap:wrap;margin-top:8px;
+}
+.wsign{
+  display:flex;align-items:center;gap:10px;
+  border:1px solid var(--line);padding:10px 16px;
+  font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+}
+.wsign svg{width:22px;height:22px;stroke:var(--brass);fill:none;stroke-width:1.6}
+.wsign b{color:var(--paper)}
+.floor .goto{
+  position:absolute;right:clamp(16px,3vw,40px);bottom:26px;
+  text-decoration:none;font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dim);display:flex;align-items:center;gap:8px;
+  transition:color .2s ease;
+}
+.floor .goto:hover{color:var(--brass)}
+.floor .goto .arrow{display:inline-block;transition:transform .2s ease}
+.floor .goto:hover .arrow{transform:translateX(5px)}
+@media (max-width:860px){
+  .floor{grid-template-columns:1fr;min-height:auto}
+  .floor .panel{position:static;height:auto;flex-direction:row;justify-content:flex-start;gap:16px;padding:14px 20px}
+  .floor .flbl{writing-mode:horizontal-tb;transform:none}
+  .floor .fno{font-size:30px;padding:4px 12px}
+  .floor .content{padding:40px 20px 70px}
+}
+
+/* floor-specific accent moods */
+.f-remedy .fno,.f-remedy h2 .thin{color:#8fc7e8}
+.f-remedy .ding .lamp{background:#8fc7e8;box-shadow:0 0 8px #8fc7e8}
+.f-remedy .wsign svg{stroke:#8fc7e8}
+.f-studio .fno,.f-studio h2 .thin{color:#e08bb8}
+.f-studio .ding .lamp{background:#e08bb8;box-shadow:0 0 8px #e08bb8}
+.f-studio .wsign svg{stroke:#e08bb8}
+.f-lounge .fno,.f-lounge h2 .thin{color:#a3c47c}
+.f-lounge .ding .lamp{background:#a3c47c;box-shadow:0 0 8px #a3c47c}
+.f-lounge .wsign svg{stroke:#a3c47c}
+
+/* photos inside floors */
+.fphoto{margin-top:10px;border:1px solid var(--line);padding:8px;background:var(--char2);max-width:560px}
+.fphoto img{width:100%;height:clamp(180px,30vh,300px);object-fit:cover;filter:saturate(.85) contrast(1.05)}
+.fphoto figcaption{font-family:"IBM Plex Mono";font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);padding-top:8px}
+
+/* doors close-open entrance */
+.doors{opacity:0}
+.doors.in{opacity:1;transition:opacity .5s ease}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .doors{opacity:1;transition:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#g">Skip to lobby floor</a>
+
+<div class="top">
+  <span class="wm">Core Culture <b>/ Lift</b></span>
+  <span class="info">Building open 05:30–23:00 · capacity: everyone</span>
+</div>
+
+<nav class="dial" aria-label="Floor selector">
+  <span class="arrow" aria-hidden="true">▲</span>
+  <a href="#roof" data-floor="roof">R</a>
+  <a href="#l3" data-floor="l3">3</a>
+  <a href="#l2" data-floor="l2">2</a>
+  <a href="#l1" data-floor="l1">1</a>
+  <a href="#g" data-floor="g">G</a>
+  <a href="#b1" data-floor="b1">B1</a>
+  <a href="#b2" data-floor="b2">B2</a>
+  <span class="arrow" aria-hidden="true">▼</span>
+  <span class="counter" id="counter">G</span>
+</nav>
+
+<main id="main">
+
+  <!-- B2 BASEMENT -->
+  <section class="floor" id="b2" data-name="B2" aria-labelledby="b2h">
+    <div class="panel"><span class="fno">B2</span><span class="flbl">Parking — arrivals</span></div>
+    <div class="content doors">
+      <span class="ding"><span class="lamp" aria-hidden="true"></span> Ground floor below — doors open</span>
+      <h2 id="b2h">Park. <span class="thin">Finally.</span></h2>
+      <p class="dir">Every visit starts in the basement, and the basement never argues. <b>Plentiful bays, good light, zero circling.</b> The lift is to your left; the culture is above.</p>
+      <div class="wayfinding">
+        <span class="wsign"><svg viewBox="0 0 24 24"><path d="M5 16l1.5-5h11L19 16M7 16a1.6 1.6 0 100 3.2A1.6 1.6 0 007 16zm10 0a1.6 1.6 0 100 3.2 1.6 1.6 0 00-3.2 0" stroke-linecap="round"/></svg><span><b>Parking</b> — free, always</span></span>
+        <span class="wsign"><svg viewBox="0 0 24 24"><path d="M8 20V9l8-5v16M12 20h4"/></svg><span><b>Lift</b> — to your left</span></span>
+      </div>
+      <a class="goto" href="#b1">Next — B1 Remedy wing <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- B1 REMEDY -->
+  <section class="floor f-remedy" id="b1" data-name="B1" aria-labelledby="b1h">
+    <div class="panel"><span class="fno">B1</span><span class="flbl">Remedy wing — 4°C</span></div>
+    <div class="content doors">
+      <span class="ding"><span class="lamp" aria-hidden="true"></span> Going up — cold first</span>
+      <h2 id="b1h">The coldest <span class="thin">room in town.</span></h2>
+      <p class="dir">Ice bath at exactly <b>four degrees</b>, steam next door. Three minutes, one breath at a time. The cheapest coach in the building works down here, pro bono, at night.</p>
+      <figure class="fphoto">
+        <img src="../crops/p04-ice.jpg" alt="Ice bath filled with ice and water">
+        <figcaption>Fig. B1 — the tub, no filter needed</figcaption>
+      </figure>
+      <a class="goto" href="#g">Next — G Lobby <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- G LOBBY -->
+  <section class="floor" id="g" data-name="G" aria-labelledby="gh">
+    <div class="panel"><span class="fno">G</span><span class="flbl">Lobby — reception</span></div>
+    <div class="content doors">
+      <span class="ding"><span class="lamp" aria-hidden="true"></span> You are here</span>
+      <h2 id="gh">Ground <span class="thin">floor culture.</span></h2>
+      <p class="dir">The front desk knows everything: where the class moved, who's subbing, and how your first week goes free. <b>Drop your bag. Pick up your pass. The building does the rest.</b></p>
+      <div class="wayfinding">
+        <span class="wsign"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span><b>Reception</b> — say hi</span></span>
+        <span class="wsign"><svg viewBox="0 0 24 24"><path d="M4 17l6-6 4 4 6-8"/></svg><span><b>Members</b> — 900+ strong</span></span>
+      </div>
+      <a class="goto" href="#l1">Next — 1 Iron room <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- 1 IRON -->
+  <section class="floor" id="l1" data-name="1" aria-labelledby="l1h">
+    <div class="panel"><span class="fno">1</span><span class="flbl">Iron room — strength</span></div>
+    <div class="content doors">
+      <span class="ding"><span class="lamp" aria-hidden="true"></span> First floor — weights</span>
+      <h2 id="l1h">Iron <span class="thin">room.</span></h2>
+      <p class="dir">Twelve racks, calibrated plates, platforms that absorb the drop. Coached barbell hours from <b>first pull to competition plate</b>, machines chosen for biomechanics — the muscle gets targeted, not your patience.</p>
+      <div class="wayfinding">
+        <span class="wsign"><svg viewBox="0 0 24 24"><path d="M3 12h18M6 7v10M18 7v10M9 9v6M15 9v6"/></svg><span><b>Racks</b> — 12</span></span>
+        <span class="wsign"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg><span><b>Coached</b> — Mon–Sat 06:00</span></span>
+      </div>
+      <a class="goto" href="#l2">Next — 2 Studio <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- 2 STUDIO -->
+  <section class="floor f-studio" id="l2" data-name="2" aria-labelledby="l2h">
+    <div class="panel"><span class="fno">2</span><span class="flbl">Studio — dance &amp; yoga</span></div>
+    <div class="content doors">
+      <span class="ding"><span class="lamp" aria-hidden="true"></span> Second floor — the floor</span>
+      <h2 id="l2h">Studio <span class="thin">nights.</span></h2>
+      <p class="dir">A sprung floor, club lights and a schedule that reads like a set list: <b>zumba, yoga, hobby clubs</b> until the mirrors fog. Cardio for people who would rather not call it cardio.</p>
+      <figure class="fphoto">
+        <img src="../crops/p03-plate.jpg" alt="Dancer silhouetted against magenta studio light">
+        <figcaption>Fig. L2 — the floor does the talking</figcaption>
+      </figure>
+      <a class="goto" href="#l3">Next — 3 Lounge <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- 3 LOUNGE -->
+  <section class="floor f-lounge" id="l3" data-name="3" aria-labelledby="l3h">
+    <div class="panel"><span class="fno">3</span><span class="flbl">Lounge — the long floor</span></div>
+    <div class="content doors">
+      <span class="ding"><span class="lamp" aria-hidden="true"></span> Third floor — stay a while</span>
+      <h2 id="l3h">The <span class="thin">lounge.</span></h2>
+      <p class="dir">Work-lift balance. <b>Coffee unmetered, chairs soft, clocks absent.</b> Meetings before the session, people after it — most memberships are justified on this floor.</p>
+      <div class="wayfinding">
+        <span class="wsign"><svg viewBox="0 0 24 24"><path d="M5 9h11v7a2 2 0 01-2 2H7a2 2 0 01-2-2zM16 10h2a2 2 0 010 4h-2M7 5v2M11 5v2"/></svg><span><b>Coffee</b> — unmetered</span></span>
+        <span class="wsign"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 3"/></svg><span><b>Clocks</b> — none</span></span>
+      </div>
+      <a class="goto" href="#roof">Top — R Roof deck <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- R ROOF -->
+  <section class="floor" id="roof" data-name="R" aria-labelledby="rh">
+    <div class="panel"><span class="fno">R</span><span class="flbl">Roof — sky deck</span></div>
+    <div class="content doors">
+      <span class="ding"><span class="lamp" aria-hidden="true"></span> Top floor — this is your stop</span>
+      <h2 id="rh">Join the <span class="thin">building.</span></h2>
+      <p class="dir">One membership, every floor: <b>parking, remedy wing, iron room, studio, lounge</b> — and the people between them. First week free. The lift returns to the lobby either way.</p>
+      <div class="wayfinding">
+        <span class="wsign"><svg viewBox="0 0 24 24"><path d="M12 3v13M6 10l6 6 6-6"/></svg><span><b>Member</b> — 89/mo</span></span>
+        <span class="wsign"><svg viewBox="0 0 24 24"><path d="M4 15a8 8 0 0116 0M4 15v4h16v-4"/></svg><span><b>House</b> — 890/yr</span></span>
+      </div>
+      <p class="dir" style="margin-top:8px"><a href="mailto:front.desk@coreculture.club" style="color:var(--brass)">front.desk@coreculture.club</a> — the desk answers faster than the lift.</p>
+      <a class="goto" href="#b2">Back to basement <span class="arrow">↓</span></a>
+    </div>
+  </section>
+</main>
+
+<script>
+  const counter=document.getElementById('counter');
+  const links=[...document.querySelectorAll('.dial a')];
+  const floors=[...document.querySelectorAll('.floor')];
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        const id=e.target.id;
+        links.forEach(l=>l.classList.toggle('cur',l.dataset.floor===id));
+        counter.textContent=e.target.dataset.name;
+        e.target.querySelector('.doors')?.classList.add('in');
+      }
+    });
+  },{threshold:.5});
+  floors.forEach(f=>{
+    io.observe(f);
+    const r=f.getBoundingClientRect();
+    if(r.top<innerHeight*.5&&r.bottom>innerHeight*.5){ f.querySelector('.doors')?.classList.add('in'); }
+  });
+</script>
+</body>
+</html>

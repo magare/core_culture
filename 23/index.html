@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Impact</title>
+<meta name="description" content="Core Culture — training you can feel. Hit the bag. Six rounds through the whole club.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0908'/%3E%3Crect x='11' y='8' width='10' height='20' rx='4' fill='%23332115'/%3E%3Crect x='8' y='4' width='16' height='3' rx='1' fill='%23555'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0908;
+  --leather:#33200f;
+  --leather-d:#1d1108;
+  --bone:#efe7d6;
+  --dim:rgba(239,231,214,.55);
+  --faint:rgba(239,231,214,.28);
+  --red:#e8442e;
+  --chalk:rgba(239,231,214,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--bone);
+  font-family:"Inter",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--red);color:var(--bone)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--red);color:var(--bone);padding:10px 16px;z-index:300;font-weight:600}
+.skip:focus{left:10px}
+
+/* ceiling beam spans the page — the bag hangs from it */
+#beam{
+  position:fixed;top:0;left:0;right:0;height:10px;z-index:4;
+  background:linear-gradient(180deg,#232323,#101010);
+  border-bottom:1px solid rgba(239,231,214,.08);
+}
+
+/* ---------- hero arena ---------- */
+.arena{
+  min-height:100vh;position:relative;
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  align-items:center;
+  padding:12vh clamp(22px,5vw,84px) 8vh;
+  overflow:clip;
+}
+.arena::before{ /* spotlight pool on the floor */
+  content:"";position:absolute;right:4%;bottom:-6%;width:56%;height:64%;
+  background:radial-gradient(50% 50% at 50% 60%, rgba(239,231,214,.05), transparent 70%);
+  pointer-events:none;
+}
+.copy .kicker{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--red);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.copy .kicker::before{content:"";width:30px;height:1px;background:var(--red)}
+h1{
+  font-family:"Allerta Stencil",Impact,sans-serif;
+  font-size:clamp(54px,7.4vw,124px);line-height:.98;letter-spacing:.01em;text-transform:uppercase;
+}
+h1 em{font-style:normal;color:var(--faint)}
+.sub{margin-top:28px;max-width:32em;color:var(--dim);font-size:15px;line-height:1.95}
+.sub b{color:var(--bone)}
+.hud{
+  margin-top:44px;display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--chalk);
+}
+.hud>div{padding:16px 26px;border-right:1px solid var(--chalk);min-width:130px}
+.hud>div:last-child{border-right:0}
+.hud .lbl{font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.hud .val{font-family:"Allerta Stencil";font-size:34px;line-height:1;color:var(--bone)}
+.hud .val.red{color:var(--red)}
+.hint{margin-top:22px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
+.hint kbd{border:1px solid var(--chalk);padding:3px 8px;border-radius:3px;font-family:inherit}
+
+/* ---------- the bag (CSS 3D pendulum) ---------- */
+.bagstage{
+  position:relative;height:min(78vh,760px);z-index:1;
+  cursor:crosshair;touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.pivot{position:absolute;left:50%;top:0;transform:translateX(-50%);transform-origin:50% 0;will-change:transform}
+#swing{position:absolute;left:50%;top:0;transform:translateX(-50%);transform-origin:50% 0;will-change:transform}
+.chain{width:44px;height:126px;margin:0 auto;display:block}
+.chain .link{fill:none;stroke:#4d4a45;stroke-width:4.5}
+.chain .link.alt{stroke:#5c584f}
+.chain .link-hi{fill:none;stroke:#8d8880;stroke-width:1.4}
+.bag{
+  width:min(240px,34vw);height:min(520px,58vh);margin:-4px auto 0;
+  border-radius:30px/62px;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='0.5'/%3E%3C/svg%3E"),
+    radial-gradient(130% 90% at 30% 14%, rgba(255,226,190,.14), transparent 44%),
+    repeating-linear-gradient(178deg, rgba(0,0,0,.14) 0 2px, transparent 2px 22px),
+    linear-gradient(94deg,#1c1006 0%,#33200f 26%,#4a3319 50%,#3a2513 72%,#150b03 100%);
+  background-blend-mode: overlay, normal, normal, normal;
+  border:1px solid #100903;
+  box-shadow:
+    0 44px 60px rgba(0,0,0,.65),
+    inset -22px 0 34px rgba(0,0,0,.55),
+    inset 22px 0 30px rgba(0,0,0,.38),
+    inset 3px 0 5px -1px rgba(255,196,130,.22),
+    inset -3px 0 5px -2px rgba(255,170,100,.14);
+  position:relative;
+  transform-style:preserve-3d;
+}
+/* cylinder end caps — sell the 3D volume */
+.bag .cap{
+  position:absolute;left:5%;right:5%;height:34px;border-radius:50%/62%;
+  box-shadow:inset 0 6px 12px rgba(0,0,0,.65), inset 0 -2px 4px rgba(255,214,160,.12);
+}
+.bag .cap.t{top:-8px;background:radial-gradient(120% 110% at 42% 30%, #4c3319 0%, #2b1a0c 58%, #150b04 100%)}
+.bag .cap.b{bottom:-8px;background:radial-gradient(120% 110% at 40% 26%, #423014 0%, #251508 58%, #120903 100%)}
+/* straps with buckles */
+.bag .strap{
+  position:absolute;left:0;right:0;height:16px;
+  background:linear-gradient(180deg,#241608,#120a04);
+  border-top:1px solid rgba(239,231,214,.09);
+  border-bottom:1px solid rgba(0,0,0,.7);
+}
+.bag .strap.t{top:12%}
+.bag .strap.b{bottom:8%}
+.bag .strap .buckle{
+  position:absolute;left:16%;top:-3px;width:12px;height:22px;border-radius:2px;
+  background:linear-gradient(180deg,#d8d2c4,#6e675a 70%,#3f3a30);
+  box-shadow:0 2px 6px rgba(0,0,0,.7);
+}
+.bag .tag{
+  position:absolute;left:50%;top:44%;transform:translateX(-50%) rotate(-4deg);
+  font-family:"Allerta Stencil";font-size:15px;letter-spacing:.14em;color:rgba(239,231,214,.5);
+  border:1.5px solid rgba(239,231,214,.3);padding:8px 14px;text-transform:uppercase;white-space:nowrap;
+  background:rgba(10,6,3,.25);
+}
+.bag .stitch{
+  position:absolute;left:14px;top:6%;bottom:4%;width:1px;
+  background:repeating-linear-gradient(180deg, rgba(239,231,214,.22) 0 7px, transparent 7px 14px);
+}
+.bag .stitch.r{left:auto;right:14px}
+.bag.squash{animation:squash .18s ease-out}
+@keyframes squash{
+  0%{scale:1 1}
+  35%{scale:.945 1.035}
+  100%{scale:1 1}
+}
+.flash{
+  position:absolute;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,244,220,.85), rgba(255,150,80,.35) 40%, transparent 68%);
+  pointer-events:none;animation:pop .38s ease-out forwards;mix-blend-mode:screen;
+}
+@keyframes pop{0%{transform:scale(.25);opacity:1}100%{transform:scale(1.7);opacity:0}}
+.puff{
+  position:absolute;width:16px;height:16px;margin:-8px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle, rgba(239,231,214,.5), transparent 70%);
+  animation:puff .7s ease-out forwards;
+}
+@keyframes puff{0%{transform:translate(0,0) scale(1);opacity:.9}100%{transform:translate(var(--dx),var(--dy)) scale(2.4);opacity:0}}
+.floor{
+  position:absolute;left:50%;bottom:-3vh;transform:translateX(-50%);
+  width:min(430px,70vw);height:44px;border-radius:50%;
+  background:radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,.9), transparent 72%);
+  filter:blur(6px);
+}
+
+/* ---------- rounds ---------- */
+.rounds{padding:14vh clamp(22px,5vw,84px) 6vh;border-top:1px solid var(--chalk)}
+.rounds .kicker{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+h2{font-family:"Allerta Stencil";font-weight:400;font-size:clamp(34px,4.6vw,68px);text-transform:uppercase;line-height:1;margin-bottom:14px}
+.rounds .sub{margin-top:0}
+.strip{
+  margin-top:7vh;display:flex;gap:16px;overflow-x:auto;padding-bottom:20px;
+  scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:#3a3a3a transparent;
+}
+.strip::-webkit-scrollbar{height:4px}
+.strip::-webkit-scrollbar-track{background:transparent}
+.strip::-webkit-scrollbar-thumb{background:#333}
+.round{
+  flex:0 0 min(330px,78vw);scroll-snap-align:start;border:1px solid var(--chalk);
+  padding:26px 24px 30px;position:relative;background:rgba(239,231,214,.015);
+  transition:border-color .25s ease, background .25s ease;
+}
+.round:hover{border-color:rgba(239,231,214,.4);background:rgba(239,231,214,.035)}
+.round .no{
+  font-family:"Allerta Stencil";font-size:56px;line-height:1;color:var(--red);
+}
+.round:nth-child(even) .no{color:var(--bone)}
+.round h3{font-family:"Allerta Stencil";font-weight:400;font-size:24px;text-transform:uppercase;margin:18px 0 12px;letter-spacing:.02em}
+.round p{color:var(--dim);font-size:13.5px;line-height:1.9}
+.round .mins{
+  margin-top:20px;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  display:flex;justify-content:space-between;border-top:1px solid var(--chalk);padding-top:14px;
+}
+
+/* ---------- corner / CTA ---------- */
+.corner{
+  margin:6vh clamp(22px,5vw,84px) 0;border:1px solid var(--chalk);
+  display:grid;grid-template-columns:1.2fr .8fr;
+}
+.corner>div{padding:clamp(28px,4vw,64px)}
+.corner .stool{border-left:1px solid var(--chalk);display:flex;flex-direction:column;justify-content:center;gap:14px}
+.corner p{color:var(--dim);font-size:14px;line-height:1.95;max-width:34em;margin-top:18px}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:30px;
+  font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;
+  background:var(--red);color:#1a0705;padding:20px 42px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(232,68,46,.3)}
+.corner .note{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+footer{
+  margin-top:10vh;padding:28px clamp(22px,5vw,84px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);border-top:1px solid var(--chalk);
+}
+
+@media (max-width:900px){
+  .arena{grid-template-columns:1fr;padding-top:10vh;gap:8vh}
+  .bagstage{height:64vh;order:2}
+  .hud>div{padding:14px 18px;min-width:106px}
+  .hud .val{font-size:26px}
+  .corner{grid-template-columns:1fr}
+  .corner .stool{border-left:0;border-top:1px solid var(--chalk)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .bag.squash{animation:none}
+  .flash,.puff{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="beam" aria-hidden="true"></div>
+
+<main id="main">
+  <section class="arena" aria-label="Hit the bag">
+    <div class="copy">
+      <p class="kicker">Core Culture · Six rounds</p>
+      <h1>Hit the bag.<br><em>Feel the club.</em></h1>
+      <p class="sub">A gym should answer back. This one does — <b>click the bag, tap it, or hammer <kbd>SPACE</kbd></b>. Every hit swings the room. Below the belt: six rounds, one for each way we train.</p>
+      <div class="hud" role="status" aria-live="off">
+        <div><div class="lbl">Shots on the bag</div><div class="val" id="hits">0</div></div>
+        <div><div class="lbl">Hardest swing</div><div class="val red" id="power">0</div></div>
+        <div><div class="lbl">Round</div><div class="val" id="round">I</div></div>
+      </div>
+      <p class="hint">Click / tap the bag · <kbd>SPACE</kbd> also lands · scrolling shakes it</p>
+    </div>
+
+    <div class="bagstage" id="stage" role="button" tabindex="0" aria-label="Heavy bag — activate to hit">
+      <div id="swing">
+        <svg class="chain" viewBox="0 0 44 126" aria-hidden="true">
+          <g>
+            <ellipse class="link" cx="15" cy="10" rx="8" ry="11"/>
+            <ellipse class="link alt" cx="29" cy="27" rx="8" ry="11"/>
+            <ellipse class="link" cx="15" cy="44" rx="8" ry="11"/>
+            <ellipse class="link alt" cx="29" cy="61" rx="8" ry="11"/>
+            <ellipse class="link" cx="15" cy="78" rx="8" ry="11"/>
+            <ellipse class="link alt" cx="29" cy="95" rx="8" ry="11"/>
+            <rect class="link" x="8" y="112" width="28" height="13" rx="5"/>
+          </g>
+          <g opacity="0.5">
+            <ellipse class="link-hi" cx="13" cy="7" rx="4" ry="7"/>
+            <ellipse class="link-hi" cx="27" cy="24" rx="4" ry="7"/>
+            <ellipse class="link-hi" cx="13" cy="41" rx="4" ry="7"/>
+            <ellipse class="link-hi" cx="27" cy="58" rx="4" ry="7"/>
+            <ellipse class="link-hi" cx="13" cy="75" rx="4" ry="7"/>
+            <ellipse class="link-hi" cx="27" cy="92" rx="4" ry="7"/>
+          </g>
+        </svg>
+        <div class="bag" id="bag">
+          <span class="cap t" aria-hidden="true"></span>
+          <span class="cap b" aria-hidden="true"></span>
+          <span class="strap t" aria-hidden="true"><span class="buckle"></span></span>
+          <span class="strap b" aria-hidden="true"><span class="buckle"></span></span>
+          <span class="stitch" aria-hidden="true"></span>
+          <span class="stitch r" aria-hidden="true"></span>
+          <span class="tag">CORE&nbsp;CULTURE</span>
+        </div>
+      </div>
+      <div class="floor" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="rounds" aria-label="The six rounds">
+    <p class="kicker">The card</p>
+    <h2>Six rounds. One club.</h2>
+    <p class="sub">Each round runs on its own clock, its own floor, its own energy. Do one honestly or chain all six — the corner (that's us) handles the recovery.</p>
+    <div class="strip" tabindex="0" aria-label="Rounds, scroll horizontally">
+      <article class="round">
+        <div class="no">R1</div>
+        <h3>Iron</h3>
+        <p>Barbells first. Squat, hinge, press, pull — progressive weight on a platform that doesn't judge, only counts.</p>
+        <div class="mins"><span>Weight training</span><span>60 min</span></div>
+      </article>
+      <article class="round">
+        <div class="no">R2</div>
+        <h3>Engine</h3>
+        <p>Sleds, bikes and intervals. The round where your lungs file a complaint and your legs vote to continue.</p>
+        <div class="mins"><span>Hybrid training</span><span>45 min</span></div>
+      </article>
+      <article class="round">
+        <div class="no">R3</div>
+        <h3>Flow</h3>
+        <p>The dance studio. Choreography at volume — the cardio you'd pay a club to disguise as a night out.</p>
+        <div class="mins"><span>Dance studio</span><span>50 min</span></div>
+      </article>
+      <article class="round">
+        <div class="no">R4</div>
+        <h3>Brawl</h3>
+        <p>Functional floor: carries, ropes, sled pushes and Medicine-ball work. Controlled chaos, real sweat.</p>
+        <div class="mins"><span>Functional training</span><span>45 min</span></div>
+      </article>
+      <article class="round">
+        <div class="no">R5</div>
+        <h3>Thaw</h3>
+        <p>Cold plunge, steam, sauna. Three minutes that make the other five rounds possible tomorrow.</p>
+        <div class="mins"><span>Recovery wing</span><span>30 min</span></div>
+      </article>
+      <article class="round">
+        <div class="no">R6</div>
+        <h3>Corner</h3>
+        <p>Coffee, playlists and people who also showed up. The round with zero intensity and all of the culture.</p>
+        <div class="mins"><span>Lounge</span><span>Open end</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="corner" aria-label="Join">
+    <div>
+      <h2>Between rounds?<br>Join the club.</h2>
+      <p>One membership, all six rounds — plus coaches in your corner and a week free to find your feet. No lock-in contracts; the only thing we lock in is the hook above the bag.</p>
+      <a class="cta" href="mailto:front.desk@coreculture.club">Take a free week</a>
+    </div>
+    <div class="stool">
+      <p class="note">House rule 01</p>
+      <p class="note">The bag always wins the first round.</p>
+      <p class="note">House rule 02</p>
+      <p class="note">Rerack your weights. Always.</p>
+      <p class="note">House rule 03</p>
+      <p class="note">Cold first, coffee after.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 23 · Impact</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stage=document.getElementById('stage'),
+        swing=document.getElementById('swing'),
+        bag=document.getElementById('bag'),
+        hitsEl=document.getElementById('hits'),
+        powerEl=document.getElementById('power'),
+        roundEl=document.getElementById('round');
+  const ROUND_N=['I','II','III','IV','V','VI'];
+
+  // pendulum state
+  let th=0.001, w=0, hits=0, power=0, last=performance.now();
+  const G=9.8, LEN=1;            // normalised
+  let audio=null, audioOn=true;
+
+  function thud(strong){
+    if(!audioOn||reduced) return;
+    try{
+      audio=audio||new (window.AudioContext||window.webkitAudioContext)();
+      const t=audio.currentTime;
+      const buf=audio.createBuffer(1,audio.sampleRate*0.12,audio.sampleRate);
+      const d=buf.getChannelData(0);
+      for(let i=0;i<d.length;i++){d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,2.4);}
+      const src=audio.createBufferSource();src.buffer=buf;
+      const f=audio.createBiquadFilter();f.type='lowpass';
+      f.frequency.setValueAtTime(strong?300:190,t);
+      const g=audio.createGain();
+      g.gain.setValueAtTime(strong?0.5:0.3,t);
+      g.gain.exponentialRampToValueAtTime(0.001,t+0.12);
+      src.connect(f).connect(g).connect(audio.destination);
+      src.start(t);
+    }catch(e){}
+  }
+
+  function hit(x,y,dir){
+    const strength=0.55+Math.random()*0.45;
+    w+=dir*strength*(reduced?0:1);
+    hits++;hitsEl.textContent=hits;
+    const p=Math.round(strength*100);
+    if(p>power){power=p;powerEl.textContent=p;}
+    roundEl.textContent=ROUND_N[Math.min(5,Math.floor(hits/4))];
+    if(!reduced){
+      bag.classList.remove('squash');void bag.offsetWidth;bag.classList.add('squash');
+      const f=document.createElement('div');f.className='flash';
+      f.style.left=x+'px';f.style.top=y+'px';
+      stage.appendChild(f);setTimeout(()=>f.remove(),420);
+      for(let i=0;i<5;i++){
+        const u=document.createElement('div');u.className='puff';
+        u.style.left=x+'px';u.style.top=y+'px';
+        u.style.setProperty('--dx',(Math.random()*90-45)+'px');
+        u.style.setProperty('--dy',(Math.random()*70-35)+'px');
+        stage.appendChild(u);setTimeout(()=>u.remove(),750);
+      }
+    }
+    thud(strength>0.75);
+  }
+
+  stage.addEventListener('pointerdown',e=>{
+    const r=stage.getBoundingClientRect();
+    const x=e.clientX-r.left,y=e.clientY-r.top;
+    const dir=x<r.width/2?1:-1;
+    hit(x,y,dir);
+  });
+  stage.addEventListener('keydown',e=>{
+    if(e.code==='Space'||e.code==='Enter'){
+      e.preventDefault();
+      const r=stage.getBoundingClientRect();
+      hit(r.width*0.5,r.height*0.55,Math.random()>0.5?1:-1);
+    }
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.code==='Space'&&document.activeElement!==stage&&
+       !/INPUT|TEXTAREA|BUTTON|A/.test(document.activeElement.tagName)){
+      e.preventDefault();
+      const r=stage.getBoundingClientRect();
+      hit(r.width*0.5,r.height*0.55,Math.random()>0.5?1:-1);
+    }
+  });
+
+  // scrolling shakes the bag
+  let lastY=scrollY;
+  addEventListener('scroll',()=>{
+    const dy=scrollY-lastY;lastY=scrollY;
+    if(!reduced)w+=Math.max(-0.02,Math.min(0.02,dy*0.00012));
+  },{passive:true});
+
+  function frame(now){
+    const dt=Math.min(0.033,(now-last)/1000);last=now;
+    if(!reduced){
+      w+=-G*LEN*Math.sin(th)*dt;
+      w*=0.988;
+      th+=w*dt;
+      const maxA=0.42; // keep it in the room
+      if(th>maxA){th=maxA;w=-Math.abs(w)*0.55;}
+      if(th<-maxA){th=-maxA;w=Math.abs(w)*0.55;}
+      swing.style.transform=`translateX(-50%) rotate(${(th*57.2958).toFixed(2)}deg)`;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

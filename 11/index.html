@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Main Character</title>
+<meta name="description" content="Core Culture Training Club — Season 1. You're the main character. The gym is your set.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ff2e2e'/%3E%3Ctext x='16' y='23' font-size='19' font-family='Arial Black' font-weight='900' fill='%23fff' text-anchor='middle'%3E!%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:ital,wght@0,400;0,600;0,800;0,900;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#ff2e2e;
+  --blue:#2e6bff;
+  --yellow:#ffd400;
+  --pink:#ff9ad5;
+  --ink:#15120f;
+  --paper:#fff7ec;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Rubik","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--ink);color:var(--yellow)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.bng{font-family:"Bungee","Arial Black",sans-serif;font-weight:400;text-transform:uppercase}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--yellow);padding:10px 16px;z-index:400;font-weight:800}
+.skip:focus{left:10px}
+:focus-visible{outline:4px solid var(--blue);outline-offset:2px}
+
+/* ---------- spotlight cursor on hero ---------- */
+.hero{
+  position:relative;min-height:100vh;overflow:hidden;
+  background:var(--ink);color:var(--paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:clamp(60px,10vh,110px) clamp(18px,4vw,50px) 60px;
+  cursor:crosshair;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(340px 340px at var(--mx,70%) var(--my,40%), rgba(255,212,0,.16), transparent 70%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.035) 0 12px, transparent 12px 24px);
+}
+.hero>*{position:relative;z-index:2}
+.hero .kicker{
+  display:inline-block;background:var(--yellow);color:var(--ink);
+  font-family:"Rubik";font-weight:900;font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+  padding:8px 16px;transform:rotate(-2deg);
+  box-shadow:5px 5px 0 var(--blue);
+}
+.hero h1{
+  font-size:clamp(46px,9.6vw,150px);
+  line-height:.92;margin:26px 0 10px;
+  text-shadow:6px 6px 0 var(--red);
+}
+.hero h1 .w{display:inline-block;transition:transform .18s cubic-bezier(.2,2.2,.4,1)}
+.hero h1 .w:hover{transform:rotate(-4deg) scale(1.12)}
+.hero h1 .alt{color:var(--yellow)}
+.hero .tag{font-size:clamp(15px,1.8vw,21px);font-weight:600;max-width:44ch;margin:0 auto}
+.hero .tag b{color:var(--pink)}
+.hero .cta-row{margin-top:34px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-block;text-decoration:none;font-family:"Rubik";font-weight:900;
+  font-size:14px;letter-spacing:.1em;text-transform:uppercase;
+  padding:16px 30px;border:4px solid var(--paper);
+  transition:transform .15s cubic-bezier(.2,2,.4,1),box-shadow .15s ease;
+  box-shadow:6px 6px 0 rgba(255,255,255,.25);
+}
+.btn.y{background:var(--yellow);color:var(--ink)}
+.btn.b{background:var(--blue);color:var(--white)}
+.btn:hover{transform:translate(-3px,-3px) rotate(-1deg);box-shadow:10px 10px 0 rgba(255,46,46,.9)}
+.spin-star{
+  position:absolute;top:8%;left:6%;width:clamp(54px,7vw,92px);height:auto;z-index:1;
+  animation:spin 9s linear infinite;
+}
+.spin-star.s2{left:auto;right:7%;top:auto;bottom:12%;animation-duration:13s}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- marquee ---------- */
+.marquee{background:var(--yellow);border-top:5px solid var(--ink);border-bottom:5px solid var(--ink);overflow:hidden}
+.marquee .track{display:flex;width:max-content;animation:mq 20s linear infinite;padding:12px 0}
+.marquee .track span{
+  font-family:"Bungee";font-size:clamp(16px,2.2vw,26px);text-transform:uppercase;white-space:nowrap;padding-right:1em;
+}
+.marquee .track em{color:var(--red);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- episodes ---------- */
+.blok{max-width:1240px;margin:0 auto;padding:clamp(40px,7vh,90px) clamp(18px,4vw,50px)}
+.season-head{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:clamp(26px,4vh,46px)}
+.season-head .s1{
+  background:var(--blue);color:var(--white);font-family:"Bungee";font-size:clamp(15px,1.7vw,22px);
+  padding:10px 18px;transform:rotate(-1.5deg);box-shadow:5px 5px 0 var(--ink);
+}
+.season-head h2{font-size:clamp(30px,4.6vw,62px);line-height:.95}
+.episode{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,40px);align-items:center;
+  padding:clamp(24px,4vh,44px) 0;border-top:5px solid var(--ink);
+}
+.episode:nth-child(even) .still{order:-1}
+@media (max-width:860px){.episode{grid-template-columns:1fr}.episode:nth-child(even) .still{order:0}}
+.ep-card{position:relative}
+.ep-num{
+  display:inline-block;background:var(--red);color:var(--white);
+  font-family:"Bungee";font-size:13px;padding:6px 12px;transform:rotate(-2deg);
+  box-shadow:4px 4px 0 var(--ink);margin-bottom:14px;
+}
+.ep:nth-child(even) .ep-num{background:var(--blue)}
+.episode h3{font-size:clamp(28px,3.8vw,56px);line-height:.95;margin-bottom:14px}
+.episode h3 .hl{background:var(--yellow);box-shadow:.12em .12em 0 var(--ink);padding:0 .1em}
+.episode .recap{font-size:15px;line-height:1.75;font-weight:500;max-width:48ch}
+.episode .recap b{font-weight:800}
+.episode .air{
+  margin-top:18px;display:inline-block;font-family:"Space Mono",monospace;font-size:11px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:7px 12px;
+  transform:rotate(-1deg);
+}
+.still{position:relative}
+.still .frame{
+  border:5px solid var(--ink);box-shadow:10px 10px 0 var(--blue);
+  transform:rotate(-1.2deg);overflow:hidden;background:var(--ink);
+}
+.episode:nth-child(even) .still .frame{box-shadow:-10px 10px 0 var(--red);transform:rotate(1.2deg)}
+.still img{width:100%;aspect-ratio:5/4;object-fit:cover;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.still:hover img{transform:scale(1.05)}
+.still .slate{
+  position:absolute;top:12px;left:12px;background:var(--paper);border:3px solid var(--ink);
+  font-family:"Space Mono",monospace;font-weight:700;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:5px 9px;transform:rotate(-2deg);
+}
+.burst{
+  position:absolute;width:clamp(60px,7vw,96px);right:-14px;bottom:-18px;z-index:3;
+  animation:pop 5s ease-in-out infinite;
+}
+@keyframes pop{0%,100%{transform:scale(1) rotate(-6deg)}50%{transform:scale(1.12) rotate(5deg)}}
+
+/* ---------- join the cast ---------- */
+.cast{
+  background:var(--ink);color:var(--paper);
+  padding:clamp(50px,9vh,100px) clamp(18px,4vw,50px);text-align:center;
+  position:relative;overflow:hidden;
+}
+.cast h2{font-size:clamp(34px,5.6vw,80px);line-height:.95;text-shadow:5px 5px 0 var(--blue)}
+.cast .sub{max-width:52ch;margin:20px auto 0;font-weight:500;color:rgba(255,247,236,.8);line-height:1.8}
+.roles{
+  max-width:1080px;margin:clamp(30px,5vh,50px) auto 0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,26px);
+  text-align:left;
+}
+@media (max-width:860px){.roles{grid-template-columns:1fr}}
+.role{
+  border:4px solid var(--paper);padding:22px;position:relative;
+  transition:transform .18s cubic-bezier(.2,2,.4,1),box-shadow .18s ease;
+  background:var(--paper);color:var(--ink);
+}
+.role:nth-child(2){background:var(--yellow);transform:rotate(-.6deg)}
+.role:nth-child(1){transform:rotate(.8deg)}
+.role:nth-child(3){background:var(--pink);transform:rotate(-.8deg)}
+.role:hover{transform:translate(-4px,-4px) rotate(0);box-shadow:9px 9px 0 var(--red)}
+.role .rr{display:inline-block;font-family:"Bungee";font-size:12px;background:var(--ink);color:var(--paper);padding:5px 10px;margin-bottom:12px}
+.role .rp{font-family:"Bungee";font-size:clamp(28px,3vw,42px);line-height:1}
+.role .rp small{font-size:.4em}
+.role ul{list-style:none;margin:14px 0 18px;font-weight:600;font-size:13.5px;line-height:2}
+.role ul li::before{content:"★ ";color:var(--red)}
+.role a{
+  text-decoration:none;font-weight:900;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);padding:11px 18px;display:inline-block;
+  transition:background .15s ease,color .15s ease;
+}
+.role a:hover{background:var(--red);color:var(--white)}
+
+/* footer */
+footer{
+  background:var(--yellow);border-top:5px solid var(--ink);
+  padding:20px clamp(18px,4vw,50px);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-weight:800;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+}
+footer em{font-style:normal;color:var(--red)}
+
+/* pop entrance */
+.pop{opacity:0;transform:scale(.86) rotate(-2deg)}
+.pop.in{opacity:1;transform:none;transition:opacity .3s ease,transform .45s cubic-bezier(.2,1.8,.35,1)}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pop{opacity:1;transform:none;transition:none}
+  .spin-star,.burst,.marquee .track{animation:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- HERO -->
+<section class="hero" id="top" aria-label="Season 1 — Main Character">
+  <svg class="spin-star" viewBox="0 0 100 100" aria-hidden="true">
+    <polygon points="50,0 61,35 98,35 68,57 79,91 50,70 21,91 32,57 2,35 39,35" fill="#ffd400" stroke="#15120f" stroke-width="3"/>
+  </svg>
+  <svg class="spin-star s2" viewBox="0 0 100 100" aria-hidden="true">
+    <polygon points="50,0 61,35 98,35 68,57 79,91 50,70 21,91 32,57 2,35 39,35" fill="#ff9ad5" stroke="#15120f" stroke-width="3"/>
+  </svg>
+  <span class="kicker">Core Culture — Season 1</span>
+  <h1 class="bng"><span class="w">You're</span> <span class="w">not</span><br><span class="w alt">extra.</span> <span class="w">You're</span> <span class="w alt">the</span> <span class="w">main</span> <span class="w">character.</span></h1>
+  <p class="tag">Tired of gyms that look like a room full of machines? <b>Yeah — us too.</b> We shoot your training like a music video: loud floor, club lights, zero extras standing around.</p>
+  <div class="cta-row">
+    <a class="btn y" href="#cast">Join the cast</a>
+    <a class="btn b" href="#ep1">Watch season 1</a>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Train <em>★</em> Move <em>★</em> Recover <em>★</em> Connect <em>★</em> Main character energy <em>★</em>&nbsp;</span>
+    <span>Train <em>★</em> Move <em>★</em> Recover <em>★</em> Connect <em>★</em> Main character energy <em>★</em>&nbsp;</span>
+  </div>
+</div>
+
+<main id="main">
+  <div class="blok">
+    <div class="season-head">
+      <span class="s1 bng">Season 1</span>
+      <h2 class="bng">The episodes.</h2>
+    </div>
+
+    <!-- EP 1 -->
+    <article class="episode pop" id="ep1" aria-labelledby="ep1h">
+      <div class="ep-card">
+        <span class="ep-num bng">Episode 01</span>
+        <h3 id="ep1h" class="bng">Leg day: <span class="hl">the sequel</span> nobody skips twice.</h3>
+        <p class="recap"><b>Cold open:</b> twelve racks, calibrated plates, chalk in the air. <b>The plot:</b> coached barbell hours turn "I should train legs" into a personality trait. <b>TWIST:</b> you'll be sore in scenes you didn't know you had.</p>
+        <span class="air">Airtime — daily, 05:30</span>
+      </div>
+      <div class="still">
+        <span class="slate">Scene 04 — iron room</span>
+        <div class="frame"><img src="../crops/p01-sled.jpg" alt="Production still: athlete driving a sled across the floor"></div>
+        <svg class="burst" viewBox="0 0 100 100" aria-hidden="true">
+          <polygon points="50,2 58,30 88,12 70,40 99,46 70,56 88,86 58,64 50,96 42,64 12,86 30,56 1,46 30,40 12,12 42,30" fill="#ff2e2e" stroke="#15120f" stroke-width="3"/>
+          <text x="50" y="58" text-anchor="middle" font-family="Arial Black" font-size="17" font-weight="900" fill="#fff">LIFT!</text>
+        </svg>
+      </div>
+    </article>
+
+    <!-- EP 2 -->
+    <article class="episode pop" aria-labelledby="ep2h">
+      <div class="ep-card">
+        <span class="ep-num bng">Episode 02</span>
+        <h3 id="ep2h" class="bng">The floor: <span class="hl">cardio's</span> glow-up.</h3>
+        <p class="recap"><b>Previously:</b> cardio was boring. <b>Tonight:</b> zumba, yoga and hobby clubs under club lights. The choreography is optional; the sweat is not. <b>GUEST STAR:</b> your friend who "doesn't do gyms."</p>
+        <span class="air">Airtime — evenings, 19:30</span>
+      </div>
+      <div class="still">
+        <span class="slate">Scene 12 — studio B</span>
+        <div class="frame"><img src="../crops/p02-dancer.jpg" alt="Production still: dancer silhouetted in magenta studio light"></div>
+      </div>
+    </article>
+
+    <!-- EP 3 -->
+    <article class="episode pop" aria-labelledby="ep3h">
+      <div class="ep-card">
+        <span class="ep-num bng">Episode 03</span>
+        <h3 id="ep3h" class="bng">Ice bath: <span class="hl">the plot twist.</span></h3>
+        <p class="recap"><b>The setup:</b> a steel tub at exactly 4°C. <b>The drama:</b> three minutes that feel like a season finale. <b>THE REVIEW:</b> "Recover like an athlete, perform like one" — every member, eventually.</p>
+        <span class="air">Airtime — bookable, remedy wing</span>
+      </div>
+      <div class="still">
+        <span class="slate">Scene 07 — remedy wing</span>
+        <div class="frame"><img src="../crops/p04-ice.jpg" alt="Production still: ice bath filled with ice and water"></div>
+        <svg class="burst" viewBox="0 0 100 100" aria-hidden="true">
+          <polygon points="50,2 58,30 88,12 70,40 99,46 70,56 88,86 58,64 50,96 42,64 12,86 30,56 1,46 30,40 12,12 42,30" fill="#2e6bff" stroke="#15120f" stroke-width="3"/>
+          <text x="50" y="58" text-anchor="middle" font-family="Arial Black" font-size="15" font-weight="900" fill="#fff">COLD!</text>
+        </svg>
+      </div>
+    </article>
+
+    <!-- EP 4 -->
+    <article class="episode pop" aria-labelledby="ep4h">
+      <div class="ep-card">
+        <span class="ep-num bng">Episode 04</span>
+        <h3 id="ep4h" class="bng">The lounge: <span class="hl">after-credits</span> scene.</h3>
+        <p class="recap"><b>The vibe:</b> coffee unmetered, clocks missing, opinions strong. <b>THE PLOT:</b> work-lift balance — meetings before the session, people after it. <b>POST-CREDITS:</b> you, still here at nine.</p>
+        <span class="air">Airtime — always, lounge</span>
+      </div>
+      <div class="still">
+        <span class="slate">Scene 21 — the lounge</span>
+        <div class="frame"><img src="../crops/p05-field.jpg" alt="Production still: a figure at a desk in an open green field"></div>
+      </div>
+    </article>
+  </div>
+
+  <!-- JOIN THE CAST -->
+  <section class="cast" id="cast" aria-labelledby="cast-h">
+    <h2 id="cast-h" class="bng">Join the cast.</h2>
+    <p class="sub">Every membership gets the whole set: iron room, engine bay, studio, remedy wing, lounge, parking. Pick your billing like you pick your role — first week is always free.</p>
+    <div class="roles">
+      <div class="role pop">
+        <span class="rr">Role — extra</span>
+        <div class="rp">Free<small> /wk</small></div>
+        <ul>
+          <li>Seven days, every wing</li>
+          <li>No card, no contract</li>
+          <li>Great audition energy</li>
+        </ul>
+        <a href="mailto:front.desk@coreculture.club">Audition</a>
+      </div>
+      <div class="role pop">
+        <span class="rr">Role — lead</span>
+        <div class="rp">89<small> /mo</small></div>
+        <ul>
+          <li>Full set access, all hours</li>
+          <li>All classes, all scenes</li>
+          <li>Remedy wing bookable</li>
+          <li>Parking: solved</li>
+        </ul>
+        <a href="mailto:front.desk@coreculture.club">Star monthly</a>
+      </div>
+      <div class="role pop">
+        <span class="rr">Role — franchise</span>
+        <div class="rp">890<small> /yr</small></div>
+        <ul>
+          <li>A year of everything</li>
+          <li>The desk knows your name</li>
+          <li>Sequel pre-approved</li>
+        </ul>
+        <a href="mailto:front.desk@coreculture.club">Sign annually</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© MMXXVI Core Culture — Training Club</span>
+    <span>Renewed for <em>Season 2</em> — obviously</span>
+    <span>Concept 11 — Main Character</span>
+  </footer>
+</main>
+
+<script>
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.pop').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<innerHeight*.94) el.classList.add('in'); else io.observe(el);
+  });
+
+  // spotlight follows the cursor on the hero
+  const hero=document.querySelector('.hero');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced){
+    hero.addEventListener('pointermove',e=>{
+      const r=hero.getBoundingClientRect();
+      hero.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+      hero.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+    },{passive:true});
+  }
+</script>
+</body>
+</html>

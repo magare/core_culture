@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Heat Index</title>
+<meta name="description" content="Core Culture — the heat index. A thermal survey of a training club, from 4°C to 65°C.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0f'/%3E%3Crect x='6' y='14' width='20' height='4' fill='%23ff6a00'/%3E%3Crect x='6' y='18' width='12' height='4' fill='%23d40f6d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0f;
+  --panel:#12121a;
+  --txt:#e8e4dc;
+  --dim:rgba(232,228,220,.55);
+  --hot:#ff6a00;
+  --mid:#d40f6d;
+  --cold:#37c4ff;
+  --line:rgba(232,228,220,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:"Chakra Petch","Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+.mono{font-family:"IBM Plex Mono",monospace}
+::selection{background:var(--hot);color:#0a0a0f}
+img{display:block;max-width:100%}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:8px;background:var(--hot);color:#0a0a0f;padding:10px 16px;z-index:400;font-weight:700}
+.skip:focus{left:8px}
+:focus-visible{outline:2px solid var(--hot);outline-offset:3px}
+
+/* ---------- temperature rail ---------- */
+.rail{
+  position:fixed;right:clamp(10px,2vw,30px);top:50%;transform:translateY(-50%);
+  z-index:120;display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.rail .tube{
+  width:10px;height:min(46vh,420px);border:1px solid var(--line);border-radius:6px;
+  background:linear-gradient(to top, #1c3fd4, #7a1fb0 35%, #d40f6d 60%, #ff6a00 82%, #ffd400);
+  position:relative;overflow:hidden;
+}
+.rail .tube::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:100%;
+  background:var(--bg);
+  transform-origin:bottom;transform:scaleY(var(--fill,0));
+  transition:transform .2s linear;
+}
+.rail .tval{
+  font-family:"IBM Plex Mono";font-weight:600;font-size:12px;color:var(--hot);
+  writing-mode:vertical-rl;letter-spacing:.14em;
+}
+@media (max-width:900px){.rail{display:none}}
+
+/* ---------- header ---------- */
+header.top{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:16px clamp(18px,3.4vw,44px);
+  border-bottom:1px solid var(--line);
+}
+header.top .wm{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:14px}
+header.top .wm b{color:var(--hot)}
+header.top .sub{font-family:"IBM Plex Mono";font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.14em}
+
+/* ramp legend */
+.ramp-wrap{padding:clamp(18px,3vh,34px) clamp(18px,3.4vw,44px) 0}
+.ramp{
+  height:14px;border:1px solid var(--line);
+  background:linear-gradient(to right, #1c3fd4, #7a1fb0 30%, #d40f6d 55%, #ff6a00 80%, #ffd400);
+  position:relative;
+}
+.ramp .marks{display:flex;justify-content:space-between;margin-top:8px;font-family:"IBM Plex Mono";font-size:10px;color:var(--dim);letter-spacing:.1em}
+.hero{
+  padding:clamp(30px,6vh,70px) clamp(18px,3.4vw,44px) clamp(30px,5vh,60px);
+}
+.hero h1{
+  font-weight:700;text-transform:uppercase;letter-spacing:-.01em;
+  font-size:clamp(40px,6.6vw,104px);line-height:.94;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(90deg, var(--cold), var(--mid) 45%, var(--hot) 80%, #ffd400);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{margin-top:20px;max-width:56ch;font-family:"IBM Plex Mono";font-size:13px;line-height:2;color:var(--dim)}
+.hero p b{color:var(--txt);font-weight:500}
+
+/* ---------- survey chapters ---------- */
+.chapter{
+  border-top:1px solid var(--line);
+  padding:clamp(40px,8vh,90px) clamp(18px,3.4vw,44px);
+  display:grid;grid-template-columns:minmax(120px,240px) 1fr;gap:clamp(20px,3.4vw,54px);
+}
+.chapter .temp{
+  display:flex;flex-direction:column;gap:6px;
+}
+.chapter .deg{
+  font-family:"IBM Plex Mono";font-weight:600;
+  font-size:clamp(30px,3.6vw,54px);line-height:1;
+}
+.chapter .deg small{font-size:.5em;color:var(--dim)}
+.chapter .stage{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--dim)}
+.chapter .ramp-mini{width:64px;height:6px;margin-top:6px}
+.chapter .body{max-width:760px}
+.chapter h2{
+  font-weight:600;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(26px,3.4vw,48px);line-height:1.02;margin-bottom:14px;
+}
+.chapter p{font-family:"IBM Plex Mono";font-size:13px;line-height:2;color:var(--dim);max-width:64ch}
+.chapter p b{color:var(--txt);font-weight:500}
+
+/* thermal figures with annotations */
+.thermal{
+  position:relative;margin-top:24px;border:1px solid var(--line);
+  overflow:hidden;background:#000;
+}
+.thermal img{width:100%;height:clamp(240px,44vh,460px);object-fit:cover;filter:grayscale(1) contrast(1.25) brightness(1.02)}
+.thermal .map{
+  position:absolute;inset:0;mix-blend-mode:color;
+  background:linear-gradient(115deg, #1c3fd4 0%, #7a1fb0 30%, #d40f6d 55%, #ff6a00 78%, #ffd400 100%);
+}
+.thermal .map.soft{opacity:.85}
+.thermal .scan{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom, transparent 0%, rgba(255,212,0,.13) 49%, rgba(255,212,0,.2) 50%, transparent 51%);
+  background-size:100% 260px;
+  animation:scan 7s linear infinite;
+}
+@keyframes scan{to{background-position:0 260px}}
+.thermal .hud{
+  position:absolute;left:12px;top:10px;right:12px;
+  display:flex;justify-content:space-between;gap:10px;
+  font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--txt);
+  text-shadow:0 1px 4px rgba(0,0,0,.9);
+}
+.thermal .hud .live{color:var(--hot)}
+.thermal figcaption{
+  border-top:1px solid var(--line);
+  padding:10px 12px;font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.1em;color:var(--dim);
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+}
+.thermal figcaption b{color:var(--txt)}
+
+@media (max-width:860px){
+  .chapter{grid-template-columns:1fr;gap:16px}
+  .chapter .temp{flex-direction:row;align-items:baseline;gap:14px}
+  .chapter .ramp-mini{width:80px;margin:0}
+}
+
+/* ---------- cold contrast chapter ---------- */
+.cold .deg,.cold h2 .thin{color:var(--cold)}
+.cold .ramp-mini{background:linear-gradient(to right,#0e2a3a,var(--cold))}
+.cold .thermal .map{background:linear-gradient(115deg,#05080d 0%,#0e2a3a 45%,#1c6f9e 75%,var(--cold) 100%)}
+
+/* ---------- closing ---------- */
+.closing{
+  border-top:1px solid var(--line);
+  padding:clamp(50px,10vh,110px) clamp(18px,3.4vw,44px);
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:center;
+  max-width:1240px;margin:0 auto;
+}
+@media (max-width:860px){.closing{grid-template-columns:1fr}}
+.closing h2{
+  font-weight:700;text-transform:uppercase;font-size:clamp(30px,4vw,58px);line-height:.98;
+}
+.closing h2 em{
+  font-style:normal;
+  background:linear-gradient(90deg,var(--mid),var(--hot));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.closing .right{font-family:"IBM Plex Mono";font-size:13px;line-height:2.1;color:var(--dim)}
+.closing .right a{color:var(--hot);text-decoration:none}
+.closing .right a:hover{text-decoration:underline}
+.legal{
+  border-top:1px solid var(--line);
+  padding:16px clamp(18px,3.4vw,44px) 30px;
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(18px)}
+.rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .thermal .scan{animation:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to survey</a>
+
+<div class="rail" aria-hidden="true">
+  <span class="tval" id="railVal">36.6°C</span>
+  <div class="tube" id="tube"></div>
+</div>
+
+<header class="top">
+  <span class="wm">Core Culture <b>/ Heat Index</b></span>
+  <span class="sub">Thermal survey — shoot 001 · annual readings</span>
+</header>
+
+<main id="main">
+  <div class="ramp-wrap" aria-hidden="true">
+    <div class="ramp"></div>
+    <div class="marks"><span>4°C — remedy</span><span>36.6 — resting</span><span>38 — working</span><span>65 — steam</span></div>
+  </div>
+
+  <section class="hero" aria-label="Introduction">
+    <h1>The heat <em>index.</em></h1>
+    <p>A training club, <b>read in temperature</b>. Every wing has a climate and a calorie-burn signature; put them together and the building glows. Survey follows — from the 4°C remedy wing, resting metabolism, working muscle, all the way to 65°C steam.</p>
+  </section>
+
+  <!-- 36.6 RESTING -->
+  <section class="chapter rv" data-temp="36.6" aria-labelledby="c1h">
+    <div class="temp">
+      <span class="deg">36.6<small>°C</small></span>
+      <span class="stage">Stage 01 — resting</span>
+      <span class="ramp-mini" style="background:linear-gradient(to right,#7a1fb0,#d40f6d)"></span>
+    </div>
+    <div class="body">
+      <h2 id="c1h">Resting state: <b style="color:var(--hot)">the lobby</b> before the first rep.</h2>
+      <p>Baseline readings, taken 05:31. <b>Lounge: 21°C, unhurried.</b> Members arrive at ambient temperature and leave the building measurably hotter — that's the whole business model, thermodynamically speaking.</p>
+      <figure class="thermal">
+        <div class="scan" aria-hidden="true"></div>
+        <img src="../crops/p12-f09.jpg" alt="Thermal view of a member seated at a desk — the lounge survey frame">
+        <div class="map soft" aria-hidden="true"></div>
+        <div class="hud"><span class="live">● LIVE</span><span>CAM 03 — LOUNGE</span></div>
+        <figcaption><span><b>Readings</b> — idle metabolism, warm opinions</span><span>Δ +0.0°C</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 38 WORKING -->
+  <section class="chapter rv" data-temp="38.0" aria-labelledby="c2h">
+    <div class="temp">
+      <span class="deg">38.0<small>°C</small></span>
+      <span class="stage">Stage 02 — working</span>
+      <span class="ramp-mini" style="background:linear-gradient(to right,#d40f6d,#ff6a00)"></span>
+    </div>
+    <div class="body">
+      <h2 id="c2h">Working sets: <b style="color:var(--hot)">the iron room</b> runs hot.</h2>
+      <p>Barbell hours push surface temperature fast. <b>Twelve racks, calibrated plates, coached progressions</b> — by set three, the camera sees you like a furnace with a haircut.</p>
+      <figure class="thermal">
+        <div class="scan" aria-hidden="true"></div>
+        <img src="../crops/p02-sled.jpg" alt="Thermal view of an athlete driving a weighted sled">
+        <div class="map" aria-hidden="true"></div>
+        <div class="hud"><span class="live">● LIVE</span><span>CAM 01 — IRON ROOM</span></div>
+        <figcaption><span><b>Readings</b> — sled track, lane 2, full heat</span><span>Δ +1.4°C</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 40 ENGINE -->
+  <section class="chapter rv" data-temp="40.2" aria-labelledby="c3h">
+    <div class="temp">
+      <span class="deg">40.2<small>°C</small></span>
+      <span class="stage">Stage 03 — engine</span>
+      <span class="ramp-mini" style="background:linear-gradient(to right,#ff6a00,#ffd400)"></span>
+    </div>
+    <div class="body">
+      <h2 id="c3h">Engine work: <b style="color:var(--hot)">peak glow</b> on the hybrid floor.</h2>
+      <p>HYROX prep reads brighter than everything else in the survey. <b>Sleds, ergs, treadmills with screens</b> — long, loud intervals that max out the scale and the dopamine.</p>
+      <figure class="thermal">
+        <div class="scan" aria-hidden="true"></div>
+        <img src="../crops/p12-f08.jpg" alt="Thermal view of light streaks from the engine bay">
+        <div class="map" aria-hidden="true"></div>
+        <div class="hud"><span class="live">● LIVE</span><span>CAM 02 — HYBRID BAY</span></div>
+        <figcaption><span><b>Readings</b> — interval block, lap 6 of 8</span><span>Δ +3.6°C</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 4 COLD -->
+  <section class="chapter cold rv" data-temp="4.0" aria-labelledby="c4h">
+    <div class="temp">
+      <span class="deg">4.0<small>°C</small></span>
+      <span class="stage">Stage 04 — plunge</span>
+      <span class="ramp-mini"></span>
+    </div>
+    <div class="body">
+      <h2 id="c4h">The plunge: <span class="thin">the coldest</span> room in the survey.</h2>
+      <p>Then the remedy wing drops the whole scale. <b>Ice bath at exactly four degrees</b>, steam next door at 65. Three minutes, slow breathing, and the chart falls off a cliff — in a good way. Cheapest coaching in the building.</p>
+      <figure class="thermal">
+        <div class="scan" aria-hidden="true"></div>
+        <img src="../crops/p04-ice.jpg" alt="Thermal view of the ice bath, cold blue survey frame">
+        <div class="map" aria-hidden="true"></div>
+        <div class="hud"><span class="live" style="color:var(--cold)">● LIVE</span><span>CAM 04 — REMEDY WING</span></div>
+        <figcaption><span><b>Readings</b> — immersion, minute two. Calm.</span><span>Δ −32.6°C</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <h2 class="rv">Every degree has <em>a room.</em><br>Every room has you.</h2>
+    <div class="right rv">
+      <p>The survey runs all year. Membership includes every climate on the chart — from the 4°C remedy wing to the 65°C steam room, plus the iron room, engine bay, dance studio and lounge in between.</p>
+      <p><b style="color:var(--txt)">First week free.</b> Parking solved. Air conditioning: industrial grade, quietly proud of it.</p>
+      <p><a href="mailto:front.desk@coreculture.club">front.desk@coreculture.club</a> — request a reading.</p>
+    </div>
+  </section>
+  <div class="legal">
+    <span>© MMXXVI Core Culture — Training Club</span>
+    <span>Concept 15 — Heat Index</span>
+    <span>Calibrated weekly · ±0.0 excuses</span>
+  </div>
+</main>
+
+<script>
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<innerHeight*.94) el.classList.add('in'); else io.observe(el);
+  });
+
+  // temperature rail tracks reading order: map chapters to scale 4..65
+  const railVal=document.getElementById('railVal');
+  const railTube=document.getElementById('tube');
+  const chapters=[...document.querySelectorAll('.chapter')].map(c=>({el:c,t:parseFloat(c.dataset.temp)}));
+  function tempToPct(t){ // cold 4 -> low, hot 65 -> high (visual: cold at top? we invert: heat rises, so top = hot)
+    return (t-4)/(65-4);
+  }
+  function nearest(){
+    let best=null,bd=1e9;
+    const mid=innerHeight/2;
+    chapters.forEach(c=>{
+      const r=c.el.getBoundingClientRect();
+      const d=Math.abs(r.top+r.height/2-mid);
+      if(d<bd){bd=d;best=c;}
+    });
+    return best;
+  }
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  addEventListener('scroll',()=>{
+    if(innerWidth<=900) return;
+    const c=nearest();
+    if(!c) return;
+    railVal.textContent=c.t.toFixed(1)+'°C';
+    railTube.style.setProperty('--fill',(1-tempToPct(c.t)).toFixed(3));
+  },{passive:true});
+</script>
+</body>
+</html>

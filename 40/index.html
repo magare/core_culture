@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Event Horizon</title>
+<meta name="description" content="Core Culture — every culture has a core. Everything in orbit shares it. Cross the horizon.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='9.5' fill='none' stroke='%23ffb46a' stroke-width='1' opacity='.9'/%3E%3Ccircle cx='24' cy='12' r='1.4' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Chivo+Mono:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#f2efe8;
+  --dim:rgba(242,239,232,.52);
+  --faint:rgba(242,239,232,.24);
+  --hot:#ffb46a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:#000;color:var(--ink);
+  font-family:"Chivo Mono",monospace;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--hot);color:#000}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--hot);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--hot);color:#000;padding:10px 16px;z-index:300}
+.skip:focus{left:10px}
+
+#sky{position:fixed;inset:0;z-index:0}
+
+.wrap{position:relative;z-index:2}
+.wrap-inner{transition:transform .12s linear}
+
+header.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:0 clamp(20px,6vw,110px);
+}
+.beacon{font-size:9.5px;letter-spacing:.44em;text-transform:uppercase;color:var(--faint);margin-bottom:30px}
+.beacon b{color:var(--hot);font-weight:400}
+h1{
+  font-family:"Syncopate",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(34px,6.4vw,96px);line-height:1.06;letter-spacing:.02em;
+}
+h1 small{display:block;font-weight:400;font-size:.36em;letter-spacing:.5em;color:var(--dim);margin-top:2.2em}
+.lede{margin-top:5vh;max-width:36em;color:var(--dim);font-size:12px;line-height:2.3}
+.lede b{color:var(--ink);font-weight:400}
+.cue{margin-top:7vh;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--faint)}
+.cue::after{content:"";display:block;width:1px;height:56px;margin:18px auto 0;background:linear-gradient(to bottom,var(--hot),transparent)}
+
+/* approach log */
+.log{display:flex;flex-direction:column}
+.entry{
+  min-height:82vh;display:flex;align-items:center;
+  padding:8vh clamp(20px,6vw,110px);
+}
+.entry:nth-child(even){justify-content:flex-end}
+.logcard{
+  max-width:520px;border:1px solid rgba(242,239,232,.14);
+  background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
+  padding:clamp(26px,3vw,46px);
+}
+.logcard .d{
+  display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+  font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--hot);margin-bottom:20px;
+  border-bottom:1px solid rgba(255,180,106,.25);padding-bottom:12px;
+}
+.logcard .d span:last-child{color:var(--faint)}
+.logcard h2{
+  font-family:"Syncopate";font-weight:400;text-transform:uppercase;
+  font-size:clamp(20px,2.4vw,34px);line-height:1.28;
+}
+.logcard p{margin-top:18px;color:var(--dim);font-size:11.5px;line-height:2.35}
+.logcard p b{color:var(--ink);font-weight:400}
+
+/* stable orbit CTA */
+.orbit{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:14vh clamp(20px,6vw,110px);
+}
+.orbit h2{
+  font-family:"Syncopate";font-weight:700;text-transform:uppercase;
+  font-size:clamp(26px,4.4vw,64px);line-height:1.2;
+}
+.orbit h2 em{font-style:normal;color:var(--hot)}
+.orbit p{margin-top:26px;max-width:34em;color:var(--dim);font-size:11.5px;line-height:2.35}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:40px;
+  font-size:10px;letter-spacing:.36em;text-transform:uppercase;
+  background:var(--hot);color:#000;padding:20px 46px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(255,180,106,.4)}
+footer{
+  padding:26px clamp(20px,6vw,110px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(242,239,232,.08);
+}
+@media (max-width:760px){
+  .entry{min-height:70vh}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .wrap-inner{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<div class="wrap">
+<div class="wrap-inner" id="pull">
+<main id="main">
+  <header class="hero">
+    <p class="beacon">Core Culture · Approach log · <b>singularity confirmed</b></p>
+    <h1>Every culture<br>has a core.<small>everything in orbit shares it</small></h1>
+    <p class="lede">Astronomers call it a singularity: one point so dense it organises everything around it. A training club works the same way — <b>one core of habit, effort and people, holding dozens of orbits in place.</b> You've been detected at range. Scroll to begin the approach.</p>
+    <p class="cue">Begin descent</p>
+  </header>
+
+  <section class="log" aria-label="Approach log">
+    <article class="entry">
+      <div class="logcard">
+        <p class="d"><span>Entry 01 · 10,000 UA out</span><span>drift</span></p>
+        <h2>You can feel it before you see it</h2>
+        <p>Something pulls the week into shape from across the city: <b>a 6AM alarm that isn't a chore</b>, a bag already packed, a route that bends toward the same door. Gravity starts long before arrival.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="logcard">
+        <p class="d"><span>Entry 02 · 4,000 UA out</span><span>orbit decaying</span></p>
+        <h2>Orbits are just strangers sharing a centre</h2>
+        <p>Nobody joins a gym for the equipment. <b>They join for the other bodies in orbit</b> — the run club, the sled pairs, the 6AM crew — all pulled around the same point, all holding each other steady.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="logcard">
+        <p class="d"><span>Entry 03 · 1,200 UA out</span><span>threshold heat</span></p>
+        <h2>Escape velocity works both ways</h2>
+        <p>It takes the same discipline to leave the couch as it does to leave a bad orbit. Three weeks of showing up <b>and escape velocity flips: now it's harder to leave the club than to stay</b>.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="logcard">
+        <p class="d"><span>Entry 04 · horizon</span><span>commitment</span></p>
+        <h2>Crossing is quiet</h2>
+        <p>No fanfare at the horizon — just a desk that knows your name and a floor that pulls a little harder every week. <b>From outside it looks like a gym. From inside, it's the centre.</b></p>
+      </div>
+    </article>
+  </section>
+
+  <section class="orbit">
+    <h2>Stable orbit.<br><em>The core keeps you.</em></h2>
+    <p>First week free — a full descent with all floors, all classes, all orbits. After that, membership is just maintenance thrust. <b>See you at the centre.</b></p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Cross the horizon — free week</a>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 40 · Event Horizon</span>
+  </footer>
+</main>
+</div>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv=document.getElementById('sky');
+  const ctx=cv.getContext('2d');
+  let W=0,H=0,DPR=Math.min(1.7,devicePixelRatio||1);
+  function size(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
+  size();addEventListener('resize',size);
+
+  // starfield
+  const stars=[];
+  for(let i=0;i<170;i++)stars.push({x:Math.random(),y:Math.random(),z:0.3+Math.random()*0.7,tw:Math.random()*6.28});
+  // disk particles: orbit radii & angles
+  const P=[];
+  for(let i=0;i<850;i++){
+    const r=0.24+Math.pow(Math.random(),0.65)*0.30;   // 0.24..0.54 of min dimension
+    P.push({r,a:Math.random()*6.283,s:(0.4+0.9*(1-(r-0.24)/0.30))});
+  }
+  let mx=0.5,my=0.4;
+  addEventListener('pointermove',e=>{mx=e.clientX/W;my=e.clientY/H;},{passive:true});
+
+  function drawDiskHalf(cx,cy,R,heat,front){
+    ctx.lineCap='round';
+    for(const p of P){
+      const isFront=Math.sin(p.a)>0;
+      if(isFront!==front)continue;
+      const rr=p.r*R;
+      const x=cx+Math.cos(p.a)*rr;
+      const y=cy+Math.sin(p.a)*rr*0.34;              // tilted disk
+      const bright=0.35+0.65*Math.pow((Math.cos(p.a)+1)/2,1.6);
+      const alpha=(front?0.95:0.4)*bright*heat;
+      // velocity-aligned streak
+      const dx=-Math.sin(p.a), dy=Math.cos(p.a)*0.34;
+      const len=5+p.s*9;
+      ctx.strokeStyle=`rgba(255,${165+Math.round(75*bright)},${95+Math.round(55*bright)},${alpha.toFixed(3)})`;
+      ctx.lineWidth=front?1.8:1.2;
+      ctx.beginPath();
+      ctx.moveTo(x-dx*len/2,y-dy*len/2);
+      ctx.lineTo(x+dx*len/2,y+dy*len/2);
+      ctx.stroke();
+    }
+  }
+
+  let t=0;
+  function frame(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    const p=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+    const heat=0.35+p*0.65;
+    t+=0.016;
+
+    ctx.fillStyle='#000';
+    ctx.fillRect(0,0,W,H);
+    // stars with parallax
+    for(const s of stars){
+      const tw=0.4+0.6*Math.abs(Math.sin(t*0.8+s.tw));
+      ctx.fillStyle=`rgba(242,239,232,${(0.12+0.5*s.z)*tw})`;
+      ctx.fillRect(s.x*W+ (mx-0.5)*s.z*18, s.y*H+(my-0.5)*s.z*12, s.z>0.8?1.6:1, s.z>0.8?1.6:1);
+    }
+    // core centre: falls from off-screen top toward centre as you descend
+    const cx=W/2+(mx-0.5)*24;
+    const cy=H*(1.5-p*1.1);
+    const R=Math.min(W,H)*(0.62+p*0.55);
+    // faint halo
+    const halo=ctx.createRadialGradient(cx,cy,R*0.2,cx,cy,R*1.1);
+    halo.addColorStop(0,`rgba(255,170,100,${0.18*heat})`);
+    halo.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=halo;
+    ctx.fillRect(0,0,W,H);
+    // disk-plane glow smears (tilted with the disk)
+    for(const gs of [[-0.34,0.16],[0.3,-0.14],[0.02,0.2]]){
+      const gx=cx+gs[0]*R, gy=cy+gs[0]*R*0.1;
+      ctx.save();
+      ctx.translate(gx,gy);ctx.rotate(0.12*Math.sign(gs[0]));ctx.scale(1.7,0.55);ctx.translate(-gx,-gy);
+      const smear=ctx.createRadialGradient(gx,gy,0,gx,gy,R*0.3);
+      smear.addColorStop(0,`rgba(255,150,80,${(0.05+0.13*heat).toFixed(3)})`);
+      smear.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=smear;
+      ctx.beginPath();ctx.arc(gx,gy,R*0.3,0,7);ctx.fill();
+      ctx.restore();
+    }
+    // orbit the disk
+    for(const p of P)p.a+=0.003+p.s*0.007*(0.3+heat);
+    // back half of disk → black core → front half of disk
+    drawDiskHalf(cx,cy,R,heat,false);
+    ctx.beginPath();ctx.arc(cx,cy,R*0.33,0,7);
+    ctx.fillStyle='#000';ctx.fill();
+    // photon ring: wide glow + crisp line
+    ctx.beginPath();ctx.arc(cx,cy,R*0.335,0,7);
+    ctx.strokeStyle=`rgba(255,190,120,${(0.22*heat).toFixed(3)})`;
+    ctx.lineWidth=9;ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,R*0.335,0,7);
+    ctx.strokeStyle=`rgba(255,214,160,${(0.8*heat).toFixed(3)})`;
+    ctx.lineWidth=1.6;ctx.stroke();
+    // lensing hint arcs just outside the rim
+    ctx.strokeStyle=`rgba(255,220,170,${(0.28*heat).toFixed(3)})`;
+    ctx.lineWidth=2.4;
+    ctx.beginPath();ctx.arc(cx,cy,R*0.345,Math.PI*0.7,Math.PI*1.08);ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,R*0.345,-Math.PI*0.08,Math.PI*0.3);ctx.stroke();
+    drawDiskHalf(cx,cy,R,heat,true);
+
+    // content pull toward centre
+    const pullY=(p-0.5)*60;
+    document.getElementById('pull').style.transform=`translateY(${(-pullY).toFixed(1)}px) scale(${(1-p*0.05).toFixed(3)})`;
+
+    if(!reduced)requestAnimationFrame(frame);
+  }
+  if(!reduced){requestAnimationFrame(frame);}
+  else{
+    scrollY>=0;
+    // static render at moderate descent
+    frame();
+    addEventListener('scroll',()=>frame(),{passive:true});
+  }
+})();
+</script>
+</body>
+</html>

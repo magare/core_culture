@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Contact Sheet / Shoot 001</title>
+<meta name="description" content="Core Culture — the contact sheets from Shoot 001. Documentary frames from the club floor.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141210'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%23e03a1e' stroke-width='2.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --table:#141210;
+  --table2:#1b1917;
+  --bone:#e8e2d2;
+  --dim:rgba(232,226,210,.55);
+  --grease:#e03a1e;
+  --line:rgba(232,226,210,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--table);
+  color:var(--bone);
+  font-family:"Fragment Mono","Courier New",monospace;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+.grot{font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif}
+::selection{background:var(--grease);color:var(--table)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:8px;background:var(--grease);color:var(--table);padding:10px 16px;z-index:400;font-weight:700}
+.skip:focus{left:8px}
+:focus-visible{outline:2px solid var(--grease);outline-offset:3px}
+
+/* ---------- top bar ---------- */
+.bar{
+  position:sticky;top:0;z-index:100;background:var(--table);
+  border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:12px clamp(16px,3vw,40px);font-size:11px;letter-spacing:.1em;
+}
+.bar .id b{color:var(--grease)}
+.bar .id span{color:var(--dim)}
+.bar nav{display:flex;gap:18px}
+.bar nav a{text-decoration:none;color:var(--dim);text-transform:uppercase;letter-spacing:.16em;font-size:10px}
+.bar nav a:hover{color:var(--bone)}
+
+/* ---------- loupe ---------- */
+.loupe{
+  display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(18px,3vw,44px);
+  max-width:1240px;margin:clamp(24px,4vh,48px) auto 0;
+  padding:0 clamp(16px,3vw,40px);
+  align-items:center;
+}
+@media (max-width:860px){.loupe{grid-template-columns:1fr}}
+.loupe .viewer{
+  position:relative;border:1px solid var(--line);background:var(--table2);
+  padding:16px;
+}
+.loupe .viewer::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg, rgba(232,226,210,.06) 0%, transparent 30%);
+}
+.loupe img{width:100%;max-height:52vh;object-fit:contain;background:#000}
+.loupe .mark{
+  position:absolute;top:10px;left:12px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+}
+.loupe .mark i{color:var(--grease);font-style:normal}
+.loupe .meta h1{
+  font-family:"Inter Tight";font-weight:800;text-transform:uppercase;
+  font-size:clamp(26px,3.2vw,44px);line-height:1;margin-bottom:14px;letter-spacing:-.01em;
+}
+.loupe .meta .ref{color:var(--grease);font-size:12px;letter-spacing:.12em;margin-bottom:18px}
+.loupe .meta p{color:var(--dim);line-height:1.9;font-size:13px;max-width:44ch}
+.loupe .meta .contact{
+  margin-top:22px;border-top:1px dashed var(--line);padding-top:16px;font-size:11.5px;
+  display:grid;gap:8px;
+}
+.loupe .meta .contact div{display:flex;justify-content:space-between;gap:10px}
+.loupe .meta .contact span:last-child{color:var(--bone)}
+.loupe .meta .contact span:first-child{color:var(--dim);text-transform:uppercase;letter-spacing:.14em;font-size:10px}
+
+/* ---------- rolls ---------- */
+.roll{margin-top:clamp(30px,5vh,54px)}
+.roll-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
+  padding:10px clamp(16px,3vw,40px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+}
+.roll-head b{color:var(--grease)}
+.roll-head span:last-child{color:var(--dim)}
+.strip-wrap{overflow-x:auto;scrollbar-width:thin;padding:18px clamp(16px,3vw,40px)}
+.strip{
+  display:flex;gap:0;width:max-content;
+  border-top:14px solid #060505;border-bottom:14px solid #060505;
+  background:#060505;
+  background-image:radial-gradient(circle at 10px 50%, transparent 0 4.5px, rgba(232,226,210,.14) 5px 6px, transparent 6.5px);
+  background-size:22px 100%;
+  background-position:0 0;
+}
+.frame{
+  position:relative;background:#000;
+  padding:5px;cursor:pointer;
+  border-right:22px solid #060505;
+  transition:background .18s ease;
+}
+.frame:first-child{border-left:22px solid #060505}
+.frame img{
+  height:170px;width:auto;display:block;
+  filter:contrast(1.08) saturate(.92);
+  opacity:.82;transition:opacity .18s ease;
+}
+.frame:hover img{opacity:1}
+.frame .fno{
+  position:absolute;bottom:-1px;left:8px;
+  font-size:9px;color:var(--dim);background:rgba(6,5,5,.85);padding:1px 5px;
+}
+.frame.sel{background:var(--table2)}
+.frame.sel img{opacity:1;outline:2px solid var(--bone);outline-offset:2px}
+/* grease pencil circle */
+.frame .grease{position:absolute;inset:0;display:none;pointer-events:none}
+.frame.sel .grease{display:block}
+.frame .grease svg{width:100%;height:100%}
+.frame .grease path{
+  fill:none;stroke:var(--grease);stroke-width:5;stroke-linecap:round;
+  stroke-dasharray:1200;stroke-dashoffset:1200;
+  animation:draw .7s ease-out forwards;opacity:.9;
+  filter:url(#rough);
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--line);margin-top:clamp(30px,5vh,54px);
+  padding:20px clamp(16px,3vw,40px) 34px;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+}
+footer b{color:var(--bone)}
+footer a{color:var(--bone);text-decoration:none;border-bottom:1px solid var(--grease)}
+footer a:hover{color:var(--grease)}
+.notes{
+  max-width:1240px;margin:clamp(20px,3vh,34px) auto 0;
+  padding:0 clamp(16px,3vw,40px);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  font-size:11.5px;line-height:1.9;color:var(--dim);
+}
+.notes b{color:var(--bone);text-transform:uppercase;letter-spacing:.14em;font-size:10px;display:block;margin-bottom:6px}
+@media (max-width:860px){.notes{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .frame .grease path{animation:none;stroke-dashoffset:0}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#rolls">Skip to contact sheets</a>
+
+<div class="bar">
+  <span class="id"><b>CORE CULTURE</b> <span>/ archive — shoot 001 “the club, documentary”</span></span>
+  <nav aria-label="Rolls">
+    <a href="#roll1">Roll 01</a>
+    <a href="#roll2">Roll 02</a>
+    <a href="#roll3">Roll 03</a>
+  </nav>
+</div>
+
+<main id="main">
+  <!-- LOUPE -->
+  <section class="loupe" aria-label="Loupe — enlarged frame">
+    <div class="viewer">
+      <img id="loupeImg" src="../crops/p12-f01.jpg" alt="Enlarged contact sheet frame">
+      <span class="mark"><i>●</i> LOUPE — <span id="loupeRef">R01 / 12A</span></span>
+    </div>
+    <div class="meta">
+      <h1 id="loupeTitle">First pull of the day</h1>
+      <div class="ref" id="loupeMeta">ROLL 01 · FRAME 12A · 1/250s · f2.0 · ISO 3200</div>
+      <p id="loupeCap">Documentary pass, no posing. The floor at 05:31 — plates already loaded, coffee still in the other hand. Shot on the house camera; grain is the house style.</p>
+      <div class="contact">
+        <div><span>Photographer</span><span>The floor, itself</span></div>
+        <div><span>Location</span><span>Core Culture, iron room</span></div>
+        <div><span>Prints</span><span>front desk, on request</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLL 01 -->
+  <section class="roll" id="roll1" aria-labelledby="r1h">
+    <div class="roll-head" id="r1h"><span><b>Roll 01</b> — the floor takes weight</span><span>36 exp · pushed +1</span></div>
+    <div class="strip-wrap">
+      <div class="strip" data-roll="R01">
+        <button class="frame sel" data-title="First pull of the day" data-cap="Documentary pass, no posing. The floor at 05:31 — plates already loaded, coffee still in the other hand." data-ref="R01 / 12A">
+          <img src="../crops/p12-f01.jpg" alt="Contact frame: athlete loading a barbell in low light"><span class="fno">12A</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+        <button class="frame" data-title="Grip study" data-cap="Hands do the talking. The sled doesn't care about your playlist — it only understands force and direction." data-ref="R01 / 13A">
+          <img src="../crops/p12-f02.jpg" alt="Contact frame: hands gripping a sled handle"><span class="fno">13A</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+        <button class="frame" data-title="Machine, biography of" data-cap="Biomechanics-backed, choreography-free. The seat adjusts to you; that's the whole relationship." data-ref="R01 / 14A">
+          <img src="../crops/p12-f06.jpg" alt="Contact frame: plate-loaded training machine detail"><span class="fno">14A</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+        <button class="frame" data-title="Red room, abstract" data-cap="Motion blur from the warm-up wall. Filed under: evidence that intensity has a texture." data-ref="R01 / 15A">
+          <img src="../crops/p12-f12.jpg" alt="Contact frame: abstract red wall texture from the fun wall shoot"><span class="fno">15A</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLL 02 -->
+  <section class="roll" id="roll2" aria-labelledby="r2h">
+    <div class="roll-head" id="r2h"><span><b>Roll 02</b> — motion &amp; neon</span><span>36 exp · drag the shutter</span></div>
+    <div class="strip-wrap">
+      <div class="strip" data-roll="R02">
+        <button class="frame" data-title="The floor, mid-sentence" data-cap="Studio B at 19:31. Choreography optional, sweat mandatory, judgement unavailable." data-ref="R02 / 03B">
+          <img src="../crops/p12-f05.jpg" alt="Contact frame: dancer silhouetted in studio light"><span class="fno">03B</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+        <button class="frame" data-title="Treadmill light" data-cap="Long exposure, series still playing. Cardio is a byproduct of the episode." data-ref="R02 / 04B">
+          <img src="../crops/p12-f07.jpg" alt="Contact frame: light streaks from the engine bay"><span class="fno">04B</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+        <button class="frame" data-title="Engine bay, second pass" data-cap="The exact frame the wall art came from. Pop culture, painted at 100 miles an hour." data-ref="R02 / 05B">
+          <img src="../crops/p12-f08.jpg" alt="Contact frame: more light streaks in violet and red"><span class="fno">05B</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+        <button class="frame" data-title="Main character, walking" data-cap="The house painting, detail. Everyone walks through this room like the floor is a runway. Because it is." data-ref="R02 / 06B">
+          <img src="../crops/p12-f10.jpg" alt="Contact frame: pop-art figure striding past the blue circle"><span class="fno">06B</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLL 03 -->
+  <section class="roll" id="roll3" aria-labelledby="r3h">
+    <div class="roll-head" id="r3h"><span><b>Roll 03</b> — cold &amp; afterwards</span><span>24 exp · kept in the fridge</span></div>
+    <div class="strip-wrap">
+      <div class="strip" data-roll="R03">
+        <button class="frame" data-title="Four degrees, exactly" data-cap="The remedy wing. Three minutes, one breath at a time. Cheapest coaching in the building." data-ref="R03 / 01C">
+          <img src="../crops/p12-f03.jpg" alt="Contact frame: ice bath with ice above the rim"><span class="fno">01C</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+        <button class="frame" data-title="Tub rim, still life" data-cap="Excuses photographed at the edge of the water. They didn't fit in; they never do." data-ref="R03 / 02C">
+          <img src="../crops/p12-f04.jpg" alt="Contact frame: ice and water at the tub rim"><span class="fno">02C</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+        <button class="frame" data-title="The lounge, eventually" data-cap="Work-lift balance, field edition. Meetings before the session, people after it." data-ref="R03 / 07C">
+          <img src="../crops/p12-f09.jpg" alt="Contact frame: a figure working at a desk in an open field"><span class="fno">07C</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+        <button class="frame" data-title="Arrivals, winter pass" data-cap="Parking, finally. The lot at dusk — nobody circling the block, everybody circling the bench press." data-ref="R03 / 08C">
+          <img src="../crops/p12-f11.jpg" alt="Contact frame: cars parked in rows at dusk"><span class="fno">08C</span>
+          <span class="grease" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M18 22 C60 6, 96 26, 90 52 C84 82, 40 98, 16 80 C-4 64, 10 34, 30 26"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes" aria-label="Shoot notes">
+    <div><b>Notes on method</b> Document the club as it is: no reshoots, no posing, no lighting that the room doesn't already own. Grain stays. Sweat stays.</div>
+    <div><b>Notes on people</b> Members appear as themselves. Beginners appear as regulars, about six weeks later. The camera waits; everybody develops.</div>
+    <div><b>Notes on joining</b> Subscriptions open at the front desk — first week free, every wing included, parking solved. Bring shoes; the rest is culture.</div>
+  </section>
+
+  <footer>
+    <span><b>CORE CULTURE</b> — Training Club · Archive</span>
+    <a href="mailto:front.desk@coreculture.club">front.desk@coreculture.club</a>
+    <span>Concept 12 — Contact Sheet</span>
+  </footer>
+</main>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="rough">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
+  </filter>
+</svg>
+
+<script>
+  const loupeImg=document.getElementById('loupeImg');
+  const loupeTitle=document.getElementById('loupeTitle');
+  const loupeMeta=document.getElementById('loupeMeta');
+  const loupeCap=document.getElementById('loupeCap');
+  const loupeRef=document.getElementById('loupeRef');
+
+  document.querySelectorAll('.frame').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.frame.sel').forEach(f=>f.classList.remove('sel'));
+      btn.classList.add('sel');
+      loupeImg.src=btn.querySelector('img').src;
+      loupeImg.alt=btn.querySelector('img').alt.replace('Contact frame: ','Enlarged: ');
+      loupeTitle.textContent=btn.dataset.title;
+      loupeCap.textContent=btn.dataset.cap;
+      loupeRef.textContent=btn.dataset.ref;
+      const roll=btn.closest('.strip').dataset.roll;
+      loupeMeta.textContent=btn.dataset.ref.replace(/ \/ .*/,'')+' · '+btn.dataset.ref.split('/ ')[1]+' · 1/250s · f2.0 · ISO 3200';
+      btn.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest',inline:'nearest'});
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — House Rules</title>
+<meta name="description" content="Core Culture Training Club. The house rules: train, move, recover, connect.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e0331c'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='18' font-weight='900' fill='%23f1ede3' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f1ede3;
+  --ink:#161513;
+  --red:#e0331c;
+  --rule:rgba(22,21,19,.22);
+  --rule-strong:rgba(22,21,19,.55);
+  --gutter:clamp(16px,3.4vw,52px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--red);color:var(--paper)}
+a{color:inherit}
+img{display:block;max-width:100%}
+button{font:inherit;background:none;border:0;color:inherit;cursor:pointer}
+
+/* ---------- macro grid ---------- */
+.page{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:64px 1fr;
+}
+@media (max-width:900px){
+  .page{grid-template-columns:1fr}
+}
+
+/* ---------- index rail (nav) ---------- */
+.rail{
+  position:sticky;top:0;height:100vh;
+  border-right:1px solid var(--rule-strong);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:18px 0;z-index:40;background:var(--paper);
+}
+.rail .mark{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:11px;font-weight:800;letter-spacing:.34em;text-transform:uppercase;
+  padding:0 0 10px;text-align:center;
+}
+.rail ol{list-style:none;display:flex;flex-direction:column}
+.rail ol a{
+  display:flex;align-items:center;justify-content:center;
+  height:58px;text-decoration:none;
+  font-size:12px;font-weight:600;letter-spacing:.08em;
+  border-top:1px solid var(--rule);
+  position:relative;
+}
+.rail ol a:last-child{border-bottom:1px solid var(--rule)}
+.rail ol a .dot{
+  position:absolute;left:50%;transform:translateX(-50%) scaleX(0);transform-origin:center;
+  bottom:8px;width:16px;height:2px;background:var(--red);transition:transform .25s ease;
+}
+.rail ol a:hover .dot,.rail ol a.active .dot{transform:translateX(-50%) scaleX(1)}
+.rail ol a:hover,.rail ol a.active{color:var(--red)}
+.rail .foot{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:9px;letter-spacing:.28em;text-transform:uppercase;opacity:.55;
+  text-align:center;padding-top:10px;
+}
+@media (max-width:900px){
+  .rail{
+    position:sticky;top:0;height:auto;flex-direction:row;align-items:center;
+    border-right:0;border-bottom:1px solid var(--rule-strong);gap:0;padding:0;
+  }
+  .rail .mark{writing-mode:horizontal-tb;transform:none;padding:12px 14px;font-size:10px}
+  .rail .foot{display:none}
+  .rail ol{flex-direction:row;flex:1;overflow-x:auto;scrollbar-width:none}
+  .rail ol::-webkit-scrollbar{display:none}
+  .rail ol a{height:44px;padding:0 12px;border-top:0;border-left:1px solid var(--rule);white-space:nowrap}
+  .rail ol a:last-child{border-bottom:0;border-right:1px solid var(--rule)}
+  .rail ol a .dot{bottom:4px}
+}
+
+/* ---------- main column ---------- */
+.main{min-width:0}
+
+/* top bar */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px var(--gutter);border-bottom:1px solid var(--rule-strong);
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  gap:12px;flex-wrap:wrap;
+}
+.topbar .status{display:flex;align-items:center;gap:8px}
+.topbar .status i{width:8px;height:8px;background:var(--red);border-radius:50%;display:inline-block}
+.topbar .apply{font-weight:800;border-bottom:2px solid var(--red);padding-bottom:2px;text-decoration:none}
+
+/* section scaffold */
+section{border-bottom:1px solid var(--rule-strong)}
+.sec-head h2{
+  font-size:inherit;font-weight:inherit;letter-spacing:inherit;text-transform:inherit;margin:0
+}
+.sec-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:12px var(--gutter);border-bottom:1px solid var(--rule);
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+}
+.sec-head .no{color:var(--red);font-weight:800}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  display:grid;grid-template-columns:repeat(6,1fr);
+  min-height:calc(100vh - 47px);
+}
+.hero .gridlines{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);pointer-events:none}
+.hero .gridlines i{border-right:1px solid var(--rule);position:relative}
+.hero .gridlines i:first-child{border-left:1px solid var(--rule)}
+.hero .gridlines i::after{
+  content:"01";position:absolute;bottom:10px;right:10px;
+  font-size:9px;font-weight:700;letter-spacing:.18em;opacity:.4;
+}
+.hero .gridlines i:nth-child(2)::after{content:"02"}
+.hero .gridlines i:nth-child(3)::after{content:"03"}
+.hero .gridlines i:nth-child(4)::after{content:"04"}
+.hero .gridlines i:nth-child(5)::after{content:"05"}
+.hero .gridlines i:nth-child(6)::after{content:"06"}
+.hero-inner{
+  grid-column:1/-1;position:relative;z-index:2;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(20px,3.5vh,40px) var(--gutter);
+}
+.hero-meta{
+  display:flex;justify-content:space-between;gap:16px;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
+  max-width:1200px;
+}
+.hero-meta span b{display:block;font-weight:600;opacity:.55;margin-top:4px;letter-spacing:.14em}
+.hero-title{
+  font-weight:900;
+  font-size:clamp(64px,14.5vw,210px);
+  line-height:.86;letter-spacing:-.035em;
+  text-transform:uppercase;
+  margin:auto 0;
+  user-select:none;
+  position:relative;
+}
+.hero-title .row{display:block;overflow:hidden}
+.hero-title .row span{display:inline-block;transform:translateY(110%);animation:rise .8s cubic-bezier(.19,1,.22,1) forwards}
+.hero-title .row:nth-child(2) span{animation-delay:.09s;color:var(--red)}
+@keyframes rise{to{transform:translateY(0)}}
+.hero-title .stop{
+  display:inline-block;width:.14em;height:.14em;background:var(--red);margin-left:.06em;
+}
+.hero-side{
+  position:absolute;right:calc(var(--gutter) - 4px);bottom:6%;
+  display:flex;align-items:flex-end;gap:14px;
+}
+.hero-side .sq{width:clamp(18px,2vw,30px);height:clamp(18px,2vw,30px);background:var(--red)}
+.hero-side .cap{
+  writing-mode:vertical-rl;
+  font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;opacity:.7;
+}
+.hero-bottom{
+  display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;max-width:1200px;width:100%;
+}
+.hero-bottom p{max-width:44ch;font-size:clamp(15px,1.35vw,19px);line-height:1.45;font-weight:500}
+.hero-bottom p b{background:var(--ink);color:var(--paper);padding:0 .28em}
+.hero-cta{display:flex;align-items:center;gap:14px}
+.cta{
+  display:inline-block;text-decoration:none;
+  background:var(--ink);color:var(--paper);
+  padding:16px 26px;font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  transition:background .18s ease,color .18s ease;
+}
+.cta:hover{background:var(--red);color:var(--paper)}
+.cta.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.cta.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--red);color:var(--red);background:transparent}
+.hero-fig{
+  position:absolute;z-index:3;right:calc(var(--gutter) + 4px);top:clamp(90px,16vh,150px);
+  width:clamp(120px,15vw,218px);
+  border:1px solid var(--ink);background:var(--paper);padding:8px 8px 6px;
+  box-shadow:6px 6px 0 var(--ink);
+}
+.hero-fig img{aspect-ratio:4/5;object-fit:cover;object-position:78% 30%;width:100%;filter:grayscale(1) contrast(1.06)}
+.hero-fig figcaption{font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding-top:6px;display:flex;justify-content:space-between}
+.hero-fig figcaption b{color:var(--red)}
+@media (max-width:900px){
+  .hero{min-height:auto}
+  .hero-fig{position:relative;inset:auto;order:3;margin:0 var(--gutter) 8px auto;width:min(62vw,240px)}
+  .hero-inner{gap:26px;justify-content:flex-start}
+  .hero-meta span:nth-child(3){display:none}
+  .hero-bottom{grid-template-columns:1fr}
+  .hero-cta{flex-wrap:wrap}
+  .hero-side{display:none}
+  .topbar .mid{display:none}
+}
+
+/* ---------- rules ---------- */
+.rules-list{list-style:none}
+.rules-list li{border-bottom:1px solid var(--rule)}
+.rules-list a{
+  display:grid;grid-template-columns:110px 1fr auto;gap:clamp(12px,3vw,40px);align-items:baseline;
+  padding:clamp(14px,2.6vh,26px) var(--gutter);text-decoration:none;
+  transition:background .16s ease,color .16s ease;
+}
+.rules-list .rn{font-size:13px;font-weight:800;letter-spacing:.12em}
+.rules-list .rt{
+  font-size:clamp(21px,3.4vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.04;text-transform:uppercase;
+}
+.rules-list .rs{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;opacity:.6;white-space:nowrap;display:flex;align-items:center;gap:14px}
+.rules-list .rs .ar{opacity:0;transform:translate(-6px,6px);transition:opacity .18s ease,transform .18s ease;color:var(--red);font-size:20px;line-height:1}
+.rules-list a:hover .ar{opacity:1;transform:none}
+.rules-list a:hover{background:var(--ink);color:var(--paper)}
+.rules-list a:hover .rn{color:var(--red)}
+.rules-list a:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+@media (max-width:700px){
+  .rules-list a{grid-template-columns:64px 1fr}
+  .rules-list .rs{display:none}
+}
+
+/* ---------- disciplines table ---------- */
+.table-wrap{overflow-x:auto}
+table.disc{width:100%;border-collapse:collapse;min-width:640px}
+table.disc th{
+  text-align:left;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+  padding:12px var(--gutter);border-bottom:1px solid var(--rule-strong);opacity:.65;
+}
+table.disc td{
+  padding:clamp(16px,2.8vh,26px) var(--gutter);border-bottom:1px solid var(--rule);
+  vertical-align:baseline;
+}
+table.disc th:nth-child(1){width:8%}
+table.disc th:nth-child(2){width:33%}
+table.disc th:nth-child(3){width:45%}
+table.disc th:nth-child(4){width:14%}
+table.disc td.dn{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--red)}
+table.disc td.dt{font-size:clamp(22px,3vw,40px);font-weight:800;letter-spacing:-.02em;text-transform:uppercase;line-height:1}
+table.disc td.dm{font-size:14px;font-weight:500;line-height:1.55;max-width:52ch;padding-right:6%}
+table.disc td.dd{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;opacity:.7;white-space:nowrap}
+table.disc tbody tr{transition:background .16s ease,color .16s ease;cursor:crosshair}
+table.disc tbody tr:hover{background:var(--red);color:var(--paper)}
+table.disc tbody tr:hover td.dn{color:var(--paper)}
+table.disc tbody tr:hover td.dd{opacity:.85}
+table.disc tbody tr:focus-visible{outline:3px solid var(--ink);outline-offset:-3px}
+.table-foot{
+  display:flex;justify-content:space-between;gap:14px;padding:12px var(--gutter);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;opacity:.65;flex-wrap:wrap;
+}
+@media (max-width:700px){
+  table.disc{min-width:0}
+  table.disc thead{display:none}
+  table.disc tbody tr{display:block;padding:22px var(--gutter)}
+  table.disc td{display:block;padding:0;border:0}
+  table.disc td.dn{margin-bottom:8px}
+  table.disc td.dm{margin-top:10px;padding-right:0}
+  table.disc td.dd{margin-top:12px;opacity:.7}
+}
+
+/* ---------- figures ---------- */
+.figures{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+}
+.figures figure{border-right:1px solid var(--rule-strong);padding:18px var(--gutter) 24px}
+.figures figure:last-child{border-right:0}
+.figures img{width:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .35s ease}
+.figures .f-rec img{aspect-ratio:100/63}
+.figures .f-stu img{aspect-ratio:33/31}
+.figures .f-eqp img{aspect-ratio:9/8}
+.figures figure:hover img{filter:grayscale(0) contrast(1)}
+.figures figcaption{margin-top:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;display:flex;justify-content:space-between;gap:10px}
+.figures figcaption b{color:var(--red)}
+.figures p{margin-top:8px;font-size:13px;line-height:1.5;opacity:.8}
+@media (max-width:900px){
+  .figures{grid-template-columns:1fr}
+  .figures figure{border-right:0;border-bottom:1px solid var(--rule-strong)}
+  .figures figure:last-child{border-bottom:0}
+}
+
+/* ---------- membership ---------- */
+.member{display:grid;grid-template-columns:1.15fr .85fr}
+.member-copy{padding:clamp(26px,5vh,56px) var(--gutter)}
+.member-copy h3{
+  font-size:clamp(34px,5vw,72px);font-weight:900;letter-spacing:-.03em;line-height:.95;text-transform:uppercase;
+}
+.member-copy h3 em{font-style:normal;color:var(--red)}
+.member-copy>p{margin-top:18px;max-width:46ch;font-size:16px;font-weight:500;line-height:1.5}
+.tiers{border-left:1px solid var(--rule-strong);display:flex;flex-direction:column}
+.tier{
+  flex:1;display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:clamp(18px,3.4vh,30px) var(--gutter);border-bottom:1px solid var(--rule-strong);
+  text-decoration:none;transition:background .16s ease,color .16s ease;
+}
+.tier:last-child{border-bottom:0}
+.tier .tn{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+.tier .tp{font-size:clamp(26px,3vw,44px);font-weight:900;letter-spacing:-.03em}
+.tier .tp sup{font-size:.4em;font-weight:600;letter-spacing:.08em}
+.tier:hover{background:var(--ink);color:var(--paper)}
+.tier:hover .tn{color:var(--red)}
+@media (max-width:900px){
+  .member{grid-template-columns:1fr}
+  .tiers{border-left:0;border-top:1px solid var(--rule-strong)}
+}
+
+/* ---------- colophon / footer ---------- */
+.ticker{
+  overflow:hidden;border-bottom:1px solid var(--rule-strong);background:var(--ink);color:var(--paper);
+}
+.ticker .track{
+  display:flex;gap:0;white-space:nowrap;padding:10px 0;
+  animation:tick 26s linear infinite;width:max-content;
+}
+.ticker .track span{
+  font-size:12px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;padding-right:3.2em;
+}
+.ticker .track em{color:var(--red);font-style:normal}
+@keyframes tick{to{transform:translateX(-50%)}}
+.colophon{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px;
+  padding:clamp(28px,5vh,56px) var(--gutter);
+}
+.colophon h4{font-size:10px;letter-spacing:.24em;text-transform:uppercase;opacity:.6;margin-bottom:14px;font-weight:700}
+.colophon .big{font-size:clamp(24px,2.6vw,40px);font-weight:900;letter-spacing:-.03em;line-height:1;text-transform:uppercase}
+.colophon ul{list-style:none;font-size:13px;font-weight:500;line-height:2}
+.colophon ul a{text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+.colophon ul a:hover{color:var(--red);border-color:var(--red)}
+.legal{
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding:14px var(--gutter);border-top:1px solid var(--rule);
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;opacity:.6;
+}
+@media (max-width:900px){.colophon{grid-template-columns:1fr}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.19,1,.22,1),transform .7s cubic-bezier(.19,1,.22,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero-title .row span{animation:none;transform:none}
+  .ticker .track{animation:none}
+  *{transition:none!important}
+}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--paper);padding:10px 16px;z-index:100}
+.skip:focus{left:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+  <nav class="rail" aria-label="Index">
+    <div class="mark">Core Culture — Training Club</div>
+    <ol>
+      <li><a href="#top" class="active">00</a></li>
+      <li><a href="#rules">01</a></li>
+      <li><a href="#disciplines">02</a></li>
+      <li><a href="#figures">03</a></li>
+      <li><a href="#membership">04</a></li>
+      <li><a href="#colophon">05</a></li>
+    </ol>
+    <div class="foot">EST. CULTURE — MMXXVI</div>
+  </nav>
+
+  <main class="main" id="main">
+    <div class="topbar" id="top">
+      <span class="status"><i aria-hidden="true"></i> Open — 05:30 to 23:00</span>
+      <span class="mid">Core Culture — Training Club</span>
+      <a class="apply" href="#membership">Become a member</a>
+    </div>
+
+    <!-- 00 HERO -->
+    <section class="hero" aria-label="Introduction">
+      <div class="gridlines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="hero-inner">
+        <div class="hero-meta">
+          <span>Doc. No.<b>CC—001 / RULES</b></span>
+          <span>Discipline<b>Train · Move · Recover · Connect</b></span>
+          <span>Admission<b>By monthly culture</b></span>
+        </div>
+        <h1 class="hero-title">
+          <span class="row"><span>Core</span></span>
+          <span class="row"><span>Culture<i class="stop" aria-hidden="true"></i></span></span>
+        </h1>
+        <div class="hero-side" aria-hidden="true">
+          <span class="cap">Document 001 — the house rules of the training club</span>
+          <span class="sq"></span>
+        </div>
+        <div class="hero-bottom">
+          <p>This is not just a gym. It is a <b>code of conduct</b> for people who take play as seriously as work — weights, dance floors, ice baths and long goodbyes at the lounge.</p>
+          <div class="hero-cta">
+            <a class="cta" href="#membership">Adopt the rules</a>
+            <a class="cta ghost" href="#rules">Read them first</a>
+          </div>
+        </div>
+        <figure class="hero-fig">
+          <img src="../crops/p01-sled.jpg" alt="Athlete driving a weighted sled across the training floor">
+          <figcaption><span>Fig. 01 — Effort</span><b>6:04 AM</b></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 01 RULES -->
+    <section id="rules" aria-labelledby="rules-h">
+      <div class="sec-head"><h2 id="rules-h"><span class="no">01</span>&nbsp;&nbsp;House Rules</h2><span>In force at all hours</span></div>
+      <ol class="rules-list">
+        <li class="reveal"><a href="#membership"><span class="rn">R—01</span><span class="rt">Train like it counts</span><span class="rs">Weights · Strength <span class="ar" aria-hidden="true">↗</span></span></a></li>
+        <li class="reveal"><a href="#membership"><span class="rn">R—02</span><span class="rt">Move because you can</span><span class="rs">Hybrid · Functional <span class="ar" aria-hidden="true">↗</span></span></a></li>
+        <li class="reveal"><a href="#membership"><span class="rn">R—03</span><span class="rt">Recover on purpose</span><span class="rs">Ice · Steam <span class="ar" aria-hidden="true">↗</span></span></a></li>
+        <li class="reveal"><a href="#membership"><span class="rn">R—04</span><span class="rt">Dance like nobody indexes it</span><span class="rs">Studio · Zumba <span class="ar" aria-hidden="true">↗</span></span></a></li>
+        <li class="reveal"><a href="#membership"><span class="rn">R—05</span><span class="rt">Stay longer than the workout</span><span class="rs">Lounge · Community <span class="ar" aria-hidden="true">↗</span></span></a></li>
+        <li class="reveal"><a href="#membership"><span class="rn">R—06</span><span class="rt">Rerack. Always rerack.</span><span class="rs">Non-negotiable <span class="ar" aria-hidden="true">↗</span></span></a></li>
+        <li class="reveal"><a href="#membership"><span class="rn">R—07</span><span class="rt">Talk to strangers between sets</span><span class="rs">Community <span class="ar" aria-hidden="true">↗</span></span></a></li>
+      </ol>
+    </section>
+
+    <!-- 02 DISCIPLINES -->
+    <section id="disciplines" aria-labelledby="disc-h">
+      <div class="sec-head"><h2 id="disc-h"><span class="no">02</span>&nbsp;&nbsp;Index of Disciplines</h2><span>One space — more than one way to move</span></div>
+      <div class="table-wrap">
+        <table class="disc">
+          <thead>
+            <tr><th scope="col">No.</th><th scope="col">Discipline</th><th scope="col">Specification</th><th scope="col">Scheduled</th></tr>
+          </thead>
+          <tbody>
+            <tr class="reveal" tabindex="0"><td class="dn">A</td><td class="dt">Weight Training</td><td class="dm">Free weights, platforms and machines chosen for biomechanics, not for show.</td><td class="dd">Daily — 05:30</td></tr>
+            <tr class="reveal" tabindex="0"><td class="dn">B</td><td class="dt">Strength</td><td class="dm">Coached barbell progressions from first pull to competition plate.</td><td class="dd">Mon / Wed / Fri</td></tr>
+            <tr class="reveal" tabindex="0"><td class="dn">C</td><td class="dt">Hybrid</td><td class="dm">Engine work for HYROX, races and anyone who refuses one identity.</td><td class="dd">Tue / Thu / Sat</td></tr>
+            <tr class="reveal" tabindex="0"><td class="dn">D</td><td class="dt">Functional</td><td class="dm">Sleds, carries, ropes and floors built to be used loudly.</td><td class="dd">Daily — circuits</td></tr>
+            <tr class="reveal" tabindex="0"><td class="dn">E</td><td class="dt">Dance &amp; Zumba</td><td class="dm">Choreography under club lights. Cardio for people who hate cardio.</td><td class="dd">Evenings</td></tr>
+            <tr class="reveal" tabindex="0"><td class="dn">F</td><td class="dt">Recovery</td><td class="dm">Ice bath, steam and the discipline of doing nothing, professionally.</td><td class="dd">Bookable</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-foot"><span>Amendments posted weekly</span><span>See front desk for scheduling</span></div>
+    </section>
+
+    <!-- 03 FIGURES -->
+    <section id="figures" aria-labelledby="fig-h">
+      <div class="sec-head"><h2 id="fig-h"><span class="no">03</span>&nbsp;&nbsp;Figures &amp; Evidence</h2><span>Documented on the premises</span></div>
+      <div class="figures">
+        <figure class="reveal f-rec">
+          <img src="../crops/p01-ice.jpg" alt="Ice bath filled with water and ice, photographed in black and white">
+          <figcaption><span>Fig. 02</span><b>Recovery</b></figcaption>
+          <p>Recover like an athlete. Perform like one. The cold is the cheapest coach you will ever hire.</p>
+        </figure>
+        <figure class="reveal f-stu">
+          <img src="../crops/p01-dance.jpg" alt="Dancer silhouetted against magenta studio light">
+          <figcaption><span>Fig. 03</span><b>Studio</b></figcaption>
+          <p>Hobby clubs: dance, yoga, zumba — fitness that does not have to look like lifting weights.</p>
+        </figure>
+        <figure class="reveal f-eqp">
+          <img src="../crops/p01-machine.jpg" alt="Plate-loaded training machine in a bright studio">
+          <figcaption><span>Fig. 04</span><b>Equipment</b></figcaption>
+          <p>Biomechanics-backed machines that target the muscle, not your patience.</p>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 04 MEMBERSHIP -->
+    <section id="membership" aria-labelledby="mem-h">
+      <div class="sec-head"><h2 id="mem-h"><span class="no">04</span>&nbsp;&nbsp;The Rate Card</h2><span>Membership terms</span></div>
+      <div class="member">
+        <div class="member-copy">
+          <h3 class="reveal">Culture is <em>not</em> included in the day pass. It is the day pass.</h3>
+          <p class="reveal">Every tier includes the floor, the studio, the tub and the people. Parking is solved. The air conditioning is industrial grade. The only thing you bring is the intensity.</p>
+          <p class="reveal" style="margin-top:14px"><a class="cta" href="#colophon">Visit the front desk</a></p>
+        </div>
+        <div class="tiers">
+          <a class="tier reveal" href="#colophon"><span class="tn">Trial — one week</span><span class="tp">Free<sup>/trial</sup></span></a>
+          <a class="tier reveal" href="#colophon"><span class="tn">Member — monthly</span><span class="tp">89<sup>/mo</sup></span></a>
+          <a class="tier reveal" href="#colophon"><span class="tn">House — annual</span><span class="tp">890<sup>/yr</sup></span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 COLOPHON -->
+    <footer id="colophon">
+      <div class="ticker" aria-hidden="true">
+        <div class="track">
+          <span>Train <em>/</em> Move <em>/</em> Recover <em>/</em> Connect <em>/</em> Find your core <em>/</em> Become part of the culture <em>/</em>&nbsp;</span>
+          <span>Train <em>/</em> Move <em>/</em> Recover <em>/</em> Connect <em>/</em> Find your core <em>/</em> Become part of the culture <em>/</em>&nbsp;</span>
+        </div>
+      </div>
+      <div class="colophon">
+        <div>
+          <h4>Imprint</h4>
+          <p class="big">Core Culture — Training Club</p>
+          <p style="margin-top:12px;max-width:40ch;font-size:13px;line-height:1.6;opacity:.8">Set in Archivo. Printed on screens of various sizes. All efforts recorded at the premises. This document supersedes every excuse.</p>
+        </div>
+        <div>
+          <h4>Index</h4>
+          <ul>
+            <li><a href="#rules">01 — House rules</a></li>
+            <li><a href="#disciplines">02 — Disciplines</a></li>
+            <li><a href="#figures">03 — Figures</a></li>
+            <li><a href="#membership">04 — Rate card</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Correspondence</h4>
+          <ul>
+            <li><a href="mailto:front.desk@coreculture.club">front.desk@coreculture.club</a></li>
+            <li><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+            <li><a href="#top">Back to document start</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal">
+        <span>© MMXXVI Core Culture</span>
+        <span>Concept 01 — House Rules / Swiss index</span>
+        <span>Rules subject to culture</span>
+      </div>
+    </footer>
+  </main>
+</div>
+<script>
+  // Reveal on intersection
+  const io = new IntersectionObserver((entries)=>{
+    for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }
+  },{threshold:.18, rootMargin:'0px 0px -4% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Rail active state
+  const links=[...document.querySelectorAll('.rail ol a')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  const so=new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const i=secs.indexOf(en.target);
+        links.forEach(l=>l.classList.remove('active'));
+        if(i>-1) links[i].classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  secs.forEach(s=>s&&so.observe(s));
+</script>
+</body>
+</html>

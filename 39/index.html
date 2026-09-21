@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Foundry</title>
+<meta name="description" content="Core Culture — training is a pour. Charge, pour, stamp, cool.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080605'/%3E%3Ccircle cx='16' cy='18' r='7' fill='%23ff7a29'/%3E%3Ccircle cx='16' cy='18' r='4' fill='%23ffd9a0'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700;12..96,800&family=Martian+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080605;
+  --ink:#ece5d8;
+  --dim:rgba(236,229,216,.55);
+  --faint:rgba(236,229,216,.26);
+  --hot:#ff7a29;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Martian Mono",monospace;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--hot);color:#080605}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--hot);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--hot);color:#080605;padding:10px 16px;z-index:300;font-weight:500}
+.skip:focus{left:10px}
+
+#lava{position:fixed;inset:0;z-index:0}
+#heatglow{
+  position:fixed;left:50%;bottom:-12vh;transform:translateX(-50%);
+  width:110vw;height:44vh;z-index:0;pointer-events:none;
+  background:radial-gradient(50% 55% at 50% 100%, rgba(255,110,40,.17), transparent 68%);
+  transition:opacity .4s ease;
+}
+
+.wrap{position:relative;z-index:2}
+header.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(20px,6vw,110px);
+}
+.kicker{font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--hot);margin-bottom:24px}
+h1{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;text-transform:uppercase;
+  font-size:clamp(44px,8vw,130px);line-height:.92;letter-spacing:-.01em;
+}
+h1 em{font-style:normal;color:var(--hot)}
+.lede{margin-top:28px;max-width:34em;color:var(--dim);font-size:12px;line-height:2.2}
+.lede b{color:var(--ink);font-weight:500}
+.temp{
+  margin-top:34px;display:inline-flex;align-items:baseline;gap:14px;
+  border:1px solid rgba(255,122,41,.4);padding:14px 20px;
+  font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--dim);
+}
+.temp b{color:var(--hot);font-weight:500;font-variant-numeric:tabular-nums;font-size:15px}
+
+.stages{display:flex;flex-direction:column}
+.stage{
+  min-height:86vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(24px,5vw,90px);align-items:center;
+  padding:10vh clamp(20px,6vw,110px);
+}
+.stage:nth-child(even){direction:rtl}
+.stage>*{direction:ltr}
+.stage .step{
+  font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--hot);margin-bottom:18px;
+  display:flex;align-items:center;gap:12px;
+}
+.stage .step::before{content:"";width:26px;height:1px;background:var(--hot)}
+.stage h2{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(30px,4.4vw,66px);line-height:.98;
+}
+.stage p{margin-top:20px;max-width:32em;color:var(--dim);font-size:11.5px;line-height:2.25}
+.stage p b{color:var(--ink);font-weight:500}
+.stage .plate{
+  border:1px solid rgba(236,229,216,.18);
+  background:linear-gradient(160deg, rgba(236,229,216,.04), rgba(0,0,0,.3));
+  padding:26px 24px;position:relative;
+}
+.stage .plate::before{
+  content:"";position:absolute;left:14px;top:-7px;width:8px;height:14px;
+  background:var(--bg);border:1px solid rgba(236,229,216,.3);
+  box-shadow:14px 0 0 var(--bg), 14px 0 0 1px rgba(236,229,216,.3);
+}
+.stage .plate ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.stage .plate li{
+  display:flex;justify-content:space-between;gap:12px;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+  border-bottom:1px dashed rgba(236,229,216,.14);padding-bottom:10px;
+}
+.stage .plate li b{color:var(--hot);font-weight:500}
+
+.close{
+  min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  padding:12vh clamp(20px,6vw,110px);
+}
+.close h2{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;text-transform:uppercase;
+  font-size:clamp(30px,5vw,76px);line-height:1;
+}
+.close h2 em{font-style:normal;color:var(--hot)}
+.close p{margin-top:24px;max-width:34em;color:var(--dim);font-size:11.5px;line-height:2.25}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:36px;
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;
+  background:var(--hot);color:#1c0903;padding:19px 42px;font-weight:500;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 46px rgba(255,122,41,.4)}
+footer{
+  padding:26px clamp(20px,6vw,110px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(236,229,216,.08);
+}
+@media (max-width:860px){
+  .stage{grid-template-columns:1fr;min-height:auto;padding:9vh 20px;gap:24px}
+  .temp{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<canvas id="lava" aria-hidden="true"></canvas>
+<div id="heatglow" aria-hidden="true"></div>
+
+<div class="wrap">
+<main id="main">
+  <header class="hero">
+    <p class="kicker">Core Culture · Bay 4, first shift</p>
+    <h1>Training is<br>a <em>pour.</em></h1>
+    <p class="lede">Everything worth being arrived molten once: <b>charged with effort, poured with intent, stamped with a name, cooled with patience.</b> The furnace is lit below. Scroll to run the shift.</p>
+    <p class="temp">Billet temp <b id="temp">1580</b> °C</p>
+  </header>
+
+  <section class="stages" aria-label="The shift">
+    <article class="stage">
+      <div>
+        <p class="step">Stage 01 · Charge</p>
+        <h2>Load the<br>furnace.</h2>
+        <p>Show up heavy: a bag, a bottle, an hour. The furnace takes <b>any scrap of a bad week</b> and burns it at temperature. Nothing you carry in is wasted here.</p>
+      </div>
+      <div class="plate">
+        <ul>
+          <li><span>Charge weight</span><b>yours</b></li>
+          <li><span>Fuel</span><b>frustration, hope</b></li>
+          <li><span>Tapping point</span><b>06:00 / 18:00</b></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div>
+        <p class="step">Stage 02 · Pour</p>
+        <h2>Move while<br>it's molten.</h2>
+        <p>The hour you train is the pour — <b>liquid effort shaped before it sets</b>. Barbells, sled lanes, dance floors: moulds of every size. Pick one and fill it properly.</p>
+      </div>
+      <div class="plate">
+        <ul>
+          <li><span>Moulds</span><b>iron · engine · dance</b></li>
+          <li><span>Pour rate</span><b>steady</b></li>
+          <li><span>Spillage</span><b>normal, wipe later</b></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div>
+        <p class="step">Stage 03 · Stamp</p>
+        <h2>Put a name<br>on it.</h2>
+        <p>Coaches stamp every billet: a program card, a correction, your name chalked on the platform. <b>Unstamped metal is just weight</b>; stamped, it's yours.</p>
+      </div>
+      <div class="plate">
+        <ul>
+          <li><span>Stamp</span><b>coach's card</b></li>
+          <li><span>Batch</span><b>the 6AM crew</b></li>
+          <li><span>Rejects</span><b>none, reruns only</b></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div>
+        <p class="step">Stage 04 · Cool</p>
+        <h2>Let the iron<br>hold its shape.</h2>
+        <p>Quench wrong and it cracks; cool patiently and it keeps an edge for years. <b>Plunge, steam, sleep</b> — the remedy wing is the cooling floor, and it's part of the shift.</p>
+      </div>
+      <div class="plate">
+        <ul>
+          <li><span>Quench</span><b>3° plunge</b></li>
+          <li><span>Anneal</span><b>steam · sauna</b></li>
+          <li><span>Shift ends</span><b>after rest</b></li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="close">
+    <h2>Strike while<br>the iron is <em>you.</em></h2>
+    <p>One membership runs the whole shift: charge, pour, stamp and cool. First week free — clock in, and leave shaped.</p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Clock in — free week</a>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 39 · Foundry</span>
+  </footer>
+</main>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv=document.getElementById('lava');
+  const ctx=cv.getContext('2d');
+  let W=0,H=0,DPR=Math.min(1.6,devicePixelRatio||1);
+  function size(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
+  size();addEventListener('resize',size);
+
+  // stream: blobs fall within a narrow pour band, splash into the pool
+  const N=26;
+  const blobs=[];
+  for(let i=0;i<N;i++)blobs.push({
+    x:0.5+(Math.random()-0.5)*0.055,   // tight pour band
+    y:Math.random(),                    // 0 top → 1 bottom
+    r:8+Math.random()*26,
+    s:0.010+Math.random()*0.02,
+    wob:Math.random()*6.28,
+    wobS:0.02+Math.random()*0.05
+  });
+
+  let temp=1580, target=1580;
+  const tempEl=document.getElementById('temp');
+  const heat=document.getElementById('heatglow');
+
+  function mix(c1,c2,t){
+    return `rgb(${Math.round(c1[0]+(c2[0]-c1[0])*t)},${Math.round(c1[1]+(c2[1]-c1[1])*t)},${Math.round(c1[2]+(c2[2]-c1[2])*t)})`;
+  }
+  function frame(now){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    target=max>0?(1-Math.min(1,Math.max(0,scrollY/max))):1;
+    temp+=(target*1580-temp)*0.06;
+    const t=Math.max(0,Math.min(1,temp/1580));   // 1 = molten
+    tempEl.textContent=String(Math.round(temp)).padStart(4,'0');
+    heat.style.opacity=(0.25+t*0.75).toFixed(2);
+
+    ctx.clearRect(0,0,W,H);
+    const coreC1=[255,244,214],coreC2=[110,32,10];
+    const outC1=[255,122,41],outC2=[42,14,8];
+    const poolY=H*1.02, poolCx=W*0.5;
+
+    // splash sparks bursting from the pool
+    for(let i=0;i<16;i++){
+      const phase=(t*0.55+i*0.137)%1;
+      const dirX=(i%2?1:-1);
+      const sx=poolCx+Math.sin(i*2.7)*W*0.012+dirX*phase*W*0.045;
+      const sy=poolY-Math.sin(phase*Math.PI)*H*(0.04+((i*37)%10)/10*0.05);
+      ctx.strokeStyle=`rgba(255,${150+((i*53)%80)},60,${((1-phase)*0.8*t).toFixed(3)})`;
+      ctx.lineWidth=1.6;
+      ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+dirX*7,sy-5);ctx.stroke();
+    }
+
+    // splash pool at the base of the pour
+    const pool=ctx.createRadialGradient(poolCx,poolY-H*0.02,0,poolCx,poolY,W*0.3);
+    pool.addColorStop(0,mix([255,236,190],[70,22,8],1-t));
+    pool.addColorStop(0.45,mix(outC1,outC2,1-t));
+    pool.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.globalAlpha=0.3+t*0.65;
+    ctx.fillStyle=pool;
+    ctx.beginPath();ctx.ellipse(poolCx,poolY,W*0.3,H*0.14,0,0,7);ctx.fill();
+    ctx.globalAlpha=1;
+
+    // continuous molten stream core (tapered band)
+    const scTop=W*0.007, scBot=W*0.022;
+    const stream=ctx.createLinearGradient(0,0,0,poolY);
+    stream.addColorStop(0,`rgba(255,214,140,${(0.55*t+0.08).toFixed(3)})`);
+    stream.addColorStop(1,`rgba(255,140,50,${(0.7*t+0.1).toFixed(3)})`);
+    ctx.fillStyle=stream;
+    ctx.beginPath();
+    ctx.moveTo(poolCx-scTop/2,-4);
+    ctx.lineTo(poolCx+scTop/2,-4);
+    ctx.lineTo(poolCx+scBot/2,poolY);
+    ctx.lineTo(poolCx-scBot/2,poolY);
+    ctx.closePath();ctx.fill();
+    // hot inner line
+    ctx.fillStyle=`rgba(255,246,220,${(0.5*t).toFixed(3)})`;
+    ctx.fillRect(poolCx-scTop*0.18,-4,scTop*0.36,poolY+4);
+
+    // falling droplets — shaded globs with offset hot core + dark rim
+    for(const b of blobs){
+      if(!reduced){
+        b.y+=b.s*(0.5+t*1.6);
+        b.wob+=b.wobS;
+        if(b.y>1.02){b.y=-0.05-Math.random()*0.3;b.x=0.5+(Math.random()-0.5)*0.055;}
+      }
+      const bx=(b.x+Math.sin(b.wob)*0.012)*W;
+      const by=b.y*H;
+      const rad=b.r*(0.6+t*0.9);
+      const g=ctx.createRadialGradient(bx-rad*0.3,by-rad*0.35,rad*0.06,bx,by,rad);
+      g.addColorStop(0,mix(coreC1,coreC2,1-t));
+      g.addColorStop(0.34,`rgba(255,196,110,${(0.35+t*0.55).toFixed(3)})`);
+      g.addColorStop(0.72,mix(outC1,outC2,1-t));
+      g.addColorStop(1,'rgba(16,5,2,0)');
+      ctx.globalAlpha=0.5+t*0.45;
+      ctx.fillStyle=g;
+      ctx.beginPath();ctx.arc(bx,by,rad,0,7);ctx.fill();
+      // specular dot on larger globs
+      if(rad>20){
+        ctx.fillStyle=`rgba(255,248,230,${(0.5*t).toFixed(3)})`;
+        ctx.beginPath();ctx.arc(bx-rad*0.32,by-rad*0.36,rad*0.09,0,7);ctx.fill();
+      }
+    }
+    ctx.globalAlpha=1;
+    if(!reduced)requestAnimationFrame(frame);
+  }
+  if(!reduced){requestAnimationFrame(frame);addEventListener('scroll',()=>{},{passive:true});}
+  else{
+    // static medium-heat frame
+    temp=900;
+    frame(performance.now());
+    addEventListener('scroll',()=>{temp=Math.max(200,1580-scrollY/8);frame(performance.now());},{passive:true});
+  }
+})();
+</script>
+</body>
+</html>

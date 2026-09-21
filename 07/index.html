@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — One Space</title>
+<meta name="description" content="Core Culture Training Club — one space, six rooms, more than one way to move. Walk through sideways.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141414'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23f4f1e8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4f1e8;
+  --ink:#141414;
+  --room-ink:#f4f1e8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--ink);color:var(--paper);
+  font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+.mono{font-family:"Space Mono",monospace}
+::selection{background:var(--paper);color:var(--ink)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:10px;background:var(--paper);color:var(--ink);padding:10px 16px;z-index:300;font-weight:600}
+.skip:focus{left:10px}
+:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+
+/* ---------- fixed chrome ---------- */
+.chrome-top{
+  position:fixed;top:0;left:0;right:0;z-index:120;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px clamp(18px,3vw,40px);
+  mix-blend-mode:difference;
+}
+.chrome-top .wm{font-weight:700;letter-spacing:.06em;font-size:15px;text-transform:uppercase}
+.chrome-top .idx{display:flex;gap:14px}
+.chrome-top .idx a{
+  text-decoration:none;font-family:"Space Mono";font-size:11px;
+  opacity:.55;transition:opacity .2s ease;
+}
+.chrome-top .idx a:hover{opacity:1}
+.corridor{
+  position:fixed;left:clamp(18px,3vw,40px);right:clamp(18px,3vw,40px);bottom:26px;z-index:120;
+  mix-blend-mode:difference;
+}
+.corridor .line{height:1px;background:rgba(244,241,232,.35);position:relative}
+.corridor .tick{
+  position:absolute;top:-4px;width:1px;height:9px;background:rgba(244,241,232,.6);
+  transform:translateX(-50%);
+}
+.corridor .dot{
+  position:absolute;top:-3.5px;width:8px;height:8px;border-radius:50%;background:var(--paper);
+  transform:translateX(-50%);transition:left .15s linear;
+}
+.corridor .lbl{
+  position:absolute;top:-30px;transform:translateX(-50%);
+  font-family:"Space Mono";font-size:10px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+}
+.hint{
+  position:fixed;bottom:44px;right:clamp(18px,3vw,40px);z-index:120;
+  font-family:"Space Mono";font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  mix-blend-mode:difference;opacity:.7;
+}
+
+/* ---------- horizontal track ---------- */
+.track{
+  display:flex;flex-direction:row;
+  height:100vh; height:100dvh;
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+}
+.track::-webkit-scrollbar{display:none}
+.room{
+  position:relative;flex:0 0 100vw;height:100%;
+  scroll-snap-align:start;
+  display:grid;grid-template-columns:1.1fr .9fr;
+  overflow:hidden;
+}
+.room .col-a{display:flex;flex-direction:column;justify-content:space-between;padding:clamp(76px,11vh,110px) clamp(22px,3.4vw,56px) clamp(70px,11vh,104px)}
+.room .col-b{position:relative;overflow:hidden}
+.room .col-b img{width:100%;height:100%;object-fit:cover}
+.room .col-b .tint{position:absolute;inset:0}
+.room .big{
+  font-weight:700;letter-spacing:-.03em;line-height:.82;
+  font-size:clamp(70px,15.5vh,190px);
+  text-transform:uppercase;
+}
+.room .rname{font-size:clamp(20px,2.6vh,30px);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-top:14px}
+.room .rlabel{font-family:"Space Mono";font-size:11px;letter-spacing:.22em;text-transform:uppercase;opacity:.75}
+.room .desc{max-width:38ch;font-size:clamp(14px,1.6vh,17px);line-height:1.65;opacity:.86}
+.room .facts{display:flex;gap:26px;flex-wrap:wrap;font-family:"Space Mono";font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.room .facts b{display:block;font-size:13px;margin-top:4px}
+.room .next{
+  position:absolute;right:clamp(18px,2.6vw,44px);top:50%;transform:translateY(-50%);
+  writing-mode:vertical-rl;
+  font-family:"Space Mono";font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;
+  text-decoration:none;opacity:.6;transition:opacity .2s ease,letter-spacing .25s ease;
+}
+.room .next:hover{opacity:1;letter-spacing:.42em}
+@media (max-width:900px){.room{grid-template-columns:1fr}.room .col-b{display:none}}
+
+/* room color worlds */
+.r1{background:#f4f1e8;color:#141414}
+.r2{background:#121110;color:#f4f1e8}
+.r3{background:#2a0e22;color:#ffd9ec}
+.r4{background:#0c1c26;color:#cfe9f5}
+.r5{background:#1c2a14;color:#e4f0d0}
+.r6{background:#b3271d;color:#ffe9e6}
+.r2 .col-b img{filter:grayscale(.4) contrast(1.1) brightness(.85)}
+.r3 .col-b img{filter:saturate(1.15) contrast(1.05)}
+.r4 .col-b img{filter:grayscale(.2) brightness(.95)}
+.r5 .col-b img{filter:saturate(.9)}
+.r6 .col-b img{filter:contrast(1.05)}
+.r3 .tint{background:linear-gradient(200deg, rgba(42,14,34,.55), rgba(42,14,34,.1))}
+.r4 .tint{background:linear-gradient(200deg, rgba(12,28,38,.55), rgba(12,28,38,.05))}
+
+/* lobby details */
+.r1 .door{
+  display:inline-block;margin-top:8px;text-decoration:none;
+  border:1.5px solid #141414;padding:14px 26px;
+  font-family:"Space Mono";font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+  transition:background .2s ease,color .2s ease;
+}
+.r1 .door:hover{background:#141414;color:#f4f1e8}
+.r1 .meta-row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+
+/* CTA room */
+.r6 .cols{display:flex;flex-direction:column;justify-content:center;gap:22px}
+.r6 .door{
+  align-self:flex-start;text-decoration:none;
+  background:#ffe9e6;color:#b3271d;padding:16px 30px;
+  font-family:"Space Mono";font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  transition:transform .15s ease,box-shadow .15s ease;
+  box-shadow:5px 5px 0 rgba(0,0,0,.35);
+}
+.r6 .door:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 rgba(0,0,0,.35)}
+
+/* ---------- mobile: vertical rooms ---------- */
+@media (max-width:900px){
+  .track{flex-direction:column;overflow-x:hidden;overflow-y:visible;height:auto;scroll-snap-type:none}
+  .room{flex:0 0 auto;height:auto;min-height:88vh;grid-template-columns:1fr;scroll-snap-align:none}
+  .room .col-a{padding:90px 22px 60px;gap:26px}
+  .room .big{font-size:clamp(46px,19vw,120px)}
+  .room .next{display:none}
+  .corridor,.hint,.chrome-top .idx{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .track{scroll-snap-type:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#lobby">Skip to rooms</a>
+
+<header class="chrome-top">
+  <div class="wm">Core Culture</div>
+  <nav class="idx" aria-label="Rooms">
+    <a href="#lobby">001</a>
+    <a href="#iron">002</a>
+    <a href="#studio">003</a>
+    <a href="#remedy">004</a>
+    <a href="#lounge">005</a>
+    <a href="#arrival">006</a>
+  </nav>
+</header>
+
+<div class="corridor" aria-hidden="true">
+  <span class="lbl" id="roomLbl">001 — Lobby</span>
+  <div class="line">
+    <span class="tick" style="left:0%"></span>
+    <span class="tick" style="left:20%"></span>
+    <span class="tick" style="left:40%"></span>
+    <span class="tick" style="left:60%"></span>
+    <span class="tick" style="left:80%"></span>
+    <span class="tick" style="left:100%"></span>
+    <span class="dot" id="dot" style="left:0%"></span>
+  </div>
+</div>
+<div class="hint" id="hint">Scroll — the club goes sideways →</div>
+
+<main class="track" id="track" role="region" aria-label="Club walkthrough — scrolls sideways on desktop, downwards on mobile">
+
+  <!-- 001 LOBBY -->
+  <section class="room r1" id="lobby" aria-label="Room 001 — Lobby">
+    <div class="col-a">
+      <div class="rlabel mono">001 / Lobby — start here</div>
+      <div>
+        <div class="big">One<br>space.</div>
+        <div class="rname">More than one way to move</div>
+      </div>
+      <div class="meta-row">
+        <p class="desc">Six rooms under one roof: iron and engines, a floor that dances, water at four degrees, a lounge that keeps you, and a parking lot that never fights back. Walk through sideways.</p>
+        <a class="door" href="#iron">Enter room 002 →</a>
+      </div>
+    </div>
+    <div class="col-b">
+      <img src="../crops/p05-cover.jpg" alt="Dancer silhouetted in warm studio light" style="object-position:center 30%">
+      <div class="tint" style="background:linear-gradient(90deg, rgba(244,241,232,.25), transparent 40%)"></div>
+    </div>
+  </section>
+
+  <!-- 002 IRON -->
+  <section class="room r2" id="iron" aria-label="Room 002 — Iron Room">
+    <div class="col-a">
+      <div class="rlabel mono">002 / Iron room</div>
+      <div>
+        <div class="big">Lift<br>heavy.</div>
+        <div class="rname">Platforms · racks · calibrated plates</div>
+      </div>
+      <div class="facts">
+        <span>Hours<b>05:30 — 23:00</b></span>
+        <span>Racks<b>12</b></span>
+        <span>Chalk<b>Provided</b></span>
+      </div>
+      <p class="desc">Coached strength from first pull to competition plate, machines chosen for biomechanics — the muscle gets targeted, not your patience.</p>
+    </div>
+    <div class="col-b">
+      <img src="../crops/p04-sled.jpg" alt="Athlete gripping a weighted sled under low light">
+    </div>
+    <a class="next" href="#studio">Next — 003 Studio →</a>
+  </section>
+
+  <!-- 003 STUDIO -->
+  <section class="room r3" id="studio" aria-label="Room 003 — Dance Studio">
+    <div class="col-a">
+      <div class="rlabel mono">003 / Dance studio</div>
+      <div>
+        <div class="big">Move<br>loud.</div>
+        <div class="rname">Dance · zumba · yoga under neon</div>
+      </div>
+      <div class="facts">
+        <span>Doors<b>19:00</b></span>
+        <span>Floor<b>Sprung, 180 m²</b></span>
+        <span>Judgement<b>Zero</b></span>
+      </div>
+      <p class="desc">Hobby clubs for people who would rather not call it cardio. Bring a friend; leave sweeter than a spin league.</p>
+    </div>
+    <div class="col-b">
+      <img src="../crops/p03-plate.jpg" alt="Dancer silhouetted against magenta light">
+      <div class="tint"></div>
+    </div>
+    <a class="next" href="#remedy">Next — 004 Remedy →</a>
+  </section>
+
+  <!-- 004 REMEDY -->
+  <section class="room r4" id="remedy" aria-label="Room 004 — Remedy Wing">
+    <div class="col-a">
+      <div class="rlabel mono">004 / Remedy wing</div>
+      <div>
+        <div class="big">Get<br>cold.</div>
+        <div class="rname">Ice bath · steam · four degrees</div>
+      </div>
+      <div class="facts">
+        <span>Tub<b>4°C</b></span>
+        <span>Protocol<b>3 minutes</b></span>
+        <span>Booking<b>By slot</b></span>
+      </div>
+      <p class="desc">Recover like an athlete, perform like one. The cheapest coach in the building works pro bono, at night, in steel.</p>
+    </div>
+    <div class="col-b">
+      <img src="../crops/p04-ice.jpg" alt="Ice bath filled with ice and water">
+      <div class="tint"></div>
+    </div>
+    <a class="next" href="#lounge">Next — 005 Lounge →</a>
+  </section>
+
+  <!-- 005 LOUNGE -->
+  <section class="room r5" id="lounge" aria-label="Room 005 — Lounge">
+    <div class="col-a">
+      <div class="rlabel mono">005 / Lounge</div>
+      <div>
+        <div class="big">Stay<br>long.</div>
+        <div class="rname">Work-lift balance</div>
+      </div>
+      <div class="facts">
+        <span>Coffee<b>Unmetered</b></span>
+        <span>Seats<b>40</b></span>
+        <span>Clocks<b>None</b></span>
+      </div>
+      <p class="desc">Got a meeting before your workout? Or work to finish after? The session ends; the culture doesn't.</p>
+    </div>
+    <div class="col-b">
+      <img src="../crops/p05-field.jpg" alt="A figure working at a desk in the middle of a green field">
+    </div>
+    <a class="next" href="#arrival">Last — 006 Arrival →</a>
+  </section>
+
+  <!-- 006 ARRIVAL / CTA -->
+  <section class="room r6" id="arrival" aria-label="Room 006 — Arrival">
+    <div class="col-a cols">
+      <div class="rlabel mono">006 / Arrival — parking, finally</div>
+      <div>
+        <div class="big">Your<br>turn.</div>
+        <div class="rname">Become part of the culture</div>
+      </div>
+      <p class="desc">First week free. Iron, engines, dance, cold water, coffee and parking — all under one roof, all on one membership.</p>
+      <a class="door" href="mailto:front.desk@coreculture.club">Claim your first week →</a>
+      <div class="facts">
+        <span>Member<b>89/mo</b></span>
+        <span>House<b>890/yr</b></span>
+        <span>front.desk@coreculture.club<b>Correspondence</b></span>
+      </div>
+    </div>
+    <div class="col-b">
+      <img src="../crops/p07-park.jpg" alt="Snow-dusted cars parked in rows at night">
+    </div>
+  </section>
+</main>
+
+<script>
+  const track=document.getElementById('track');
+  const dot=document.getElementById('dot');
+  const lbl=document.getElementById('roomLbl');
+  const rooms=[...document.querySelectorAll('.room')];
+  const names=rooms.map(r=>r.getAttribute('aria-label').replace('Room ','').replace(' — ',' — '));
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile=matchMedia('(max-width: 900px)');
+
+  function onScroll(){
+    const max=track.scrollWidth-track.clientWidth;
+    const p=max>0?track.scrollLeft/max:0;
+    dot.style.left=(p*100)+'%';
+    let i=Math.round(p*(rooms.length-1));
+    i=Math.max(0,Math.min(rooms.length-1,i));
+    lbl.textContent=names[i].replace('aria-label','');
+    lbl.textContent=rooms[i].id==='lobby'?'001 — Lobby':
+      rooms[i].id==='iron'?'002 — Iron room':
+      rooms[i].id==='studio'?'003 — Dance studio':
+      rooms[i].id==='remedy'?'004 — Remedy wing':
+      rooms[i].id==='lounge'?'005 — Lounge':'006 — Arrival';
+  }
+  track.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  // wheel -> horizontal translation (desktop, motion allowed)
+  if(!mobile.matches && !reduced){
+    addEventListener('wheel',e=>{
+      if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){
+        e.preventDefault();
+        track.scrollLeft+=e.deltaY;
+      }
+    },{passive:false});
+  }
+  // keyboard arrows walk the rooms
+  addEventListener('keydown',e=>{
+    if(mobile.matches) return;
+    const order=rooms.map(r=>r.id);
+    const cur=Math.round((track.scrollLeft/(track.scrollWidth-track.clientWidth||1))*(rooms.length-1));
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();go(Math.min(order.length-1,cur+1));}
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go(Math.max(0,cur-1));}
+  });
+  function go(i){
+    const r=rooms[i];
+    track.scrollTo({left:r.offsetLeft-track.offsetLeft,behavior:reduced?'auto':'smooth'});
+  }
+  // index + next links use smooth walk
+  document.querySelectorAll('.chrome-top .idx a, .next, .door[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id=a.getAttribute('href').slice(1);
+      const r=document.getElementById(id);
+      if(!r) return;
+      e.preventDefault();
+      const i=rooms.indexOf(r);
+      if(mobile.matches){ r.scrollIntoView({behavior:reduced?'auto':'smooth'}); }
+      else go(i);
+      history.replaceState(null,'','#'+id);
+    });
+  });
+</script>
+</body>
+</html>

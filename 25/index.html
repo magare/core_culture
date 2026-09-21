@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Orrery</title>
+<meta name="description" content="Core Culture — the weekly schedule as a working orrery. Seven days, seven orbits, every class a body in motion.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2304060a'/%3E%3Cellipse cx='16' cy='16' rx='12' ry='5' fill='none' stroke='%23cfe4ff' stroke-width='.8' opacity='.5'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23f3e3c0'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#04060a;
+  --ink:#dbe7f5;
+  --dim:rgba(219,231,245,.5);
+  --faint:rgba(219,231,245,.24);
+  --ring:rgba(219,231,245,.16);
+  --core:#f3e3c0;
+  --ice:#9cc7ff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:
+    radial-gradient(120% 90% at 50% 110%, rgba(156,199,255,.05), transparent 55%),
+    var(--void);
+  color:var(--ink);
+  font-family:"IBM Plex Mono",monospace;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--core);color:#04060a}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ice);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--ice);color:#04060a;padding:10px 16px;z-index:200;font-weight:500}
+.skip:focus{left:10px}
+
+header.top{
+  position:fixed;top:0;left:0;right:0;z-index:20;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  padding:22px clamp(18px,3.4vw,44px);pointer-events:none;
+}
+.brand{pointer-events:auto}
+.brand h1{
+  font-family:"Marcellus",serif;font-weight:400;font-size:clamp(17px,1.7vw,23px);
+  letter-spacing:.3em;text-transform:uppercase;
+}
+.brand p{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+.daynav{pointer-events:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.daynav button{
+  font-family:"IBM Plex Mono";font-size:9.5px;letter-spacing:.22em;
+  background:transparent;color:var(--dim);border:1px solid var(--ring);
+  padding:8px 11px;cursor:pointer;transition:all .2s ease;
+}
+.daynav button:hover{color:var(--ink);border-color:rgba(219,231,245,.4)}
+.daynav button[aria-pressed="true"]{background:var(--ink);color:#04060a;border-color:var(--ink)}
+.daynav button:focus-visible{outline:2px solid var(--ice);outline-offset:2px}
+
+/* ---------- the orrery ---------- */
+#field{
+  position:fixed;inset:0;display:grid;place-items:center;
+  cursor:grab;touch-action:none;user-select:none;
+}
+#field.dragging{cursor:grabbing}
+#field svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);overflow:visible}
+#field svg ellipse{fill:none;stroke:var(--ring);stroke-width:1}
+#field svg ellipse.hot{stroke:rgba(243,227,192,.5)}
+
+#core{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:clamp(64px,9vw,110px);aspect-ratio:1;border-radius:50%;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='90' height='90' filter='url(%23s)' opacity='0.3'/%3E%3C/svg%3E"),
+    radial-gradient(circle at 40% 34%, #fffdf6 0%, #fff4d8 20%, var(--core) 46%, #c49a4e 78%, #7c5f2c 100%);
+  background-blend-mode: overlay, normal;
+  box-shadow:0 0 44px rgba(243,227,192,.4), 0 0 130px rgba(243,227,192,.16), 0 0 220px 40px rgba(243,227,192,.1), inset -10px -14px 30px rgba(90,62,20,.55);
+  display:grid;place-items:center;z-index:5;
+  animation:breathe 6s ease-in-out infinite;
+}
+#core::after{
+  content:"CORE";font-size:8.5px;letter-spacing:.4em;color:rgba(4,6,10,.72);font-weight:500;
+  transform:translateX(.2em);
+}
+@keyframes breathe{
+  0%,100%{box-shadow:0 0 44px rgba(243,227,192,.4), 0 0 130px rgba(243,227,192,.16)}
+  50%{box-shadow:0 0 60px rgba(243,227,192,.55), 0 0 170px rgba(243,227,192,.22)}
+}
+.orbitee{
+  position:absolute;left:0;top:0;z-index:8;
+  display:flex;align-items:center;gap:8px;
+  background:rgba(6,10,16,.82);border:1px solid rgba(219,231,245,.3);
+  padding:7px 11px;border-radius:999px;white-space:nowrap;
+  cursor:pointer;transition:border-color .2s ease, background .2s ease;
+  will-change:transform;
+}
+.orbitee:hover,.orbitee.sel{border-color:var(--core);background:rgba(10,14,22,.95)}
+.orbitee .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.orbitee .nm{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.orbitee .tm{font-size:9px;color:var(--dim)}
+.orbitee .day{font-size:8px;color:var(--core);letter-spacing:.2em}
+
+/* ---------- side panels ---------- */
+.panel{
+  position:fixed;z-index:20;left:clamp(18px,3.4vw,44px);bottom:clamp(18px,3.4vw,44px);
+  max-width:min(430px,86vw);pointer-events:none;
+}
+.panel .intro{
+  pointer-events:auto;border-left:1px solid var(--ring);padding-left:18px;
+}
+.panel .intro p{font-size:10.5px;letter-spacing:.14em;line-height:2;color:var(--dim);text-transform:uppercase}
+.panel .intro p b{color:var(--ink);font-weight:400}
+#card{
+  margin-top:18px;pointer-events:auto;
+  background:rgba(6,10,16,.9);border:1px solid rgba(219,231,245,.28);
+  padding:20px 22px;display:none;backdrop-filter:blur(6px);
+}
+#card.show{display:block}
+#card .head{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+#card h2{font-family:"Marcellus",serif;font-weight:400;font-size:22px;letter-spacing:.06em;text-transform:uppercase}
+#card .day{font-size:9.5px;letter-spacing:.26em;color:var(--core);text-transform:uppercase}
+#card p{margin-top:12px;font-size:11px;line-height:2;color:var(--dim);letter-spacing:.04em}
+#card .row{margin-top:16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+#card .book{
+  text-decoration:none;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+  border:1px solid var(--core);color:var(--core);padding:10px 16px;transition:all .2s ease;
+}
+#card .book:hover{background:var(--core);color:#04060a}
+#card .close{
+  background:none;border:0;color:var(--faint);cursor:pointer;font-family:inherit;
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;padding:6px;
+}
+#card .close:hover{color:var(--ink)}
+
+.legend{
+  position:fixed;right:clamp(18px,3.4vw,44px);bottom:clamp(18px,3.4vw,44px);z-index:20;
+  display:flex;flex-direction:column;gap:7px;font-size:8.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--dim);pointer-events:none;text-align:right;
+}
+.legend span{display:flex;gap:8px;justify-content:flex-end;align-items:center}
+.legend i{width:7px;height:7px;border-radius:50%}
+
+@media (max-width:900px){
+  .panel{left:14px;right:14px;bottom:14px;max-width:none}
+  .legend{display:none}
+  .daynav button{padding:7px 8px;font-size:8.5px}
+  .orbitee{padding:5px 8px}
+  .orbitee .tm,.orbitee .day{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  #core{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#card">Skip to class details</a>
+
+<header class="top">
+  <div class="brand">
+    <h1>Core Culture</h1>
+    <p>the week · in orbit</p>
+  </div>
+  <div class="daynav" role="group" aria-label="Filter days">
+    <button data-day="all" aria-pressed="true">ALL</button>
+    <button data-day="0" aria-pressed="false">MON</button>
+    <button data-day="1" aria-pressed="false">TUE</button>
+    <button data-day="2" aria-pressed="false">WED</button>
+    <button data-day="3" aria-pressed="false">THU</button>
+    <button data-day="4" aria-pressed="false">FRI</button>
+    <button data-day="5" aria-pressed="false">SAT</button>
+    <button data-day="6" aria-pressed="false">SUN</button>
+  </div>
+</header>
+
+<div id="field" aria-label="Class schedule orrery — drag to tilt, select a class">
+  <svg id="ringsvg" width="1000" height="1000" aria-hidden="true"></svg>
+  <div id="core" aria-hidden="true"></div>
+  <!-- orbiting class chips injected -->
+</div>
+
+<div class="panel">
+  <div class="intro">
+    <p><b>Every class is a body in motion.</b><br>
+    Seven days orbit the core. Drag up or down to tilt the week, drag sideways to spin it. Select a class to read its ephemeris.</p>
+  </div>
+  <div id="card" role="dialog" aria-label="Class details">
+    <div class="head">
+      <h2 id="cardname">—</h2>
+      <span class="day" id="cardday">—</span>
+    </div>
+    <p id="carddesc">—</p>
+    <div class="row">
+      <a class="book" id="cardbook" href="mailto:front.desk@coreculture.club">Reserve a spot</a>
+      <button class="close" id="cardclose">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="legend" aria-hidden="true">
+  <span><i style="background:#9cc7ff"></i> strength &amp; engine</span>
+  <span><i style="background:#f3a25c"></i> hybrid &amp; run</span>
+  <span><i style="background:#e88ab0"></i> dance &amp; flow</span>
+  <span><i style="background:#8fe3c0"></i> recovery &amp; mobility</span>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DAYS=['MON','TUE','WED','THU','FRI','SAT','SUN'];
+  const CLASSES=[
+    // day, name, time, color-key, radius-idx, description
+    {d:0,n:'IRON 06',t:'06:00',c:'#9cc7ff',r:0,desc:'Barbell fundamentals before sunrise. Squat, hinge, press — the quietest hour on the iron floor.'},
+    {d:0,n:'ENGINE',t:'18:30',c:'#f3a25c',r:1,desc:'Sleds and intervals. Forty-five minutes that make the stairs outside feel decorative.'},
+    {d:0,n:'DEEP STRETCH',t:'20:45',c:'#8fe3c0',r:2,desc:'Slow mobility to close the day. Breath-led, candle-lit, deeply unpopular with your excuses.'},
+    {d:1,n:'HYBRID 45',t:'07:00',c:'#f3a25c',r:0,desc:'Lift heavy, run fast, repeat. The class that refuses to pick a lane so you never have to.'},
+    {d:1,n:'HOUSE FLOOR',t:'19:30',c:'#e88ab0',r:1,desc:'Dance choreography at volume. Cardio in disguise — the mirror stays off, the bass does not.'},
+    {d:2,n:'IRON 06',t:'06:00',c:'#9cc7ff',r:0,desc:'Barbell club, second serving. Progressive loading for the mid-week body.'},
+    {d:2,n:'CIRCUITS',t:'17:45',c:'#9cc7ff',r:1,desc:'Stations, partners and a clock you will learn to distrust. Functional work at honest pace.'},
+    {d:2,n:'COLD OPEN',t:'20:30',c:'#8fe3c0',r:2,desc:'Plunge, steam, breathe. Three minutes in the tub and a longer life in your training.'},
+    {d:3,n:'STRENGTH LAB',t:'07:00',c:'#9cc7ff',r:0,desc:'Technique first: film review, tempo work, and numbers that go up because they should.'},
+    {d:3,n:'NEON YOGA',t:'19:45',c:'#e88ab0',r:1,desc:'Flow under low light. Flexibility for people who usually only stretch the truth.'},
+    {d:4,n:'IRON 06',t:'06:00',c:'#9cc7ff',r:0,desc:'The Friday barbell. End the week heavier than you started it.'},
+    {d:4,n:'DANCE FLOOR',t:'19:30',c:'#e88ab0',r:1,desc:'Friday night session — half class, half party, fully the best cardio you never notice.'},
+    {d:5,n:'RACE DAY',t:'09:00',c:'#f3a25c',r:0,desc:'Hybrid simulation. Sled, run, row — Saturday is for people with a start line in their eyes.'},
+    {d:5,n:'COLD & SLOW',t:'11:30',c:'#8fe3c0',r:1,desc:'Long recovery session: plunge, sauna cycles and mobility at a conversational pace.'},
+    {d:6,n:'LONG COFFEE',t:'10:00',c:'#8fe3c0',r:0,desc:'The lounge\'s flagship class. Community hours — stretching optional, staying late likely.'},
+    {d:6,n:'OPEN FLOOR',t:'16:00',c:'#9cc7ff',r:1,desc:'Open training with a coach on the floor. Bring a plan, or borrow one of ours.'}
+  ];
+  const SPEED=[0.05,0.034,0.024]; // angular speed per radius ring
+  const RADII=[0.30,0.42,0.545];  // of field size
+
+  const field=document.getElementById('field');
+  const svg=document.getElementById('ringsvg');
+  const card=document.getElementById('card');
+  const coreEl=document.getElementById('core');
+
+  let tilt=0.42;            // ry/rx ratio
+  let spin=reduced?0:1;     // time multiplier
+  let extraSpin=0;
+  let focusDay='all';
+  const nodes=[];           // {el, cls, phase, ringEl}
+
+  // build planets
+  CLASSES.forEach((c,i)=>{
+    const el=document.createElement('button');
+    el.className='orbitee';
+    el.setAttribute('aria-label',c.n+' '+DAYS[c.d]+' '+c.t);
+    el.innerHTML=`<span class="dot" style="background:${c.c}"></span><span class="nm">${c.n}</span><span class="tm">${c.t}</span><span class="day">${DAYS[c.d]}</span>`;
+    field.appendChild(el);
+    nodes.push({el,c,phase:(i*2.39996)%6.2832,ring:svg.querySelector('#ring'+c.r)});
+    el.addEventListener('click',()=>openCard(c,el));
+  });
+
+  // rings
+  [0,1,2].forEach(i=>{
+    const e=document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    e.id='ring'+i;
+    svg.appendChild(e);
+  });
+
+  let W=0,H=0;
+  function size(){
+    W=innerWidth;H=innerHeight;
+    svg.setAttribute('width',W);svg.setAttribute('height',H);
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  }
+  size();addEventListener('resize',size);
+
+  function frame(t){
+    const cx=W/2, cy=H/2*1.0;
+    const baseR=Math.min(W,H);
+    [0,1,2].forEach(i=>{
+      const e=svg.querySelector('#ring'+i);
+      const rx=baseR*RADII[i], ry=rx*tilt;
+      e.setAttribute('cx',cx);e.setAttribute('cy',cy);
+      e.setAttribute('rx',rx);e.setAttribute('ry',ry);
+      e.setAttribute('class',(focusDay==='all'||focusDay!=='all')?'':'');
+    });
+    const time=reduced?10:t*0.001*spin+extraSpin;
+    nodes.forEach(nd=>{
+      const rx=baseR*RADII[nd.c.r], ry=rx*tilt;
+      const th=nd.phase+time*SPEED[nd.c.r];
+      const x=cx+Math.cos(th)*rx;
+      const y=cy+Math.sin(th)*ry;
+      const depth=(Math.sin(th)+1)/2;          // 0 far → 1 near
+      const s=0.78+0.30*depth;
+      const far=Math.sin(th)<0;
+      nd.el.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%) scale(${s.toFixed(3)})`;
+      nd.el.style.zIndex=far?2:8;
+      nd.el.style.opacity=(focusDay!=='all'&&nd.c.d!==+focusDay)?0.22:1;
+      nd.el.style.display=(focusDay!=='all'&&nd.c.d!==+focusDay)?'none':'flex';
+    });
+    // ring highlight by day filter
+    svg.querySelectorAll('ellipse').forEach((e,i)=>{
+      const used=nodes.some(nd=>nd.c.r===i&&(focusDay==='all'||nd.c.d===+focusDay));
+      e.setAttribute('stroke',used?'rgba(219,231,245,.3)':'rgba(219,231,245,.08)');
+    });
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // drag: vertical = tilt, horizontal = spin
+  let dragging=false,lx=0,ly=0;
+  field.addEventListener('pointerdown',e=>{
+    if(e.target.closest('.orbitee'))return;
+    dragging=true;lx=e.clientX;ly=e.clientY;
+    field.classList.add('dragging');field.setPointerCapture(e.pointerId);
+  });
+  field.addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    const dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;
+    tilt=Math.max(0.22,Math.min(0.92,tilt+dy*0.0022));
+    extraSpin+=dx*0.004;
+  });
+  const endDrag=()=>{dragging=false;field.classList.remove('dragging')};
+  field.addEventListener('pointerup',endDrag);
+  field.addEventListener('pointercancel',endDrag);
+  // wheel nudges time
+  addEventListener('wheel',e=>{extraSpin+=e.deltaY*0.0006;},{passive:true});
+
+  // day filter
+  document.querySelectorAll('.daynav button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.daynav button').forEach(x=>x.setAttribute('aria-pressed','false'));
+      b.setAttribute('aria-pressed','true');
+      focusDay=b.dataset.day;
+    });
+  });
+
+  // detail card
+  let selEl=null;
+  function openCard(c,el){
+    if(selEl)selEl.classList.remove('sel');
+    selEl=el;el.classList.add('sel');
+    document.getElementById('cardname').textContent=c.n;
+    document.getElementById('cardday').textContent=DAYS[c.d]+' · '+c.t;
+    document.getElementById('carddesc').textContent=c.desc;
+    document.getElementById('cardbook').href='mailto:front.desk@coreculture.club?subject='+encodeURIComponent('Reserve — '+c.n+' '+DAYS[c.d]+' '+c.t);
+    card.classList.add('show');
+    document.getElementById('cardclose').focus();
+  }
+  document.getElementById('cardclose').addEventListener('click',()=>{
+    card.classList.remove('show');
+    if(selEl){selEl.classList.remove('sel');selEl=null;}
+  });
+})();
+</script>
+</body>
+</html>

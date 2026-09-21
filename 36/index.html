@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Rubber</title>
+<meta name="description" content="Core Culture — the body is elastic. Pull the headline. Load, recoil, rest. Snap back stronger.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0b0a'/%3E%3Cpath d='M4 16 C 10 8, 22 24, 28 16' stroke='%23ff5c39' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Familjen+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0b0a;
+  --ink:#efe8dc;
+  --dim:rgba(239,232,220,.55);
+  --faint:rgba(239,232,220,.26);
+  --clay:#ff5c39;
+  --wg:800;   /* weight axis */
+  --wd:100;   /* width axis */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Familjen Grotesk",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--clay);color:#0d0b0a}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--clay);offset:3px;outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--clay);color:#0d0b0a;padding:10px 16px;z-index:300;font-weight:700}
+.skip:focus{left:10px}
+
+header.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:10vh clamp(16px,4vw,60px) 0;
+}
+.kicker{font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--clay);margin-bottom:5vh}
+.stage{
+  perspective:900px;
+  cursor:grab;touch-action:none;user-select:none;
+}
+.stage:active{cursor:grabbing}
+#stretch{
+  position:relative;transform-style:preserve-3d;
+  font-family:"Archivo",sans-serif;
+  font-variation-settings:'wdth' var(--wd),'wght' var(--wg);
+  font-size:clamp(58px,13vw,190px);line-height:.95;text-transform:uppercase;
+  letter-spacing:-.01em;white-space:nowrap;
+}
+#stretch i{
+  position:absolute;inset:0;font-style:normal;
+  color:#171310;pointer-events:none;
+}
+#stretch .face{
+  position:relative;color:var(--ink);
+  text-shadow:0 0 0 transparent;
+}
+#stretch .face::after{
+  content:"";position:absolute;left:0;right:0;bottom:.08em;height:.035em;
+  background:var(--clay);transform:scaleX(var(--sq,1));
+  transform-origin:left;
+}
+.grabhint{
+  margin-top:6vh;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--faint);
+  display:flex;align-items:center;gap:14px;
+}
+.grabhint i{width:52px;height:1px;background:linear-gradient(90deg,transparent,var(--clay));display:block}
+.grabhint i+i{background:linear-gradient(90deg,var(--clay),transparent)}
+.lede{margin-top:4vh;max-width:32em;color:var(--dim);font-size:14px;line-height:2;text-align:center;font-weight:300}
+.lede b{color:var(--ink);font-weight:600}
+
+/* principles */
+.principles{
+  display:flex;flex-direction:column;
+  border-top:1px solid rgba(239,232,220,.08);
+}
+.pr{
+  min-height:70vh;display:flex;align-items:center;gap:clamp(24px,5vw,80px);
+  padding:8vh clamp(20px,6vw,110px);
+  border-bottom:1px solid rgba(239,232,220,.08);
+}
+.pr:nth-child(even){flex-direction:row-reverse}
+.pr .word{
+  font-family:"Archivo",sans-serif;
+  font-variation-settings:'wdth' var(--p-wd,100),'wght' var(--p-wg,700);
+  font-size:clamp(44px,6.4vw,110px);line-height:.92;text-transform:uppercase;
+  color:transparent;-webkit-text-stroke:1.5px var(--clay);
+  transition:font-variation-settings .7s cubic-bezier(.2,2.2,.3,1), color .4s ease;
+  cursor:pointer;user-select:none;white-space:nowrap;
+}
+.pr .word:hover,.pr .word:focus-visible{
+  color:var(--ink);
+  font-variation-settings:'wdth' var(--p-wd-h,62),'wght' var(--p-wg-h,300);
+}
+.pr .txt{max-width:34em}
+.pr .no{font-size:10px;letter-spacing:.32em;color:var(--clay);text-transform:uppercase;margin-bottom:16px}
+.pr h2{
+  font-weight:700;text-transform:uppercase;font-size:clamp(22px,2.6vw,38px);line-height:1.1;
+}
+.pr p{margin-top:16px;color:var(--dim);font-size:13.5px;line-height:2.05;font-weight:300}
+.pr p b{color:var(--ink);font-weight:600}
+
+/* meter + CTA */
+.meterbar{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  padding:5vh clamp(20px,6vw,110px);
+  border-top:1px solid rgba(239,232,220,.08);
+  font-family:"Familjen Grotesk";
+}
+.meterbar .lbl{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint)}
+.meterbar .track{flex:1;min-width:200px;height:2px;background:rgba(239,232,220,.14);position:relative}
+.meterbar .track i{
+  position:absolute;top:-3px;left:0;width:8px;height:8px;border-radius:50%;background:var(--clay);
+}
+.meterbar .val{font-variant-numeric:tabular-nums;color:var(--ink);font-size:12px;letter-spacing:.2em}
+.ctarow{
+  padding:0 clamp(20px,6vw,110px) 12vh;
+  display:flex;flex-direction:column;align-items:flex-start;gap:20px;
+}
+.cta{
+  display:inline-block;text-decoration:none;
+  font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+  background:var(--clay);color:#1c0903;padding:19px 40px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(255,92,57,.35)}
+footer{
+  padding:26px clamp(20px,6vw,110px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(239,232,220,.08);
+}
+@media (max-width:760px){
+  .pr{flex-direction:column!important;align-items:flex-start;min-height:auto;padding:9vh 20px}
+  #stretch i{display:none}
+  #stretch .face{color:var(--ink)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pr .word{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main">
+  <header class="hero">
+    <p class="kicker">Core Culture · Elasticity dept.</p>
+    <div class="stage" id="stage" aria-hidden="true">
+      <div id="stretch">
+        <i style="transform:translateZ(-42px)"></i><i style="transform:translateZ(-34px)"></i>
+        <i style="transform:translateZ(-26px)"></i><i style="transform:translateZ(-18px)"></i>
+        <i style="transform:translateZ(-11px)"></i><i style="transform:translateZ(-5px)"></i>
+        <span class="face">Rubber</span>
+      </div>
+    </div>
+    <p class="grabhint"><i></i> Grab the word — pull, release <i></i></p>
+    <p class="lede">Muscle is rubber with a memory. Load it, it resists; release it, it returns — <b>stronger than it was.</b> This page stretches the same way. Pull the headline. Scroll hard. Everything here snaps back.</p>
+  </header>
+
+  <section class="principles" aria-label="The three principles">
+    <article class="pr">
+      <div class="word" tabindex="0" style="--p-wd:100;--p-wg:800;--p-wd-h:62;--p-wg-h:300">Load</div>
+      <div class="txt">
+        <p class="no">Principle 01</p>
+        <h2>Resistance is the point</h2>
+        <p>Nothing adapts while it's comfortable. <b>Iron, sleds and intervals</b> exist to pull you past the shape you're in — the stretch only counts when it argues back.</p>
+      </div>
+    </article>
+    <article class="pr">
+      <div class="word" tabindex="0" style="--p-wd:62;--p-wg:300;--p-wd-h:125;--p-wg-h:900">Recoil</div>
+      <div class="txt">
+        <p class="no">Principle 02</p>
+        <h2>Power is the snap</h2>
+        <p>Speed lives in the return. Jumps, sprints, throws — <b>training teaches your tissue to release energy</b>, not just hold it.</p>
+      </div>
+    </article>
+    <article class="pr">
+      <div class="word" tabindex="0" style="--p-wd:85;--p-wg:600;--p-wd-h:100;--p-wg-h:800">Rest</div>
+      <div class="txt">
+        <p class="no">Principle 03</p>
+        <h2>Recover to full length</h2>
+        <p>Stretch without rest is just damage. Plunge, steam, sleep — <b>the club guards your rest length like it guards the bar</b>.</p>
+      </div>
+    </article>
+  </section>
+
+  <div class="meterbar">
+    <span class="lbl">Live tension</span>
+    <div class="track"><i id="dot" style="left:0%"></i></div>
+    <span class="val" id="tens">000%</span>
+  </div>
+
+  <div class="ctarow">
+    <p class="lede" style="text-align:left;max-width:34em;margin-top:0">One membership, every frequency of stretch: iron to engine to dance to deep rest. First week free — come see what you spring back as.</p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Stretch your first week — free</a>
+  </div>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 36 · Rubber</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root=document.documentElement;
+  const stage=document.getElementById('stage');
+  const dot=document.getElementById('dot'),tens=document.getElementById('tens');
+
+  // spring state: displacement d, velocity v
+  let d=0,v=0,dragging=false,startX=0,startD=0,lastScroll=scrollY,scrollStretch=0;
+
+  function setAxes(){
+    // displacement -> width & weight
+    const t=Math.min(1,Math.abs(d)/140);
+    const wd=100+Math.sign(d)*t*25;      // 75..125
+    const wg=800+t*100;                   // heavier under tension
+    root.style.setProperty('--wd',wd.toFixed(1));
+    root.style.setProperty('--wg',wg.toFixed(0));
+    root.style.setProperty('--sq',(1+t*1.4).toFixed(2));
+    const pct=Math.round(t*100);
+    tens.textContent=String(pct).padStart(3,'0')+'%';
+    dot.style.left=`calc(${pct}% - ${pct*0.08}px)`;
+  }
+  setAxes();
+
+  stage.addEventListener('pointerdown',e=>{
+    dragging=true;startX=e.clientX;startD=d;
+    stage.setPointerCapture(e.pointerId);
+  });
+  stage.addEventListener('pointermove',e=>{
+    if(!dragging)return;
+    d=startD+(e.clientX-startX)*1.15;
+    v=0; // grab kills momentum
+  });
+  const end=()=>{dragging=false;};
+  stage.addEventListener('pointerup',end);
+  stage.addEventListener('pointercancel',end);
+
+  addEventListener('scroll',()=>{
+    const dy=scrollY-lastScroll;lastScroll=scrollY;
+    if(!dragging) d+=Math.max(-30,Math.min(30,dy*0.16));
+  },{passive:true});
+
+  if(!reduced){
+    (function loop(){
+      if(!dragging){
+        // spring back with overshoot
+        v+=(-d)*0.055;
+        v*=0.9;
+        d+=v;
+        if(Math.abs(d)<0.1&&Math.abs(v)<0.1){d=0;v=0;}
+      }
+      setAxes();
+      requestAnimationFrame(loop);
+    })();
+  }else{
+    // reduced motion: fixed neutral axes, still interactive hover via CSS
+    root.style.setProperty('--wd',100);
+    root.style.setProperty('--wg',800);
+  }
+})();
+</script>
+</body>
+</html>

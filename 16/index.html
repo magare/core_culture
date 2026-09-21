@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Club Nocturne</title>
+<meta name="description" content="Core Culture — the nocturnal season. Classes listed like club nights. Guestlist open.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060606'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23b6ff00'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Six+Caps&family=VT323&family=Archivo:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#060606;
+  --panel:#0d0d0d;
+  --acid:#b6ff00;
+  --pink:#ff2ea6;
+  --dim:rgba(182,255,0,.55);
+  --grey:rgba(255,255,255,.5);
+  --line:rgba(182,255,0,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);
+  color:var(--acid);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+.six{font-family:"Six Caps","Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase}
+.lcd{font-family:"VT323","Courier New",monospace}
+::selection{background:var(--pink);color:var(--void)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:8px;background:var(--acid);color:var(--void);padding:10px 16px;z-index:400;font-weight:900}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+
+/* ---------- ticker ---------- */
+.ticker{
+  border-bottom:2px solid var(--line);
+  overflow:hidden;background:var(--panel);
+}
+.ticker .track{display:flex;width:max-content;animation:tk 30s linear infinite;padding:8px 0}
+.ticker .track span{
+  font-family:"VT323";font-size:19px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;padding-right:1em;
+  color:var(--acid);
+}
+.ticker .track em{color:var(--pink);font-style:normal}
+@keyframes tk{to{transform:translateX(-50%)}}
+
+/* ---------- hero flyer ---------- */
+.flyer{
+  min-height:92vh;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(30px,8vh,90px) clamp(18px,4vw,60px);
+  position:relative;overflow:hidden;text-align:center;
+}
+.flyer::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 45% at 50% 38%, rgba(182,255,0,.14), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(182,255,0,.045) 0 2px, transparent 2px 4px);
+}
+.flyer>*{position:relative;z-index:2}
+.flyer .pre{font-family:"VT323";font-size:clamp(16px,2vw,24px);letter-spacing:.3em;text-transform:uppercase;color:var(--grey)}
+.flyer h1{
+  font-size:clamp(80px,19vw,300px);
+  line-height:.82;margin:8px 0 6px;
+  text-shadow:0 0 22px rgba(182,255,0,.55);
+}
+.flyer h1 .pk{color:var(--pink);text-shadow:0 0 22px rgba(255,46,166,.6)}
+.flyer .line2{
+  font-family:"VT323";font-size:clamp(18px,2.6vw,32px);letter-spacing:.24em;text-transform:uppercase;color:var(--grey);
+}
+.flyer .meta{
+  margin-top:clamp(22px,4vh,40px);
+  display:flex;justify-content:center;gap:clamp(16px,4vw,50px);flex-wrap:wrap;
+  font-family:"VT323";font-size:clamp(15px,1.9vw,22px);letter-spacing:.14em;text-transform:uppercase;
+}
+.flyer .meta span b{color:var(--pink)}
+.glow{animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{text-shadow:0 0 18px rgba(182,255,0,.5)}50%{text-shadow:0 0 42px rgba(182,255,0,.95)}}
+
+/* ---------- night listings ---------- */
+.nights{max-width:1080px;margin:0 auto;padding:clamp(34px,6vh,70px) clamp(18px,4vw,50px)}
+.sec-label{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:8px;
+}
+.sec-label h2{font-family:"VT323";font-weight:400;font-size:clamp(24px,3vw,38px);letter-spacing:.14em;text-transform:uppercase}
+.sec-label span{font-family:"VT323";color:var(--grey);font-size:16px;letter-spacing:.14em}
+.night{
+  display:grid;grid-template-columns:90px 1fr auto;gap:clamp(12px,3vw,40px);align-items:center;
+  padding:clamp(14px,2.6vh,26px) 6px;border-bottom:1px dashed rgba(182,255,0,.3);
+  text-decoration:none;
+  transition:background .15s ease,padding-left .15s ease;
+}
+.night:hover{background:rgba(182,255,0,.06);padding-left:16px}
+.night .d{
+  font-family:"VT323";font-size:15px;color:var(--grey);text-transform:uppercase;letter-spacing:.1em;
+  border:1px solid var(--line);text-align:center;padding:6px 4px;
+}
+.night:hover .d{border-color:var(--pink);color:var(--pink)}
+.night .nm{
+  font-size:clamp(46px,8.4vw,110px);line-height:.86;
+  transition:color .15s ease,text-shadow .15s ease;
+}
+.night:hover .nm{color:var(--pink);text-shadow:0 0 30px rgba(255,46,166,.5)}
+.night .info{font-family:"VT323";text-align:right;font-size:clamp(14px,1.7vw,19px);letter-spacing:.08em;text-transform:uppercase;color:var(--grey)}
+.night .info b{display:block;color:var(--acid);font-size:clamp(16px,2vw,23px)}
+
+/* guestlist */
+.guest{
+  border:2px solid var(--acid);
+  max-width:1080px;margin:clamp(30px,6vh,60px) auto;
+  padding:clamp(20px,4vw,40px);
+  background:var(--panel);
+}
+.guest h3{font-family:"VT323";font-weight:400;font-size:clamp(26px,3.4vw,42px);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.guest .gs{font-family:"VT323";color:var(--grey);font-size:16px;letter-spacing:.1em;margin-bottom:18px}
+.guest form{display:flex;gap:12px;flex-wrap:wrap}
+.guest input{
+  flex:1;min-width:200px;
+  background:transparent;border:2px solid var(--acid);color:var(--acid);
+  font-family:"VT323";font-size:20px;letter-spacing:.1em;text-transform:uppercase;
+  padding:10px 14px;border-radius:0;
+}
+.guest input::placeholder{color:rgba(182,255,0,.4)}
+.guest input:focus{outline:none;border-color:var(--pink);color:var(--pink)}
+.guest button{
+  font-family:"Archivo";font-weight:900;font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--acid);color:var(--void);border:0;padding:12px 26px;cursor:pointer;
+  transition:background .15s ease;
+}
+.guest button:hover{background:var(--pink);color:var(--void)}
+.guest .confirmed{margin-top:14px;font-family:"VT323";font-size:19px;letter-spacing:.08em;color:var(--pink);display:none}
+.guest .confirmed.show{display:block}
+
+/* ---------- membership cards ---------- */
+.cards{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,36px);
+  max-width:1080px;margin:0 auto clamp(34px,6vh,70px);
+  padding:0 clamp(18px,4vw,50px);
+}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+.card{
+  border:2px solid var(--acid);padding:26px;position:relative;overflow:hidden;
+  background:var(--panel);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 0 44px rgba(182,255,0,.22)}
+.card.hc{border-color:var(--pink)}
+.card.hc:hover{box-shadow:0 0 44px rgba(255,46,166,.22)}
+.card .ctype{
+  font-family:"VT323";font-size:15px;letter-spacing:.3em;text-transform:uppercase;color:var(--grey);
+  display:flex;justify-content:space-between;gap:8px;
+}
+.card .price{font-family:"Six Caps";font-size:clamp(64px,8vw,110px);line-height:.9;margin:10px 0 4px}
+.card.hc .price{color:var(--pink)}
+.card .per{font-family:"VT323";color:var(--grey);font-size:16px;letter-spacing:.2em;margin-bottom:16px}
+.card ul{list-style:none;font-family:"VT323";font-size:18px;letter-spacing:.06em;line-height:1.9;text-transform:uppercase}
+.card ul li::before{content:"▸ ";color:var(--pink)}
+.card .chip{
+  margin-top:18px;height:30px;
+  background:repeating-linear-gradient(90deg,rgba(182,255,0,.5) 0 3px,transparent 3px 8px);
+  border:1px solid var(--line);
+}
+.card .cta{
+  display:inline-block;margin-top:18px;text-decoration:none;
+  font-weight:900;font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+  background:var(--acid);color:var(--void);padding:12px 22px;
+}
+.card .cta:hover{background:var(--pink)}
+
+footer{
+  border-top:2px solid var(--line);
+  padding:18px clamp(18px,4vw,50px) 30px;
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-family:"VT323";font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);
+}
+footer b{color:var(--acid)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker .track,.glow{animation:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#nights">Skip to listings</a>
+
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    <span>Tonight at Core <em>/</em> Iron room opens 05:30 <em>/</em> Sled league 18:30 <em>/</em> Studio set 19:30 <em>/</em> Remedy wing at 4°C all night <em>/</em> Guestlist open <em>/</em>&nbsp;</span>
+    <span>Tonight at Core <em>/</em> Iron room opens 05:30 <em>/</em> Sled league 18:30 <em>/</em> Studio set 19:30 <em>/</em> Remedy wing at 4°C all night <em>/</em> Guestlist open <em>/</em>&nbsp;</span>
+  </div>
+</div>
+
+<main id="main">
+  <!-- FLYER -->
+  <section class="flyer" aria-label="Club Nocturne — the flyer">
+    <p class="pre">Core Culture presents — the nocturnal season</p>
+    <h1 class="six glow">Club<br><span class="pk">Nocturne</span></h1>
+    <p class="line2">The gym that keeps club-kid hours</p>
+    <div class="meta">
+      <span>Doors <b>05:30 — 23:00</b></span>
+      <span>Wings <b>Iron · Engine · Studio · Remedy</b></span>
+      <span>Dress code <b>None</b></span>
+      <span>Judgement <b>None</b></span>
+    </div>
+  </section>
+
+  <!-- NIGHT LISTINGS -->
+  <section class="nights" id="nights" aria-labelledby="nl-h">
+    <div class="sec-label">
+      <h2 id="nl-h">This week's sets</h2>
+      <span>All wings · one membership · first week free</span>
+    </div>
+
+    <a class="night" href="#guest">
+      <span class="d">Mon</span>
+      <span class="nm six">Iron Room</span>
+      <span class="info">Barbell club<b>06:00 — Coach V</b></span>
+    </a>
+    <a class="night" href="#guest">
+      <span class="d">Tue</span>
+      <span class="nm six">Engine Bay</span>
+      <span class="info">Dawn intervals<b>07:00 — Coach D</b></span>
+    </a>
+    <a class="night" href="#guest">
+      <span class="d">Wed</span>
+      <span class="nm six">Sled League</span>
+      <span class="info">Teams of two<b>18:30 — Turf lane</b></span>
+    </a>
+    <a class="night" href="#guest">
+      <span class="d">Thu</span>
+      <span class="nm six">Yoga Under</span>
+      <span class="info">Neon set<b>19:45 — Coach May</b></span>
+    </a>
+    <a class="night" href="#guest">
+      <span class="d">Fri</span>
+      <span class="nm six">Zumba Rave</span>
+      <span class="info">The flagship<b>19:30 — Studio B</b></span>
+    </a>
+    <a class="night" href="#guest">
+      <span class="d">Sat</span>
+      <span class="nm six">Hyrox Cellar</span>
+      <span class="info">Full simulation<b>09:00 — whole floor</b></span>
+    </a>
+    <a class="night" href="#guest">
+      <span class="d">Sun</span>
+      <span class="nm six">Afterhours</span>
+      <span class="info">Cold &amp; coffee<b>10:00 — Remedy / Lounge</b></span>
+    </a>
+
+    <!-- GUESTLIST -->
+    <div class="guest" id="guest">
+      <h3>Guestlist — your first week is free</h3>
+      <p class="gs">Type a name. See it on the board. That's the whole trick — and it works every time.</p>
+      <form id="glform">
+        <label class="lcd" for="glname" style="position:absolute;left:-9999px">Your name</label>
+        <input id="glname" type="text" placeholder="YOUR NAME, THEN" maxlength="18" autocomplete="off">
+        <button type="submit">Put me on the list</button>
+      </form>
+      <p class="confirmed lcd" id="glDone" role="status"></p>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP CARDS -->
+  <div class="nights" style="padding-bottom:0">
+    <div class="sec-label">
+      <h2>Membership cards</h2>
+      <span>Laminated attitude included</span>
+    </div>
+  </div>
+  <section class="cards" aria-label="Membership cards">
+    <div class="card">
+      <span class="ctype"><span>Card type — member</span><span>Nº 0417</span></span>
+      <div class="price">89</div>
+      <div class="per">per month · cancel anytime</div>
+      <ul>
+        <li>Every wing, every set</li>
+        <li>Remedy slots bookable</li>
+        <li>Guestlist: always open</li>
+        <li>Parking: solved</li>
+      </ul>
+      <div class="chip" aria-hidden="true"></div>
+      <a class="cta" href="mailto:front.desk@coreculture.club">Hold this card</a>
+    </div>
+    <div class="card hc">
+      <span class="ctype"><span>Card type — house</span><span>Nº 0001</span></span>
+      <div class="price">890</div>
+      <div class="per">per year · the desk knows your name</div>
+      <ul>
+        <li>A full year of everything</li>
+        <li>Priority on the guestlist</li>
+        <li>Steam room: honorary key</li>
+        <li>Season 2 pre-approved</li>
+      </ul>
+      <div class="chip" aria-hidden="true"></div>
+      <a class="cta" href="mailto:front.desk@coreculture.club">Hold this card</a>
+    </div>
+  </section>
+
+  <footer>
+    <span><b>Core Culture</b> — Training Club · the nocturnal season</span>
+    <span>front.desk@coreculture.club</span>
+    <span>Concept 16 — Club Nocturne</span>
+  </footer>
+</main>
+
+<script>
+  const gl=document.getElementById('glform');
+  const done=document.getElementById('glDone');
+  gl.addEventListener('submit',e=>{
+    e.preventDefault();
+    const v=document.getElementById('glname').value.trim();
+    if(!v){ done.textContent='// the list needs a name. any name. your call.'; done.classList.add('show'); return; }
+    done.textContent='// '+v.toUpperCase()+' — ON THE LIST. First week free. Doors at 05:30. Bring shoes.';
+    done.classList.add('show');
+    gl.reset();
+  });
+</script>
+</body>
+</html>

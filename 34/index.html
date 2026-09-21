@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Locker Room</title>
+<meta name="description" content="Core Culture — the club lives in its lockers. Open a few doors; one of them is yours.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0d'/%3E%3Crect x='8' y='5' width='16' height='22' rx='1.5' fill='none' stroke='%238f959c' stroke-width='1.6'/%3E%3Cpath d='M8 11h16M8 21h16' stroke='%238f959c' stroke-width='1'/%3E%3Ccircle cx='21' cy='16' r='1.4' fill='%23c9a24d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Permanent+Marker&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b0d;
+  --steel:#8f959c;
+  --steel-d:#3a3e44;
+  --ink:#e9e7e0;
+  --dim:rgba(233,231,224,.55);
+  --faint:rgba(233,231,224,.26);
+  --brass:#c9a24d;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(143,149,156,.06), transparent 55%),
+    var(--bg);
+  color:var(--ink);
+  font-family:"Manrope",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--brass);color:#0b0b0d}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--brass);color:#0b0b0d;padding:10px 16px;z-index:300;font-weight:600}
+.skip:focus{left:10px}
+
+header.hero{
+  min-height:74vh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(20px,6vw,110px);
+}
+.kicker{font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--dim);margin-bottom:24px}
+h1{
+  font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;
+  font-size:clamp(44px,7.4vw,120px);line-height:.96;letter-spacing:.01em;
+}
+h1 em{font-style:normal;color:var(--faint)}
+.lede{margin-top:26px;max-width:34em;color:var(--dim);font-size:14.5px;line-height:2;font-weight:300}
+.lede b{color:var(--ink);font-weight:600}
+.tools{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+.tools button{
+  font-family:"Oswald";font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;
+  background:transparent;color:var(--dim);border:1px solid rgba(233,231,224,.25);
+  padding:13px 22px;cursor:pointer;transition:all .2s ease;
+}
+.tools button:hover{color:var(--ink);border-color:var(--ink)}
+
+/* the wall */
+.bench{
+  perspective:1600px;
+  padding:6vh clamp(20px,5vw,90px) 12vh;
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(14px,2vw,26px);
+  max-width:1500px;margin:0 auto;
+  transform-style:preserve-3d;
+}
+.aisle{transform:rotateY(-7deg) rotateX(1.5deg);transform-style:preserve-3d;display:contents}
+.locker{
+  position:relative;aspect-ratio:3/4.4;transform-style:preserve-3d;
+}
+.locker .box{
+  position:absolute;inset:0;transform-style:preserve-3d;
+}
+.locker .inner{
+  position:absolute;inset:0;padding:18px 16px;
+  background:linear-gradient(180deg,#101216,#0a0b0d);
+  border:1px solid #0e1013;
+  display:flex;flex-direction:column;gap:10px;
+  transform:translateZ(0px);
+}
+.locker .inner .tag{
+  font-family:"Permanent Marker",cursive;font-size:clamp(13px,1.1vw,16px);
+  transform:rotate(-2deg);
+}
+.locker .inner .who{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint)}
+.locker .inner p{font-size:11px;line-height:1.9;color:var(--dim);font-weight:300}
+.locker .inner .since{margin-top:auto;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
+.locker .door{
+  position:absolute;inset:0;transform-origin:left center;
+  transform:translateZ(2px);
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  transition:transform .65s cubic-bezier(.5,0,.2,1);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.05) 0 2px, transparent 2px 100%),
+    repeating-linear-gradient(180deg, rgba(255,255,255,.025) 0 2px, transparent 2px 46px),
+    linear-gradient(160deg,#2e3238 0%,#22252a 55%,#17191d 100%);
+  border:1px solid #0e1013;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:16px 14px;
+  box-shadow:inset -14px 0 24px rgba(0,0,0,.5);
+}
+.locker .door .vents{display:flex;flex-direction:column;gap:4px;width:56%}
+.locker .door .vents i{height:3px;background:rgba(0,0,0,.55);box-shadow:0 1px 0 rgba(255,255,255,.05)}
+.locker .door .num{
+  font-family:"Oswald";font-weight:400;font-size:clamp(20px,1.8vw,30px);color:var(--steel);
+  letter-spacing:.06em;
+}
+.locker .door .handle{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  width:5px;height:54px;border-radius:3px;background:var(--brass);
+  box-shadow:0 0 12px rgba(201,162,77,.4);
+}
+.locker.open .door{transform:translateZ(2px) rotateY(-112deg)}
+.locker .door:hover{box-shadow:inset -14px 0 24px rgba(0,0,0,.5), 0 0 0 1px rgba(201,162,77,.35)}
+.locker.yours .door{background:
+  linear-gradient(90deg, rgba(201,162,77,.12) 0 2px, transparent 2px 100%),
+  linear-gradient(160deg,#3a3423 0%,#2a2519 55%,#1c1810 100%)}
+.locker.yours .door .num{color:var(--brass)}
+.locker button.door{cursor:pointer;font:inherit;color:inherit;text-align:left}
+.locker .door:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+/* caption under wall */
+.capt{
+  max-width:1500px;margin:0 auto;padding:0 clamp(20px,5vw,90px) 14vh;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+}
+footer{
+  padding:26px clamp(20px,6vw,110px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid rgba(233,231,224,.08);
+}
+@media (max-width:1020px){
+  .bench{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:760px){
+  .bench{grid-template-columns:repeat(2,1fr);transform:none}
+  .aisle{transform:none}
+  header.hero{min-height:60vh;padding-top:8vh}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .locker .door{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main">
+  <header class="hero">
+    <p class="kicker">Core Culture · Locker room east</p>
+    <h1>The club keeps<br>its promises <em>in here.</em></h1>
+    <p class="lede">Every locker holds somebody's routine: the 5AM crew, the Tuesday squad, a forgotten shaker, a folded note that says <b>you promised you'd come back</b>. Open a few doors. The brass-handled one at the end is unassigned.</p>
+    <div class="tools">
+      <button id="openall">Open the row</button>
+      <button id="closeall">Close it up</button>
+    </div>
+  </header>
+
+  <section class="bench" aria-label="Locker wall — select a locker to open it">
+    <div class="aisle">
+      <div class="locker" >
+        <div class="box">
+          <div class="inner">
+            <span class="tag" style="color:#e8a5b8">Mara — 5AM crew</span>
+            <span class="who">Member № 041</span>
+            <p>"I picked the early class because nobody watches you learn. Now I'm the one holding the door."</p>
+            <span class="since">Here since the first winter</span>
+          </div>
+          <button class="door" aria-expanded="false" aria-label="Locker 041 — Mara, 5AM crew. Open locker.">
+            <span class="vents" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="num">041</span>
+            <span class="handle" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="locker">
+        <div class="box">
+          <div class="inner">
+            <span class="tag" style="color:#a8d8b8">Tue Squad — 4 of us</span>
+            <span class="who">Shared locker</span>
+            <p>"One sled, four people, zero mercy. We keep the chalk in here and the excuses outside."</p>
+            <span class="since">Sled league — defending champs</span>
+          </div>
+          <button class="door" aria-expanded="false" aria-label="Locker 077 — Tuesday squad. Open locker.">
+            <span class="vents" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="num">077</span>
+            <span class="handle" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="locker">
+        <div class="box">
+          <div class="inner">
+            <span class="tag" style="color:#9cc7e8">D. Ito — dancer</span>
+            <span class="who">Member № 118</span>
+            <p>"Came for the weights, stayed for the dance studio. The mirror still isn't my friend, but the floor is."</p>
+            <span class="since">Friday floor regular</span>
+          </div>
+          <button class="door" aria-expanded="false" aria-label="Locker 118 — D. Ito, dancer. Open locker.">
+            <span class="vents" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="num">118</span>
+            <span class="handle" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="locker">
+        <div class="box">
+          <div class="inner">
+            <span class="tag" style="color:#e8cf9c">Lost &amp; found</span>
+            <span class="who">House shelf</span>
+            <p>One left shoe. A wedding ring (claimed). Seven water bottles forming a family. A note: <b>"return me to the squat rack"</b>.</p>
+            <span class="since">Unclaimed since spring</span>
+          </div>
+          <button class="door" aria-expanded="false" aria-label="Locker 130 — lost and found. Open locker.">
+            <span class="vents" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="num">130</span>
+            <span class="handle" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="locker">
+        <div class="box">
+          <div class="inner">
+            <span class="tag" style="color:#c8a8e8">J. Okafor — hybrid</span>
+            <span class="who">Member № 203</span>
+            <p>"The coach wrote my program on a card. I kept the card. It says: 'slow is smooth, you'll see.'"</p>
+            <span class="since">Race block — week 6</span>
+          </div>
+          <button class="door" aria-expanded="false" aria-label="Locker 203 — J. Okafor, hybrid. Open locker.">
+            <span class="vents" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="num">203</span>
+            <span class="handle" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="locker">
+        <div class="box">
+          <div class="inner">
+            <span class="tag" style="color:#9ce8d8">House rules</span>
+            <span class="who">Pinned inside the door</span>
+            <p>Rerack your weights. Cold before coffee. Cheer for strangers' PRs. <b>The bag always wins round one.</b></p>
+            <span class="since">Non-negotiable</span>
+          </div>
+          <button class="door" aria-expanded="false" aria-label="Locker 214 — house rules. Open locker.">
+            <span class="vents" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="num">214</span>
+            <span class="handle" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="locker">
+        <div class="box">
+          <div class="inner">
+            <span class="tag" style="color:#e89c9c">R. Silva — plunge club</span>
+            <span class="who">Member № 099</span>
+            <p>"Three minutes at three degrees, every visit, no exceptions. I don't lift the heaviest — I recover the best."</p>
+            <span class="since">Tub record holder (self-appointed)</span>
+          </div>
+          <button class="door" aria-expanded="false" aria-label="Locker 099 — R. Silva, plunge club. Open locker.">
+            <span class="vents" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="num">099</span>
+            <span class="handle" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="locker yours">
+        <div class="box">
+          <div class="inner">
+            <span class="tag" style="color:#c9a24d">Reserved — your name here</span>
+            <span class="who">The brass handle</span>
+            <p>Every locker in this room started empty. This one still is. <b>First week free</b> — bring a lock, leave a legend.</p>
+            <span class="since">Awaiting since… now</span>
+          </div>
+          <button class="door" aria-expanded="false" aria-label="Unassigned locker — yours. Open locker.">
+            <span class="vents" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="num">—</span>
+            <span class="handle" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="capt">
+    <span>East corridor · lockers 001–248</span>
+    <span>Towels at the desk · locks are yours to keep</span>
+    <span>Tap any door</span>
+  </p>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 34 · Locker Room</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.locker').forEach(l=>{
+    const door=l.querySelector('.door');
+    door.addEventListener('click',()=>{
+      const open=l.classList.toggle('open');
+      door.setAttribute('aria-expanded',String(open));
+    });
+  });
+  document.getElementById('openall').addEventListener('click',()=>{
+    document.querySelectorAll('.locker').forEach(l=>{
+      l.classList.add('open');
+      l.querySelector('.door').setAttribute('aria-expanded','true');
+    });
+  });
+  document.getElementById('closeall').addEventListener('click',()=>{
+    document.querySelectorAll('.locker').forEach(l=>{
+      l.classList.remove('open');
+      l.querySelector('.door').setAttribute('aria-expanded','false');
+    });
+  });
+})();
+</script>
+</body>
+</html>

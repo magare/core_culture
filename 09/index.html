@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — SLAB</title>
+<meta name="description" content="Core Culture Training Club. No soft launch. No pastel vibes. Just the slab.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffd400'/%3E%3Crect x='7' y='7' width='18' height='18' fill='%23111111'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Archivo:wght@500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --concrete:#d6d3cc;
+  --block:#f2f0ea;
+  --ink:#111111;
+  --yellow:#ffd400;
+  --red:#e03a1e;
+  --white:#ffffff;
+  --bw:3px;
+  --sh:7px 7px 0 var(--ink);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--concrete);
+  background-image:radial-gradient(rgba(17,17,17,.07) 1px, transparent 1.2px);
+  background-size:5px 5px;
+  color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+  padding:clamp(14px,2.6vw,34px);
+}
+.ab{font-family:"Archivo Black","Arial Black",sans-serif;font-weight:400;text-transform:uppercase}
+.mono{font-family:"Space Mono",monospace}
+::selection{background:var(--ink);color:var(--yellow)}
+img{display:block;max-width:100%}
+a{color:inherit}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--yellow);padding:10px 16px;z-index:300;font-weight:700}
+.skip:focus{left:10px}
+:focus-visible{outline:4px solid var(--red);outline-offset:2px}
+
+.block{
+  background:var(--block);
+  border:var(--bw) solid var(--ink);
+  box-shadow:var(--sh);
+}
+.slam{opacity:0;transform:translateY(26px)}
+.slam.in{opacity:1;transform:none;transition:opacity .25s steps(4,end),transform .3s cubic-bezier(.2,.9,.3,1.2)}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .slam{opacity:1;transform:none;transition:none}
+  *{transition:none!important}
+}
+
+/* ---------- header ---------- */
+header.top{
+  display:flex;justify-content:space-between;align-items:stretch;gap:12px;flex-wrap:wrap;
+  margin-bottom:clamp(20px,3.4vw,40px);
+}
+.brand{
+  background:var(--ink);color:var(--yellow);
+  padding:14px 22px;
+  font-size:clamp(17px,2.2vw,26px);letter-spacing:.02em;
+  box-shadow:var(--sh);
+  transform:rotate(-1deg);
+}
+nav.tabs{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+nav.tabs a{
+  text-decoration:none;font-family:"Space Mono";font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;
+  background:var(--white);border:var(--bw) solid var(--ink);
+  padding:10px 14px;box-shadow:4px 4px 0 var(--ink);
+  transition:transform .12s ease,box-shadow .12s ease,background .12s ease;
+}
+nav.tabs a:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--ink);background:var(--yellow)}
+nav.tabs a:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+
+/* ---------- ticker bars ---------- */
+.tickerbar{
+  background:var(--ink);color:var(--paper);
+  overflow:hidden;border:var(--bw) solid var(--ink);
+  margin:clamp(22px,3.6vw,44px) 0;
+  transform:rotate(-.6deg);
+}
+.tickerbar .track{display:flex;width:max-content;animation:tk 24s linear infinite;padding:10px 0}
+.tickerbar .track span{
+  font-family:"Space Mono";font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  white-space:nowrap;padding-right:2.4em;
+}
+.tickerbar .track em{color:var(--yellow);font-style:normal}
+@keyframes tk{to{transform:translateX(-50%)}}
+
+/* ---------- hero ---------- */
+.hero{
+  display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(16px,2.6vw,30px);
+  align-items:stretch;
+}
+@media (max-width:900px){.hero{grid-template-columns:1fr}}
+.hero-main{
+  padding:clamp(22px,3.4vw,44px);
+  position:relative;overflow:hidden;
+  transform:rotate(-.4deg);
+}
+.hero-main h1{
+  font-size:clamp(46px,7.4vw,116px);
+  line-height:.86;letter-spacing:-.01em;
+}
+.hero-main h1 .y{background:var(--yellow);padding:0 .12em;box-shadow:.1em .1em 0 var(--ink)}
+.hero-main h1 .r{color:var(--red)}
+.hero-main p{
+  margin-top:20px;max-width:46ch;font-weight:600;font-size:clamp(14px,1.3vw,17px);line-height:1.6;
+}
+.hero-main .stickers{position:absolute;top:18px;right:16px;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.st{
+  font-family:"Space Mono";font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:7px 12px;border:var(--bw) solid var(--ink);box-shadow:4px 4px 0 var(--ink);
+}
+.st.y{background:var(--yellow);transform:rotate(3deg)}
+.st.r{background:var(--red);color:var(--white);transform:rotate(-2deg)}
+.st.w{background:var(--white);transform:rotate(2deg)}
+.hero-side{
+  background:var(--ink);color:var(--paper);
+  padding:clamp(18px,2.4vw,30px);
+  display:flex;flex-direction:column;justify-content:space-between;gap:18px;
+  transform:rotate(.6deg);
+}
+.hero-side img{border:var(--bw) solid var(--paper);width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 24%;filter:contrast(1.1)}
+.hero-side .cap{font-family:"Space Mono";font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow)}
+
+/* ---------- sections ---------- */
+section{margin-top:clamp(26px,4.4vw,52px)}
+.sec-head{
+  display:flex;align-items:center;gap:14px;margin-bottom:clamp(16px,2.4vw,26px);
+}
+.sec-head .chip{
+  background:var(--red);color:var(--white);
+  font-family:"Space Mono";font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 12px;border:var(--bw) solid var(--ink);box-shadow:4px 4px 0 var(--ink);
+  transform:rotate(-1.4deg);
+}
+.sec-head h2{font-size:clamp(26px,3.6vw,48px);line-height:.95}
+
+/* ---------- day slider ---------- */
+.sliderbox{padding:clamp(20px,3vw,36px);transform:rotate(.3deg)}
+.day-big{
+  display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+  border-bottom:var(--bw) solid var(--ink);padding-bottom:14px;margin-bottom:16px;
+}
+.day-big .dw{font-size:clamp(44px,6.4vw,92px);line-height:.9;color:var(--red)}
+.day-big .dd{font-weight:700;font-size:clamp(13px,1.3vw,16px);max-width:38ch}
+input[type="range"]{
+  width:100%;appearance:none;-webkit-appearance:none;height:14px;
+  background:repeating-linear-gradient(90deg,var(--ink) 0 3px,transparent 3px 16.66%);
+  border:var(--bw) solid var(--ink);outline-offset:4px;cursor:ew-resize;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:30px;height:34px;background:var(--yellow);
+  border:var(--bw) solid var(--ink);box-shadow:4px 4px 0 var(--ink);cursor:grab;
+}
+input[type="range"]::-moz-range-thumb{
+  width:30px;height:34px;background:var(--yellow);
+  border:var(--bw) solid var(--ink);box-shadow:4px 4px 0 var(--ink);border-radius:0;cursor:grab;
+}
+.day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:18px}
+.daycell{
+  border:var(--bw) solid var(--ink);padding:10px 8px;min-height:104px;
+  background:var(--white);
+  display:flex;flex-direction:column;gap:6px;
+  opacity:.45;transform:scale(.98);
+  transition:opacity .15s steps(3,end),transform .15s ease,background .15s ease;
+}
+.daycell.on{opacity:1;transform:none;background:var(--yellow);box-shadow:5px 5px 0 var(--ink)}
+.daycell .dn{font-family:"Space Mono";font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.daycell .dc{font-size:11.5px;font-weight:700;line-height:1.35}
+@media (max-width:860px){
+  .day-grid{grid-template-columns:repeat(2,1fr)}
+  .daycell{min-height:0}
+}
+
+/* ---------- disciplines grid ---------- */
+.disc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,24px)}
+@media (max-width:640px){
+  .hero-main .stickers{position:static;flex-direction:row;flex-wrap:wrap;align-items:flex-start;margin-bottom:16px}
+}
+@media (max-width:980px){.disc-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.disc-grid{grid-template-columns:1fr}}
+.disc{
+  padding:18px;display:flex;flex-direction:column;gap:10px;
+  transition:transform .14s ease,box-shadow .14s ease;
+}
+.disc:hover{transform:translate(-4px,-4px);box-shadow:11px 11px 0 var(--ink)}
+.disc .no{font-family:"Space Mono";font-weight:700;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase}
+.disc h3{font-size:clamp(20px,2.2vw,30px);line-height:.95}
+.disc p{font-size:13.5px;font-weight:600;line-height:1.55}
+.disc .tagline{margin-top:auto;align-self:flex-start;font-family:"Space Mono";font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border:2.5px solid var(--ink)}
+.disc.y{background:var(--yellow)}
+.disc.w{background:var(--white)}
+.disc.r{background:var(--red);color:var(--white)}
+.disc.r .no,.disc.r .tagline{color:var(--white);border-color:var(--white)}
+.disc.r:hover{box-shadow:11px 11px 0 rgba(17,17,17,.9)}
+
+/* ---------- membership ---------- */
+.member-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(14px,2.2vw,24px)}
+@media (max-width:980px){.member-grid{grid-template-columns:1fr}}
+.tier{padding:20px;display:flex;flex-direction:column;gap:12px}
+.tier.hot{background:var(--yellow)}
+.tier .tn{font-family:"Space Mono";font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.tier .tp{font-size:clamp(38px,4.4vw,64px);line-height:.9}
+.tier .tp small{font-size:.38em;font-weight:700;vertical-align:super}
+.tier ul{list-style:none;font-size:13px;font-weight:700;line-height:1.9}
+.tier ul li::before{content:"■ ";color:var(--red)}
+.tier a.buy{
+  margin-top:auto;align-self:flex-start;text-decoration:none;
+  background:var(--ink);color:var(--paper);
+  font-family:"Space Mono";font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  padding:11px 18px;box-shadow:4px 4px 0 rgba(17,17,17,.35);
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+.tier a.buy:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 rgba(17,17,17,.35)}
+
+/* ---------- footer ---------- */
+footer{
+  margin-top:clamp(28px,4.6vw,54px);
+  background:var(--ink);color:var(--paper);
+  border:var(--bw) solid var(--ink);
+  padding:22px clamp(18px,3vw,34px);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-family:"Space Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+}
+footer a{color:var(--yellow);text-decoration:none}
+footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="brand ab">Core Culture</div>
+  <nav class="tabs" aria-label="Sections">
+    <a href="#week">The week</a>
+    <a href="#disc">Disciplines</a>
+    <a href="#join">Membership</a>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" aria-label="Intro">
+    <div class="hero-main block slam">
+      <div class="stickers" aria-hidden="true">
+        <span class="st y">Est. MMXXVI</span>
+        <span class="st r">No pastel vibes</span>
+        <span class="st w">05:30 — 23:00</span>
+      </div>
+      <h1 class="ab">No soft <span class="y">launch.</span><br>No egos. <span class="r">Just</span><br>the slab.</h1>
+      <p>A training club poured like concrete: strength bays, hybrid engines, a dance floor with club lights, a 4°C remedy tub, a lounge with opinions — and parking that never fights back.</p>
+    </div>
+    <div class="hero-side block slam">
+      <img src="../crops/p02-sled.jpg" alt="Athlete driving a weighted sled, high-contrast crop">
+      <div class="cap">EXHIBIT 001 — THE 6AM SHIFT, UNFILTERED</div>
+    </div>
+  </section>
+
+  <div class="tickerbar" aria-hidden="true">
+    <div class="track">
+      <span>Train <em>/</em> Move <em>/</em> Recover <em>/</em> Connect <em>/</em> Rerack your plates <em>/</em> First week free <em>/</em>&nbsp;</span>
+      <span>Train <em>/</em> Move <em>/</em> Recover <em>/</em> Connect <em>/</em> Rerack your plates <em>/</em> First week free <em>/</em>&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- WEEK -->
+  <section id="week" aria-labelledby="week-h">
+    <div class="sec-head">
+      <span class="chip">01</span>
+      <h2 id="week-h" class="ab">Drag the week.</h2>
+    </div>
+    <div class="sliderbox block slam">
+      <div class="day-big">
+        <span class="dw ab" id="dayName">MON</span>
+        <span class="dd" id="dayDesc">Heavy day. Barbell club at 06:00, engines at 18:30, dance floor at 19:30.</span>
+      </div>
+      <label class="mono" for="daySlider" style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:10px">Day selector — drag it</label>
+      <input type="range" id="daySlider" min="0" max="6" step="1" value="0" aria-valuetext="Monday">
+      <div class="day-grid" id="dayGrid" aria-hidden="true">
+        <div class="daycell on"><span class="dn">Mon</span><span class="dc">BARBELL 06:00<br>ENGINE 18:30<br>FLOOR 19:30</span></div>
+        <div class="daycell"><span class="dn">Tue</span><span class="dc">ENGINE 07:00<br>ZUMBA 19:00</span></div>
+        <div class="daycell"><span class="dn">Wed</span><span class="dc">BARBELL 06:00<br>COLD 20:00</span></div>
+        <div class="daycell"><span class="dn">Thu</span><span class="dc">ENGINE 18:30<br>YOGA 19:45</span></div>
+        <div class="daycell"><span class="dn">Fri</span><span class="dc">BARBELL 06:00<br>FLOOR 19:30</span></div>
+        <div class="daycell"><span class="dn">Sat</span><span class="dc">HYROX PREP 09:00<br>COLD 11:00</span></div>
+        <div class="daycell"><span class="dn">Sun</span><span class="dc">SLOW. COLD. COFFEE.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCIPLINES -->
+  <section id="disc" aria-labelledby="disc-h">
+    <div class="sec-head">
+      <span class="chip">02</span>
+      <h2 id="disc-h" class="ab">What happens on the slab.</h2>
+    </div>
+    <div class="disc-grid">
+      <article class="disc block y slam">
+        <span class="no">D—01 / Iron room</span>
+        <h3 class="ab">Strength</h3>
+        <p>Twelve racks, calibrated plates, coached barbell hours. From first pull to competition plate.</p>
+        <span class="tagline">Daily · 05:30</span>
+      </article>
+      <article class="disc block w slam">
+        <span class="no">D—02 / Engine bay</span>
+        <h3 class="ab">Hybrid</h3>
+        <p>Sled tracks, ergs, treadmills with screens. HYROX prep for people who refuse one identity.</p>
+        <span class="tagline">Tue · Thu · Sat</span>
+      </article>
+      <article class="disc block r slam">
+        <span class="no">D—03 / Studio</span>
+        <h3 class="ab">Dance</h3>
+        <p>Zumba, yoga, hobby clubs under neon. Cardio for people who would rather not call it cardio.</p>
+        <span class="tagline">Evenings · 19:30</span>
+      </article>
+      <article class="disc block w slam">
+        <span class="no">D—04 / Remedy</span>
+        <h3 class="ab">Recovery</h3>
+        <p>Ice bath at four degrees, steam next door. The cheapest coach in the building works nights.</p>
+        <span class="tagline">Bookable · 3 min</span>
+      </article>
+      <article class="disc block y slam">
+        <span class="no">D—05 / Lounge</span>
+        <h3 class="ab">Lounge</h3>
+        <p>Coffee unmetered, clocks absent. Work-lift balance: meetings before, people after.</p>
+        <span class="tagline">Always open</span>
+      </article>
+      <article class="disc block w slam">
+        <span class="no">D—06 / Basement</span>
+        <h3 class="ab">Parking</h3>
+        <p>Plentiful. Your ride waits safely. No parking-lot cardio required, ever again.</p>
+        <span class="tagline">Free · obviously</span>
+      </article>
+    </div>
+  </section>
+
+  <div class="tickerbar" aria-hidden="true" style="transform:rotate(.5deg)">
+    <div class="track">
+      <span>No mirrors for posing <em>/</em> Machines with biomechanics <em>/</em> Judgement not on the timetable <em>/</em>&nbsp;</span>
+      <span>No mirrors for posing <em>/</em> Machines with biomechanics <em>/</em> Judgement not on the timetable <em>/</em>&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- MEMBERSHIP -->
+  <section id="join" aria-labelledby="join-h">
+    <div class="sec-head">
+      <span class="chip">03</span>
+      <h2 id="join-h" class="ab">Buy in.</h2>
+    </div>
+    <div class="member-grid">
+      <div class="tier block slam" style="background:var(--white)">
+        <span class="tn">Trial — one week</span>
+        <span class="tp ab">FREE</span>
+        <ul>
+          <li>Every wing, every class</li>
+          <li>No card, no contract</li>
+          <li>The desk asks how it went</li>
+        </ul>
+        <a class="buy" href="mailto:front.desk@coreculture.club">Start free →</a>
+      </div>
+      <div class="tier block hot slam">
+        <span class="tn">Member — monthly</span>
+        <span class="tp ab">89<small>/mo</small></span>
+        <ul>
+          <li>Full facility access</li>
+          <li>All classes, all hours</li>
+          <li>Chamber slots bookable</li>
+          <li>Culture included, obviously</li>
+        </ul>
+        <a class="buy" href="mailto:front.desk@coreculture.club">Take monthly →</a>
+      </div>
+      <div class="tier block slam" style="background:var(--red);color:var(--white)">
+        <span class="tn" style="color:var(--yellow)">House — annual</span>
+        <span class="tp ab">890<small>/yr</small></span>
+        <ul>
+          <li style="--c:var(--yellow)">Everything. A year of it.</li>
+          <li>The desk knows your name</li>
+          <li>The tub knows your excuses</li>
+        </ul>
+        <a class="buy" href="mailto:front.desk@coreculture.club" style="background:var(--yellow);color:var(--ink)">Go annual →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© MMXXVI CORE CULTURE — TRAINING CLUB</span>
+    <a href="mailto:front.desk@coreculture.club">FRONT.DESK@CORECULTURE.CLUB</a>
+    <span>CONCEPT 09 — SLAB / BRUTAL BLOCKS</span>
+  </footer>
+</main>
+
+<script>
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.slam').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<innerHeight*.94) el.classList.add('in'); else io.observe(el);
+  });
+
+  // day slider
+  const days=[
+    {n:'MON',d:'Heavy day. Barbell club at 06:00, engines at 18:30, dance floor at 19:30.'},
+    {n:'TUE',d:'Engine morning at 07:00. Zumba at 19:00 — bring the friend who "hates cardio".'},
+    {n:'WED',d:'Barbell club 06:00. Cold plunge at 20:00. Choose your own hard.'},
+    {n:'THU',d:'Engines 18:30, yoga under neon 19:45. Stretch what Monday built.'},
+    {n:'FRI',d:'Barbell 06:00, the floor at 19:30. Nobody counts beats; everybody stays.'},
+    {n:'SAT',d:'HYROX prep 09:00, cold water 11:00. Long, loud, done by lunch.'},
+    {n:'SUN',d:'Slow. Cold. Coffee. The lounge does the rest.'}
+  ];
+  const slider=document.getElementById('daySlider');
+  const dayName=document.getElementById('dayName');
+  const dayDesc=document.getElementById('dayDesc');
+  const cells=[...document.getElementById('dayGrid').children];
+  function setDay(i){
+    dayName.textContent=days[i].n;
+    dayDesc.textContent=days[i].d;
+    cells.forEach((c,j)=>c.classList.toggle('on',j===i));
+    slider.setAttribute('aria-valuetext',days[i].n);
+  }
+  slider.addEventListener('input',()=>setDay(+slider.value));
+  setDay(0);
+</script>
+</body>
+</html>

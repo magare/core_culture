@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Mirror Room</title>
+<meta name="description" content="Core Culture — the club as a mirror room. Everything you do here comes back to you.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060606'/%3E%3Cpath d='M6 22 L16 8 L26 22 Z' fill='none' stroke='%23cfd6dd' stroke-width='1.2'/%3E%3Cpath d='M8 27 L16 16 L24 27 Z' fill='none' stroke='%23cfd6dd' stroke-width='.8' opacity='.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060606;
+  --ink:#e9edf0;
+  --dim:rgba(233,237,240,.5);
+  --faint:rgba(233,237,240,.24);
+  --silver:#cfd6dd;
+  --line:rgba(233,237,240,.1);
+  --lx:50%;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Manrope",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+::selection{background:var(--silver);color:#060606}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--silver);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;background:var(--silver);color:#060606;padding:10px 16px;z-index:300;font-weight:600}
+.skip:focus{left:10px}
+
+/* ---------- the floor ---------- */
+#floor{
+  position:fixed;left:0;right:0;bottom:0;height:34vh;z-index:0;
+  perspective:700px;perspective-origin:50% -10%;
+  overflow:hidden;pointer-events:none;
+}
+#floor .plane{
+  position:absolute;left:-20%;right:-20%;top:0;height:280%;
+  transform:rotateX(64deg);transform-origin:50% 0;
+  background:
+    radial-gradient(58% 62% at var(--lx) 12%, rgba(233,237,240,.13), transparent 62%),
+    repeating-linear-gradient(90deg, rgba(233,237,240,.05) 0 1px, transparent 1px 90px),
+    repeating-linear-gradient(0deg, rgba(233,237,240,.04) 0 1px, transparent 1px 90px),
+    linear-gradient(180deg, #101113 0%, #08090a 30%, #050505 100%);
+}
+#floor .plane::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, transparent 0%, rgba(6,6,6,.75) 55%, #060606 100%);
+}
+#floorline{
+  position:fixed;left:0;right:0;bottom:34vh;height:1px;z-index:1;
+  background:linear-gradient(90deg, transparent, rgba(233,237,240,.25) var(--lx,50%), transparent);
+  pointer-events:none;
+}
+
+/* ---------- room content ---------- */
+.wrap{position:relative;z-index:2}
+header.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  padding:10vh clamp(20px,5vw,90px) calc(34vh + 4vh);
+  position:relative;
+}
+.kicker{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--faint);margin-bottom:3vh}
+.hero .lede{max-width:26em;color:var(--dim);font-size:14.5px;line-height:2;font-weight:300}
+.hero .lede b{color:var(--ink);font-weight:600}
+h1{
+  font-family:"DM Serif Display",serif;font-weight:400;
+  font-size:clamp(58px,10vw,168px);line-height:.95;letter-spacing:.005em;
+  margin-top:auto;
+}
+h1 em{font-style:italic;color:var(--silver)}
+
+[data-reflect]::selection{background:transparent}
+
+/* chapters stand on the floor */
+.hall{
+  display:flex;flex-direction:column;gap:22vh;
+  padding:6vh clamp(20px,5vw,90px) 26vh;
+}
+.stand{
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  gap:clamp(20px,4vw,70px);align-items:end;
+}
+.stand.flip .txt{order:2}
+.stand .num{
+  font-family:"Manrope";font-weight:300;font-size:12px;letter-spacing:.4em;color:var(--faint);
+  margin-bottom:16px;text-transform:uppercase;
+}
+.stand h2{
+  font-family:"DM Serif Display",serif;font-weight:400;
+  font-size:clamp(40px,5.6vw,86px);line-height:1;
+}
+.stand p{margin-top:20px;color:var(--dim);font-size:14px;line-height:2.05;font-weight:300;max-width:32em}
+.stand p b{color:var(--ink);font-weight:600}
+.stand .panel{
+  border:1px solid var(--line);padding:26px 24px 28px;background:rgba(233,237,240,.02);
+}
+.stand .panel h3{
+  font-family:"DM Serif Display",serif;font-weight:400;font-size:19px;margin-bottom:16px;
+}
+.stand .panel ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.stand .panel li{
+  display:flex;justify-content:space-between;gap:12px;
+  font-size:11.5px;color:var(--dim);letter-spacing:.06em;
+  border-bottom:1px dashed rgba(233,237,240,.12);padding-bottom:10px;
+}
+.stand .panel li b{color:var(--silver);font-weight:600}
+
+/* reflections (generated) */
+[data-reflect]{position:relative;z-index:1}
+.reflection{
+  position:absolute;z-index:0;
+  transform:scaleY(-1);
+  opacity:.28;filter:blur(1.6px) brightness(1.35);
+  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,.75), transparent 34%);
+  mask-image:linear-gradient(to top, rgba(0,0,0,.75), transparent 34%);
+  pointer-events:none;user-select:none;
+}
+h1.reflection,h2.reflection{margin-top:.06em}
+
+/* CTA */
+.meet{
+  padding:0 clamp(20px,5vw,90px) calc(34vh + 6vh);
+  display:flex;flex-direction:column;align-items:flex-start;
+}
+.meet h2{
+  font-family:"DM Serif Display",serif;font-weight:400;
+  font-size:clamp(44px,6.6vw,104px);line-height:1;
+}
+.meet p{margin-top:22px;max-width:32em;color:var(--dim);font-size:14.5px;line-height:2;font-weight:300}
+.cta{
+  display:inline-block;text-decoration:none;margin-top:36px;
+  font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+  color:#060606;background:var(--silver);padding:20px 44px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:0 0 46px rgba(207,214,221,.3)}
+footer{
+  position:relative;z-index:2;
+  padding:26px clamp(20px,5vw,90px);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);
+  border-top:1px solid var(--line);
+}
+@media (max-width:860px){
+  #floor{height:26vh}
+  #floorline{bottom:26vh}
+  header.hero{padding-bottom:calc(26vh + 4vh)}
+  .stand{grid-template-columns:1fr;gap:22px;align-items:start}
+  .stand.flip .txt{order:0}
+  .hall{padding-bottom:20vh;gap:14vh}
+  .meet{padding-bottom:calc(26vh + 5vh)}
+  .reflection{opacity:.12}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="floor" aria-hidden="true"><div class="plane"></div></div>
+<div id="floorline" aria-hidden="true"></div>
+
+<div class="wrap">
+<main id="main">
+  <header class="hero">
+    <p class="kicker">Core Culture · The mirror room</p>
+    <p class="lede">Effort reflected as strength. Rhythm reflected as confidence. Rest reflected as appetite. Walk the room below — <b>everything here stands on black glass, and everything here comes back to you.</b></p>
+    <h1 data-reflect>The club is<br>a mirror.<br><em>It only gives back<br>what you bring.</em></h1>
+  </header>
+
+  <section class="hall" aria-label="The four reflections">
+    <article class="stand">
+      <div class="txt">
+        <div class="num">I — What you lift</div>
+        <h2 data-reflect>Strength looks back.</h2>
+        <p>The iron floor answers honestly: plates loaded, reps earned, nothing borrowed. <b>What you put on the bar comes back across it.</b></p>
+      </div>
+      <div class="panel">
+        <h3>House mirrors</h3>
+        <ul>
+          <li><span>Free-weight floor</span><b>17 platforms</b></li>
+          <li><span>Coached strength hours</span><b>daily</b></li>
+          <li><span>Testing weeks</span><b>seasonal</b></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="stand flip">
+      <div class="txt">
+        <div class="num">II — How you move</div>
+        <h2 data-reflect>Rhythm comes back around.</h2>
+        <p>Dance and hybrid work reflect differently — in footwork, cadence, breath. Miss a beat here and the room shows you exactly where.</p>
+      </div>
+      <div class="panel">
+        <h3>House mirrors</h3>
+        <ul>
+          <li><span>Sprung dance floor</span><b>studio B</b></li>
+          <li><span>Sled track &amp; engine</span><b>40 m</b></li>
+          <li><span>Beginner choreo</span><b>weekly</b></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="stand">
+      <div class="txt">
+        <div class="num">III — How you rest</div>
+        <h2 data-reflect>Stillness holds you.</h2>
+        <p>Cold water, steam, warm stone. The quietest room reflects the loudest week — <b>recovery is the club looking after its own reflection</b>.</p>
+      </div>
+      <div class="panel">
+        <h3>House mirrors</h3>
+        <ul>
+          <li><span>Cold plunge</span><b>3°</b></li>
+          <li><span>Steam &amp; sauna</span><b>adjacent</b></li>
+          <li><span>Stretch bay</span><b>open floor</b></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="stand flip">
+      <div class="txt">
+        <div class="num">IV — Who you're with</div>
+        <h2 data-reflect>Company multiplies.</h2>
+        <p>The lounge reflects the whole club at eye level: coffee, arguments about programming, someone's first pull-up. <b>Come for the training; stay reflected in other people.</b></p>
+      </div>
+      <div class="panel">
+        <h3>House mirrors</h3>
+        <ul>
+          <li><span>Barista bar</span><b>long hours</b></li>
+          <li><span>Run club</span><b>saturdays</b></li>
+          <li><span>Member nights</span><b>monthly</b></li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="meet" aria-label="Join">
+    <p class="kicker">The fifth reflection</p>
+    <h2 data-reflect>Meet yourself here.</h2>
+    <p>One membership reflects every floor — iron, studio, engine, remedy wing, lounge. The first week is free, and the mirror keeps whatever excuses you brought. Leave them; take the rest.</p>
+    <a class="cta" href="mailto:front.desk@coreculture.club">Step onto the glass — free week</a>
+  </section>
+
+  <footer>
+    <span>Core Culture — train · move · recover · connect</span>
+    <span>Concept 28 · Mirror Room</span>
+  </footer>
+</main>
+</div>
+
+<script>
+(function(){
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // build live reflections for tagged headings
+  document.querySelectorAll('[data-reflect]').forEach(el=>{
+    const r=el.cloneNode(true);
+    r.removeAttribute('data-reflect');
+    r.removeAttribute('id');
+    r.classList.add('reflection');
+    r.setAttribute('aria-hidden','true');
+    el.insertAdjacentElement('afterend',r);
+    // anchor precisely under the heading regardless of which ancestor is positioned
+    const place=()=>{
+      const op=el.offsetParent||document.body;
+      const er=el.getBoundingClientRect(), pr=op.getBoundingClientRect();
+      r.style.top=(er.bottom-pr.top)+'px';
+      r.style.left=(er.left-pr.left)+'px';
+      r.style.width=er.width+'px';
+    };
+    place();
+    addEventListener('resize',place);
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
+  });
+
+  // light follows the pointer — highlights sweep the floor
+  const root=document.documentElement;
+  let lx=innerWidth/2,tx=lx;
+  addEventListener('pointermove',e=>{tx=e.clientX;},{passive:true});
+  function loop(){
+    lx+=(tx-lx)*0.06;
+    root.style.setProperty('--lx',(lx/innerWidth*100).toFixed(2)+'%');
+    requestAnimationFrame(loop);
+  }
+  if(!reduced)requestAnimationFrame(loop);
+  else root.style.setProperty('--lx','50%');
+})();
+</script>
+</body>
+</html>
