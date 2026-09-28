@@ -1,0 +1,232 @@
+{
+  "labels_per_view": 10,
+  "views": [
+    "CUTAWAY",
+    "PLAN"
+  ],
+  "room_areas_preserved": true,
+  "equipment_transforms_preserved": true,
+  "projected_overlap_check": "passed",
+  "labels": [
+    {
+      "view": "cut",
+      "area": "CARDIO",
+      "height_ft": 10.5,
+      "screen_bbox": [
+        0.2746,
+        0.7944,
+        0.3987,
+        0.8391
+      ]
+    },
+    {
+      "view": "cut",
+      "area": "WEIGHT TRAINING",
+      "height_ft": 9.5,
+      "screen_bbox": [
+        0.5062,
+        0.6484,
+        0.6668,
+        0.6932
+      ]
+    },
+    {
+      "view": "cut",
+      "area": "HYROX",
+      "height_ft": 7.5,
+      "screen_bbox": [
+        0.3841,
+        0.4703,
+        0.5155,
+        0.5151
+      ]
+    },
+    {
+      "view": "cut",
+      "area": "RECEPTION",
+      "height_ft": 11.5,
+      "screen_bbox": [
+        0.8142,
+        0.5491,
+        0.931,
+        0.5938
+      ]
+    },
+    {
+      "view": "cut",
+      "area": "GROUP EXERCISE",
+      "height_ft": 9.0,
+      "screen_bbox": [
+        0.6662,
+        0.3511,
+        0.7976,
+        0.3958
+      ]
+    },
+    {
+      "view": "cut",
+      "area": "MEN'S WASHROOM",
+      "height_ft": 10.0,
+      "screen_bbox": [
+        0.1704,
+        0.6737,
+        0.3018,
+        0.7185
+      ]
+    },
+    {
+      "view": "cut",
+      "area": "WOMEN'S WASHROOM",
+      "height_ft": 8.5,
+      "screen_bbox": [
+        0.1028,
+        0.5856,
+        0.2488,
+        0.6304
+      ]
+    },
+    {
+      "view": "cut",
+      "area": "CENTRAL TRAINING",
+      "height_ft": 7.5,
+      "screen_bbox": [
+        0.4492,
+        0.5514,
+        0.5952,
+        0.5962
+      ]
+    },
+    {
+      "view": "cut",
+      "area": "SUPPORT ROOMS",
+      "height_ft": 10.5,
+      "screen_bbox": [
+        0.7396,
+        0.4613,
+        0.8709,
+        0.5061
+      ]
+    },
+    {
+      "view": "cut",
+      "area": "PASSAGE",
+      "height_ft": 5.5,
+      "screen_bbox": [
+        0.3984,
+        0.3624,
+        0.5225,
+        0.3974
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "CARDIO",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.0924,
+        0.702,
+        0.2353,
+        0.7517
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "WEIGHT TRAINING",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.4076,
+        0.6642,
+        0.5924,
+        0.7139
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "HYROX",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.416,
+        0.3347,
+        0.5672,
+        0.3844
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "RECEPTION",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.7908,
+        0.7831,
+        0.9151,
+        0.8328
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "GROUP EXERCISE",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.7908,
+        0.3909,
+        0.9151,
+        0.4406
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "MEN'S WASHROOM",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.0882,
+        0.4265,
+        0.2395,
+        0.4762
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "WOMEN'S WASHROOM",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.0798,
+        0.2645,
+        0.2479,
+        0.3142
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "CENTRAL TRAINING",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.416,
+        0.5151,
+        0.584,
+        0.5648
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "SUPPORT ROOMS",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.7908,
+        0.5756,
+        0.9151,
+        0.6253
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "PASSAGE",
+      "height_ft": 8.0,
+      "screen_bbox": [
+        0.4538,
+        0.2104,
+        0.5966,
+        0.2493
+      ]
+    }
+  ]
+}

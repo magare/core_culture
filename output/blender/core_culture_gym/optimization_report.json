@@ -1,0 +1,1106 @@
+{
+  "source": "/Users/magare/Dev/web-app-farm/core_culture/output/blender/core_culture_gym/Core_Culture_Gym_pre_optimization.blend",
+  "output": "/Users/magare/Dev/web-app-farm/core_culture/output/blender/core_culture_gym/Core_Culture_Gym_Optimized.blend",
+  "before": {
+    "objects": 1985,
+    "meshes": 1790,
+    "curves": 121,
+    "modifiers": {
+      "BEVEL": 862,
+      "SOLIDIFY": 4
+    },
+    "bytes": 3823363
+  },
+  "after": {
+    "objects": 570,
+    "meshes": 300,
+    "curves": 67,
+    "modifiers": {
+      "BEVEL": 212,
+      "SOLIDIFY": 4
+    },
+    "scenes": 5,
+    "equipment_instances": 41,
+    "packed_reference_images": 4,
+    "bytes": 4383939
+  },
+  "exact_mesh_links_created": 1018,
+  "duplicate_parts_removed": [
+    {
+      "name": "Weight tree upright.001",
+      "duplicate_of": "Weight tree upright"
+    },
+    {
+      "name": "Weight tree upright.003",
+      "duplicate_of": "Weight tree upright.002"
+    }
+  ],
+  "static_batches": [
+    {
+      "collection": "01 | Floors \u2022 measured zoning",
+      "batch": "Rubber tile joint X \u2022 static batch",
+      "parts": 15,
+      "vertices": 120,
+      "faces": 90
+    },
+    {
+      "collection": "01 | Floors \u2022 measured zoning",
+      "batch": "Rubber tile joint Y \u2022 static batch",
+      "parts": 14,
+      "vertices": 112,
+      "faces": 84
+    },
+    {
+      "collection": "01 | Floors \u2022 measured zoning",
+      "batch": "Studio oak plank joint \u2022 static batch",
+      "parts": 25,
+      "vertices": 200,
+      "faces": 150
+    },
+    {
+      "collection": "01 | Floors \u2022 measured zoning",
+      "batch": "Staggered end grain joint \u2022 static batch",
+      "parts": 150,
+      "vertices": 1200,
+      "faces": 900
+    },
+    {
+      "collection": "02 | Walls \u2022 lower cutaway",
+      "batch": "South exterior \u2022 skirting \u2022 static batch",
+      "parts": 3,
+      "vertices": 168,
+      "faces": 162
+    },
+    {
+      "collection": "02 | Walls \u2022 lower cutaway",
+      "batch": "Entrance / east facade \u2022 skirting \u2022 static batch",
+      "parts": 4,
+      "vertices": 224,
+      "faces": 216
+    },
+    {
+      "collection": "02 | Walls \u2022 lower cutaway",
+      "batch": "Cardio & washroom partition \u2022 skirting \u2022 static batch",
+      "parts": 4,
+      "vertices": 224,
+      "faces": 216
+    },
+    {
+      "collection": "02 | Walls \u2022 lower cutaway",
+      "batch": "East circulation partition \u2022 skirting \u2022 static batch",
+      "parts": 3,
+      "vertices": 168,
+      "faces": 162
+    },
+    {
+      "collection": "02 | Walls \u2022 lower cutaway",
+      "batch": "Support room front \u2022 skirting \u2022 static batch",
+      "parts": 4,
+      "vertices": 224,
+      "faces": 216
+    },
+    {
+      "collection": "03 | Rear feature wall \u2022 full height",
+      "batch": "North corrugated wall \u2022 cladding rib \u2022 static batch",
+      "parts": 111,
+      "vertices": 6216,
+      "faces": 5994
+    },
+    {
+      "collection": "04 | Exterior walls \u2022 upper",
+      "batch": "West corrugated wall \u2022 cladding rib \u2022 static batch",
+      "parts": 66,
+      "vertices": 3696,
+      "faces": 3564
+    },
+    {
+      "collection": "04 | Exterior walls \u2022 upper",
+      "batch": "South exterior \u2022 cladding rib \u2022 static batch",
+      "parts": 102,
+      "vertices": 5712,
+      "faces": 5508
+    },
+    {
+      "collection": "04 | Exterior walls \u2022 upper",
+      "batch": "Entrance / east facade \u2022 cladding rib \u2022 static batch",
+      "parts": 47,
+      "vertices": 2632,
+      "faces": 2538
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Roof standing seam A \u2022 static batch",
+      "parts": 112,
+      "vertices": 1344,
+      "faces": 896
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Roof standing seam B \u2022 static batch",
+      "parts": 112,
+      "vertices": 1344,
+      "faces": 896
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Portal steel column \u2022 static batch",
+      "parts": 12,
+      "vertices": 672,
+      "faces": 648
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Steel truss chord \u2022 static batch",
+      "parts": 18,
+      "vertices": 288,
+      "faces": 180
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Triangular web bracing \u2022 static batch",
+      "parts": 120,
+      "vertices": 1920,
+      "faces": 1200
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Roof purlin \u2022 static batch",
+      "parts": 9,
+      "vertices": 504,
+      "faces": 486
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Gable vertical seam \u2022 static batch",
+      "parts": 118,
+      "vertices": 6608,
+      "faces": 6372
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Ridge truss diagonal \u2022 static batch",
+      "parts": 20,
+      "vertices": 320,
+      "faces": 200
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Ridge truss vertical \u2022 static batch",
+      "parts": 20,
+      "vertices": 320,
+      "faces": 200
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Pendant suspension wire \u2022 static batch",
+      "parts": 8,
+      "vertices": 128,
+      "faces": 80
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Vertical pendant dark backing \u2022 static batch",
+      "parts": 8,
+      "vertices": 192,
+      "faces": 112
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Vertical warm-white tube \u2022 static batch",
+      "parts": 8,
+      "vertices": 192,
+      "faces": 112
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Duct hanger \u2022 static batch",
+      "parts": 6,
+      "vertices": 120,
+      "faces": 72
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Suspended linear luminaire \u2022 static batch",
+      "parts": 15,
+      "vertices": 840,
+      "faces": 810
+    },
+    {
+      "collection": "06 | Roof & steel structure \u2022 removable",
+      "batch": "Linear LED diffuser \u2022 static batch",
+      "parts": 15,
+      "vertices": 840,
+      "faces": 810
+    },
+    {
+      "collection": "07 | Entrance facade & canopy",
+      "batch": "Entry aluminium stile \u2022 static batch",
+      "parts": 3,
+      "vertices": 168,
+      "faces": 162
+    },
+    {
+      "collection": "07 | Entrance facade & canopy",
+      "batch": "Canopy corrugation \u2022 static batch",
+      "parts": 20,
+      "vertices": 1120,
+      "faces": 1080
+    },
+    {
+      "collection": "07 | Entrance facade & canopy",
+      "batch": "Shutter slat \u2022 static batch",
+      "parts": 46,
+      "vertices": 2576,
+      "faces": 2484
+    },
+    {
+      "collection": "07 | Entrance facade & canopy",
+      "batch": "Entrance shoe shelf \u2022 static batch",
+      "parts": 3,
+      "vertices": 168,
+      "faces": 162
+    },
+    {
+      "collection": "07 | Entrance facade & canopy",
+      "batch": "Shoe shelf frame \u2022 static batch",
+      "parts": 3,
+      "vertices": 168,
+      "faces": 162
+    },
+    {
+      "collection": "08 | Exposed silver HVAC",
+      "batch": "Spiral duct seam \u2022 static batch",
+      "parts": 32,
+      "vertices": 9216,
+      "faces": 9216
+    },
+    {
+      "collection": "08 | Exposed silver HVAC",
+      "batch": "AC grille collar \u2022 static batch",
+      "parts": 6,
+      "vertices": 336,
+      "faces": 324
+    },
+    {
+      "collection": "08 | Exposed silver HVAC",
+      "batch": "AC grille dark insert \u2022 static batch",
+      "parts": 6,
+      "vertices": 336,
+      "faces": 324
+    },
+    {
+      "collection": "08 | Exposed silver HVAC",
+      "batch": "AC grille horizontal louver \u2022 static batch",
+      "parts": 30,
+      "vertices": 240,
+      "faces": 180
+    },
+    {
+      "collection": "08 | Exposed silver HVAC",
+      "batch": "AC grille upright \u2022 static batch",
+      "parts": 42,
+      "vertices": 336,
+      "faces": 252
+    },
+    {
+      "collection": "08 | Exposed silver HVAC",
+      "batch": "Side duct collar \u2022 static batch",
+      "parts": 16,
+      "vertices": 4608,
+      "faces": 4608
+    },
+    {
+      "collection": "10 | Weight training",
+      "batch": "Mirror vertical mullion \u2022 static batch",
+      "parts": 12,
+      "vertices": 96,
+      "faces": 72
+    },
+    {
+      "collection": "10 | Weight training",
+      "batch": "Plate storage branch \u2022 static batch",
+      "parts": 8,
+      "vertices": 320,
+      "faces": 176
+    },
+    {
+      "collection": "11 | HYROX & 16 ft central circle",
+      "batch": "HYROX lane boundary \u2022 static batch",
+      "parts": 3,
+      "vertices": 24,
+      "faces": 18
+    },
+    {
+      "collection": "11 | HYROX & 16 ft central circle",
+      "batch": "Lane distance hash \u2022 static batch",
+      "parts": 10,
+      "vertices": 80,
+      "faces": 60
+    },
+    {
+      "collection": "11 | HYROX & 16 ft central circle",
+      "batch": "Wall ball accent \u2022 static batch",
+      "parts": 6,
+      "vertices": 1728,
+      "faces": 1728
+    },
+    {
+      "collection": "13 | Reception & support rooms",
+      "batch": "Reception desk fluting \u2022 static batch",
+      "parts": 30,
+      "vertices": 1680,
+      "faces": 1620
+    },
+    {
+      "collection": "13 | Reception & support rooms",
+      "batch": "Coffee table leg \u2022 static batch",
+      "parts": 4,
+      "vertices": 160,
+      "faces": 88
+    },
+    {
+      "collection": "13 | Reception & support rooms",
+      "batch": "Support desk leg \u2022 static batch",
+      "parts": 6,
+      "vertices": 336,
+      "faces": 324
+    },
+    {
+      "collection": "13 | Reception & support rooms",
+      "batch": "Chair stem \u2022 static batch",
+      "parts": 3,
+      "vertices": 120,
+      "faces": 66
+    },
+    {
+      "collection": "13 | Reception & support rooms",
+      "batch": "Chair base \u2022 static batch",
+      "parts": 6,
+      "vertices": 336,
+      "faces": 324
+    },
+    {
+      "collection": "14 | Group exercise",
+      "batch": "Barre bracket \u2022 static batch",
+      "parts": 7,
+      "vertices": 280,
+      "faces": 154
+    },
+    {
+      "collection": "14 | Group exercise",
+      "batch": "Mat centre logo \u2022 static batch",
+      "parts": 6,
+      "vertices": 48,
+      "faces": 36
+    },
+    {
+      "collection": "14 | Group exercise",
+      "batch": "Studio cubby \u2022 static batch",
+      "parts": 8,
+      "vertices": 448,
+      "faces": 432
+    }
+  ],
+  "curve_changes": [
+    {
+      "name": "Cardio / washroom bay dimension typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Cardio / washroom bay line path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Cardio / washroom bay witness path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Cardio / washroom bay witness path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Cardio wall sign typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Central circle lettering typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Central circle \u2022 16 ft diameter path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Central clear width dimension typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Central clear width line path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Central clear width witness path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Central clear width witness path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Central monogram typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Circulation arrow path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Circulation arrow path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Coiled battle rope path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Coiled battle rope path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Coiled battle rope path.002",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "East passage label typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Exterior entrance lettering typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Facade brand circle path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Facade logo footer typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Facade logo heading typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Facade monogram typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Floor label \u2022 CARDIO typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Floor label \u2022 GROUP EX typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Floor label \u2022 HYROX typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Floor label \u2022 MEN typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Floor label \u2022 RECEPTION typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Floor label \u2022 WEIGHT TRAINING typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Floor label \u2022 WOMEN typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Free-weight wall sign typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Lane 01 typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Lane 02 typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Lane finish text 01 typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Lane finish text 02 typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Men faucet path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Men faucet path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Men shower riser path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Overall depth dimension typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Overall depth line path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Overall depth witness path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Overall depth witness path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Overall width dimension typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Overall width line path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Overall width witness path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Overall width witness path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Passage width dimension typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Passage width line path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Passage width witness path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Passage width witness path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Presentation subtitle typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Presentation title typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Reception / studio bay dimension typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Reception / studio bay line path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Reception / studio bay witness path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Reception / studio bay witness path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Reception brand wall typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Reception descriptor typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Reception desk logo typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Scale caveat typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Side duct collar path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.002",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.003",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.004",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.005",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.006",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.007",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.008",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.009",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.010",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.011",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.012",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.013",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.014",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Side duct collar path.015",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "South passage label typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Spiral duct seam path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.002",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.003",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.004",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.005",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.006",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.007",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.008",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.009",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.010",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.011",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.012",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.013",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.014",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.015",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.016",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.017",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.018",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.019",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.020",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.021",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.022",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.023",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.024",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.025",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.026",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.027",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.028",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.029",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.030",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Spiral duct seam path.031",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Support label typography",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Support label typography.001",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Support label typography.002",
+      "change": "text viewport tessellation 4; render tessellation 8"
+    },
+    {
+      "name": "Wall ball accent path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Wall ball accent path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Wall ball accent path.002",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Wall ball accent path.003",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Wall ball accent path.004",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Wall ball accent path.005",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 48
+    },
+    {
+      "name": "Women faucet path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Women faucet path.001",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    },
+    {
+      "name": "Women shower riser path",
+      "bevel_resolution_before": 3,
+      "bevel_resolution_after": 1,
+      "control_points_removed": 0
+    }
+  ],
+  "render_settings": [
+    {
+      "scene": "01 | CUTAWAY \u2022 furnished plan",
+      "engine": "CYCLES",
+      "final_samples": 40,
+      "preview_samples": 16,
+      "adaptive_threshold": 0.02500000037252903
+    },
+    {
+      "scene": "02 | PLAN \u2022 orthographic",
+      "engine": "CYCLES",
+      "final_samples": 40,
+      "preview_samples": 16,
+      "adaptive_threshold": 0.02500000037252903
+    },
+    {
+      "scene": "03 | EXTERIOR \u2022 entrance",
+      "engine": "CYCLES",
+      "final_samples": 40,
+      "preview_samples": 16,
+      "adaptive_threshold": 0.02500000037252903
+    },
+    {
+      "scene": "04 | INTERIOR \u2022 free weights",
+      "engine": "CYCLES",
+      "final_samples": 40,
+      "preview_samples": 16,
+      "adaptive_threshold": 0.02500000037252903
+    },
+    {
+      "scene": "05 | INTERIOR \u2022 HYROX",
+      "engine": "CYCLES",
+      "final_samples": 40,
+      "preview_samples": 16,
+      "adaptive_threshold": 0.02500000037252903
+    }
+  ],
+  "preserved_checks": {
+    "all_five_scenes": true,
+    "room_areas": true,
+    "equipment_transforms": true,
+    "camera_transforms": true,
+    "retained_mesh_bounds": true,
+    "packed_references": true
+  },
+  "elapsed_seconds": 1.83
+}

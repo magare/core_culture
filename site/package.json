@@ -1,0 +1,17 @@
+{
+  "name": "core-culture-site",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build:viewer": "esbuild js/model-viewer.js --bundle --format=esm --minify --target=es2022 --legal-comments=linked --outfile=js/model-viewer.bundle.js",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@phosphor-icons/web": "^2.1.2",
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "gltf-validator": "2.0.0-dev.3.10"
+  }
+}

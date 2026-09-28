@@ -1,0 +1,175 @@
+/* Campaign 02 motion: staged, scroll-aware, and quiet when reduced motion is requested. */
+:root{
+  --motion-ease:cubic-bezier(.16,1,.3,1);
+  --motion-ui:cubic-bezier(.2,.8,.2,1);
+  --page-progress:0;
+}
+
+.site-header::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-1px;
+  width:100%;
+  height:2px;
+  background:var(--accent);
+  transform:scaleX(var(--page-progress));
+  transform-origin:left;
+  pointer-events:none;
+}
+.site-header{transition:background-color .3s ease,border-color .3s ease,box-shadow .3s ease}
+.site-header.is-scrolled{box-shadow:0 14px 42px rgba(0,0,0,.2)}
+
+/* First frame: a short editorial sequence, not a looping showreel. */
+html.motion-ready:not(.reduce-motion) .hero-copy-panel>.eyebrow{
+  animation:cc-rise-in .72s var(--motion-ease) .05s both;
+}
+html.motion-ready:not(.reduce-motion) #hero-title>span,
+html.motion-ready:not(.reduce-motion) #hero-title>em{
+  animation:cc-title-in .92s var(--motion-ease) both;
+  transform-origin:left bottom;
+}
+html.motion-ready:not(.reduce-motion) #hero-title>span:nth-child(1){animation-delay:.1s}
+html.motion-ready:not(.reduce-motion) #hero-title>span:nth-child(2){animation-delay:.18s}
+html.motion-ready:not(.reduce-motion) #hero-title>em{animation-delay:.26s}
+html.motion-ready:not(.reduce-motion) .hero-copy{animation:cc-rise-in .72s var(--motion-ease) .34s both}
+html.motion-ready:not(.reduce-motion) .hero-actions{animation:cc-rise-in .72s var(--motion-ease) .42s both}
+html.motion-ready:not(.reduce-motion) .hero-media{
+  animation:cc-media-in 1.05s var(--motion-ease) .08s both;
+}
+html.motion-ready:not(.reduce-motion) .hero-media img{
+  animation:cc-hero-image-in 1.35s var(--motion-ease) .06s both;
+}
+html.motion-ready:not(.reduce-motion) .hero-media-meta,
+html.motion-ready:not(.reduce-motion) .hero-media figcaption{
+  animation:cc-rise-in .72s var(--motion-ease) .55s both;
+}
+html.motion-ready:not(.reduce-motion) .hero-media::after{
+  animation:cc-light-sweep 1.45s var(--motion-ease) .25s both;
+}
+html.motion-ready:not(.reduce-motion) .first-route{animation:cc-rise-in .8s var(--motion-ease) .55s both}
+
+@keyframes cc-title-in{
+  from{opacity:0;clip-path:inset(100% 0 0);transform:translate3d(0,34px,0) rotate(2deg)}
+  to{opacity:1;clip-path:inset(0);transform:none}
+}
+@keyframes cc-rise-in{
+  from{opacity:0;transform:translate3d(0,20px,0)}
+  to{opacity:1;transform:none}
+}
+@keyframes cc-media-in{
+  from{opacity:.15;clip-path:inset(5% 5% 5% 0)}
+  to{opacity:1;clip-path:inset(0)}
+}
+@keyframes cc-hero-image-in{
+  from{transform:translate3d(0,var(--hero-media-y,0),0) scale(1.12);filter:saturate(.72) contrast(1.14) brightness(.88)}
+  to{transform:translate3d(0,var(--hero-media-y,0),0) scale(1.045);filter:saturate(.98) contrast(1.1) brightness(.94)}
+}
+@keyframes cc-light-sweep{
+  from{transform:translate3d(-140%,0,0) skewX(-13deg);opacity:0}
+  25%{opacity:1}
+  to{transform:translate3d(560%,0,0) skewX(-13deg);opacity:0}
+}
+
+/* Content remains visible without JS; the ready class activates one-shot reveals. */
+.motion-reveal{opacity:1;transform:none}
+html.motion-ready:not(.reduce-motion) .motion-reveal{
+  transition:
+    opacity .68s var(--motion-ease),
+    transform .76s var(--motion-ease),
+    clip-path .84s var(--motion-ease);
+  transition-delay:var(--reveal-delay,0ms);
+}
+html.motion-ready:not(.reduce-motion) .motion-reveal:not(.is-visible){
+  opacity:0;
+  transform:translate3d(0,24px,0);
+}
+html.motion-ready:not(.reduce-motion) .motion-reveal[data-reveal-kind="image"]{
+  clip-path:inset(0);
+}
+html.motion-ready:not(.reduce-motion) .motion-reveal[data-reveal-kind="image"]:not(.is-visible){
+  clip-path:inset(7% 0 7% 0);
+  transform:translate3d(0,16px,0);
+}
+.motion-reveal:focus-within{opacity:1!important;transform:none!important;clip-path:inset(0)!important;transition:none!important}
+
+.motion-image{overflow:hidden}
+.motion-image>img{
+  transform:translate3d(0,var(--parallax-y,0),0) scale(1.045);
+  transition:transform 1s var(--motion-ease),filter .6s ease;
+}
+html.motion-ready:not(.reduce-motion) .motion-image.motion-reveal:not(.is-visible)>img{
+  transform:translate3d(0,var(--parallax-y,0),0) scale(1.11);
+}
+
+.kinetic-track{transform:translate3d(var(--band-x,0),0,0)}
+.kinetic-band.is-moving .kinetic-track{will-change:transform}
+.footer-wordmark{transform:translate3d(0,var(--footer-y,0),0)}
+.hero-copy-panel{transform:translate3d(0,var(--hero-copy-y,0),0);opacity:var(--hero-copy-opacity,1)}
+
+/* Responsive interaction feedback mirrors hover for keyboard users. */
+.button,.text-link,.circle-button,.menu-toggle,.close-button,
+.space-card,.room-list button,.viewer-presets button,.viewer-toolbar button{
+  transition:
+    transform .22s var(--motion-ui),
+    color .2s ease,
+    background-color .2s ease,
+    border-color .2s ease,
+    opacity .2s ease;
+}
+.button>i,.text-link>i,.space-caption>i,.room-list button>i,.menu-toggle>i{
+  transition:transform .22s var(--motion-ease);
+}
+.button:is(:hover,:focus-visible)>i,.text-link:is(:hover,:focus-visible)>i,
+.space-card:is(:hover,:focus-visible) .space-caption>i,
+.room-list button:is(:hover,:focus-visible)>i{
+  transform:translate3d(3px,-3px,0);
+}
+.button:active,.circle-button:active,.menu-toggle:active,.close-button:active{transform:scale(.985)}
+.space-card .space-photo img{transition:transform .72s var(--motion-ease),filter .45s ease}
+.space-card:is(:hover,:focus-visible) .space-photo img,.space-card.is-active .space-photo img{transform:scale(1.035);filter:saturate(.92) contrast(1.08) brightness(.95)}
+.space-card.is-active .space-caption{color:var(--accent)}
+.space-card.is-active .space-photo::after{border-color:rgba(255,91,34,.52)}
+.room-list button:is(:hover,:focus-visible){padding-left:8px;color:var(--accent)}
+
+/* Dynamic schedule updates should feel placed, never dropped in. */
+html.motion-ready:not(.reduce-motion) #sessionList>.session{
+  animation:cc-session-in .32s var(--motion-ease) both;
+  animation-delay:calc(var(--session-index,0) * 35ms);
+}
+@keyframes cc-session-in{
+  from{opacity:0;transform:translate3d(0,9px,0)}
+  to{opacity:1;transform:none}
+}
+
+html.motion-ready:not(.reduce-motion) #modelLoading{
+  transition:opacity .3s ease,visibility .3s ease;
+}
+.viewer-presets button[aria-pressed="true"],.viewer-toolbar button[aria-pressed="true"]{transform:translateY(-1px)}
+
+@media(max-width:780px){
+  .hero-copy-panel{transform:none;opacity:1}
+  .motion-image>img{transform:scale(1.025)}
+  html.motion-ready:not(.reduce-motion) .motion-image.motion-reveal:not(.is-visible)>img{transform:scale(1.07)}
+  .kinetic-track{transform:translate3d(var(--band-x,0),0,0)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .motion-reveal,.motion-image>img,.hero-copy-panel,.hero-media img,.kinetic-track,.footer-wordmark{opacity:1!important;transform:none!important;clip-path:none!important}
+  .hero-media::after{display:none!important}
+}
+html.reduce-motion{scroll-behavior:auto}
+html.reduce-motion .motion-reveal,
+html.reduce-motion .motion-image>img,
+html.reduce-motion .hero-copy-panel,
+html.reduce-motion .hero-media img,
+html.reduce-motion .kinetic-track,
+html.reduce-motion .footer-wordmark{
+  opacity:1!important;
+  transform:none!important;
+  clip-path:none!important;
+  animation:none!important;
+  transition:none!important;
+}
+html.reduce-motion .hero-media::after{display:none!important}

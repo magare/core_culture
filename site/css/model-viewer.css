@@ -1,0 +1,53 @@
+/* Realtime model controls live outside the scene: nothing covers the floor. */
+.model-viewer{min-width:0;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#202622}
+.viewer-heading{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;font-size:10px;letter-spacing:.12em;color:#c8d1c0}
+.viewer-heading>span:first-child{display:flex;align-items:center;gap:9px}
+.viewer-live-dot{width:5px;height:5px;border-radius:50%;background:#a8bc92}
+.model-stage{position:relative;aspect-ratio:9/7;min-height:280px;background:#bcc1b5;isolation:isolate}
+.model-stage canvas{display:block;width:100%;height:100%;touch-action:pan-y;outline-offset:-4px}
+.model-stage canvas:focus-visible{outline:3px solid #314432}
+.model-loading{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;padding:30px;text-align:center;color:#293329;z-index:1;background:#bcc1b5}
+.model-loading[hidden]{display:none}
+.model-loading-mark{font:600 64px/.9 var(--display);letter-spacing:-.06em;opacity:.45}
+.model-loading p{max-width:360px;font-size:13px;line-height:1.8}
+.model-loading .button{color:var(--paper);background:#293329;border-color:#293329}
+.viewer-presets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line);padding:0 16px;gap:12px}
+.viewer-presets button{min-height:55px;padding:10px 0;border-bottom:2px solid transparent;color:#b3bfaa;font-size:12px;text-align:left}
+.viewer-presets button[aria-pressed=true]{color:var(--white);border-color:var(--accent)}
+.viewer-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 16px 0}
+.viewer-toolbar button{min-height:44px;border:1px solid #ffffff30;border-radius:3px;padding:10px 13px;color:#e0e6d9;font-size:11px;white-space:nowrap}
+.viewer-toolbar button:hover{border-color:#c5d0b9;background:#ffffff08}
+.viewer-toolbar button[aria-pressed=true]{background:#ced6bd;color:#253021;border-color:#ced6bd}
+.viewer-toolbar #modelInteract{margin-right:auto;min-width:100px}
+.viewer-zoom{display:flex;gap:0}
+.viewer-zoom button{min-width:44px;font-size:19px;padding:5px 10px;border-radius:0}
+.viewer-zoom button+button{border-left:0}
+.viewer-zoom button:first-child{border-radius:3px 0 0 3px}
+.viewer-zoom button:last-child{border-radius:0 3px 3px 0}
+.model-viewer button:disabled{opacity:.4;cursor:default}
+.viewer-help{padding:13px 17px 17px;color:#b6c0ac;font-size:11px;line-height:1.8;margin:0}
+.model-disclaimer a{display:inline-block;color:#d3dcc9;text-decoration:underline;text-underline-offset:4px;margin-top:6px}
+.model-dialog{width:min(1280px,calc(100vw - 40px));max-width:none;max-height:calc(100dvh - 30px);padding:0;border:1px solid var(--line);background:var(--ink);color:var(--white);border-radius:5px;overflow:auto}
+.model-dialog .dialog-top{position:sticky;top:0;z-index:3}
+.model-dialog .model-viewer{border:0;border-radius:0}
+.model-dialog .model-stage{height:clamp(240px,65dvh,780px);aspect-ratio:auto;min-height:0}
+.model-dialog #modelExpand{display:none}
+.model-dialog::backdrop{background:#0a0e0ce8}
+@media(max-width:700px){
+ .model-stage{aspect-ratio:1;min-height:250px}
+ .viewer-heading{padding:13px 14px;font-size:9px}
+ .viewer-presets{gap:8px;padding-inline:13px}
+ .viewer-presets button{font-size:10px;min-height:52px}
+ .viewer-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:12px 12px 0}
+ .viewer-toolbar button{padding:8px 10px;font-size:10px}
+ .viewer-toolbar #modelInteract{min-width:98px;margin:0;justify-self:start}
+ .viewer-zoom{justify-self:end}
+ .viewer-toolbar #modelLabels{justify-self:start}
+ .viewer-zoom button{min-width:44px;font-size:18px;padding-inline:8px}
+ .viewer-toolbar #modelExpand{margin:0;justify-self:end}
+ .viewer-help{padding:12px 14px 15px;font-size:10px}
+ .model-dialog{width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
+ .model-dialog .dialog-top{padding:12px 16px}
+ .model-dialog .dialog-top .eyebrow{font-size:9px}
+ .model-dialog .model-stage{height:52dvh;min-height:200px}
+}

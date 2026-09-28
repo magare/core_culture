@@ -1,0 +1,19 @@
+{
+  "source_blend": "Core_Culture_Gym_Aesthetic.blend",
+  "source_sha256": "51b521bb2ed6876096d2cab0f27e6a0fca9c33a2c7828767ccdbe74338e8cc08",
+  "output_blend": "Core_Culture_Gym_Layout_Aligned.blend",
+  "output_sha256": "020b7090d14d028ce23784407f78b54a6fbd0646840d0d0990d0b47c52b83865",
+  "footprint_ft": [
+    96,
+    60
+  ],
+  "footprint_confidence": "inferred from 64-ft central floor, 16-ft reception bay, equal drawn side bays",
+  "central_training_floor_ft": [
+    64,
+    60
+  ],
+  "roof_center_ft": 25,
+  "source_pdf": "/Users/magare/Downloads/Gym layout .pdf",
+  "cutaway_scene": "01 | CUTAWAY \u2022 furnished plan",
+  "website_scene": "07 | WEBSITE \u2022 architectural cutaway"
+}

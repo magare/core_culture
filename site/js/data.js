@@ -13,12 +13,12 @@ window.CC = (function () {
 
   /* ---- categories: one colour system for plan, carousel, timetable ---- */
   const categories = {
-    strength:  { label: "Strength",  color: "#ff5a1f", deep: "#c43a06" },
-    hybrid:    { label: "Hybrid / HYROX", color: "#ffb400", deep: "#8a5f00" },
-    cardio:    { label: "Cardio & Engine", color: "#4f7dff", deep: "#2743b8" },
-    studio:    { label: "Dance · Yoga", color: "#ff4fa3", deep: "#b81d6d" },
-    recovery:  { label: "Recovery",  color: "#49c3d8", deep: "#0b7f95" },
-    community: { label: "Community", color: "#8fbf6f", deep: "#44691f" }
+    strength:  { label: "Strength",  color: "#c95a25", deep: "#8e3e1a" },
+    hybrid:    { label: "Hybrid conditioning", color: "#e8ae28", deep: "#a8750e" },
+    cardio:    { label: "Cardio & Engine", color: "#c7b09a", deep: "#6e5844" },
+    studio:    { label: "Dance · Yoga", color: "#e7dccb", deep: "#8e6d51" },
+    recovery:  { label: "Recovery",  color: "#8f9a7a", deep: "#4e5a45" },
+    community: { label: "Community", color: "#a99884", deep: "#665342" }
   };
 
   /* ---- rooms: carousel order = walkthrough order; plan = SVG coords ----
@@ -29,7 +29,7 @@ window.CC = (function () {
       access: "included", accessNote: "Open with every membership — hours to confirm.",
       tagline: "Racks, platforms and iron that means it.",
       intro: "The lifting heart of the club: racks and platforms for barbell work, a machines bay for targeted, biomechanics-backed training.",
-      photo: { src: "../crops/w303-floor-weights.jpg", alt: "Art-directed render: training machine and calibrated plates in the strength zone" },
+      photo: { src: "../assets/images/core-culture-strength-v2.webp", alt: "Female athlete lifting in the Core Culture strength zone — concept photography" },
       amenities: ["Squat racks", "Platforms", "Calibrated plates", "Dumbbells", "Benches"],
       facilities: [
         ["Floor", "Rubber platform flooring"], ["Racks & platforms", "TBC — count to confirm"],
@@ -37,9 +37,9 @@ window.CC = (function () {
       ],
       plan: { x: 40, y: 40, w: 330, h: 300, letter: "A" },
       gallery: [
-        { src: "../crops/w303-floor-weights.jpg", alt: "Machine and plates in the strength zone — art direction", caption: "Machines bay — art direction" },
-        { src: "../crops/w301-machine-sq.jpg", alt: "Close view of a selectorised training machine — art direction", caption: "Biomechanics-first machines" },
-        { src: "../crops/w301-machine-tall.jpg", alt: "Tall crop of strength equipment against a pale wall — art direction", caption: "Iron, kept honest" }
+        { src: "../assets/images/core-culture-strength-v2.webp", alt: "Female athlete lifting in the strength zone — concept photography", caption: "Strength, kept honest" },
+        { src: "../assets/images/core-culture-hero-v2.webp", alt: "Male athlete deadlifting on the Core Culture floor — concept photography", caption: "Iron, kept honest" },
+        { src: "../assets/images/core-culture-recovery-v2.webp", alt: "Athletes cooling down inside Core Culture — concept photography", caption: "Work after the work" }
       ],
       equipment: ["rack", "barbell", "plates", "dumbbells", "bench", "cables", "machines"]
     },
@@ -48,7 +48,7 @@ window.CC = (function () {
       access: "included", accessNote: "Open floor; HYROX batches use it on the timetable.",
       tagline: "Sled lanes and a turf track built for HYROX.",
       intro: "A functional floor for sled work, carries, ropes and race simulation — the training ground for HYROX batches and engine days.",
-      photo: { src: "../crops/w301-sled-sq.jpg", alt: "Art-directed render: athlete driving a weighted sled across dark turf" },
+      photo: { src: "../assets/images/core-culture-hero-v2.webp", alt: "Athletes training on an industrial gym floor — concept photography" },
       amenities: ["Sled track", "Turf lane", "Sleds & ropes", "Boxes", "HYROX stations"],
       facilities: [
         ["Surface", "Turf sprint lane"], ["Sleds", "Weighted, lane use"],
@@ -56,9 +56,9 @@ window.CC = (function () {
       ],
       plan: { x: 390, y: 40, w: 250, h: 300, letter: "C" },
       gallery: [
-        { src: "../crops/w301-sled-sq.jpg", alt: "Sled drive on the hybrid turf — art direction", caption: "Sled lane, race pace" },
-        { src: "../crops/w301-sled-tall.jpg", alt: "Tall crop of a sled push — art direction", caption: "Low and driving" },
-        { src: "../crops/w307-obj-sled.jpg", alt: "Close view of a sled handle — art direction", caption: "Grip points, chalk dust" }
+        { src: "../assets/images/core-culture-hero-v2.webp", alt: "Male athlete driving through a heavy lift — concept photography", caption: "Low and driving" },
+        { src: "../assets/images/core-culture-strength-v2.webp", alt: "Female athlete training in the hybrid zone — concept photography", caption: "Grip points, chalk dust" },
+        { src: "../assets/images/core-culture-recovery-v2.webp", alt: "Male and female athletes after training — concept photography", caption: "The floor, together" }
       ],
       equipment: ["sled", "ropes", "boxes", "kettlebells", "hyrox"]
     },
@@ -67,7 +67,7 @@ window.CC = (function () {
       access: "included", accessNote: "Open with every membership; class programming varies.",
       tagline: "Treadmills, ergs and bikes — running, upgraded.",
       intro: "Cardio that doesn't patronise you: platforms for zone-2 base, threshold work and sprint finishes, with screens you're allowed to ignore.",
-      photo: { src: "../crops/w306-hero-streak.jpg", alt: "Art-directed image: light streaks suggesting pace on the engine room floor" },
+      photo: { src: "../assets/images/core-culture-hero-v2.webp", alt: "Athlete training under warm industrial lights — concept photography" },
       amenities: ["Treadmills", "Row ergs", "Ski ergs", "Bikes"],
       facilities: [
         ["Machines", "Count & models TBC"], ["Screens", "Training data — optional"],
@@ -75,8 +75,8 @@ window.CC = (function () {
       ],
       plan: { x: 660, y: 40, w: 300, h: 130, letter: "D" },
       gallery: [
-        { src: "../crops/w306-hero-streak.jpg", alt: "Light-streak artwork for the engine room — art direction", caption: "Pace, made visible" },
-        { src: "../crops/p02-streaks.jpg", alt: "Colour light streaks — art direction", caption: "Interval lights" }
+        { src: "../assets/images/core-culture-hero-v2.webp", alt: "Athlete training under warm industrial lights — concept photography", caption: "Pace, made visible" },
+        { src: "../assets/images/core-culture-strength-v2.webp", alt: "Female athlete driving through a lift — concept photography", caption: "Interval lights" }
       ],
       equipment: ["treadmill", "rower", "ski", "bike"]
     },
@@ -85,7 +85,7 @@ window.CC = (function () {
       access: "included", accessNote: "Included classes; hobby clubs may run as events — see timetable.",
       tagline: "Dance, yoga and hobby clubs under club lights.",
       intro: "A sprung floor with a sound system and zero judgement: dance and zumba evenings, yoga flows, and hobby clubs for people who don't call it cardio.",
-      photo: { src: "../crops/w303-floor-studio.jpg", alt: "Art-directed render: dancer in silhouette under pink studio light" },
+      photo: { src: "../assets/images/core-culture-recovery-v2.webp", alt: "Athletes connecting after a session in Core Culture — concept photography" },
       amenities: ["Sprung floor", "Sound system", "Club lights", "Yoga props"],
       facilities: [
         ["Floor", "Sprung — size TBC"], ["Lights", "Programmable studio wash"],
@@ -93,9 +93,9 @@ window.CC = (function () {
       ],
       plan: { x: 660, y: 200, w: 300, h: 140, letter: "E" },
       gallery: [
-        { src: "../crops/w303-floor-studio.jpg", alt: "Dancer under pink light — art direction", caption: "Choreography hour" },
-        { src: "../crops/w301-hero-dance.jpg", alt: "Dancer between neon tubes — art direction", caption: "Club lights, zero mirrors policy TBC" },
-        { src: "../crops/p01-dance.jpg", alt: "Dancer in silhouette, magenta wash — art direction", caption: "The last song nobody skips" }
+        { src: "../assets/images/core-culture-recovery-v2.webp", alt: "Male and female athletes cooling down together — concept photography", caption: "The last song nobody skips" },
+        { src: "../assets/images/core-culture-strength-v2.webp", alt: "Female athlete training under warm light — concept photography", caption: "Club lights, hard work" },
+        { src: "../assets/images/core-culture-hero-v2.webp", alt: "Male athlete training on the floor — concept photography", caption: "No spectators" }
       ],
       equipment: ["yoga", "av"]
     },
@@ -104,7 +104,7 @@ window.CC = (function () {
       access: "bookable", accessNote: "Plunge and steam — booking model to confirm (included vs slot-paid).",
       tagline: "Ice bath and steam. Three honest minutes.",
       intro: "Cold plunge and steam for the work after the work. Guided immersion sessions run on the timetable; protocols are coached, not macho.",
-      photo: { src: "../crops/w301-hero-ice.jpg", alt: "Art-directed render: ice water filling a cold plunge tub" },
+      photo: { src: "../assets/images/core-culture-recovery-v2.webp", alt: "Male and female athletes cooling down after training — concept photography" },
       amenities: ["Cold plunge", "Steam", "Towels", "Guided sessions"],
       facilities: [
         ["Plunge", "Temperature TBC — protocol ~3 min"], ["Steam", "Capacity TBC"],
@@ -112,9 +112,9 @@ window.CC = (function () {
       ],
       plan: { x: 390, y: 360, w: 180, h: 160, letter: "F" },
       gallery: [
-        { src: "../crops/w301-hero-ice.jpg", alt: "Ice bath close-up — art direction", caption: "The tub doesn't lie" },
-        { src: "../crops/w301-ice-sq.jpg", alt: "Ice and water — art direction", caption: "Cold, patient" },
-        { src: "../crops/p10-ice.jpg", alt: "Black-and-white plunge study — art direction", caption: "Steam after" }
+        { src: "../assets/images/core-culture-recovery-v2.webp", alt: "Athletes cooling down in the recovery wing — concept photography", caption: "The reset counts" },
+        { src: "../assets/images/core-culture-strength-v2.webp", alt: "Female athlete finishing a hard set — concept photography", caption: "Cold, patient" },
+        { src: "../assets/images/core-culture-hero-v2.webp", alt: "Male athlete finishing a heavy set — concept photography", caption: "Steam after" }
       ],
       equipment: ["plunge", "steam"]
     },
@@ -123,7 +123,7 @@ window.CC = (function () {
       access: "included", accessNote: "Open to members during staffed hours — hours TBC.",
       tagline: "Work-lift balance. Coffee unmetered.",
       intro: "Meetings before the session, people after it. A warm room to work, argue about training and stay longer than you planned.",
-      photo: { src: "../crops/p05-field.jpg", alt: "Art-directed render: a desk standing in an open field — the lounge as headspace" },
+      photo: { src: "../assets/images/core-culture-recovery-v2.webp", alt: "Male and female athletes share a post-training moment — concept photography" },
       amenities: ["Seats & desks", "Coffee", "Wi-Fi TBC", "No clocks"],
       facilities: [
         ["Seats", "Count TBC"], ["Coffee", "Included — machine TBC"],
@@ -131,8 +131,8 @@ window.CC = (function () {
       ],
       plan: { x: 590, y: 360, w: 370, h: 160, letter: "G" },
       gallery: [
-        { src: "../crops/p05-field.jpg", alt: "Desk in a field — lounge headspace artwork", caption: "Headspace, drawn literally" },
-        { src: "../crops/w301-field-tall.jpg", alt: "Tall crop of the field desk artwork", caption: "Work-lift balance" }
+        { src: "../assets/images/core-culture-recovery-v2.webp", alt: "Male and female athletes share a post-training moment — concept photography", caption: "Work-lift balance" },
+        { src: "../assets/images/core-culture-strength-v2.webp", alt: "Female athlete in the strength zone — concept photography", caption: "Stay for the people" }
       ],
       equipment: []
     },
@@ -141,7 +141,7 @@ window.CC = (function () {
       access: "included", accessNote: "Parking included with membership — to confirm at sign-up.",
       tagline: "Parking. Finally.",
       intro: "Drive in, park without a quest, walk in warm. The lot is part of the membership — arrival should never be the hardest set.",
-      photo: { src: "../crops/w305-hero-park.jpg", alt: "Art-directed render: cars parked in rows at dusk" },
+      photo: { src: "../assets/images/core-culture-hero-v2.webp", alt: "Core Culture training floor at dusk — concept photography" },
       amenities: ["On-site parking", "Step-free entry TBC", "Front desk", "Accessibility TBC"],
       facilities: [
         ["Spaces", "Count TBC — brand promise: plenty"], ["EV charging", "TBC"],
@@ -149,8 +149,8 @@ window.CC = (function () {
       ],
       plan: { strip: true, letter: "P" },
       gallery: [
-        { src: "../crops/w305-hero-park.jpg", alt: "Parked cars at dusk — art direction", caption: "No parking cardio required" },
-        { src: "../crops/w301-dusk-wide.jpg", alt: "Parking at dusk, wide — art direction", caption: "Arrival, un-fought" }
+        { src: "../assets/images/core-culture-hero-v2.webp", alt: "The Core Culture floor in warm evening light — concept photography", caption: "Arrival, un-fought" },
+        { src: "../assets/images/core-culture-recovery-v2.webp", alt: "Athletes cooling down together — concept photography", caption: "Walk in warm" }
       ],
       equipment: []
     },
@@ -159,7 +159,7 @@ window.CC = (function () {
       access: "included", accessNote: "Front desk during staffed hours.",
       tagline: "Start here. The desk knows your name eventually.",
       intro: "Reception, trial check-ins and the house board. First visit starts with a tour — book one below.",
-      photo: { src: "../crops/w301-hero-frost.jpg", alt: "Art-directed texture: frosted glass — lobby detail study" },
+      photo: { src: "../assets/images/core-culture-strength-v2.webp", alt: "Female athlete arriving on the Core Culture floor — concept photography" },
       amenities: ["Reception", "House board", "Trial check-in"],
       facilities: [
         ["Desk hours", "Staffed hours TBC"], ["Tours", "Bookable with a trial"],
@@ -167,7 +167,7 @@ window.CC = (function () {
       ],
       plan: { x: 40, y: 360, w: 200, h: 160, letter: "B" },
       gallery: [
-        { src: "../crops/w301-hero-frost.jpg", alt: "Frosted glass texture — lobby detail artwork", caption: "Detail study — real photos to follow" }
+        { src: "../assets/images/core-culture-strength-v2.webp", alt: "Female athlete arriving on the Core Culture floor — concept photography", caption: "Start here" }
       ],
       equipment: []
     }
@@ -336,5 +336,128 @@ window.CC = (function () {
     imageryNotice: "Photographs are brand art direction from the concept work — not yet verified photography of the actual gym."
   };
 
+  /* Editorial concept imagery. These are not photographs of a real venue. */
+  const art = {
+    strength: { src: "assets/images/cc-quietheat-strength-v5.webp", alt: "A mature South Asian woman quietly adjusting a barbell collar in morning light — AI-generated editorial concept photography", heroPosition: "50% 6%" },
+    hybrid: { src: "assets/images/cc-quietheat-hybrid-v5.webp", alt: "A Black male athlete training on a rowing machine across a sunlit club floor — AI-generated editorial concept photography", heroPosition: "50% 18%" },
+    cardio: { src: "assets/images/cc-quietheat-cardio-v5.webp", alt: "A Latina runner moving through a charcoal club corridor beneath a pool of light — AI-generated editorial concept photography", heroPosition: "50% 15%" },
+    studio: { src: "assets/images/cc-quietheat-movement-v5.webp", alt: "An East Asian man performing a controlled rotational movement in a quiet studio — AI-generated editorial concept photography", heroPosition: "50% 12%" },
+    recovery: { src: "assets/images/cc-quietheat-recovery-v5.webp", alt: "An East Asian woman cooling down beside a tall window after training — AI-generated editorial concept photography", heroPosition: "50% 10%" },
+    lounge: { src: "assets/images/cc-quietheat-community-v5.webp", alt: "Four athletes sharing an unforced conversation at a brushed-steel water point — AI-generated editorial concept photography", heroPosition: "50% 8%" },
+    lobby: { src: "assets/images/cc-quietheat-welcome-v5.webp", alt: "A South Asian member receiving a warm welcome at a dark-oak club reception — AI-generated editorial concept photography", heroPosition: "50% 12%" },
+    arrival: { src: "assets/images/cc-quietheat-arrival-v5.webp", alt: "A woman in a cobalt coat arriving at the club on a rainy blue-hour morning — AI-generated editorial concept photography", heroPosition: "50% 14%" }
+  };
+  const roomCopy = {
+    strength: ["Build a foundation. Raise your ceiling.", "An illustrative strength-space concept. The exact equipment mix and floor layout will be published only when confirmed."],
+    hybrid: ["Strength meets endurance. Find your edge.", "An open-floor conditioning concept for days that bring strength and stamina together. Final equipment and programming remain unconfirmed."],
+    cardio: ["Find a pace. Then find your next.", "A conditioning concept for steady work, intervals, and everything in between. The final equipment mix remains unconfirmed."],
+    studio: ["Move to your own rhythm.", "A movement concept designed for a different energy and pace. The final class format and room specification remain unconfirmed."],
+    recovery: ["The reset is part of the routine.", "A quieter end to the session is part of the concept. The final facilities and format have not yet been confirmed."],
+    lounge: ["Good company. A little more time.", "A place to pause and connect is part of the concept. Its final use, services, and access have not yet been confirmed."],
+    lobby: ["Your first step into the culture.", "An illustrative welcome concept. Staffing, check-in, and tour arrangements remain unconfirmed."],
+    arrival: ["A considered arrival, from the start.", "Explore the arrival concept. Location, access, and any parking information will be published only when confirmed."]
+  };
+  rooms.forEach(room => {
+    [room.tagline, room.intro] = roomCopy[room.id];
+    const photo = art[room.id];
+    if (photo) {
+      room.photo = photo;
+      room.gallery = [{ ...photo, caption: room.name + " · AI-generated concept visual" }];
+      if (room.id === "strength") room.gallery.push({ ...art.hybrid, caption: "Training in motion · campaign concept" });
+      if (room.id === "hybrid") room.gallery.push({ ...art.strength, caption: "Strength in motion · campaign concept" });
+    }
+  });
+  const conceptNames = {
+    strength: "Strength Concept",
+    hybrid: "Training Floor",
+    cardio: "Conditioning Concept",
+    studio: "Movement Concept",
+    recovery: "Reset Concept",
+    lounge: "Community Concept",
+    lobby: "Welcome Concept",
+    arrival: "Arrival Concept"
+  };
+  rooms.forEach(room => {
+    room.name = conceptNames[room.id];
+    if (room.gallery?.[0]) room.gallery[0].caption = `${room.name} · AI-generated concept visual`;
+    room.access = "tbc";
+    room.accessNote = "Final access details are still to be confirmed.";
+    room.amenities = [];
+    room.facilities = [];
+    room.equipment = [];
+  });
+  equipment.find(e => e.id === "sled").purpose = "Push or pull a weighted sled to combine strength and conditioning on the turf.";
+  equipment.find(e => e.id === "rack").purpose = "Adjustable racks and platforms for squats, presses, and barbell training.";
+  equipment.find(e => e.id === "barbell").purpose = "A versatile bar for squats, presses, deadlifts, and coached strength work.";
+  equipment.find(e => e.id === "plates").purpose = "Weight plates for measured, incremental loading across barbell exercises.";
+  equipment.find(e => e.id === "dumbbells").purpose = "Free weights for controlled strength work, from individual movements to full-body sessions.";
+  equipment.find(e => e.id === "machines").purpose = "Guided-resistance machines for focused strength training. Makes and models to be confirmed.";
+  equipment.find(e => e.id === "bike").purpose = "Stationary bikes for warm-ups, steady conditioning, and interval sessions.";
+  equipment.find(e => e.id === "av").purpose = "Audio and lighting for coached movement classes. Configuration to be confirmed.";
+  equipment.find(e => e.id === "plunge").purpose = "A cold-water immersion facility. Availability, guidance, and suitability to be confirmed before use.";
+  equipment.find(e => e.id === "steam").purpose = "A warm, humid space to unwind. Access and usage guidance to be confirmed.";
+  Object.assign(batches.find(b => b.id === "b4"), {
+    name: "Guided Reset",
+    desc: "A guided introduction to post-training recovery habits. Session format and suitability guidance are still to be confirmed.",
+    bring: "Comfortable training kit."
+  });
+  Object.assign(batches.find(b => b.id === "b14"), {
+    name: "Mobility Reset",
+    desc: "An unhurried sample session focused on mobility and downshifting after training. Final programming is still to be confirmed.",
+    bring: "Comfortable training kit."
+  });
+  Object.assign(events.find(e => e.id === "e3"), {
+    name: "Recovery Workshop",
+    desc: "A sample workshop on breathing, mobility, and recovery habits. The final format and programming are still to be confirmed.",
+    bring: "Comfortable training kit."
+  });
+  Object.assign(events.find(e => e.id === "e5"), {
+    name: "Club Introduction",
+    desc: "A sample orientation format for exploring the training concept and asking questions. No event or trial availability is implied.",
+    bring: "Questions."
+  });
+  Object.assign(batches.find(b => b.id === "b6"), {
+    name: "Hybrid Circuit",
+    desc: "A sample circuit combining strength and conditioning. Final programming and equipment are still to be confirmed."
+  });
+  Object.assign(batches.find(b => b.id === "b13"), {
+    name: "Endurance Simulation",
+    desc: "A sample endurance circuit with scalable work blocks. Final programming and equipment are still to be confirmed."
+  });
+  Object.assign(events.find(e => e.id === "e2"), {
+    name: "Endurance Session",
+    desc: "A sample endurance session with scalable work blocks. No event availability or specific equipment is implied."
+  });
+  const sampleSessionCopy = {
+    strength: "A sample strength session built around progressive, coached work. Final programming and equipment are still to be confirmed.",
+    hybrid: "A sample conditioning session with scalable work blocks. Final programming and equipment are still to be confirmed.",
+    cardio: "A sample conditioning session with adjustable intensity. Final programming and equipment are still to be confirmed.",
+    studio: "A sample movement session with an adaptable pace. Final programming and room specifications are still to be confirmed.",
+    recovery: "A sample post-training reset. Final programming, facilities, and suitability guidance are still to be confirmed.",
+    community: "A sample community session format. Final programming, access, and venue details are still to be confirmed."
+  };
+  batches.forEach(batch => {
+    batch.desc = sampleSessionCopy[batch.category];
+    batch.bring = batch.category === "community" ? "Questions and curiosity." : "Comfortable training kit and water.";
+  });
+  Object.assign(batches.find(b => b.id === "b1"), { name: "Strength Foundations" });
+  Object.assign(batches.find(b => b.id === "b8"), { name: "Evening Strength" });
+  Object.assign(batches.find(b => b.id === "b11"), { name: "Strength Finish" });
+  Object.assign(batches.find(b => b.id === "b16"), { name: "Community Reset" });
+  Object.assign(batches.find(b => b.id === "b17"), { name: "Open Movement" });
+  events.forEach(event => {
+    event.desc = sampleSessionCopy[event.category] + " This is an event concept only; no availability is implied.";
+    event.bring = event.category === "community" ? "Questions and curiosity." : "Comfortable training kit and water.";
+  });
+  /* Avoid two sample classes occupying the same strength floor at 06:00 Friday. */
+  batches.find(b => b.id === "b1").days = ["mon", "wed"];
+  /* The published prototype intentionally exposes no equipment or amenity
+     inventory. Keep those details out of the runtime data until confirmed. */
+  equipment.splice(0, equipment.length);
+  profile.hero = {
+    src: "assets/images/cc-nightshift-hero-v3.webp",
+    alt: "South Asian woman athlete sprinting through signal-orange light and motion haze — AI-generated campaign photography"
+  };
+  profile.imageryNotice = "AI-generated concept imagery, not photography of the actual venue.";
   return { categories, rooms, equipment, batches, events, memberships, contact, profile };
 })();

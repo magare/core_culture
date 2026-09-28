@@ -1,0 +1,488 @@
+- generic [ref=f4e1]:
+  - link "Skip to content" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f4e3]:
+    - link "Core Culture home" [ref=f4e4] [cursor=pointer]:
+      - /url: "#top"
+      - generic [ref=f4e5]:
+        - text: CORE CULTURE
+        - generic [ref=f4e6]: THE TRAINING CLUB
+    - button "Open navigation" [active] [ref=f4e7] [cursor=pointer]:
+      - text: Menu
+      - generic [aria-hidden] [ref=f4e8]: ☰
+  - main [ref=f4e9]:
+    - region [ref=f4e10]:
+      - img "A male athlete deadlifts in a naturally lit industrial gym while a female athlete trains behind him — concept photography" [ref=f4e11]
+      - generic [ref=f4e13]:
+        - paragraph [ref=f4e14]: PUNE / TRAINING CULTURE
+        - heading "Stay hard" [level=1] [ref=f4e16]:
+          - generic [ref=f4e17]: STAY
+          - generic [ref=f4e19]: HARD
+        - paragraph [ref=f4e21]: Show up. Put in the work.Leave a little stronger.
+        - generic [ref=f4e22]:
+          - link "Take your place" [ref=f4e23] [cursor=pointer]:
+            - /url: "#book"
+            - text: Take your place
+            - generic [aria-hidden] [ref=f4e24]: ↗
+          - link "Enter the floor" [ref=f4e25] [cursor=pointer]:
+            - /url: "#amenities"
+            - text: Enter the floor
+            - generic [aria-hidden] [ref=f4e26]: ↓
+      - generic [ref=f4e27]:
+        - generic [ref=f4e28]: PEOPLE / DISCIPLINE / PROGRESS.
+        - link "Discover the Core Culture approach" [ref=f4e29] [cursor=pointer]:
+          - /url: "#club"
+          - text: SCROLL INTO THE CULTURE
+          - generic [aria-hidden] [ref=f4e30]: ↓
+    - region [ref=f4e31]:
+      - generic [ref=f4e32]:
+        - generic [ref=f4e34]:
+          - generic [ref=f4e35]:
+            - paragraph [ref=f4e36]: THE CORE CULTURE WAY
+            - generic [ref=f4e38]:
+              - heading "People. Discipline. Progress." [level=2] [ref=f4e39]:
+                - generic [ref=f4e40]: People.
+                - generic [ref=f4e41]: Discipline.
+                - generic [ref=f4e42]: Progress.
+              - paragraph [ref=f4e43]: One floor for strength, movement, recovery, and the people who return.
+            - generic [aria-hidden] [ref=f4e44]:
+              - generic [ref=f4e45]: 01 / PEOPLE
+              - generic [ref=f4e46]: 02 / DISCIPLINE
+              - generic [ref=f4e47]: 03 / PROGRESS
+          - generic "Core Culture training concepts" [ref=f4e48]:
+            - generic [ref=f4e49]:
+              - figure "01 / FIND YOUR PEOPLE CORE CULTURE ↗":
+                - img "Athletes connect in the members lounge — concept photography"
+                - generic:
+                  - generic: 01 / FIND YOUR PEOPLE
+                  - generic: CORE CULTURE ↗
+              - figure [aria-hidden]:
+                - generic:
+                  - generic: 02 / PUT IN THE WORK
+                  - generic: CORE CULTURE ↗
+              - figure [aria-hidden]:
+                - generic:
+                  - generic: 03 / FIND YOUR NEXT
+                  - generic: CORE CULTURE ↗
+            - generic [ref=f4e50]: THE PRACTICE. THE PEOPLE. THE PROGRESS.
+        - generic [ref=f4e54]:
+          - link [ref=f4e55] [cursor=pointer]:
+            - /url: "#amenities"
+            - text: 01 /
+            - heading "Build." [level=3] [ref=f4e56]
+            - paragraph [ref=f4e57]: Put something solid underneath you.
+            - generic [aria-hidden] [ref=f4e58]: ↗
+          - link [ref=f4e59] [cursor=pointer]:
+            - /url: "#schedule"
+            - text: 02 /
+            - heading "Move." [level=3] [ref=f4e60]
+            - paragraph [ref=f4e61]: Find your pace. Keep it yours.
+            - generic [aria-hidden] [ref=f4e62]: ↗
+          - link [ref=f4e63] [cursor=pointer]:
+            - /url: "#recovery"
+            - text: 03 /
+            - heading "Reset." [level=3] [ref=f4e64]
+            - paragraph [ref=f4e65]: The work after the work counts.
+            - generic [aria-hidden] [ref=f4e66]: ↗
+          - link [ref=f4e67] [cursor=pointer]:
+            - /url: "#room=lounge"
+            - text: 04 /
+            - heading "Stay." [level=3] [ref=f4e68]
+            - paragraph [ref=f4e69]: Come for yourself. Stay for the people.
+            - generic [aria-hidden] [ref=f4e70]: ↗
+    - generic [aria-hidden] [ref=f4e71]:
+      - generic [ref=f4e72]:
+        - generic [ref=f4e73]: BUILD.
+        - generic [ref=f4e74]: MOVE.
+        - generic [ref=f4e75]: RESET.
+        - generic [ref=f4e76]: REPEAT.
+        - generic [ref=f4e77]: BUILD.
+        - generic [ref=f4e78]: MOVE.
+      - generic [ref=f4e79]: THIS IS YOUR TRAINING GROUND.
+    - region [ref=f4e80]:
+      - generic [ref=f4e81]:
+        - generic [ref=f4e82]:
+          - generic [ref=f4e83]:
+            - paragraph [ref=f4e84]: 01 / THE FLOOR
+            - heading "Find your fight." [level=2] [ref=f4e85]: Find yourfight.
+          - generic [ref=f4e86]:
+            - paragraph [ref=f4e87]: Eight ways to train.One culture underneath.
+            - generic [ref=f4e88]:
+              - generic [ref=f4e89]: 01 — 08
+              - button "Previous space" [disabled] [ref=f4e90]: ←
+              - button "Next space" [ref=f4e91] [cursor=pointer]: →
+        - region "Club spaces. Scroll horizontally to explore." [ref=f4e92]:
+          - link "Female athlete training in a naturally lit strength zone — editorial concept photography 01 Strength Strength Zone Build a foundation. Raise your ceiling." [ref=f4e93] [cursor=pointer]:
+            - /url: "#room=strength"
+            - generic [ref=f4e94]:
+              - img "Female athlete training in a naturally lit strength zone — editorial concept photography" [ref=f4e95]
+              - generic [ref=f4e96]: "01"
+              - generic [ref=f4e97]: Strength
+            - generic [ref=f4e98]:
+              - heading "Strength Zone" [level=3] [ref=f4e99]
+              - generic [aria-hidden] [ref=f4e100]: ↗
+            - paragraph [ref=f4e101]: Build a foundation. Raise your ceiling.
+          - link "Male and female athletes moving a weighted sled together — editorial concept photography 02 Hybrid / HYROX Hybrid Turf Strength meets endurance. Find your edge." [ref=f4e102] [cursor=pointer]:
+            - /url: "#room=hybrid"
+            - generic [ref=f4e103]:
+              - img "Male and female athletes moving a weighted sled together — editorial concept photography" [ref=f4e104]
+              - generic [ref=f4e105]: "02"
+              - generic [ref=f4e106]: Hybrid / HYROX
+            - generic [ref=f4e107]:
+              - heading "Hybrid Turf" [level=3] [ref=f4e108]
+              - generic [aria-hidden] [ref=f4e109]: ↗
+            - paragraph [ref=f4e110]: Strength meets endurance. Find your edge.
+          - link "Male and female athletes moving in the Core Culture studio — editorial concept photography 03 Dance · Yoga The Studio Move to your own rhythm." [ref=f4e111] [cursor=pointer]:
+            - /url: "#room=studio"
+            - generic [ref=f4e112]:
+              - img "Male and female athletes moving in the Core Culture studio — editorial concept photography" [ref=f4e113]
+              - generic [ref=f4e114]: "03"
+              - generic [ref=f4e115]: Dance · Yoga
+            - generic [ref=f4e116]:
+              - heading "The Studio" [level=3] [ref=f4e117]
+              - generic [aria-hidden] [ref=f4e118]: ↗
+            - paragraph [ref=f4e119]: Move to your own rhythm.
+          - link "Female athlete running while a male athlete rows in the engine room — editorial concept photography 04 Cardio & Engine Engine Room Find a pace. Then find your next." [ref=f4e120] [cursor=pointer]:
+            - /url: "#room=cardio"
+            - generic [ref=f4e121]:
+              - img "Female athlete running while a male athlete rows in the engine room — editorial concept photography" [ref=f4e122]
+              - generic [ref=f4e123]: "04"
+              - generic [ref=f4e124]: Cardio & Engine
+            - generic [ref=f4e125]:
+              - heading "Engine Room" [level=3] [ref=f4e126]
+              - generic [aria-hidden] [ref=f4e127]: ↗
+            - paragraph [ref=f4e128]: Find a pace. Then find your next.
+          - link "Male and female athletes cooling down after training — editorial concept photography 05 Recovery Recovery Wing The reset is part of the routine." [ref=f4e129] [cursor=pointer]:
+            - /url: "#room=recovery"
+            - generic [ref=f4e130]:
+              - img "Male and female athletes cooling down after training — editorial concept photography" [ref=f4e131]
+              - generic [ref=f4e132]: "05"
+              - generic [ref=f4e133]: Recovery
+            - generic [ref=f4e134]:
+              - heading "Recovery Wing" [level=3] [ref=f4e135]
+              - generic [aria-hidden] [ref=f4e136]: ↗
+            - paragraph [ref=f4e137]: The reset is part of the routine.
+          - link "Male and female athletes talking over coffee in the members lounge — editorial concept photography 06 Community The Lounge Good company. A little more time." [ref=f4e138] [cursor=pointer]:
+            - /url: "#room=lounge"
+            - generic [ref=f4e139]:
+              - img "Male and female athletes talking over coffee in the members lounge — editorial concept photography" [ref=f4e140]
+              - generic [ref=f4e141]: "06"
+              - generic [ref=f4e142]: Community
+            - generic [ref=f4e143]:
+              - heading "The Lounge" [level=3] [ref=f4e144]
+              - generic [aria-hidden] [ref=f4e145]: ↗
+            - paragraph [ref=f4e146]: Good company. A little more time.
+          - link "Male and female athletes talking over coffee in the members lounge — editorial concept photography 07 Community Lobby & Desk Your first step into the culture." [ref=f4e147] [cursor=pointer]:
+            - /url: "#room=lobby"
+            - generic [ref=f4e148]:
+              - img "Male and female athletes talking over coffee in the members lounge — editorial concept photography" [ref=f4e149]
+              - generic [ref=f4e150]: "07"
+              - generic [ref=f4e151]: Community
+            - generic [ref=f4e152]:
+              - heading "Lobby & Desk" [level=3] [ref=f4e153]
+              - generic [aria-hidden] [ref=f4e154]: ↗
+            - paragraph [ref=f4e155]: Your first step into the culture.
+          - link "Male and female athletes walking into the Core Culture club — editorial concept photography 08 Community Arrival & Parking A considered arrival, from the start." [ref=f4e156] [cursor=pointer]:
+            - /url: "#room=arrival"
+            - generic [ref=f4e157]:
+              - img "Male and female athletes walking into the Core Culture club — editorial concept photography" [ref=f4e158]
+              - generic [ref=f4e159]: "08"
+              - generic [ref=f4e160]: Community
+            - generic [ref=f4e161]:
+              - heading "Arrival & Parking" [level=3] [ref=f4e162]
+              - generic [aria-hidden] [ref=f4e163]: ↗
+            - paragraph [ref=f4e164]: A considered arrival, from the start.
+        - generic [ref=f4e165]:
+          - generic [ref=f4e166]: 08 SPACES. ONE CULTURE.
+          - link "Get to know the floor" [ref=f4e167] [cursor=pointer]:
+            - /url: "#plan"
+            - text: Get to know the floor
+            - generic [aria-hidden] [ref=f4e168]: ↗
+    - region [ref=f4e169]:
+      - generic [ref=f4e170]:
+        - img "A male and female athlete cool down together in a naturally lit industrial gym — concept photography" [ref=f4e171]
+        - generic [ref=f4e172]: THE RECOVERY WING / CONCEPT VISUAL
+      - generic [ref=f4e173]:
+        - paragraph [ref=f4e174]: THE WORK AFTER THE WORK
+        - heading "Go hard. Come back." [level=2] [ref=f4e175]: Go hard.Come back.
+        - paragraph [ref=f4e176]: Cold, heat, water, and a little room to breathe. The reset is part of the routine.
+        - link "Find recovery" [ref=f4e177] [cursor=pointer]:
+          - /url: "#room=recovery"
+          - text: Find recovery
+          - generic [aria-hidden] [ref=f4e178]: ↗
+        - generic [ref=f4e179]: Facilities and booking options to be confirmed.
+    - region [ref=f4e180]:
+      - generic [ref=f4e181]:
+        - generic [ref=f4e182]:
+          - generic [ref=f4e183]:
+            - paragraph [ref=f4e184]: 02 / TRAINING CULTURE
+            - heading "Show up. Do the work." [level=2] [ref=f4e185]: Show up.Do the work.
+          - generic [ref=f4e186]:
+            - paragraph [ref=f4e187]: Early starts. Evening resets.Find your session.
+            - generic [ref=f4e188]: Sample schedule · subject to confirmation
+        - generic [ref=f4e189]:
+          - complementary [ref=f4e190]:
+            - paragraph [ref=f4e191]: UP NEXT IN THE SAMPLE SCHEDULE
+            - generic [ref=f4e193]:
+              - paragraph [ref=f4e194]: Sat 26 Sept
+              - paragraph [ref=f4e195]: 10:00
+              - heading "Community Lift" [level=3] [ref=f4e196]
+              - paragraph [ref=f4e197]: Strength Zone / 120 MIN
+              - button "Ask about this session" [ref=f4e198] [cursor=pointer]:
+                - text: Ask about this session
+                - generic [aria-hidden] [ref=f4e199]: ↗
+            - generic [ref=f4e200]:
+              - generic [ref=f4e201]: SHOW UP FOR YOURSELF.
+              - generic [aria-hidden] [ref=f4e202]: ↗
+          - generic [ref=f4e203]:
+            - generic [ref=f4e204]:
+              - tablist "Schedule type" [ref=f4e205]:
+                - tab "Weekly classes" [selected] [ref=f4e206] [cursor=pointer]
+                - tab "Club events" [ref=f4e207] [cursor=pointer]
+              - generic [ref=f4e208]: Filter by training type
+              - combobox "Filter by training type" [ref=f4e209] [cursor=pointer]:
+                - option "All disciplines" [selected]
+                - option "Strength"
+                - option "Hybrid / HYROX"
+                - option "Cardio & Engine"
+                - option "Dance · Yoga"
+                - option "Recovery"
+                - option "Community"
+            - group "Choose from the next seven days" [ref=f4e210]:
+              - button "Saturday, Sat 26 Sept, today" [pressed] [ref=f4e211] [cursor=pointer]:
+                - text: SAT
+                - generic [ref=f4e212]: "26"
+              - button "Sunday, Sun 27 Sept" [ref=f4e213] [cursor=pointer]:
+                - text: SUN
+                - generic [ref=f4e214]: "27"
+              - button "Monday, Mon 28 Sept" [ref=f4e215] [cursor=pointer]:
+                - text: MON
+                - generic [ref=f4e216]: "28"
+              - button "Tuesday, Tue 29 Sept" [ref=f4e217] [cursor=pointer]:
+                - text: TUE
+                - generic [ref=f4e218]: "29"
+              - button "Wednesday, Wed 30 Sept" [ref=f4e219] [cursor=pointer]:
+                - text: WED
+                - generic [ref=f4e220]: "30"
+              - button "Thursday, Thu 1 Oct" [ref=f4e221] [cursor=pointer]:
+                - text: THU
+                - generic [ref=f4e222]: "1"
+              - button "Friday, Fri 2 Oct" [ref=f4e223] [cursor=pointer]:
+                - text: FRI
+                - generic [ref=f4e224]: "2"
+            - status [ref=f4e225]: 1 upcoming class · Sat 26 Sept
+            - tabpanel "Weekly classes" [ref=f4e226]:
+              - group [ref=f4e228]:
+                - generic "11:00 Cold & Slow Recovery Wing · All levels 60 MIN" [ref=f4e229] [cursor=pointer]:
+                  - generic [ref=f4e230]: 11:00
+                  - generic [ref=f4e231]:
+                    - text: Cold & Slow
+                    - generic [ref=f4e232]: Recovery Wing · All levels
+                  - generic [ref=f4e233]: 60 MIN
+                  - generic [aria-hidden] [ref=f4e234]: +
+            - paragraph [ref=f4e235]: All levels have a starting point. We’ll help you find yours.
+    - region [ref=f4e236]:
+      - generic [ref=f4e237]:
+        - generic [ref=f4e238]:
+          - generic [ref=f4e239]:
+            - paragraph [ref=f4e240]: 03 / KNOW YOUR GROUND
+            - heading "One floor. Every perspective." [level=2] [ref=f4e241]: One floor.Every perspective.
+          - generic [ref=f4e242]:
+            - paragraph [ref=f4e243]: Your space, in three dimensions.Find your perspective.
+            - generic [ref=f4e244]: Interactive architectural study · based on the supplied plan
+        - generic [ref=f4e245]:
+          - generic [ref=f4e246]:
+            - generic [ref=f4e247]:
+              - generic [ref=f4e248]: GROUND FLOOR / 6,000 SQ FT
+              - generic [ref=f4e249]: 100 × 60 FT
+            - generic [ref=f4e251]:
+              - generic [ref=f4e252]:
+                - generic [ref=f4e253]: LIVE 3D
+                - generic [ref=f4e255]: Overview
+              - generic [ref=f4e257]:
+                - generic [aria-hidden] [ref=f4e258]: CC
+                - status [ref=f4e259]: The floor, in a new dimension.
+                - button "Load 3D model" [ref=f4e260] [cursor=pointer]:
+                  - text: Load 3D model
+                  - generic [aria-hidden] [ref=f4e261]: ↗
+              - group "Choose a 3D viewpoint" [ref=f4e262]:
+                - button "Overview" [disabled] [pressed] [ref=f4e263]
+                - button "Top view" [disabled] [ref=f4e264]
+                - button "Free weights" [disabled] [ref=f4e265]
+                - button "Reception" [disabled] [ref=f4e266]
+              - group "3D model controls" [ref=f4e267]:
+                - button "Enable orbit" [disabled] [ref=f4e268]
+                - generic [ref=f4e269]:
+                  - button "Zoom in" [disabled] [ref=f4e270]: +
+                  - button "Zoom out" [disabled] [ref=f4e271]: −
+                  - button "Reset 3D view" [disabled] [ref=f4e272]: ↺
+                - button "Labels" [disabled] [pressed] [ref=f4e273]
+                - button "Expand" [disabled] [ref=f4e274]: Expand ↗
+              - paragraph [ref=f4e275]: Choose a viewpoint, or enable orbit to rotate, pan and zoom.
+              - paragraph [ref=f4e276]: When orbit is enabled, drag to rotate, right-drag to pan, and scroll or pinch to zoom. With the model focused, arrow keys rotate, Shift and arrow keys pan, plus and minus zoom, Home resets, and Escape returns to page scrolling.
+            - paragraph [ref=f4e277]:
+              - text: Live 3D design study, not venue photography. Ceiling heights, equipment, and unmeasured details are illustrative.
+              - link "Download the 3D model ↗" [ref=f4e278] [cursor=pointer]:
+                - /url: assets/models/core-culture-gym.glb
+          - complementary [ref=f4e279]:
+            - paragraph [ref=f4e280]: EXPLORE THE SPACE CONCEPTS
+            - generic [ref=f4e281]:
+              - button [ref=f4e282] [cursor=pointer]:
+                - strong [ref=f4e283]: Strength Zone
+                - generic [aria-hidden] [ref=f4e284]: ↗
+              - button [ref=f4e285] [cursor=pointer]:
+                - strong [ref=f4e286]: Hybrid Turf
+                - generic [aria-hidden] [ref=f4e287]: ↗
+              - button [ref=f4e288] [cursor=pointer]:
+                - strong [ref=f4e289]: Engine Room
+                - generic [aria-hidden] [ref=f4e290]: ↗
+              - button [ref=f4e291] [cursor=pointer]:
+                - strong [ref=f4e292]: The Studio
+                - generic [aria-hidden] [ref=f4e293]: ↗
+              - button [ref=f4e294] [cursor=pointer]:
+                - strong [ref=f4e295]: Recovery Wing
+                - generic [aria-hidden] [ref=f4e296]: ↗
+              - button [ref=f4e297] [cursor=pointer]:
+                - strong [ref=f4e298]: The Lounge
+                - generic [aria-hidden] [ref=f4e299]: ↗
+              - button [ref=f4e300] [cursor=pointer]:
+                - strong [ref=f4e301]: Lobby & Desk
+                - generic [aria-hidden] [ref=f4e302]: ↗
+              - button [ref=f4e303] [cursor=pointer]:
+                - strong [ref=f4e304]: Arrival & Parking
+                - generic [aria-hidden] [ref=f4e305]: ↗
+            - paragraph [ref=f4e306]: The space directory includes proposed amenities beyond the ground-floor model. Facilities remain subject to confirmation.
+        - generic [ref=f4e307]:
+          - generic [ref=f4e308]:
+            - paragraph [ref=f4e309]: TOOLS FOR YOUR NEXT LEVEL
+            - heading "Good work starts with good equipment." [level=3] [ref=f4e310]
+          - button "Explore the equipment" [ref=f4e311] [cursor=pointer]:
+            - text: Explore the equipment
+            - generic [aria-hidden] [ref=f4e312]: ↗
+    - region [ref=f4e313]:
+      - generic [ref=f4e314]:
+        - generic [ref=f4e315]:
+          - generic [ref=f4e316]:
+            - paragraph [ref=f4e317]: 04 / YOUR PLACE
+            - heading "Take your place." [level=2] [ref=f4e318]: Take yourplace.
+          - generic [ref=f4e319]:
+            - paragraph [ref=f4e320]: A routine that works for you.Start where you are.
+            - generic [ref=f4e321]: Proposed memberships · rates coming soon
+        - generic [ref=f4e322]:
+          - article [ref=f4e323]:
+            - generic [ref=f4e324]: 01 / FIND YOUR RHYTHM
+            - heading "Monthly" [level=3] [ref=f4e326]
+            - paragraph [ref=f4e327]: Make space for a new routine, one month at a time.
+            - paragraph [ref=f4e328]: Rates coming soon ↗
+            - list [ref=f4e329]:
+              - listitem [ref=f4e330]: ✓ All training zones
+              - listitem [ref=f4e331]: ✓ Weekly group classes
+              - listitem [ref=f4e332]: ✓ The members lounge
+            - button "Explore monthly" [ref=f4e333] [cursor=pointer]:
+              - text: Explore monthly
+              - generic [aria-hidden] [ref=f4e334]: ↗
+            - group [ref=f4e335]:
+              - generic "Membership details" [ref=f4e336] [cursor=pointer]
+          - article [ref=f4e337]:
+            - generic [ref=f4e338]: 02 / BUILD SOMETHING LASTING
+            - heading "Annual" [level=3] [ref=f4e340]
+            - paragraph [ref=f4e341]: A longer commitment to the person you’re becoming.
+            - paragraph [ref=f4e342]: Rates coming soon ↗
+            - list [ref=f4e343]:
+              - listitem [ref=f4e344]: ✓ All training zones
+              - listitem [ref=f4e345]: ✓ Weekly group classes
+              - listitem [ref=f4e346]: ✓ The members lounge
+            - button "Explore annual" [ref=f4e347] [cursor=pointer]:
+              - text: Explore annual
+              - generic [aria-hidden] [ref=f4e348]: ↗
+            - group [ref=f4e349]:
+              - generic "Membership details" [ref=f4e350] [cursor=pointer]
+          - article [ref=f4e351]:
+            - generic [ref=f4e352]: 03 / MOVE ON YOUR TIME
+            - heading "Off-peak" [level=3] [ref=f4e354]
+            - paragraph [ref=f4e355]: A quieter floor. A little more room to make it yours.
+            - paragraph [ref=f4e356]: Rates coming soon ↗
+            - list [ref=f4e357]:
+              - listitem [ref=f4e358]: ✓ Training during off-peak hours
+              - listitem [ref=f4e359]: ✓ Eligible daytime classes
+              - listitem [ref=f4e360]: ✓ The members lounge
+            - button "Explore off-peak" [ref=f4e361] [cursor=pointer]:
+              - text: Explore off-peak
+              - generic [aria-hidden] [ref=f4e362]: ↗
+            - group [ref=f4e363]:
+              - generic "Membership details" [ref=f4e364] [cursor=pointer]
+        - paragraph [ref=f4e365]: Membership benefits, availability, and terms are provisional. No payment is collected on this site.
+    - region [ref=f4e366]:
+      - generic [ref=f4e367]:
+        - img "A male and female athlete cool down together after training — concept photography" [ref=f4e368]
+        - generic [ref=f4e369]:
+          - generic [ref=f4e370]: THE FIRST STEP IS YOURS.
+          - paragraph [ref=f4e371]: Same floor.New start.
+      - generic [ref=f4e372]:
+        - paragraph [ref=f4e373]: 05 / COME AS YOU ARE
+        - heading "Start here." [level=2] [ref=f4e374]: Starthere.
+        - paragraph [ref=f4e375]: Explore what your first visit could look like.
+        - generic [ref=f4e376]:
+          - paragraph [ref=f4e377]: Preview form only. No request is sent and no personal details are stored.
+          - generic [ref=f4e378]:
+            - generic [ref=f4e379]:
+              - generic [ref=f4e380]: Your name *
+              - textbox "Your name" [ref=f4e381]:
+                - /placeholder: Full name
+            - generic [ref=f4e382]:
+              - generic [ref=f4e383]: Phone number *
+              - textbox "Phone number" [ref=f4e384]:
+                - /placeholder: Include country code
+          - generic [ref=f4e385]:
+            - generic [ref=f4e386]: What brings you here?
+            - combobox "What brings you here?" [ref=f4e387] [cursor=pointer]:
+              - option "A little of everything" [selected]
+              - option "Strength training"
+              - option "Hybrid / HYROX"
+              - option "Cardio & conditioning"
+              - option "Dance, yoga & movement"
+              - option "Recovery"
+              - option "The community"
+          - generic [ref=f4e388]:
+            - generic [ref=f4e389]:
+              - generic [ref=f4e390]: Preferred date *
+              - textbox "Preferred date" [ref=f4e391]
+            - generic [ref=f4e392]:
+              - generic [ref=f4e393]: Best time
+              - combobox "Best time" [ref=f4e394] [cursor=pointer]:
+                - option "Morning" [selected]
+                - option "Afternoon"
+                - option "Evening"
+          - button "Preview your visit" [ref=f4e395] [cursor=pointer]:
+            - text: Preview your visit
+            - generic [aria-hidden] [ref=f4e396]: ↗
+    - region "Visit information" [ref=f4e397]:
+      - generic [ref=f4e398]:
+        - generic [ref=f4e399]: FIND THE CLUB
+        - paragraph [ref=f4e400]: Location details coming soon.
+      - generic [ref=f4e401]:
+        - generic [ref=f4e402]: PLAN YOUR VISIT
+        - paragraph [ref=f4e403]: Opening hours & access to be confirmed.
+      - link "Let’s get acquainted" [ref=f4e404] [cursor=pointer]:
+        - /url: "#book"
+        - text: Let’s get acquainted
+        - generic [aria-hidden] [ref=f4e405]: ↗
+  - contentinfo [ref=f4e406]:
+    - generic [ref=f4e407]:
+      - generic [ref=f4e408]:
+        - link "Core Culture home" [ref=f4e409] [cursor=pointer]:
+          - /url: "#top"
+          - generic [ref=f4e410]:
+            - text: CORE CULTURE
+            - generic [ref=f4e411]: THE TRAINING CLUB
+        - paragraph [ref=f4e412]: Train. Move. Recover. Connect.
+        - link "Back to top" [ref=f4e413] [cursor=pointer]:
+          - /url: "#top"
+          - text: Back to top
+          - generic [aria-hidden] [ref=f4e414]: ↑
+      - generic [aria-hidden] [ref=f4e415]: CORE CULTURE
+      - generic [ref=f4e416]:
+        - generic [ref=f4e417]: © 2026 CORE CULTURE
+        - paragraph [ref=f4e418]: Design preview. AI-generated concept imagery, not venue photography. 3D views are architectural studies. Schedules, memberships, and facilities are illustrative.
+        - link "Contact & location" [ref=f4e419] [cursor=pointer]:
+          - /url: "#contact"

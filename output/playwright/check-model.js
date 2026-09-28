@@ -1,0 +1,56 @@
+async (page) => {
+  const checks = [];
+  const check = (value, label) => { if (!value) throw new Error(label); checks.push(label); };
+  await page.locator('#plan').scrollIntoViewIfNeeded();
+  await page.waitForFunction(() => document.querySelector('#modelViewer').dataset.state === 'ready');
+  for (const view of ['top', 'weights', 'reception', 'overview']) {
+    await page.locator(`[data-model-view="${view}"]`).click();
+    check(await page.locator('#modelViewer').getAttribute('data-view') === view, `Camera preset: ${view}`);
+  }
+  await page.locator('#modelLabels').click();
+  check(await page.locator('#modelLabels').getAttribute('aria-pressed') === 'false', 'Hide labels');
+  await page.locator('#modelLabels').click();
+  check(await page.locator('#modelLabels').getAttribute('aria-pressed') === 'true', 'Show labels');
+  const before = await page.locator('#modelViewer').getAttribute('data-camera');
+  await page.locator('#modelZoomIn').click();
+  await page.waitForFunction(value => document.querySelector('#modelViewer').dataset.camera !== value, before);
+  check(await page.locator('#modelViewer').getAttribute('data-view') === 'custom', 'Zoom changes actual camera');
+  await page.locator('#modelReset').click();
+  check(await page.locator('#modelViewer').getAttribute('data-view') === 'overview', 'Reset restores overview');
+  await page.locator('#modelInteract').click();
+  await page.keyboard.press('ArrowRight');
+  check(await page.locator('#modelViewer').getAttribute('data-view') === 'custom', 'Keyboard orbit');
+  await page.keyboard.press('Shift+ArrowUp');
+  await page.keyboard.press('+');
+  await page.keyboard.press('Home');
+  check(await page.locator('#modelViewer').getAttribute('data-view') === 'overview', 'Keyboard reset');
+  await page.keyboard.press('Escape');
+  check(await page.locator('#modelInteract').getAttribute('aria-pressed') === 'false', 'Escape releases orbit');
+  await page.locator('#modelExpand').click();
+  check(await page.locator('#modelDialog').isVisible(), 'Expanded model opens');
+  check(await page.locator('canvas').count() === 1, 'Expanded model reuses one canvas');
+  await page.locator('#modelInteract').click();
+  await page.keyboard.press('Escape');
+  check(await page.locator('#modelDialog').isVisible(), 'First Escape leaves expanded view open');
+  await page.keyboard.press('Escape');
+  await page.waitForFunction(() => !document.querySelector('#modelDialog').open);
+  check(await page.locator('#modelHome canvas').count() === 1, 'Second Escape returns canvas home');
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.locator('#modelExpand').click();
+  check(await page.locator('#modelDialog').evaluate(e => e.scrollWidth <= e.clientWidth + 1), 'Mobile expanded viewer has no overflow');
+  await page.screenshot({ path: 'output/playwright/model-mobile.png' });
+  await page.locator('#modelClose').click();
+  await page.waitForFunction(() => !document.querySelector('#modelDialog').open);
+  check(await page.locator('#modelExpand').evaluate(e => e === document.activeElement), 'Expanded close restores focus');
+  await page.route('**/core-culture-gym.glb', route => route.abort());
+  await page.reload();
+  await page.locator('#plan').scrollIntoViewIfNeeded();
+  await page.waitForFunction(() => document.querySelector('#modelViewer').dataset.state === 'error');
+  check(await page.locator('#loadModel').isVisible(), 'Failed download offers retry');
+  check(await page.locator('canvas').count() === 0, 'Failed viewer cleans up canvas');
+  await page.unroute('**/core-culture-gym.glb');
+  await page.locator('#loadModel').click();
+  await page.waitForFunction(() => document.querySelector('#modelViewer').dataset.state === 'ready', null, { timeout: 30000 });
+  check(await page.locator('canvas').count() === 1, 'Retry recovers with a single viewer');
+  return { passed: checks.length, checks };
+}

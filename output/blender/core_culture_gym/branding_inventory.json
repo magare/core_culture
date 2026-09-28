@@ -1,0 +1,913 @@
+{
+  "logos": [
+    {
+      "name": "Central circle lettering",
+      "type": "FONT",
+      "body": "CORE CULTURE",
+      "location_ft": [
+        49.99999924907534,
+        28.73000197523222,
+        0.11999999708312703
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "11 | HYROX & 16 ft central circle"
+      ],
+      "bbox_ft": [
+        [
+          48.66998652460694,
+          28.618962120196322,
+          0.11700000173932923
+        ],
+        [
+          51.342236401215,
+          28.987741220028692,
+          0.12299999242692482
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Central circle \u2022 16 ft diameter",
+      "type": "CURVE",
+      "body": "",
+      "location_ft": [
+        0.0,
+        0.5299999840616241,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "11 | HYROX & 16 ft central circle"
+      ],
+      "bbox_ft": [
+        [
+          41.99800215993966,
+          22.527999452405712,
+          0.0686269177715453
+        ],
+        [
+          58.00200259591651,
+          38.53199675952981,
+          0.14137308017944725
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Central monogram",
+      "type": "FONT",
+      "body": "CC",
+      "location_ft": [
+        49.99999924907534,
+        31.1300009880166,
+        0.11999999708312703
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "11 | HYROX & 16 ft central circle"
+      ],
+      "bbox_ft": [
+        [
+          49.01525229606728,
+          30.591124937603166,
+          0.11700000173932923
+        ],
+        [
+          51.00204875775835,
+          32.380788032151266,
+          0.12299999242692482
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Facade brand circle",
+      "type": "CURVE",
+      "body": "",
+      "location_ft": [
+        -0.26499999203081204,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "07 | Entrance facade & canopy"
+      ],
+      "bbox_ft": [
+        [
+          99.99999849815067,
+          41.469689116390356,
+          4.969689398612876
+        ],
+        [
+          100.06999719174202,
+          47.33031190286471,
+          10.83031101176745
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Facade logo footer",
+      "type": "FONT",
+      "body": "GYM",
+      "location_ft": [
+        100.05499747168673,
+        44.40000363848028,
+        5.900000180472226
+      ],
+      "rotation": [
+        1.5707963705062866,
+        0.0,
+        1.5707963705062866
+      ],
+      "collections": [
+        "07 | Entrance facade & canopy"
+      ],
+      "bbox_ft": [
+        [
+          100.05200003075787,
+          43.9640511990845,
+          5.766097407328488
+        ],
+        [
+          100.0579949126156,
+          44.832270289343484,
+          6.210801638956145
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Facade logo heading",
+      "type": "FONT",
+      "body": "CORE CULTURE",
+      "location_ft": [
+        100.05499747168673,
+        44.40000363848028,
+        9.699999660331745
+      ],
+      "rotation": [
+        1.5707963705062866,
+        0.0,
+        1.5707963705062866
+      ],
+      "collections": [
+        "07 | Entrance facade & canopy"
+      ],
+      "bbox_ft": [
+        [
+          100.05200003075787,
+          43.2069063812416,
+          9.600389504370101
+        ],
+        [
+          100.0579949126156,
+          45.60406752458707,
+          9.931205451644937
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Facade monogram",
+      "type": "FONT",
+      "body": "CC",
+      "location_ft": [
+        100.05499747168673,
+        44.40000363848028,
+        7.799999920401985
+      ],
+      "rotation": [
+        1.5707963705062866,
+        0.0,
+        1.5707963705062866
+      ],
+      "collections": [
+        "07 | Entrance facade & canopy"
+      ],
+      "bbox_ft": [
+        [
+          100.05200003075787,
+          43.35557381937823,
+          7.228464122832291
+        ],
+        [
+          100.0579949126156,
+          45.46278417892656,
+          9.126592026607883
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Lane finish text 01",
+      "type": "FONT",
+      "body": "CORE CULTURE",
+      "location_ft": [
+        69.00000134165205,
+        10.12500033290993,
+        0.20000000736062606
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        1.5707963705062866
+      ],
+      "collections": [
+        "11 | HYROX & 16 ft central circle"
+      ],
+      "bbox_ft": [
+        [
+          68.75742138840081,
+          8.873225353521311,
+          0.1970000120168283
+        ],
+        [
+          69.10451128101099,
+          11.388280886051849,
+          0.20300000270442387
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Lane finish text 02",
+      "type": "FONT",
+      "body": "CORE CULTURE",
+      "location_ft": [
+        69.00000134165205,
+        17.87500118646096,
+        0.20000000736062606
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        1.5707963705062866
+      ],
+      "collections": [
+        "11 | HYROX & 16 ft central circle"
+      ],
+      "bbox_ft": [
+        [
+          68.75742138840081,
+          16.623225424859154,
+          0.1970000120168283
+        ],
+        [
+          69.10451128101099,
+          19.138281739602878,
+          0.20300000270442387
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Mat centre logo \u2022 static batch",
+      "type": "MESH",
+      "body": "",
+      "location_ft": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "14 | Group exercise"
+      ],
+      "bbox_ft": [
+        [
+          88.7500019524041,
+          7.724999755699177,
+          0.15099999785736162
+        ],
+        [
+          95.75000272335342,
+          23.275000529652193,
+          0.16899999436431043
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "North corrugated wall \u2022 base",
+      "type": "MESH",
+      "body": "",
+      "location_ft": [
+        49.99999924907534,
+        59.73499903841594,
+        1.649999907949152
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "02 | Walls \u2022 lower cutaway"
+      ],
+      "bbox_ft": [
+        [
+          0.0,
+          59.509996979881144,
+          0.0
+        ],
+        [
+          99.99999849815067,
+          59.96000109695074,
+          3.299999815898304
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": [
+        "BEVEL"
+      ]
+    },
+    {
+      "name": "North corrugated wall \u2022 cladding rib \u2022 static batch",
+      "type": "MESH",
+      "body": "",
+      "location_ft": [
+        0.0,
+        -0.26499999203081204,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "03 | Rear feature wall \u2022 full height"
+      ],
+      "bbox_ft": [
+        [
+          0.41295048289411646,
+          59.47750071528076,
+          3.3999999051331846
+        ],
+        [
+          99.58705877068788,
+          59.992497361551116,
+          17.999998853588355
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "North corrugated wall \u2022 skirting",
+      "type": "MESH",
+      "body": "",
+      "location_ft": [
+        49.99999924907534,
+        59.73499903841594,
+        0.3000000232630201
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "02 | Walls \u2022 lower cutaway"
+      ],
+      "bbox_ft": [
+        [
+          0.0,
+          59.46999772640038,
+          0.0900000314230681
+        ],
+        [
+          99.99999849815067,
+          60.000000350431506,
+          0.5100000151029722
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": [
+        "BEVEL"
+      ]
+    },
+    {
+      "name": "North corrugated wall \u2022 upper",
+      "type": "MESH",
+      "body": "",
+      "location_ft": [
+        49.99999924907534,
+        59.73499903841594,
+        10.649999921403218
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "03 | Rear feature wall \u2022 full height"
+      ],
+      "bbox_ft": [
+        [
+          0.0,
+          59.509996979881144,
+          3.3000002070048975
+        ],
+        [
+          99.99999849815067,
+          59.96000109695074,
+          17.999998853588355
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": [
+        "BEVEL"
+      ]
+    },
+    {
+      "name": "Presentation title",
+      "type": "FONT",
+      "body": "CORE CULTURE",
+      "location_ft": [
+        0.0,
+        -8.500000153939554,
+        0.029999999270781758
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "21 | Plan dimensions & title"
+      ],
+      "bbox_ft": [
+        [
+          0.06606741233917046,
+          -8.842921632481373,
+          0.02700000087146371
+        ],
+        [
+          8.318594747328069,
+          -7.704045046658654,
+          0.032999997670099805
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Reception brand wall",
+      "type": "FONT",
+      "body": "CORE CULTURE",
+      "location_ft": [
+        92.00000387477124,
+        59.235002112200874,
+        9.399999783733698
+      ],
+      "rotation": [
+        1.5707963705062866,
+        0.0,
+        0.0
+      ],
+      "collections": [
+        "03 | Rear feature wall \u2022 full height"
+      ],
+      "bbox_ft": [
+        [
+          89.06615374908046,
+          59.232004671272016,
+          9.155055982234284
+        ],
+        [
+          94.96081845341078,
+          59.23799955312974,
+          9.968538922587717
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    },
+    {
+      "name": "Reception desk logo",
+      "type": "FONT",
+      "body": "CC",
+      "location_ft": [
+        90.68000347908401,
+        50.29999990788657,
+        2.0000000247179366
+      ],
+      "rotation": [
+        1.5707963705062866,
+        0.0,
+        1.5707963705062866
+      ],
+      "collections": [
+        "13 | Reception & support rooms"
+      ],
+      "bbox_ft": [
+        [
+          90.67700603815514,
+          49.77778499833555,
+          1.7142321259330888
+        ],
+        [
+          90.68300092001286,
+          50.831391742536084,
+          2.663295882267589
+        ]
+      ],
+      "hidden_render": false,
+      "hidden_viewport": false,
+      "modifiers": []
+    }
+  ],
+  "text_objects": [
+    {
+      "name": "AC reference note",
+      "body": "AC CENTRELINE"
+    },
+    {
+      "name": "Audit caveat",
+      "body": "HEIGHTS, FIXTURES AND UNLOCATED PHOTO FEATURES REMAIN UNVERIFIED"
+    },
+    {
+      "name": "Audit legend",
+      "body": "DIMENSION AUDIT  /  CLEAR CORE + CIRCULATION"
+    },
+    {
+      "name": "Cardio / washroom bay dimension",
+      "body": "20 FT"
+    },
+    {
+      "name": "Cardio wall sign",
+      "body": "CARDIO"
+    },
+    {
+      "name": "Central circle lettering",
+      "body": "CORE CULTURE"
+    },
+    {
+      "name": "Central clear width dimension",
+      "body": "60 FT"
+    },
+    {
+      "name": "Central monogram",
+      "body": "CC"
+    },
+    {
+      "name": "Core clear chain.001",
+      "body": "22 FT"
+    },
+    {
+      "name": "Core clear chain.003",
+      "body": "16 FT"
+    },
+    {
+      "name": "Core clear chain.005",
+      "body": "22 FT"
+    },
+    {
+      "name": "East passage clear.001",
+      "body": "4 FT"
+    },
+    {
+      "name": "East passage label",
+      "body": "4 FT  /  PASSAGE"
+    },
+    {
+      "name": "Exterior entrance lettering",
+      "body": "THE ENTRANCE"
+    },
+    {
+      "name": "Facade logo footer",
+      "body": "GYM"
+    },
+    {
+      "name": "Facade logo heading",
+      "body": "CORE CULTURE"
+    },
+    {
+      "name": "Facade monogram",
+      "body": "CC"
+    },
+    {
+      "name": "Floor label \u2022 CARDIO",
+      "body": "CARDIO"
+    },
+    {
+      "name": "Floor label \u2022 GROUP EX",
+      "body": "GROUP EX"
+    },
+    {
+      "name": "Floor label \u2022 HYROX",
+      "body": "HYROX"
+    },
+    {
+      "name": "Floor label \u2022 MEN",
+      "body": "MEN"
+    },
+    {
+      "name": "Floor label \u2022 RECEPTION",
+      "body": "RECEPTION"
+    },
+    {
+      "name": "Floor label \u2022 WEIGHT TRAINING",
+      "body": "WEIGHT TRAINING"
+    },
+    {
+      "name": "Floor label \u2022 WOMEN",
+      "body": "WOMEN"
+    },
+    {
+      "name": "Free-weight wall sign",
+      "body": "THE  FREE WEIGHT  SECTION"
+    },
+    {
+      "name": "Lane 01",
+      "body": "01"
+    },
+    {
+      "name": "Lane 02",
+      "body": "02"
+    },
+    {
+      "name": "Lane finish text 01",
+      "body": "CORE CULTURE"
+    },
+    {
+      "name": "Lane finish text 02",
+      "body": "CORE CULTURE"
+    },
+    {
+      "name": "North 18 ft chain.001",
+      "body": "18 FT"
+    },
+    {
+      "name": "Overall depth dimension",
+      "body": "60 FT  /  18.29 M"
+    },
+    {
+      "name": "Overall width dimension",
+      "body": "100 FT  /  30.48 M"
+    },
+    {
+      "name": "Passage width dimension",
+      "body": "4 FT"
+    },
+    {
+      "name": "Plan title \u2022 cardio",
+      "body": "CARDIO"
+    },
+    {
+      "name": "Plan title \u2022 central",
+      "body": "CENTRAL TRAINING"
+    },
+    {
+      "name": "Plan title \u2022 group",
+      "body": "GROUP EXERCISE"
+    },
+    {
+      "name": "Plan title \u2022 hyrox",
+      "body": "HYROX"
+    },
+    {
+      "name": "Plan title \u2022 men",
+      "body": "MEN'S WASHROOM"
+    },
+    {
+      "name": "Plan title \u2022 passage",
+      "body": "PASSAGE"
+    },
+    {
+      "name": "Plan title \u2022 reception",
+      "body": "RECEPTION"
+    },
+    {
+      "name": "Plan title \u2022 support",
+      "body": "SUPPORT ROOMS"
+    },
+    {
+      "name": "Plan title \u2022 weights",
+      "body": "WEIGHT TRAINING"
+    },
+    {
+      "name": "Plan title \u2022 women",
+      "body": "WOMEN'S WASHROOM"
+    },
+    {
+      "name": "Presentation subtitle",
+      "body": "GROUND FLOOR  /  6,000 SQ FT  /  FURNISHED SPATIAL STUDY"
+    },
+    {
+      "name": "Presentation title",
+      "body": "CORE CULTURE"
+    },
+    {
+      "name": "Reception / studio bay dimension",
+      "body": "16 FT"
+    },
+    {
+      "name": "Reception brand wall",
+      "body": "CORE CULTURE"
+    },
+    {
+      "name": "Reception descriptor",
+      "body": "TRAIN WITH INTENT"
+    },
+    {
+      "name": "Reception desk logo",
+      "body": "CC"
+    },
+    {
+      "name": "Scale caveat",
+      "body": "DRAWN DIMENSIONS CHECKED  /  UNMEASURED SITE DETAILS REMAIN ESTIMATED"
+    },
+    {
+      "name": "South 18 ft chain.001",
+      "body": "18 FT"
+    },
+    {
+      "name": "South passage clear.001",
+      "body": "4 FT"
+    },
+    {
+      "name": "South passage label",
+      "body": "C I R C U L A T I O N"
+    },
+    {
+      "name": "Support label",
+      "body": "SUPPORT 01"
+    },
+    {
+      "name": "Support label.001",
+      "body": "SUPPORT 02"
+    },
+    {
+      "name": "Support label.002",
+      "body": "SUPPORT 03"
+    },
+    {
+      "name": "Suspended reverse title \u2022 cardio",
+      "body": "CARDIO"
+    },
+    {
+      "name": "Suspended reverse title \u2022 central",
+      "body": "CENTRAL TRAINING"
+    },
+    {
+      "name": "Suspended reverse title \u2022 group",
+      "body": "GROUP EXERCISE"
+    },
+    {
+      "name": "Suspended reverse title \u2022 hyrox",
+      "body": "HYROX"
+    },
+    {
+      "name": "Suspended reverse title \u2022 men",
+      "body": "MEN'S WASHROOM"
+    },
+    {
+      "name": "Suspended reverse title \u2022 passage",
+      "body": "PASSAGE"
+    },
+    {
+      "name": "Suspended reverse title \u2022 reception",
+      "body": "RECEPTION"
+    },
+    {
+      "name": "Suspended reverse title \u2022 support",
+      "body": "SUPPORT ROOMS"
+    },
+    {
+      "name": "Suspended reverse title \u2022 weights",
+      "body": "WEIGHT TRAINING"
+    },
+    {
+      "name": "Suspended reverse title \u2022 women",
+      "body": "WOMEN'S WASHROOM"
+    },
+    {
+      "name": "Suspended title \u2022 cardio",
+      "body": "CARDIO"
+    },
+    {
+      "name": "Suspended title \u2022 central",
+      "body": "CENTRAL TRAINING"
+    },
+    {
+      "name": "Suspended title \u2022 group",
+      "body": "GROUP EXERCISE"
+    },
+    {
+      "name": "Suspended title \u2022 hyrox",
+      "body": "HYROX"
+    },
+    {
+      "name": "Suspended title \u2022 men",
+      "body": "MEN'S WASHROOM"
+    },
+    {
+      "name": "Suspended title \u2022 passage",
+      "body": "PASSAGE"
+    },
+    {
+      "name": "Suspended title \u2022 reception",
+      "body": "RECEPTION"
+    },
+    {
+      "name": "Suspended title \u2022 support",
+      "body": "SUPPORT ROOMS"
+    },
+    {
+      "name": "Suspended title \u2022 weights",
+      "body": "WEIGHT TRAINING"
+    },
+    {
+      "name": "Suspended title \u2022 women",
+      "body": "WOMEN'S WASHROOM"
+    }
+  ],
+  "scenes": [
+    [
+      "01 | CUTAWAY \u2022 furnished plan",
+      769
+    ],
+    [
+      "02 | PLAN \u2022 orthographic",
+      679
+    ],
+    [
+      "03 | EXTERIOR \u2022 entrance",
+      639
+    ],
+    [
+      "04 | INTERIOR \u2022 free weights",
+      639
+    ],
+    [
+      "05 | INTERIOR \u2022 HYROX",
+      639
+    ],
+    [
+      "06 | AUDIT \u2022 verified plan dimensions",
+      711
+    ]
+  ],
+  "logo_image": {
+    "size": [
+      1254,
+      1254
+    ],
+    "channels": 4,
+    "alpha_min": 0.0,
+    "alpha_max": 1.0,
+    "transparent_fraction": 0.6402338672547688
+  }
+}

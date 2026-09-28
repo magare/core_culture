@@ -1,0 +1,191 @@
+{
+  "output": "/Users/magare/Dev/web-app-farm/core_culture/output/blender/core_culture_gym/Core_Culture_Gym_Audited.blend",
+  "source": "/Users/magare/Dev/web-app-farm/core_culture/output/blender/core_culture_gym/Core_Culture_Gym_Suspended_Signs.blend",
+  "changes": [
+    "Contained exterior wall finishes in 100 x 60 ft; maintained 22+16+22 ft clear core; restored true 4 ft passages, including skirting.",
+    "Preserved the 16 ft circle and both 18 ft plan-axis spacings; eliminated the turf overlap.",
+    "Rescaled treadmills, stair climbers, rowers and SkiErgs using manufacturer envelopes; fixed floor contact and two SkiErg/wall clashes.",
+    "Moved stair climbers away from treadmill rear clearance zones; retained all equipment instances.",
+    "Repositioned vanity tops and the women\u2019s locker row clear of perimeter finishes; provided approximately 3 ft on both sides of the changing benches.",
+    "Rebuilt nine doors with true hinge pivots and jambs; corrected openings that intersected perpendicular walls; removed two unsupported south-wall openings.",
+    "Corrected reversed mesh normals and clipped sanitary partitions to their wall faces; shared equipment meshes retained.",
+    "Seated the exterior planter on the shoe-shelf top and centered its base inside the support footprint."
+  ],
+  "equipment_envelope_corrections": [
+    {
+      "category": "treadmill",
+      "previous_xyz_ft": [
+        3.1000001430511475,
+        6.450000286102295,
+        4.203670501708984
+      ],
+      "corrected_xyz_ft": [
+        3.0208332097436497,
+        6.854166508972488,
+        4.6666666591574195
+      ],
+      "source": "https://support.lifefitness.com/hc/en-us/articles/16340135145623-Life-Fitness-Integrity-Treadmill-Specifications"
+    },
+    {
+      "category": "stair climber",
+      "previous_xyz_ft": [
+        3.0799999237060547,
+        4.225000381469727,
+        5.383119583129883
+      ],
+      "corrected_xyz_ft": [
+        2.8333333846465183,
+        4.833333604917751,
+        6.58333379765508
+      ],
+      "source": "https://www.corehandf.com/products/stairmaster-8gx-1"
+    },
+    {
+      "category": "ski erg",
+      "previous_xyz_ft": [
+        3.1999998092651367,
+        4.650000095367432,
+        7.537271022796631
+      ],
+      "corrected_xyz_ft": [
+        1.9583334838311501,
+        4.166666604089611,
+        7.083333852722888
+      ],
+      "source": "https://www.concept2.com/ergs/skierg"
+    },
+    {
+      "category": "rower",
+      "previous_xyz_ft": [
+        2.0,
+        6.71999979019165,
+        3.424999952316284
+      ],
+      "corrected_xyz_ft": [
+        2.0000000247179366,
+        8.000000489978339,
+        3.521666914549438
+      ],
+      "source": "https://www.concept2.com/ergs/rowerg"
+    }
+  ],
+  "door_openings": [
+    {
+      "door": "Women",
+      "rough_width_ft": 3.3,
+      "clear_jamb_width_ft": 3.0999999999999996,
+      "rough_height_ft": 8,
+      "hinge_ft": [
+        19.735,
+        0.86,
+        0
+      ]
+    },
+    {
+      "door": "Men",
+      "rough_width_ft": 3.3000000000000007,
+      "clear_jamb_width_ft": 3.1000000000000005,
+      "rough_height_ft": 8,
+      "hinge_ft": [
+        19.735,
+        15.71,
+        0
+      ]
+    },
+    {
+      "door": "Cardio",
+      "rough_width_ft": 3.3000000000000007,
+      "clear_jamb_width_ft": 3.1000000000000005,
+      "rough_height_ft": 8,
+      "hinge_ft": [
+        19.735,
+        30.71,
+        0
+      ]
+    },
+    {
+      "door": "Group studio",
+      "rough_width_ft": 3.3,
+      "clear_jamb_width_ft": 3.0999999999999996,
+      "rough_height_ft": 8,
+      "hinge_ft": [
+        84.265,
+        0.86,
+        0
+      ]
+    },
+    {
+      "door": "Reception access",
+      "rough_width_ft": 3.5,
+      "clear_jamb_width_ft": 3.3,
+      "rough_height_ft": 8,
+      "hinge_ft": [
+        84.265,
+        40.66,
+        0
+      ]
+    },
+    {
+      "door": "Support 1",
+      "rough_width_ft": 2.799999999999997,
+      "clear_jamb_width_ft": 2.599999999999997,
+      "rough_height_ft": 8,
+      "hinge_ft": [
+        86.16,
+        40,
+        0
+      ]
+    },
+    {
+      "door": "Support 2",
+      "rough_width_ft": 2.799999999999997,
+      "clear_jamb_width_ft": 2.599999999999997,
+      "rough_height_ft": 8,
+      "hinge_ft": [
+        91.16,
+        40,
+        0
+      ]
+    },
+    {
+      "door": "Support 3",
+      "rough_width_ft": 2.799999999999997,
+      "clear_jamb_width_ft": 2.599999999999997,
+      "rough_height_ft": 8,
+      "hinge_ft": [
+        96.46,
+        40,
+        0
+      ]
+    },
+    {
+      "door": "Group exercise exterior exit",
+      "rough_width_ft": 3.5,
+      "clear_jamb_width_ft": 3.3,
+      "rough_height_ft": 8,
+      "hinge_ft": [
+        99.735,
+        9.16,
+        0
+      ]
+    }
+  ],
+  "remaining_unknowns": [
+    "Eaves/ridge height: retained at estimated 18/21 ft; no measured height was provided.",
+    "The photographed staircase and upper platform are not located on the plan. They remain omitted pending a marked location and dimensions.",
+    "The photographed window band, wall vents and HYBRID TRAINING wall are not located on the plan; their exact position/size is unresolved.",
+    "The ceiling photo shows a row of training racks. Their exact count, model and mapping to the plan are unconfirmed; the current equipment arrangement is proposed.",
+    "Actual equipment makes, quantity and detailed mechanism dimensions are unverified. Four categories use documented representative product envelopes, not exact replicas.",
+    "Doors, wall thickness, sanitary fixtures, lockers, reception furniture, exterior canopy/shutter, duct diameter and structural steel are conceptual dimensions.",
+    "Only 100 x 60 ft, 16 ft circle, 22/18 ft offsets and 4 ft east passage are explicitly dimensioned in the source. Remaining zone splits are inferred.",
+    "100 x 60 ft is interpreted as the exterior finish outline for this revision; confirm whether the site measurement is outside-to-outside or clear internal.",
+    "This is not a surveyed as-built model, a structural check or an accessibility/fire/egress compliance assessment."
+  ],
+  "dimension_convention": "Feet. 100 x 60 exterior-finish outline; 4 ft clear paths. Undimensioned room bays remain inferred gross zones.",
+  "references": {
+    "rower": "https://www.concept2.com/ergs/rowerg",
+    "ski erg": "https://www.concept2.com/ergs/skierg",
+    "treadmill": "https://support.lifefitness.com/hc/en-us/articles/16340135145623-Life-Fitness-Integrity-Treadmill-Specifications",
+    "stair climber": "https://www.corehandf.com/products/stairmaster-8gx-1"
+  }
+}

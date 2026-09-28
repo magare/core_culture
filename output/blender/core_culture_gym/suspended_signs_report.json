@@ -1,0 +1,276 @@
+{
+  "signs": 10,
+  "old_total_panel_area_sqft": 829.4,
+  "new_total_panel_area_sqft": 123.45,
+  "panel_area_reduction_percent": 85.1,
+  "floor_leaders": 0,
+  "title_only": true,
+  "upright_physical_signs": true,
+  "cables_per_sign": 2,
+  "non_label_objects_preserved": 570,
+  "equipment_transforms_preserved": true,
+  "room_areas_preserved": true,
+  "projected_overlap_check": "passed",
+  "labels": [
+    {
+      "view": "cutaway",
+      "area": "CARDIO",
+      "width_ft": 6.2,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 12.25,
+      "screen_bbox": [
+        0.3257984220981598,
+        0.8297421932220459,
+        0.3635764420032501,
+        0.8620085716247559
+      ]
+    },
+    {
+      "view": "cutaway",
+      "area": "WEIGHT TRAINING",
+      "width_ft": 9.6,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 12.25,
+      "screen_bbox": [
+        0.5411487817764282,
+        0.6548994183540344,
+        0.5996438264846802,
+        0.6986427307128906
+      ]
+    },
+    {
+      "view": "cutaway",
+      "area": "HYROX",
+      "width_ft": 6.0,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 12.25,
+      "screen_bbox": [
+        0.4193619191646576,
+        0.5141933560371399,
+        0.45592132210731506,
+        0.5457846522331238
+      ]
+    },
+    {
+      "view": "cutaway",
+      "area": "RECEPTION",
+      "width_ft": 7.2,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 12.25,
+      "screen_bbox": [
+        0.8284900188446045,
+        0.5478834509849548,
+        0.8723613023757935,
+        0.5835254192352295
+      ]
+    },
+    {
+      "view": "cutaway",
+      "area": "GROUP EXERCISE",
+      "width_ft": 9.3,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 12.25,
+      "screen_bbox": [
+        0.7015239596366882,
+        0.3908059895038605,
+        0.7581909894943237,
+        0.433536559343338
+      ]
+    },
+    {
+      "view": "cutaway",
+      "area": "MEN'S WASHROOM",
+      "width_ft": 9.0,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 11.75,
+      "screen_bbox": [
+        0.2208133339881897,
+        0.6984105706214905,
+        0.2756524085998535,
+        0.7401285171508789
+      ]
+    },
+    {
+      "view": "cutaway",
+      "area": "WOMEN'S WASHROOM",
+      "width_ft": 10.2,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 11.75,
+      "screen_bbox": [
+        0.14481645822525024,
+        0.6042653322219849,
+        0.20696742832660675,
+        0.6500339508056641
+      ]
+    },
+    {
+      "view": "cutaway",
+      "area": "CENTRAL TRAINING",
+      "width_ft": 10.1,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 12.25,
+      "screen_bbox": [
+        0.4913981854915619,
+        0.5926422476768494,
+        0.5529398322105408,
+        0.6380733251571655
+      ]
+    },
+    {
+      "view": "cutaway",
+      "area": "SUPPORT ROOMS",
+      "width_ft": 8.7,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 11.75,
+      "screen_bbox": [
+        0.775692880153656,
+        0.4801592230796814,
+        0.8287039399147034,
+        0.5208644866943359
+      ]
+    },
+    {
+      "view": "cutaway",
+      "area": "PASSAGE",
+      "width_ft": 6.0,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": 11.75,
+      "screen_bbox": [
+        0.44010481238365173,
+        0.42548078298568726,
+        0.4766642451286316,
+        0.45707207918167114
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "CARDIO",
+      "width_ft": 6.2,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.13781511783599854,
+        0.7187875509262085,
+        0.1899159550666809,
+        0.7349939942359924
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "WEIGHT TRAINING",
+      "width_ft": 9.6,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.45966386795043945,
+        0.6809724569320679,
+        0.5403361320495605,
+        0.6971789002418518
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "HYROX",
+      "width_ft": 6.0,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.4663865566253662,
+        0.35144057869911194,
+        0.5168067216873169,
+        0.36764705181121826
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "RECEPTION",
+      "width_ft": 7.2,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.8226891160011292,
+        0.7998200058937073,
+        0.8831933736801147,
+        0.8160264492034912
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "GROUP EXERCISE",
+      "width_ft": 9.3,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.813865602016449,
+        0.4076230525970459,
+        0.8920168876647949,
+        0.4238295555114746
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "MEN'S WASHROOM",
+      "width_ft": 9.0,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.1260504126548767,
+        0.4432773292064667,
+        0.20168064534664154,
+        0.459483802318573
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "WOMEN'S WASHROOM",
+      "width_ft": 10.2,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.12100838869810104,
+        0.2812124788761139,
+        0.2067226767539978,
+        0.2974189519882202
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "CENTRAL TRAINING",
+      "width_ft": 10.1,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.45756301283836365,
+        0.5318727493286133,
+        0.542436957359314,
+        0.5480791926383972
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "SUPPORT ROOMS",
+      "width_ft": 8.7,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.8163865804672241,
+        0.5923769474029541,
+        0.889495849609375,
+        0.608583390712738
+      ]
+    },
+    {
+      "view": "plan",
+      "area": "PASSAGE",
+      "width_ft": 6.0,
+      "height_ft": 1.5,
+      "bottom_clearance_ft": null,
+      "screen_bbox": [
+        0.5,
+        0.2217887043952942,
+        0.5504201650619507,
+        0.2379951924085617
+      ]
+    }
+  ]
+}

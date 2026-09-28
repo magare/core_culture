@@ -1,0 +1,30 @@
+CORE CULTURE / GYM MODEL
+========================
+01 CUTAWAY: furnished architectural overview (opens by default).
+02 PLAN: true orthographic view of the supplied 100 x 60 ft layout.
+03 EXTERIOR: enclosed warehouse with entrance glazing, sign and canopy.
+04 INTERIOR: free-weight wall, mirror, racks, exposed AC duct.
+05 INTERIOR: HYROX view.
+
+Choose a scene from Blender's top-right scene selector. Numpad 0 = camera.
+The roof, upper walls, partitions, equipment and labels have named collections.
+All furniture/equipment is editable native geometry, with linked repeated meshes.
+Use Object > Relations > Make Single User > Object & Data to vary one instance.
+The source images and fonts are packed; no external assets are needed.
+
+PLAN DIMENSIONS: 100 x 60 ft overall. Left bay 20 ft; clear central bay 60 ft;
+east passage 4 ft; right bay 16 ft. Circle diameter 16 ft; AC centerline at y=56 ft.
+The 18 ft dimensions locate the circle relative to the duct and HYROX south edge.
+Cardio 20 x 30 ft. Each washroom 20 x 15 ft. Group studio 16 x 32 ft.
+Reception 16 x 20 ft. Three support rooms are not assigned uses in the source.
+
+ASSUMPTIONS: eaves 18 ft, ridge 21 ft, room partitions 10 ft, exterior walls 5.4 in.
+Some zone boundaries are inferred from the diagram's proportions. The photo shows
+finishes, not an equipment inventory. Equipment, sanitary fixtures, reception
+furniture, roof structure and the roller shutter dimensions are proposed details.
+The dashed circle is treated as an open central training/identity area.
+This is a spatial visualization, not a surveyed as-built or construction drawing.
+
+Ceiling steelwork and vertical pendant lights follow the fourth reference image.
+The staircase/platform location remains unconfirmed and is not included in this version.
+Created from the four user-supplied images; feet are converted to meters in mesh data.

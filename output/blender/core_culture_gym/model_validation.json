@@ -1,0 +1,35 @@
+{
+  "footprint_ft": [
+    100.0,
+    60.0
+  ],
+  "footprint_sqm": 557.418,
+  "assumed_eaves_ft": 18.0,
+  "scenes": [
+    "01 | CUTAWAY \u2022 furnished plan",
+    "02 | PLAN \u2022 orthographic",
+    "03 | EXTERIOR \u2022 entrance",
+    "04 | INTERIOR \u2022 free weights",
+    "05 | INTERIOR \u2022 HYROX"
+  ],
+  "object_count": 1985,
+  "mesh_count": 2239,
+  "zone_area_sqft": 6000,
+  "references_packed": true,
+  "equipment_assets": [
+    "dumbbell rack",
+    "bench",
+    "power rack",
+    "cable machine",
+    "chest press",
+    "treadmill",
+    "spin bike",
+    "stair climber",
+    "rower",
+    "ski erg",
+    "sled",
+    "toilet",
+    "locker"
+  ],
+  "assumptions": "See MODEL_GUIDE.txt and START HERE text in Blender"
+}

@@ -1,0 +1,256 @@
+{
+  "source": "/Users/magare/Dev/web-app-farm/core_culture/output/blender/core_culture_gym/Core_Culture_Gym_Audited.blend",
+  "output": "/Users/magare/Dev/web-app-farm/core_culture/output/blender/core_culture_gym/Core_Culture_Gym_Branded.blend",
+  "placement_count": 13,
+  "placements": [
+    {
+      "placement": "central training floor",
+      "center_ft": [
+        49.99999924907534,
+        30.529999670394137,
+        0.09500000251716202
+      ],
+      "artwork_width_ft": 8.0,
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "surface": "matte print",
+      "rounded_backing": true,
+      "collection": "BRAND \u2022 official logo \u2022 HYROX & 16 ft central circle"
+    },
+    {
+      "placement": "entrance facade",
+      "center_ft": [
+        100.155,
+        44.4,
+        7.9
+      ],
+      "artwork_width_ft": 5.8,
+      "rotation_degrees": [
+        90,
+        0,
+        90
+      ],
+      "surface": "silver sign",
+      "rounded_backing": true,
+      "collection": "BRAND \u2022 official logo \u2022 Entrance facade & canopy"
+    },
+    {
+      "placement": "reception feature wall",
+      "center_ft": [
+        92,
+        59.355,
+        10.75
+      ],
+      "artwork_width_ft": 4.6,
+      "rotation_degrees": [
+        90,
+        0,
+        0
+      ],
+      "surface": "silver sign",
+      "rounded_backing": true,
+      "collection": "BRAND \u2022 official logo \u2022 Rear feature wall \u2022 full height"
+    },
+    {
+      "placement": "reception desk",
+      "center_ft": [
+        90.752,
+        50.3,
+        2.0
+      ],
+      "artwork_width_ft": 2.15,
+      "rotation_degrees": [
+        90,
+        0,
+        90
+      ],
+      "surface": "silver sign",
+      "rounded_backing": true,
+      "collection": "BRAND \u2022 official logo \u2022 Reception & support rooms"
+    },
+    {
+      "placement": "HYROX lane 01",
+      "center_ft": [
+        69.0,
+        10.125,
+        0.178
+      ],
+      "artwork_width_ft": 2.1,
+      "rotation_degrees": [
+        0,
+        0,
+        90
+      ],
+      "surface": "matte print",
+      "rounded_backing": false,
+      "collection": "BRAND \u2022 official logo \u2022 HYROX & 16 ft central circle"
+    },
+    {
+      "placement": "HYROX lane 02",
+      "center_ft": [
+        69.0,
+        17.875001907348633,
+        0.178
+      ],
+      "artwork_width_ft": 2.1,
+      "rotation_degrees": [
+        0,
+        0,
+        90
+      ],
+      "surface": "matte print",
+      "rounded_backing": false,
+      "collection": "BRAND \u2022 official logo \u2022 HYROX & 16 ft central circle"
+    },
+    {
+      "placement": "studio mat 01",
+      "center_ft": [
+        89.0,
+        7.800000190734863,
+        0.152
+      ],
+      "artwork_width_ft": 0.7,
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "surface": "matte print",
+      "rounded_backing": false,
+      "collection": "BRAND \u2022 official logo \u2022 Group exercise"
+    },
+    {
+      "placement": "studio mat 02",
+      "center_ft": [
+        89.0,
+        15.5,
+        0.152
+      ],
+      "artwork_width_ft": 0.7,
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "surface": "matte print",
+      "rounded_backing": false,
+      "collection": "BRAND \u2022 official logo \u2022 Group exercise"
+    },
+    {
+      "placement": "studio mat 03",
+      "center_ft": [
+        89.0,
+        23.19999885559082,
+        0.152
+      ],
+      "artwork_width_ft": 0.7,
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "surface": "matte print",
+      "rounded_backing": false,
+      "collection": "BRAND \u2022 official logo \u2022 Group exercise"
+    },
+    {
+      "placement": "studio mat 04",
+      "center_ft": [
+        95.5,
+        7.800000190734863,
+        0.152
+      ],
+      "artwork_width_ft": 0.7,
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "surface": "matte print",
+      "rounded_backing": false,
+      "collection": "BRAND \u2022 official logo \u2022 Group exercise"
+    },
+    {
+      "placement": "studio mat 05",
+      "center_ft": [
+        95.5,
+        15.5,
+        0.152
+      ],
+      "artwork_width_ft": 0.7,
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "surface": "matte print",
+      "rounded_backing": false,
+      "collection": "BRAND \u2022 official logo \u2022 Group exercise"
+    },
+    {
+      "placement": "studio mat 06",
+      "center_ft": [
+        95.5,
+        23.19999885559082,
+        0.152
+      ],
+      "artwork_width_ft": 0.7,
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "surface": "matte print",
+      "rounded_backing": false,
+      "collection": "BRAND \u2022 official logo \u2022 Group exercise"
+    },
+    {
+      "placement": "presentation title",
+      "center_ft": [
+        1.9,
+        -7.6,
+        0.041
+      ],
+      "artwork_width_ft": 3.6,
+      "rotation_degrees": [
+        0,
+        0,
+        0
+      ],
+      "surface": "matte print",
+      "rounded_backing": true,
+      "collection": "BRAND \u2022 official logo \u2022 Plan dimensions & title"
+    }
+  ],
+  "replaced_placeholder_objects": [
+    "Central circle lettering",
+    "Central monogram",
+    "Facade brand circle",
+    "Facade logo footer",
+    "Facade logo heading",
+    "Facade monogram",
+    "Lane finish text 01",
+    "Lane finish text 02",
+    "Mat centre logo \u2022 static batch",
+    "Presentation title",
+    "Reception brand wall",
+    "Reception desk logo"
+  ],
+  "non_brand_objects_preserved": 825,
+  "equipment_instances_preserved": 41,
+  "hanging_signs_preserved": 10,
+  "zone_boundaries_preserved": true,
+  "all_existing_scenes_preserved": true,
+  "image_dimensions": [
+    1254,
+    1254
+  ],
+  "image_has_real_alpha": true,
+  "packed_images": true,
+  "material_note": "One shared RGBA artwork and one shared square UV mesh. Silver signage and matte floor print; no stretch or rectangular background.",
+  "layout_adjustment": "The plan-only CENTRAL TRAINING label moves below the floor logo. Audit scene 06 excludes the central/lane artwork for clear dimension chains.",
+  "source_limitation": "The source was 150 x 150 px. The cleaned high-resolution texture is an image-assisted extraction/reconstruction, not a recovered original vector master."
+}

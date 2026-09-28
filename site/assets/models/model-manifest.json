@@ -1,0 +1,23 @@
+{
+  "source": "Core_Culture_Gym_Layout_Aligned.blend",
+  "source_sha256": "020b7090d14d028ce23784407f78b54a6fbd0646840d0d0990d0b47c52b83865",
+  "source_unchanged": true,
+  "scene": "07 | WEBSITE \u2022 architectural cutaway",
+  "footprint_ft": [
+    96.0,
+    60.0
+  ],
+  "evaluated_mesh_objects": 780,
+  "exported_objects": 10,
+  "triangles": 264072,
+  "materials": 42,
+  "hanging_signs": 10,
+  "exported_logos": 8,
+  "bytes": 4382628,
+  "notes": [
+    "Visible website cutaway; roof/exterior upper walls intentionally omitted.",
+    "Geometry evaluated and batched, not decimated.",
+    "Procedural shader nodes reduced to their base PBR finishes.",
+    "Glazing uses alpha transparency; logos embedded at 1024px."
+  ]
+}
