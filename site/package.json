@@ -5,8 +5,7 @@
   "scripts": {
     "build:motion": "esbuild js/motion.source.js --bundle --format=iife --minify --target=es2022 --outfile=js/motion.js",
     "build:viewer": "esbuild js/model-viewer.js --bundle --format=esm --minify --target=es2022 --legal-comments=linked --outfile=js/model-viewer.bundle.js",
-    "build": "npm run build:motion && npm run build:viewer",
-    "test": "node --test tests/*.test.cjs"
+    "build": "npm run build:motion && npm run build:viewer"
   },
   "dependencies": {
     "@phosphor-icons/web": "^2.1.2",
