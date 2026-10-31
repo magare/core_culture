@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Circuit Culture</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture. Team circuits in the Foundry District.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' fill='none' stroke='%23e0201c' stroke-width='3'/%3E%3Ctext x='16' y='23' font-family='Arial Black,Arial' font-weight='900' font-size='17' fill='%23101114' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#ffffff; --mist:#f4f4f2; --ink:#101114; --panel:#111318;
+  --red:#e0201c; --red-dk:#b3150f; --blue:#1b5fd9; --blue-dk:#1448a8;
+  --grey:#5c5f66; --grey-lt:#9a9da3; --hair:rgba(16,17,20,.12);
+  --heavy:"Arial Black","Avenir Next",Futura,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.heavy{font-family:var(--heavy);font-weight:900;text-transform:uppercase;letter-spacing:-.005em;line-height:.96}
+.caps{text-transform:uppercase;letter-spacing:.18em;font-size:10.5px;font-weight:700}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--red);color:#fff;padding:10px 18px;z-index:500;font-weight:700}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* buttons — blocky */
+.btn{display:inline-block;background:var(--red);color:#fff;font-family:var(--heavy);font-weight:900;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;padding:16px 28px;border:2px solid var(--red);transition:background .2s,border-color .2s,color .2s;text-align:center}
+.btn:hover{background:var(--ink);border-color:var(--ink)}
+.btn-blue{background:var(--blue);border-color:var(--blue)}
+.btn-blue:hover{background:var(--ink);border-color:var(--ink)}
+.btn-ink{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn-ink:hover{background:var(--red);border-color:var(--red)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+
+/* workout progress rail */
+.progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:300;pointer-events:none;background:rgba(16,17,20,.08)}
+.progress span{display:block;height:100%;width:100%;background:var(--red);transform:scaleX(0);transform-origin:0 50%}
+
+/* ---------- nav (white) ---------- */
+.nav{position:sticky;top:4px;z-index:200;height:66px;display:flex;align-items:center;gap:26px;padding:0 28px;background:var(--paper);border-bottom:1px solid var(--hair)}
+.wordmark{font-family:var(--heavy);font-weight:900;font-size:17px;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap}
+.wordmark em{font-style:normal;color:var(--red)}
+.nav-links{display:flex;gap:24px;margin-left:10px}
+.nav-links a{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--grey);padding:8px 2px;border-bottom:3px solid transparent;transition:color .15s,border-color .15s}
+.nav-links a:hover{color:var(--ink);border-color:var(--red)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.nav-right .btn{padding:12px 20px;font-size:11.5px}
+.burger{display:none;flex-direction:column;gap:5px;padding:10px 4px}
+.burger span{display:block;width:24px;height:3px;background:var(--ink)}
+.burger span:nth-child(2){background:var(--red)}
+
+.mmenu{position:fixed;inset:0;z-index:400;background:var(--paper);display:none;flex-direction:column;padding:20px 22px}
+.mmenu.open{display:flex}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center;height:48px;border-bottom:3px solid var(--ink)}
+.mmenu .top button{font-size:20px;padding:8px 10px;color:var(--red)}
+.mmenu nav{display:flex;flex-direction:column;margin-top:36px}
+.mmenu nav a{font-family:var(--heavy);font-weight:900;font-size:30px;text-transform:uppercase;padding:15px 2px;border-bottom:1px solid var(--hair)}
+.mmenu nav a i{font-style:normal;color:var(--red);font-size:13px;vertical-align:middle;padding-right:14px;letter-spacing:.1em}
+.mmenu nav a:hover{color:var(--red)}
+.mmenu .btn{margin-top:32px}
+.mmenu .foot-note{margin-top:auto;color:var(--grey-lt);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.18em}
+
+/* ---------- hero ---------- */
+.hero{max-width:1360px;margin:0 auto;padding:64px 28px 0;display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center}
+.kick{display:inline-block;background:var(--ink);color:#fff;font-family:var(--heavy);font-weight:900;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;padding:8px 14px;margin-bottom:24px}
+.kick i{font-style:normal;color:var(--red);padding-left:10px}
+.hero-h1{font-family:var(--heavy);font-weight:900;text-transform:uppercase;font-size:clamp(48px,7.6vw,116px);line-height:.9;letter-spacing:-.015em}
+.hero-h1 em{font-style:normal;color:var(--red)}
+.hero-h1 .bl{color:var(--blue)}
+.hero .sub{max-width:46ch;color:var(--grey);font-size:15px;line-height:1.8;margin-top:28px}
+.hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+.hero-stats{display:flex;margin-top:44px;border-top:3px solid var(--ink);padding-top:18px}
+.hero-stats div{padding:0 24px;border-left:1px solid var(--hair)}
+.hero-stats div:first-child{padding-left:0;border-left:0}
+.hero-stats b{display:block;font-family:var(--heavy);font-weight:900;font-size:26px;line-height:1}
+.hero-stats div:first-child b{color:var(--red)}
+.hero-stats div:nth-child(2) b{color:var(--blue)}
+.hero-stats span{display:block;margin-top:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--grey)}
+.hero-photo{position:relative}
+.hero-photo .frame{position:relative;border:3px solid var(--ink)}
+.hero-photo img{width:100%;aspect-ratio:16/11.5;object-fit:cover}
+.hero-photo::before{content:"";position:absolute;top:-16px;right:-16px;width:96px;height:96px;background:var(--blue);z-index:-1}
+.hero-photo::after{content:"";position:absolute;bottom:-16px;left:-16px;width:64px;height:64px;background:var(--red);z-index:-1}
+.hero-photo .tag{position:absolute;left:0;bottom:0;background:var(--red);color:#fff;font-family:var(--heavy);font-weight:900;font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding:9px 14px}
+
+/* ---------- offer band ---------- */
+.offer-band{max-width:1360px;margin:76px auto 0;padding:0 28px}
+.offer-in{background:var(--red);color:#fff;padding:44px 44px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.offer-in h2{font-family:var(--heavy);font-weight:900;text-transform:uppercase;font-size:clamp(24px,3.2vw,40px);line-height:.98}
+.offer-in h2 b{background:var(--ink);padding:2px 12px;display:inline-block}
+.offer-in p{margin-top:10px;font-size:13px;color:rgba(255,255,255,.9);max-width:46ch}
+.offer-in .btn{background:#fff;color:var(--red);border-color:#fff;flex-shrink:0}
+.offer-in .btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ---------- shared sections ---------- */
+.sec{max-width:1360px;margin:0 auto;padding:110px 28px 0}
+.sec-kick{display:inline-block;font-family:var(--heavy);font-weight:900;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;padding:7px 13px;margin-bottom:22px}
+.sec-kick.red{background:var(--red);color:#fff}
+.sec-kick.blue{background:var(--blue);color:#fff}
+.sec-kick.ink{background:var(--ink);color:#fff}
+h2.title{font-family:var(--heavy);font-weight:900;text-transform:uppercase;font-size:clamp(34px,4.8vw,64px);line-height:.94;letter-spacing:-.01em}
+h2.title em{font-style:normal;color:var(--red)}
+h2.title .bl{color:var(--blue)}
+.lede{color:var(--grey);max-width:58ch;margin-top:20px;font-size:14.5px;line-height:1.85}
+
+/* ---------- crew ---------- */
+.crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
+.coach{background:var(--mist);border-top:6px solid var(--red)}
+.coach:nth-child(2){border-top-color:var(--blue)}
+.coach:nth-child(3){border-top-color:var(--ink)}
+.coach .ph{aspect-ratio:4/3.4;overflow:hidden}
+.coach img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05);transition:transform .5s cubic-bezier(.2,.6,.2,1)}
+.coach:hover img{transform:scale(1.04)}
+.coach .body{padding:22px 22px 26px}
+.coach h3{font-family:var(--heavy);font-weight:900;font-size:21px;text-transform:uppercase}
+.coach .role{display:inline-block;margin-top:8px;background:var(--ink);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;padding:5px 10px}
+.coach:nth-child(2) .role{background:var(--blue)}
+.coach:nth-child(3) .role{background:var(--red)}
+.coach p{color:var(--grey);font-size:12.5px;line-height:1.7;margin-top:12px}
+.crew-band{margin-top:64px;position:relative}
+.crew-band img{width:100%;height:min(56vh,480px);object-fit:cover}
+.crew-band .cap{position:absolute;left:0;bottom:0;background:var(--blue);color:#fff;padding:18px 26px;font-family:var(--heavy);font-weight:900;font-size:clamp(15px,1.9vw,23px);text-transform:uppercase;max-width:72%}
+.crew-band .cap i{font-style:normal;color:#ffd8d6}
+
+/* ---------- circuit stations ---------- */
+.circuit-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;margin-top:52px;align-items:start}
+.station-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.station{text-align:left;background:var(--paper);border:2px solid var(--hair);padding:18px;transition:border-color .2s,background .2s,transform .2s;position:relative}
+.station:hover{border-color:var(--blue);transform:translateY(-2px)}
+.station[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.station .no{display:inline-block;font-family:var(--heavy);font-weight:900;font-size:19px;background:var(--red);color:#fff;padding:4px 10px}
+.station:nth-child(even) .no{background:var(--blue)}
+.station h3{font-family:var(--heavy);font-weight:900;font-size:17.5px;text-transform:uppercase;margin-top:12px}
+.station p{font-size:11.5px;color:var(--grey);margin-top:6px;line-height:1.6}
+.station[aria-pressed="true"] p{color:rgba(255,255,255,.75)}
+.station .pick{display:inline-block;margin-top:12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--red)}
+.station:nth-child(even) .pick{color:var(--blue)}
+.station[aria-pressed="true"] .pick{color:#fff}
+.station-detail{border:3px solid var(--ink);position:sticky;top:86px}
+.sd-photo{position:relative;aspect-ratio:16/9.5;overflow:hidden;background:var(--mist)}
+.sd-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+.sd-photo .tag{position:absolute;left:0;bottom:0;background:var(--blue);color:#fff;font-family:var(--heavy);font-weight:900;font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding:8px 13px}
+.sd-body{padding:26px 28px 28px}
+.sd-body h3{font-family:var(--heavy);font-weight:900;font-size:clamp(24px,2.4vw,32px);text-transform:uppercase}
+.sd-body h3 em{font-style:normal;color:var(--red)}
+.sd-body p{color:var(--grey);margin:14px 0 20px;font-size:13.5px;line-height:1.85}
+.sd-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.sd-meta span{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;border:2px solid var(--ink);padding:7px 11px}
+.sd-meta span b{color:var(--red)}
+
+/* ---------- schedule ---------- */
+.days{display:flex;gap:8px;flex-wrap:wrap;margin:38px 0 26px}
+.dchip{font-family:var(--heavy);font-weight:900;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;padding:11px 17px;border:2px solid var(--hair);color:var(--grey);transition:all .15s}
+.dchip:hover{border-color:var(--red);color:var(--red)}
+.dchip[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.tt-list{border-top:3px solid var(--ink)}
+.tt-row{display:grid;grid-template-columns:96px 1fr auto auto;gap:26px;align-items:center;padding:20px 4px;border-bottom:1px solid var(--hair);transition:background .15s}
+.tt-row:hover{background:var(--mist)}
+.tt-row .t{font-family:var(--heavy);font-weight:900;font-size:18px;color:var(--red);font-variant-numeric:tabular-nums}
+.tt-row .n{font-family:var(--heavy);font-weight:900;font-size:16px;text-transform:uppercase}
+.tt-row .n span{display:block;font-family:var(--sans);font-weight:400;font-size:11px;color:var(--grey-lt);text-transform:none;letter-spacing:.02em;margin-top:3px}
+.tt-row .tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;padding:6px 11px;color:#fff}
+.tt-row .tag.red{background:var(--red)}
+.tt-row .tag.blue{background:var(--blue)}
+.tt-row .tag.ink{background:var(--ink)}
+.tt-row .btn{padding:10px 16px;font-size:10.5px}
+.tt-empty{padding:30px 4px;color:var(--grey-lt);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;display:none}
+
+/* ---------- member story ---------- */
+.story{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;margin-top:52px;align-items:center}
+.story-photo{position:relative}
+.story-photo img{width:100%;aspect-ratio:4/4.2;object-fit:cover;border:3px solid var(--ink)}
+.story-photo::before{content:"";position:absolute;top:-14px;left:-14px;width:64px;height:64px;background:var(--red);z-index:-1}
+.story blockquote{font-family:var(--heavy);font-weight:900;font-size:clamp(22px,2.6vw,34px);text-transform:uppercase;line-height:1.08}
+.story blockquote em{font-style:normal;color:var(--blue)}
+.story blockquote::before{content:"";display:block;width:56px;height:8px;background:var(--red);margin-bottom:24px}
+.story .who{display:flex;align-items:center;gap:14px;margin-top:28px;padding-top:20px;border-top:2px solid var(--ink)}
+.story .who b{display:block;font-family:var(--heavy);font-weight:900;font-size:15px;text-transform:uppercase}
+.story .who span{display:block;font-size:11px;color:var(--grey);text-transform:uppercase;letter-spacing:.12em;margin-top:3px}
+
+/* ---------- booking (blue band) ---------- */
+.book{background:var(--blue);color:#fff;margin-top:120px;padding:96px 28px}
+.book-in{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.book h2{font-family:var(--heavy);font-weight:900;text-transform:uppercase;font-size:clamp(38px,5vw,72px);line-height:.92}
+.book h2 em{font-style:normal;color:#ffd8d6}
+.book .rate{margin-top:22px;font-family:var(--heavy);font-weight:900;font-size:15px;text-transform:uppercase;letter-spacing:.05em}
+.book .rate b{background:var(--ink);color:#fff;padding:4px 10px}
+.book .note{margin-top:14px;font-size:12.5px;color:rgba(255,255,255,.85);max-width:44ch;line-height:1.8}
+.b-form{background:rgba(16,17,20,.22);border:2px solid rgba(255,255,255,.5);padding:28px;display:flex;flex-direction:column;gap:13px}
+.b-field label{display:block;font-family:var(--heavy);font-weight:900;font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
+.b-field input,.b-field select{width:100%;border:2px solid rgba(255,255,255,.55);background:rgba(16,17,20,.25);color:#fff;font:inherit;font-size:13px;padding:14px;border-radius:0;appearance:none}
+.b-field select{background-image:linear-gradient(45deg,transparent 50%,#fff 50%),linear-gradient(135deg,#fff 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+.b-field input:focus,.b-field select:focus{outline:none;border-color:#fff}
+.b-field input::placeholder{color:rgba(255,255,255,.55)}
+.b-msg{font-family:var(--heavy);font-weight:900;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;min-height:16px}
+.b-msg.ok{color:#fff}
+.b-msg.err{color:#ffc9c5}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:#fff}
+.foot{max-width:1360px;margin:0 auto;padding:78px 28px 24px}
+.fmark{font-family:var(--heavy);font-weight:900;font-size:clamp(38px,6.4vw,92px);text-transform:uppercase;line-height:.92}
+.fmark em{font-style:normal;color:var(--red)}
+.frow{display:grid;grid-template-columns:1.3fr 2fr;gap:60px;margin-top:52px}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fcols h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--grey-lt);margin-bottom:14px}
+.fcols a,.fcols p{display:block;color:rgba(255,255,255,.82);font-size:12.5px;padding:4px 0}
+.fcols a:hover{color:var(--red)}
+.bottom{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.14);margin-top:58px;padding:20px 0 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--grey-lt)}
+.bottom .soc{display:flex;gap:22px}
+.bottom a:hover{color:var(--red)}
+
+/* responsive */
+@media (max-width:1120px){
+  .hero{grid-template-columns:1fr .92fr;gap:40px}
+  .circuit-wrap{grid-template-columns:1fr}
+  .station-detail{position:static}
+  .book-in{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:900px){
+  .nav{padding:0 20px}
+  .nav-links,.nav-right .btn{display:none}
+  .burger{display:flex}
+  .hero{grid-template-columns:1fr;padding-top:48px}
+  .crew-grid{grid-template-columns:1fr}
+  .coach{max-width:520px}
+  .story{grid-template-columns:1fr;gap:44px}
+  .story-photo{max-width:440px}
+  .tt-row{grid-template-columns:70px 1fr auto;gap:14px}
+  .tt-row .tag{display:none}
+}
+@media (max-width:560px){
+  .sec{padding:80px 16px 0}
+  .hero{padding:40px 16px 0}
+  .offer-band{padding:0 16px;margin-top:60px}
+  .offer-in{padding:32px 22px}
+  .hero .cta-row .btn{width:100%}
+  .hero-stats div{padding:0 14px}
+  .station-grid{grid-template-columns:1fr}
+  .sd-body{padding:22px 18px 24px}
+  .tt-row{grid-template-columns:60px 1fr;align-items:start}
+  .tt-row .btn{grid-column:2;justify-self:start}
+  .book{padding:76px 16px}
+  .b-form{padding:22px 16px}
+  .fcols{grid-template-columns:1fr 1fr}
+  .bottom{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .coach img{transition:none}
+  .progress{display:none}
+  .station{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- NAV -->
+<header class="nav">
+  <a class="wordmark" href="#top">Core Culture<em>.</em></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#crew">The crew</a>
+    <a href="#circuit">The circuit</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#story">Story</a>
+  </nav>
+  <div class="nav-right">
+    <a class="btn" href="#book">Book a class</a>
+    <button class="burger" id="mmenuOpen" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark">Core Culture<em>.</em></span>
+    <button id="mmenuClose" aria-label="Close menu">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#crew"><i>01</i>The crew</a>
+    <a href="#circuit"><i>02</i>The circuit</a>
+    <a href="#schedule"><i>03</i>Schedule</a>
+    <a href="#story"><i>04</i>Story</a>
+  </nav>
+  <a class="btn" href="#book">Book a class</a>
+  <div class="foot-note">Foundry District · Doors 05:30–22:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — Circuit Culture. Team circuit training in the Foundry District.</h1>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="kick rv">Circuit Culture<i>◆</i>Foundry District</p>
+    <h2 class="hero-h1" aria-hidden="true" style="margin:0">Sweat in <em>numbers.</em><br><span class="bl">Train as one.</span></h2>
+    <p class="sub rv">Forty-five minutes, eight stations, sixteen people, zero hiding. You move through the circuit as a crew — the clock runs, the coach calls it, and the last station is always the one you didn’t want.</p>
+    <div class="cta-row rv">
+      <a class="btn" href="#book">Claim the week</a>
+      <a class="btn btn-ghost" href="#circuit">Walk the circuit</a>
+    </div>
+    <div class="hero-stats rv">
+      <div><b>8</b><span>Stations</span></div>
+      <div><b>45′</b><span>Per round</span></div>
+      <div><b>2</b><span>Coaches on the floor</span></div>
+      <div><b>16</b><span>Crew per class</span></div>
+    </div>
+  </div>
+  <div class="hero-photo rv">
+    <div class="frame">
+      <img width="1080" height="590" src="../crops/w302-hero-dance.jpg" alt="The crew moving through a station under neon light" fetchpriority="high">
+    </div>
+    <p class="tag">Station 04 — the floor</p>
+  </div>
+</section>
+
+<!-- INTRO OFFER -->
+<section class="offer-band" id="offer">
+  <div class="offer-in rv">
+    <div>
+      <h2>The opening offer — <b>first week £10.</b></h2>
+      <p>Every class, every station, both coaches. No contract waiting at the end — the crew is the contract.</p>
+    </div>
+    <a class="btn" href="#book">Start the week</a>
+  </div>
+</section>
+
+<!-- CREW -->
+<section class="sec" id="crew">
+  <p class="sec-kick red rv">The crew</p>
+  <h2 class="title rv">Coached like a <em>pack.</em></h2>
+  <p class="lede rv">Two coaches on the floor for every class of sixteen. One runs the clock and the calls; the other walks the stations and fixes your set-up before it costs you a round.</p>
+  <div class="crew-grid">
+    <article class="coach rv">
+      <div class="ph"><img width="520" height="510" src="../crops/w302-class-sled.jpg" alt="Dami driving a loaded sled at the turf lane" loading="lazy"></div>
+      <div class="body">
+        <h3>Dami Okon</h3>
+        <span class="role">Circuit lead</span>
+        <p>Runs the clock, calls the swaps, and remembers your name by the second round. Ex-track sprinter — the lane is her home turf.</p>
+      </div>
+    </article>
+    <article class="coach rv">
+      <div class="ph"><img width="410" height="410" src="../crops/w302-class-machine.jpg" alt="Petra setting a strength station" loading="lazy"></div>
+      <div class="body">
+        <h3>Petra Lindqvist</h3>
+        <span class="role">Strength coach</span>
+        <p>Owns the rack and the rig. Sets your loads on day one and adds the plate before you ask — that’s the deal.</p>
+      </div>
+    </article>
+    <article class="coach rv">
+      <div class="ph"><img width="415" height="375" src="../crops/w302-class-streak.jpg" alt="Marcus pushing the engine row under streak lights" loading="lazy"></div>
+      <div class="body">
+        <h3>Marcus Reid</h3>
+        <span class="role">Engine coach</span>
+        <p>Rows, bikes, bags — the loud half of the circuit. Will match your pace and then raise it one notch, every time.</p>
+      </div>
+    </article>
+  </div>
+  <div class="crew-band rv">
+    <img width="1080" height="520" src="../crops/w302-trend-pop.jpg" alt="Pop-art wall painted by the members at culture night" loading="lazy">
+    <p class="cap">The wall repaints itself every <i>culture night</i> — last Friday of the month</p>
+  </div>
+</section>
+
+<!-- CIRCUIT STATIONS -->
+<section class="sec" id="circuit">
+  <p class="sec-kick blue rv">The circuit</p>
+  <h2 class="title rv">Eight stations.<br><em>Zero</em> coasting.</h2>
+  <p class="lede rv">Every class moves through the same eight stations in two loops. Pick one to see what it asks of you — then book the round that starts there.</p>
+
+  <div class="circuit-wrap">
+    <div class="station-grid rv" role="group" aria-label="Choose a station">
+      <button class="station" data-st="sled" aria-pressed="true">
+        <span class="no">01</span>
+        <h3>Sled lane</h3>
+        <p>Loaded pushes down twenty metres of turf.</p>
+        <span class="pick">Select station →</span>
+      </button>
+      <button class="station" data-st="rack" aria-pressed="false">
+        <span class="no">02</span>
+        <h3>Iron rack</h3>
+        <p>Squat, press, pull — coach-set loads.</p>
+        <span class="pick">Select station →</span>
+      </button>
+      <button class="station" data-st="row" aria-pressed="false">
+        <span class="no">03</span>
+        <h3>Engine row</h3>
+        <p>Meters on the clock, crew on the board.</p>
+        <span class="pick">Select station →</span>
+      </button>
+      <button class="station" data-st="bag" aria-pressed="false">
+        <span class="no">04</span>
+        <h3>Bag row</h3>
+        <p>Six bags, forty seconds, no referee needed.</p>
+        <span class="pick">Select station →</span>
+      </button>
+      <button class="station" data-st="turf" aria-pressed="false">
+        <span class="no">05</span>
+        <h3>Turf push</h3>
+        <p>Sled sprints paired against the partner lane.</p>
+        <span class="pick">Select station →</span>
+      </button>
+      <button class="station" data-st="rig" aria-pressed="false">
+        <span class="no">06</span>
+        <h3>The rig</h3>
+        <p>Bodyweight rows, steps and carries.</p>
+        <span class="pick">Select station →</span>
+      </button>
+      <button class="station" data-st="cold" aria-pressed="false">
+        <span class="no">07</span>
+        <h3>Cold tub</h3>
+        <p>Three degrees between loops — if you dare.</p>
+        <span class="pick">Select station →</span>
+      </button>
+      <button class="station" data-st="floor" aria-pressed="false">
+        <span class="no">08</span>
+        <h3>Movement floor</h3>
+        <p>Stretch, breathe, reset before the bell.</p>
+        <span class="pick">Select station →</span>
+      </button>
+    </div>
+
+    <div class="station-detail" aria-live="polite">
+      <div class="sd-photo">
+        <img id="sdImg" width="520" height="510" src="../crops/w302-class-sled.jpg" alt="Station 01 — athlete driving a loaded sled down the turf lane" loading="lazy">
+        <span class="tag" id="sdTag">Station 01</span>
+      </div>
+      <div class="sd-body">
+        <h3 id="sdName">Sled <em>lane</em></h3>
+        <p id="sdDesc">The opener. Load it heavy, drive low, and finish the twenty metres — the crew scores the board by total metres, so nobody dawdles.</p>
+        <div class="sd-meta">
+          <span>Round <b id="sdRound">45″ work</b></span>
+          <span id="sdLoop">Loop one</span>
+        </div>
+        <button class="btn" id="sdBook">Book from this station</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="sec" id="schedule">
+  <p class="sec-kick ink rv">The schedule</p>
+  <h2 class="title rv">Pick a day.<br>Join the <em>crew.</em></h2>
+  <p class="lede rv">Same circuit every class — the rounds and the music change. Members book seven days out; everyone else, the Sunday before.</p>
+  <div class="days rv" role="group" aria-label="Choose a day">
+    <button class="dchip" data-day="Mon" aria-pressed="true">Mon</button>
+    <button class="dchip" data-day="Tue" aria-pressed="false">Tue</button>
+    <button class="dchip" data-day="Wed" aria-pressed="false">Wed</button>
+    <button class="dchip" data-day="Thu" aria-pressed="false">Thu</button>
+    <button class="dchip" data-day="Fri" aria-pressed="false">Fri</button>
+    <button class="dchip" data-day="Sat" aria-pressed="false">Sat</button>
+    <button class="dchip" data-day="Sun" aria-pressed="false">Sun</button>
+  </div>
+  <div class="tt-list rv" id="ttList" aria-live="polite"></div>
+  <p class="tt-empty" id="ttEmpty">Rest day — the floor rests, the crew doesn’t have to.</p>
+</section>
+
+<!-- MEMBER STORY -->
+<section class="sec" id="story">
+  <p class="sec-kick red rv">Crew story</p>
+  <div class="story">
+    <div class="story-photo rv">
+      <img width="415" height="375" src="../crops/w303-class-dance.jpg" alt="Jonas mid-round under the neon wall at Circuit Culture" loading="lazy">
+    </div>
+    <div class="rv">
+      <blockquote>I turned up alone in January. By February the six a.m. crew was <em>saving me a station.</em> That’s the whole pitch.</blockquote>
+      <div class="who">
+        <div>
+          <b>Jonas Weir</b>
+          <span>Member since 2024 · 140 rounds logged · the six a.m. pack</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="book" id="book">
+  <div class="book-in">
+    <div class="rv">
+      <p class="sec-kick" style="background:var(--ink)">Book a round</p>
+      <h2>Get in the<br><em>circuit.</em></h2>
+      <p class="rate"><b>£10</b> first week — every class, every station</p>
+      <p class="note">Pick your day, leave your name, and the desk holds a spot in the crew. Confirmation lands inside the hour — the clock starts without you if you’re late.</p>
+    </div>
+    <form class="b-form rv" id="bForm" novalidate>
+      <div class="b-field">
+        <label for="bName">Name</label>
+        <input id="bName" type="text" autocomplete="name" placeholder="Your name">
+      </div>
+      <div class="b-field">
+        <label for="bEmail">Email</label>
+        <input id="bEmail" type="email" autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="b-field">
+        <label for="bClass">Class</label>
+        <select id="bClass">
+          <option value="Circuit 45">Circuit 45 — the full loop</option>
+          <option value="Circuit Strength">Circuit Strength — racks and rig</option>
+          <option value="Engine Night">Engine Night — rows and bags</option>
+          <option value="Recovery Circuit">Recovery Circuit — cold tub finish</option>
+        </select>
+      </div>
+      <div class="b-field">
+        <label for="bStation">Starting station</label>
+        <select id="bStation">
+          <option value="Sled lane">01 — Sled lane</option>
+          <option value="Iron rack">02 — Iron rack</option>
+          <option value="Engine row">03 — Engine row</option>
+          <option value="Bag row">04 — Bag row</option>
+          <option value="Turf push">05 — Turf push</option>
+          <option value="The rig">06 — The rig</option>
+          <option value="Cold tub">07 — Cold tub</option>
+          <option value="Movement floor">08 — Movement floor</option>
+        </select>
+      </div>
+      <button class="btn btn-ink" type="submit">Hold my spot</button>
+      <p class="b-msg" id="bMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <p class="fmark">Core Culture<em>.</em></p>
+    <div class="frow">
+      <div>
+        <p style="color:rgba(255,255,255,.75);max-width:36ch;font-size:12.5px">Not a gym — a culture. Eight stations, sixteen crew, two coaches, one clock. Train as one.</p>
+      </div>
+      <div class="fcols">
+        <div>
+          <h4>The club</h4>
+          <a href="#crew">The crew</a>
+          <a href="#circuit">The circuit</a>
+          <a href="#schedule">Schedule</a>
+        </div>
+        <div>
+          <h4>Classes</h4>
+          <a href="#book">Circuit 45</a>
+          <a href="#book">Circuit Strength</a>
+          <a href="#book">Engine Night</a>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>9 Foundry Row</p>
+          <p>Daily 05:30–22:00</p>
+          <a href="#book">crew@coreculture</a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Core Culture — not a gym. A culture.</span>
+      <span class="soc"><a href="#top">IG</a><a href="#top">YT</a><a href="#top">SP</a></span>
+      <span>Foundry District (English)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- GSAP 3.15.0 + ScrollTrigger — pinned versions; the page stays fully visible if these fail -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* mobile menu */
+  var mmenu = document.getElementById("mmenu"),
+      openBtn = document.getElementById("mmenuOpen");
+  openBtn.addEventListener("click", function(){
+    mmenu.classList.add("open");
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mmenu.querySelector("nav a").focus();
+  });
+  function closeMenu(){
+    mmenu.classList.remove("open");
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    openBtn.focus();
+  }
+  document.getElementById("mmenuClose").addEventListener("click", closeMenu);
+  [].forEach.call(mmenu.querySelectorAll("nav a, .btn"), function(a){
+    a.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && mmenu.classList.contains("open")) closeMenu();
+  });
+
+  /* circuit stations */
+  var STATIONS = {
+    sled:  { tag: "Station 01", name: 'Sled <em>lane</em>', img: "../crops/w302-class-sled.jpg", w: 520, h: 510,
+      alt: "Station 01 — athlete driving a loaded sled down the turf lane",
+      desc: "The opener. Load it heavy, drive low, and finish the twenty metres — the crew scores the board by total metres, so nobody dawdles.",
+      round: "45″ work", loop: "Loop one" },
+    rack:  { tag: "Station 02", name: 'Iron <em>rack</em>', img: "../crops/w307-obj-rack.jpg", w: 410, h: 400,
+      alt: "Station 02 — the iron rack set and ready",
+      desc: "Coach-set loads, three compound lifts, one bar per pair. Your numbers go in the book — next week’s plate is decided today.",
+      round: "6 reps", loop: "Loop one" },
+    row:   { tag: "Station 03", name: 'Engine <em>row</em>', img: "../crops/w302-class-streak.jpg", w: 415, h: 375,
+      alt: "Station 03 — the engine row under streak lights",
+      desc: "Meters on the clock, names on the board. Pace is personal, progress isn’t — the board doesn’t care how you feel about it.",
+      round: "250m bursts", loop: "Loop one" },
+    bag:   { tag: "Station 04", name: 'Bag <em>row</em>', img: "../crops/w301-streak-card.jpg", w: 733, h: 440,
+      alt: "Station 04 — light streaks over the bag row",
+      desc: "Six bags, forty seconds each, rotating pairs. The loudest station in the building and the fastest forty seconds of your week.",
+      round: "40″ work", loop: "Loop two" },
+    turf:  { tag: "Station 05", name: 'Turf <em>push</em>', img: "../crops/w301-sled-sq.jpg", w: 420, h: 420,
+      alt: "Station 05 — head-on turf push against the partner lane",
+      desc: "Sled sprints against the partner lane. Win or lose, you go again — the turf keeps the score honest and the legs honest too.",
+      round: "2 × 20m", loop: "Loop two" },
+    rig:   { tag: "Station 06", name: 'The <em>rig</em>', img: "../crops/w302-class-machine.jpg", w: 410, h: 410,
+      alt: "Station 06 — the rig set for rows, steps and carries",
+      desc: "Bodyweight rows, box steps and farmer carries. The station everyone underestimates in loop one and respects by loop two.",
+      round: "40″ work", loop: "Loop two" },
+    cold:  { tag: "Station 07", name: 'Cold <em>tub</em>', img: "../crops/w301-ice-sq.jpg", w: 620, h: 620,
+      alt: "Station 07 — the cold tub packed with fresh ice",
+      desc: "Three degrees between loops. Ninety seconds in the tub resets the legs — optional in theory, a badge of honour in practice.",
+      round: "90″ plunge", loop: "Between loops" },
+    floor: { tag: "Station 08", name: 'Movement <em>floor</em>', img: "../crops/w304-half-studio.jpg", w: 600, h: 580,
+      alt: "Station 08 — the movement floor under cool light",
+      desc: "Stretch, breathe, reset before the bell. The coach walks you through the next round while your heart rate comes home.",
+      round: "3′ reset", loop: "Between loops" }
+  };
+  var stBtns = [].slice.call(document.querySelectorAll(".station")),
+      sdImg = document.getElementById("sdImg"),
+      sdTag = document.getElementById("sdTag"),
+      sdName = document.getElementById("sdName"),
+      sdDesc = document.getElementById("sdDesc"),
+      sdRound = document.getElementById("sdRound"),
+      sdLoop = document.getElementById("sdLoop");
+  function stationGo(key){
+    var d = STATIONS[key];
+    if (!d) return;
+    stBtns.forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.st === key ? "true" : "false"); });
+    sdImg.src = d.img; sdImg.width = d.w; sdImg.height = d.h; sdImg.alt = d.alt;
+    sdTag.textContent = d.tag;
+    sdName.innerHTML = d.name;
+    sdDesc.textContent = d.desc;
+    sdRound.textContent = d.round;
+    sdLoop.textContent = d.loop;
+  }
+  stBtns.forEach(function(b){
+    b.addEventListener("click", function(){ stationGo(b.dataset.st); });
+  });
+  document.getElementById("sdBook").addEventListener("click", function(){
+    var active = stBtns.filter(function(b){ return b.getAttribute("aria-pressed") === "true"; })[0];
+    if (active){
+      var map = { sled: "Sled lane", rack: "Iron rack", row: "Engine row", bag: "Bag row", turf: "Turf push", rig: "The rig", cold: "Cold tub", floor: "Movement floor" };
+      document.getElementById("bStation").value = map[active.dataset.st] || "Sled lane";
+    }
+    document.getElementById("book").scrollIntoView({ behavior: "smooth" });
+  });
+
+  /* schedule */
+  var WEEK = {
+    Mon: [
+      { t: "06:15", n: "Circuit 45", s: "The full loop, both loops, all eight", tag: "red", tagTxt: "All levels" },
+      { t: "12:15", n: "Circuit Strength", s: "Rack and rig focus, heavier loads", tag: "blue", tagTxt: "Strength" },
+      { t: "18:15", n: "Engine Night", s: "Rows, bags and the partner lanes", tag: "red", tagTxt: "Engine" }
+    ],
+    Tue: [
+      { t: "07:00", n: "Circuit 45", s: "The full loop before the city wakes", tag: "red", tagTxt: "All levels" },
+      { t: "19:30", n: "Recovery Circuit", s: "Longer resets, cold tub finish", tag: "ink", tagTxt: "Recover" }
+    ],
+    Wed: [
+      { t: "06:15", n: "Circuit 45", s: "The full loop, both loops, all eight", tag: "red", tagTxt: "All levels" },
+      { t: "12:15", n: "Engine Night", s: "Rows, bags and the partner lanes", tag: "red", tagTxt: "Engine" },
+      { t: "18:15", n: "Circuit Strength", s: "Rack and rig focus, heavier loads", tag: "blue", tagTxt: "Strength" }
+    ],
+    Thu: [
+      { t: "07:00", n: "Circuit 45", s: "The full loop before the city wakes", tag: "red", tagTxt: "All levels" },
+      { t: "18:00", n: "Culture night circuit", s: "Floors open, music up, one long loop", tag: "blue", tagTxt: "Social" }
+    ],
+    Fri: [
+      { t: "06:15", n: "Circuit 45", s: "The full loop, both loops, all eight", tag: "red", tagTxt: "All levels" },
+      { t: "17:30", n: "Circuit Strength", s: "Rack and rig focus, heavier loads", tag: "blue", tagTxt: "Strength" }
+    ],
+    Sat: [
+      { t: "08:00", n: "Weekend crew", s: "The full loop — partners assigned at the door", tag: "red", tagTxt: "All levels" },
+      { t: "10:00", n: "Recovery Circuit", s: "Longer resets, cold tub finish", tag: "ink", tagTxt: "Recover" }
+    ],
+    Sun: []
+  };
+  var dchips = [].slice.call(document.querySelectorAll(".dchip")),
+      ttList = document.getElementById("ttList"),
+      ttEmpty = document.getElementById("ttEmpty");
+  function renderDay(day){
+    var rows = WEEK[day] || [];
+    ttList.innerHTML = "";
+    ttEmpty.style.display = rows.length ? "none" : "block";
+    rows.forEach(function(r){
+      var row = document.createElement("div");
+      row.className = "tt-row";
+      var t = document.createElement("span"); t.className = "t"; t.textContent = r.t;
+      var n = document.createElement("span"); n.className = "n";
+      n.textContent = r.n;
+      var s = document.createElement("span"); s.textContent = r.s;
+      n.appendChild(s);
+      var tag = document.createElement("span"); tag.className = "tag " + r.tag; tag.textContent = r.tagTxt;
+      var b = document.createElement("a"); b.className = "btn"; b.href = "#book"; b.textContent = "Book";
+      row.appendChild(t); row.appendChild(n); row.appendChild(tag); row.appendChild(b);
+      ttList.appendChild(row);
+    });
+  }
+  dchips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      dchips.forEach(function(c){ c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      renderDay(chip.dataset.day);
+    });
+  });
+  renderDay("Mon");
+
+  /* booking form */
+  document.getElementById("bForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("bName"),
+        email = document.getElementById("bEmail"),
+        cls = document.getElementById("bClass"),
+        st = document.getElementById("bStation"),
+        msg = document.getElementById("bMsg");
+    if (!name.value.trim()){
+      msg.textContent = "Tell us your name — the crew will use it.";
+      msg.className = "b-msg err";
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+      msg.textContent = "That address doesn’t look right.";
+      msg.className = "b-msg err";
+      return;
+    }
+    msg.textContent = "Held — " + name.value.trim().split(" ")[0] + ", " + cls.value + " from " + st.value + ". Check your inbox.";
+    msg.className = "b-msg ok";
+    this.reset();
+  });
+
+  /* ---------- scroll motion: GSAP 3.15.0 + ScrollTrigger (pinned CDN) ----------
+     Fail-visible: elements are only hidden after the library loads.
+     High-voltage team motion: staggered station reveals, a red workout
+     progress rail, light section reveals — no parallax, no pinning. */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.gsap && window.ScrollTrigger && !reduced){
+    gsap.registerPlugin(ScrollTrigger);
+    var compact = window.matchMedia("(max-width: 700px)").matches;
+    var dist = compact ? 12 : 24,
+        dur = compact ? 0.55 : 0.75,
+        stag = compact ? 0.06 : 0.09;
+
+    /* red workout progress rail, scrubbed to document scroll */
+    gsap.to("#progressBar", { scaleX: 1, ease: "none",
+      scrollTrigger: { start: 0, end: "max", scrub: 0.3 } });
+
+    /* section intros */
+    [].forEach.call(["crew", "circuit", "schedule", "story"], function(id){
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      gsap.from(sec.querySelectorAll(".sec-kick.rv, h2.title.rv, .lede.rv"), {
+        y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+        scrollTrigger: { trigger: sec, start: "top 78%", once: true },
+        clearProps: "all"
+      });
+    });
+
+    /* hero copy + stats */
+    gsap.from(".hero-copy .rv", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag + 0.02,
+      scrollTrigger: { trigger: ".hero", start: "top 70%", once: true },
+      clearProps: "all"
+    });
+    gsap.from(".hero-photo.rv", {
+      y: dist, autoAlpha: 0, duration: dur + 0.1, ease: "power2.out",
+      scrollTrigger: { trigger: ".hero", start: "top 70%", once: true },
+      clearProps: "all"
+    });
+
+    /* offer band */
+    gsap.from("#offer .offer-in", {
+      autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: "#offer", start: "top 82%", once: true },
+      clearProps: "all"
+    });
+
+    /* crew cards staggered */
+    gsap.from(".crew-grid .coach", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".crew-grid", start: "top 82%", once: true },
+      clearProps: "all"
+    });
+    gsap.from(".crew-band", {
+      autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: ".crew-band", start: "top 82%", once: true },
+      clearProps: "all"
+    });
+
+    /* STATION GRID — the staggered centrepiece */
+    gsap.from(".station-grid .station", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".station-grid", start: "top 82%", once: true },
+      clearProps: "all"
+    });
+    gsap.from(".station-detail", {
+      autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: ".circuit-wrap", start: "top 78%", once: true },
+      clearProps: "all"
+    });
+
+    /* schedule rows, story, form */
+    gsap.from(".days .dchip", {
+      y: dist * 0.7, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".days", start: "top 85%", once: true },
+      clearProps: "all"
+    });
+    gsap.from("#ttList", {
+      autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: "#ttList", start: "top 85%", once: true },
+      clearProps: "all"
+    });
+    gsap.from("#story .story > .rv, #story .story-photo", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag + 0.03,
+      scrollTrigger: { trigger: "#story .story", start: "top 80%", once: true },
+      clearProps: "all"
+    });
+    gsap.from("#book .book-in > *", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: "#book", start: "top 76%", once: true },
+      clearProps: "all"
+    });
+  }
+})();
+</script>
+</body>
+</html>

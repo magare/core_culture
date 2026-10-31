@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Electric Intent</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='Arial Narrow,Arial' font-weight='bold' font-size='19' fill='%23d7ff00' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --black:#050505; --panel:#0f0f0f; --white:#fff; --grey:#a3a3a3; --grey-dk:#707070;
+  --volt:#d7ff00; --purple:#7b2ff2;
+  --hair:rgba(255,255,255,.14);
+  --cond:"Arial Narrow","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--black);color:var(--white);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.cond{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.01em;line-height:.94}
+.caps{text-transform:uppercase;letter-spacing:.18em;font-size:10.5px;font-weight:700}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--volt);color:var(--black);padding:10px 18px;z-index:400;font-weight:700}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:2px solid var(--volt);outline-offset:3px}
+
+/* purple-lit treatment */
+.purplit{position:relative;overflow:hidden;background:var(--black)}
+.purplit img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.78) contrast(1.18)}
+.purplit::after{content:"";position:absolute;inset:0;background:var(--purple);mix-blend-mode:multiply}
+
+/* buttons */
+.btn{
+  display:inline-block;background:var(--volt);color:var(--black);
+  font-family:var(--cond);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em;
+  padding:14px 26px;border:2px solid var(--volt);transition:background .2s,color .2s,border-color .2s;text-align:center;
+}
+.btn:hover{background:var(--black);color:var(--volt);border-color:var(--volt)}
+.btn-black{background:var(--black);color:var(--white);border-color:var(--black)}
+.btn-black:hover{background:var(--volt);color:var(--black);border-color:var(--black)}
+.btn-ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.7)}
+.btn-ghost:hover{background:transparent;color:var(--volt);border-color:var(--volt)}
+
+/* ---------- ticker ---------- */
+.ticker{background:var(--volt);color:var(--black);overflow:hidden;padding:10px 0}
+.ticker-row{display:flex;width:max-content;animation:tk 26s linear infinite}
+.ticker:hover .ticker-row{animation-play-state:paused}
+.ticker-row span{font-family:var(--cond);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;padding:0 22px}
+.ticker-row span i{font-style:normal;opacity:.4;padding-left:44px}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- white nav ---------- */
+.nav{position:sticky;top:0;z-index:200;height:60px;background:var(--white);color:var(--black);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 26px;
+  border-bottom:1px solid rgba(0,0,0,.1)}
+.nav-links{display:flex;gap:22px}
+.nav-links.right{justify-content:flex-end;align-items:center;gap:18px}
+.nav a.nl{font-family:var(--cond);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;padding:6px 2px;border-bottom:2px solid transparent;transition:border-color .15s,color .15s}
+.nav a.nl:hover{border-color:var(--black)}
+.wordmark{font-family:var(--cond);font-weight:700;font-size:21px;text-transform:uppercase;letter-spacing:.14em;text-align:center;white-space:nowrap}
+.wordmark b{color:transparent;-webkit-text-stroke:1.2px var(--black)}
+.nav-right{display:flex;justify-content:flex-end;align-items:center;gap:16px}
+.nav-right .btn{padding:9px 18px;font-size:11.5px}
+.burger{display:none;flex-direction:column;gap:4px;padding:10px 4px;justify-self:start}
+.burger span{display:block;width:22px;height:2px;background:var(--black)}
+.burger span:nth-child(2){background:var(--volt)}
+
+.mmenu{position:fixed;inset:0;z-index:300;background:var(--black);display:none;flex-direction:column;padding:20px 22px}
+.mmenu.open{display:flex}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center;height:44px}
+.mmenu .top .wordmark{color:var(--white)}
+.mmenu .top .wordmark b{-webkit-text-stroke:1.2px var(--volt)}
+.mmenu nav{display:flex;flex-direction:column;margin-top:38px}
+.mmenu nav a{font-family:var(--cond);font-weight:700;font-size:30px;text-transform:uppercase;padding:15px 0;border-bottom:1px solid var(--hair)}
+.mmenu nav a:hover{color:var(--volt)}
+.mmenu .btn{margin-top:32px}
+.mmenu .foot-note{margin-top:auto;color:var(--grey-dk);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.2em}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:calc(100vh - 60px);display:flex;align-items:flex-end;overflow:hidden;background:var(--black)}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:grayscale(1) brightness(.9) contrast(1.15)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:var(--purple);mix-blend-mode:multiply}
+.hero .shade{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(5,5,5,.45) 0%,rgba(5,5,5,.02) 45%,rgba(5,5,5,.8) 100%),
+  linear-gradient(90deg,rgba(5,5,5,.5),rgba(5,5,5,0) 60%)}
+.hero-in{position:relative;z-index:2;width:100%;max-width:1360px;margin:0 auto;padding:0 28px 72px}
+.hero-h1{font-family:var(--cond);font-weight:700;font-size:clamp(52px,9.6vw,138px);text-transform:uppercase;letter-spacing:.005em;line-height:.9;max-width:12ch}
+.hero-h1 em{font-style:normal;color:var(--volt)}
+.hero .sub{max-width:44ch;margin-top:26px;color:rgba(255,255,255,.85);font-size:14px;line-height:1.8}
+.hero .cta-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+
+/* ---------- carousel ---------- */
+.drops{margin-top:0;border-bottom:1px solid var(--hair)}
+.car{position:relative;overflow:hidden;background:var(--panel)}
+.car-track{display:flex;transition:transform .55s cubic-bezier(.25,.7,.25,1)}
+.slide{min-width:100%;position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center}
+.slide .sbg{position:absolute;inset:0}
+.slide .sbg img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.6) contrast(1.2)}
+.slide .sbg::after{content:"";position:absolute;inset:0;background:var(--purple);mix-blend-mode:multiply}
+.slide .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.72),rgba(5,5,5,.15) 70%)}
+.slide .s-in{position:relative;z-index:2;padding:64px 28px;max-width:760px;margin:0 auto;width:100%}
+.slide .kick{display:inline-block;background:var(--volt);color:var(--black);font-family:var(--cond);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding:7px 12px;margin-bottom:20px}
+.slide h2{font-family:var(--cond);font-weight:700;font-size:clamp(38px,5.6vw,76px);text-transform:uppercase;line-height:.9}
+.slide h2 em{font-style:normal;color:var(--volt)}
+.slide p{color:rgba(255,255,255,.85);margin:18px 0 26px;max-width:44ch}
+.slide.s-volt{background:var(--volt);color:var(--black)}
+.slide.s-volt .kick{background:var(--black);color:var(--volt)}
+.slide.s-volt p{color:rgba(0,0,0,.75)}
+.car-ui{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 28px;background:var(--black);border-top:1px solid var(--hair)}
+.car-dots{display:flex;gap:8px}
+.car-dot{width:26px;height:4px;background:rgba(255,255,255,.25);transition:background .2s}
+.car-dot[aria-pressed="true"]{background:var(--volt)}
+.car-arrows{display:flex;gap:8px}
+.car-arrows button{width:44px;height:36px;border:1px solid rgba(255,255,255,.5);font-size:15px;transition:all .2s}
+.car-arrows button:hover{background:var(--volt);border-color:var(--volt);color:var(--black)}
+
+/* ---------- sections ---------- */
+.sec{max-width:1360px;margin:0 auto;padding:110px 28px 0}
+.kicker{display:inline-block;color:var(--volt);font-family:var(--cond);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.14em;margin-bottom:18px;position:relative;padding-left:30px}
+.kicker::before{content:"";position:absolute;left:0;top:50%;width:18px;height:2px;background:var(--volt)}
+h2.title{font-family:var(--cond);font-weight:700;font-size:clamp(34px,4.8vw,66px);text-transform:uppercase;line-height:.92}
+h2.title em{font-style:normal;color:var(--volt)}
+.lede{color:var(--grey);max-width:54ch;margin-top:20px;font-size:14px;line-height:1.85}
+
+/* concept tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:52px}
+.tile{position:relative;display:block;aspect-ratio:.78;overflow:hidden;background:var(--panel)}
+.tile img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.75) contrast(1.15);transition:transform .6s cubic-bezier(.2,.6,.2,1)}
+.tile::after{content:"";position:absolute;inset:0;background:var(--purple);mix-blend-mode:multiply;transition:opacity .3s}
+.tile:hover img{transform:scale(1.05)}
+.tile:hover::after{opacity:.75}
+.tile .lab{position:absolute;left:16px;right:16px;bottom:16px;z-index:2}
+.tile .lab .no{font-family:var(--cond);font-weight:700;font-size:11px;color:var(--volt);letter-spacing:.14em}
+.tile .lab h3{font-family:var(--cond);font-weight:700;font-size:clamp(20px,1.9vw,27px);text-transform:uppercase;line-height:.95;margin-top:6px}
+.tile .lab .go{display:inline-block;margin-top:10px;font-family:var(--cond);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--volt);opacity:0;transform:translateY(6px);transition:all .25s}
+.tile:hover .go{opacity:1;transform:none}
+.tile.flat{background:var(--volt);color:var(--black);display:flex;flex-direction:column;justify-content:space-between;padding:22px}
+.tile.flat::after{display:none}
+.tile.flat .no{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:.14em;color:rgba(0,0,0,.55)}
+.tile.flat h3{font-family:var(--cond);font-weight:700;font-size:clamp(22px,2vw,30px);text-transform:uppercase;line-height:.92;margin-top:10px}
+.tile.flat p{font-size:12px;line-height:1.6;color:rgba(0,0,0,.72);margin-top:12px}
+.tile.flat .go{display:inline-block;margin-top:16px;font-family:var(--cond);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;border-bottom:2px solid var(--black);align-self:flex-start}
+
+/* studio finder */
+.studios{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:50px}
+.studio{text-align:left;border:1px solid var(--hair);padding:24px;transition:border-color .2s,background .2s}
+.studio:hover{border-color:rgba(215,255,0,.6)}
+.studio[aria-pressed="true"]{background:var(--volt);border-color:var(--volt);color:var(--black)}
+.studio .sname{display:block;font-family:var(--cond);font-weight:700;font-size:23px;text-transform:uppercase}
+.studio .saddr{display:block;margin-top:8px;font-size:12px;color:var(--grey)}
+.studio[aria-pressed="true"] .saddr{color:rgba(0,0,0,.65)}
+.studio .smeta{display:block;margin-top:16px;font-family:var(--cond);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--volt);min-height:15px}
+.studio[aria-pressed="true"] .smeta{color:var(--black)}
+.studio .sopen{display:block;margin-top:4px;font-size:11px;color:var(--grey-dk)}
+
+/* live events */
+.live{margin-top:130px}
+.live-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--volt);margin-right:10px;box-shadow:0 0 12px rgba(215,255,0,.8);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.events{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:34px 28px 26px;margin:0 -28px;scrollbar-width:none}
+.events::-webkit-scrollbar{display:none}
+.event{min-width:280px;scroll-snap-align:start;border:1px solid var(--hair);padding:20px;transition:border-color .2s}
+.event:hover{border-color:var(--volt)}
+.event .date{display:inline-block;background:var(--volt);color:var(--black);font-family:var(--cond);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:6px 10px}
+.event h3{font-family:var(--cond);font-weight:700;font-size:24px;text-transform:uppercase;line-height:.95;margin:14px 0 8px}
+.event p{font-size:12px;color:var(--grey)}
+
+/* experience accordions */
+.acc{border-top:1px solid var(--hair)}
+.acc:last-child{border-bottom:1px solid var(--hair)}
+.acc-head{display:grid;grid-template-columns:56px 1fr auto;gap:18px;align-items:center;width:100%;text-align:left;padding:26px 4px}
+.acc-head .no{font-family:var(--cond);font-weight:700;color:var(--volt);font-size:13px;letter-spacing:.12em}
+.acc-head h3{font-family:var(--cond);font-weight:700;font-size:clamp(21px,2.4vw,30px);text-transform:uppercase;line-height:.95}
+.acc-head .sg{font-family:var(--cond);font-weight:700;font-size:20px;color:var(--grey);transition:transform .3s}
+.acc[data-open="true"] .sg{transform:rotate(45deg);color:var(--volt)}
+.acc-head:hover h3{color:var(--volt)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.acc-body-in{padding:0 4px 30px 78px;color:var(--grey);max-width:60ch;font-size:13.5px;line-height:1.85}
+.acc-body-in .tiny{display:block;margin-top:14px;font-family:var(--cond);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--volt)}
+
+/* booking strip */
+.book{margin-top:130px;background:var(--volt);color:var(--black);padding:96px 28px}
+.book-in{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
+.book h2{font-family:var(--cond);font-weight:700;font-size:clamp(38px,5vw,72px);text-transform:uppercase;line-height:.9}
+.book .rate{margin-top:20px;font-family:var(--cond);font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.06em}
+.book .rate b{background:var(--black);color:var(--volt);padding:4px 10px}
+.book .note{margin-top:14px;font-size:12.5px;color:rgba(0,0,0,.7);max-width:44ch}
+.b-form{display:flex;flex-direction:column;gap:10px}
+.b-field label{display:block;font-family:var(--cond);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:7px}
+.b-field select,.b-field input{
+  width:100%;border:2px solid var(--black);background:transparent;color:var(--black);
+  font:inherit;font-size:13px;padding:14px;border-radius:0;appearance:none;
+}
+.b-field select{background-image:linear-gradient(45deg,transparent 50%,var(--black) 50%),linear-gradient(135deg,var(--black) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+.b-field select:focus,.b-field input:focus{outline:none;background-color:rgba(0,0,0,.06)}
+.b-msg{font-family:var(--cond);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;min-height:16px}
+.b-msg.ok{color:var(--black)}
+.b-msg.err{color:#7a1010}
+
+/* footer */
+footer{border-top:1px solid var(--hair)}
+.foot{max-width:1360px;margin:0 auto;padding:78px 28px 24px}
+.fmark{font-family:var(--cond);font-weight:700;font-size:clamp(40px,6.6vw,96px);text-transform:uppercase;line-height:.9;letter-spacing:.06em}
+.fmark b{color:transparent;-webkit-text-stroke:1.5px var(--volt)}
+.frow{display:grid;grid-template-columns:1.3fr 2fr;gap:60px;margin-top:54px}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fcols h4{font-family:var(--cond);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--grey-dk);margin-bottom:14px}
+.fcols a,.fcols p{display:block;color:rgba(255,255,255,.8);font-size:12.5px;padding:4px 0}
+.fcols a:hover{color:var(--volt)}
+.bottom{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid var(--hair);margin-top:60px;padding:20px 0 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--grey-dk)}
+.bottom .soc{display:flex;gap:22px}
+.bottom a:hover{color:var(--volt)}
+
+/* reveal — handled by GSAP 3.15.0 + ScrollTrigger (see footer). Elements are
+   visible by default and only hidden inline once the library has loaded, so
+   content stays fully visible if the CDN fails. */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:260;pointer-events:none}
+.progress span{display:block;height:100%;width:100%;background:var(--volt);transform:scaleX(0);transform-origin:0 50%}
+
+/* responsive */
+@media (max-width:1060px){
+  .nav{padding:0 20px}
+  .sec{padding:92px 20px 0}
+  .hero-in{padding:0 20px 64px}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .studios{grid-template-columns:1fr}
+  .events{margin:34px -20px 0;padding:0 20px 20px}
+  .frow{grid-template-columns:1fr;gap:44px}
+  .book-in{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:860px){
+  .nav-links{display:none}
+  .nav-right .btn{display:none}
+  .nav{grid-template-columns:1fr auto}
+  .wordmark{justify-self:center}
+  .nav-right{display:flex}
+  .burger{display:flex}
+  .acc-body-in{padding-left:56px}
+}
+@media (max-width:560px){
+  .sec{padding:76px 16px 0}
+  .hero-in{padding:0 16px 56px}
+  .hero .cta-row .btn{width:100%}
+  .tiles{grid-template-columns:1fr}
+  .tile{aspect-ratio:4/3.4}
+  .slide{min-height:480px}
+  .car-ui{padding:14px 16px}
+  .events{margin:34px -16px 0;padding:0 16px 20px}
+  .b-form .btn{width:100%}
+  .acc-head{grid-template-columns:40px 1fr auto;gap:12px}
+  .acc-body-in{padding-left:54px;padding-right:4px}
+  .fcols{grid-template-columns:1fr 1fr}
+  .bottom{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-row{animation:none}
+  .car-track{transition:none}
+  .live-dot{animation:none}
+  .tile img{transition:none}
+  .progress{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- OFFER TICKER -->
+<div class="ticker" aria-label="Offers">
+  <div class="ticker-row" aria-hidden="true">
+    <span>First session £15<i>◆</i></span><span>No contracts, ever<i>◆</i></span><span>DJ classes every Fri night<i>◆</i></span><span>Open 05:45–23:00<i>◆</i></span><span>Under new electric management<i>◆</i></span>
+    <span>First session £15<i>◆</i></span><span>No contracts, ever<i>◆</i></span><span>DJ classes every Fri night<i>◆</i></span><span>Open 05:45–23:00<i>◆</i></span><span>Under new electric management<i>◆</i></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <nav class="nav-links left" aria-label="Primary left">
+    <a class="nl" href="#concepts">Concepts</a>
+    <a class="nl" href="#studios">Studios</a>
+  </nav>
+  <a class="wordmark" href="#top">Core <b>Culture</b></a>
+  <div class="nav-right">
+    <nav class="nav-links right" aria-label="Primary right">
+      <a class="nl" href="#live">Live</a>
+      <a class="nl" href="#experience">Experience</a>
+    </nav>
+    <a class="btn" href="#book">Book now</a>
+    <button class="burger" id="mmenuOpen" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark">Core <b>Culture</b></span>
+    <button id="mmenuClose" aria-label="Close menu" style="font-size:19px;padding:8px 10px">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#concepts">Concepts</a>
+    <a href="#studios">Studios</a>
+    <a href="#live">Live</a>
+    <a href="#experience">Experience</a>
+  </nav>
+  <a class="btn" href="#book">Book now</a>
+  <div class="foot-note">Foundry District · 05:45–23:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — electric intent. A high-voltage training studio in the Foundry District.</h1>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <img width="1080" height="590" src="../crops/w302-hero-dance.jpg" alt="" fetchpriority="high">
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="hero-in">
+    <h2 class="hero-h1" aria-hidden="true" style="margin:0">The floor<br>is the <em>afterparty.</em></h2>
+    <p class="sub">Four studios under one roof in the Foundry District. Coached to the beat, lit like a gig, programmed like it matters — because fifty minutes is fifty minutes, however loud the playlist.</p>
+    <div class="cta-row">
+      <a class="btn" href="#book">First session £15</a>
+      <a class="btn btn-ghost" href="#concepts">See the concepts</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO CAROUSEL -->
+<section class="drops" aria-label="Promotions">
+  <div class="car" id="car">
+    <div class="car-track" id="carTrack">
+      <div class="slide s-volt" role="group" aria-label="Promotion 1 of 3">
+        <div class="s-in">
+          <p class="kick">The drop — this month</p>
+          <h2>First session<br><em>£15. Flat.</em></h2>
+          <p>Any concept, any studio, any coach. One loud hour and a cold towel. No contract hiding in the small print — there is no small print.</p>
+          <a class="btn btn-black" href="#book">Claim the rate</a>
+        </div>
+      </div>
+      <div class="slide" role="group" aria-label="Promotion 2 of 3">
+        <div class="sbg" aria-hidden="true">
+          <img width="1080" height="580" src="../crops/w303-hero-dance.jpg" alt="" loading="lazy">
+        </div>
+        <div class="shade" aria-hidden="true"></div>
+        <div class="s-in">
+          <p class="kick">Fridays</p>
+          <h2>DJ sets on<br>the <em>main floor.</em></h2>
+          <p>Every Friday from 18:00, a resident DJ plays the evening concepts live. The workout is the same. Everything else is louder.</p>
+          <a class="btn" href="#live">See what's on</a>
+        </div>
+      </div>
+      <div class="slide" role="group" aria-label="Promotion 3 of 3">
+        <div class="s-in">
+          <p class="kick">Students</p>
+          <h2>Show the card,<br>keep the <em>change.</em></h2>
+          <p>Valid student card gets you every off-peak concept at half rate. Yes, including the Friday DJ ones. Especially those.</p>
+          <a class="btn btn-ghost" href="#book">Book off-peak</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="car-ui">
+    <div class="car-dots" role="group" aria-label="Choose promotion">
+      <button class="car-dot" data-i="0" aria-pressed="true" aria-label="Promotion 1"></button>
+      <button class="car-dot" data-i="1" aria-pressed="false" aria-label="Promotion 2"></button>
+      <button class="car-dot" data-i="2" aria-pressed="false" aria-label="Promotion 3"></button>
+    </div>
+    <div class="car-arrows">
+      <button id="carPrev" aria-label="Previous promotion">←</button>
+      <button id="carNext" aria-label="Next promotion">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPTS -->
+<section class="sec" id="concepts">
+  <p class="kicker rv">The concepts</p>
+  <h2 class="title rv">Pick your <em>poison.</em></h2>
+  <p class="lede rv">Six coached formats, forty-five minutes each, capped at twenty-four. Every one ends with you on the floor looking at the ceiling. That's the sign it worked.</p>
+  <div class="tiles rv">
+    <a class="tile" href="#book">
+      <img width="600" height="580" src="../crops/w302-class-dance.jpg" alt="Riders moving in formation under violet light" loading="lazy">
+      <span class="lab"><span class="no">01</span><h3>Afterhours<br>Ride</h3><span class="go">Book →</span></span>
+    </a>
+    <a class="tile" href="#book">
+      <img width="410" height="410" src="../crops/w302-class-machine.jpg" alt="A loaded strength machine under hard light" loading="lazy">
+      <span class="lab"><span class="no">02</span><h3>Iron<br>Service</h3><span class="go">Book →</span></span>
+    </a>
+    <div class="tile flat">
+      <span class="no">03</span>
+      <div><h3>40 minutes.<br>Zero coasting.</h3>
+      <p>Every concept is built on the same rule: the coach sets the pace, the room holds it, nobody hides at the back.</p>
+      <a class="go" href="#book">Why it works →</a></div>
+    </div>
+    <a class="tile" href="#book">
+      <img width="520" height="510" src="../crops/w302-class-sled.jpg" alt="Athlete gripping a heavy sled on the turf lane" loading="lazy">
+      <span class="lab"><span class="no">04</span><h3>Sled<br>League</h3><span class="go">Book →</span></span>
+    </a>
+    <a class="tile" href="#book">
+      <img width="415" height="375" src="../crops/w302-class-streak.jpg" alt="Streaks of light across the boxing studio" loading="lazy">
+      <span class="lab"><span class="no">05</span><h3>Contact<br>Boxing</h3><span class="go">Book →</span></span>
+    </a>
+    <a class="tile" href="#book">
+      <img width="560" height="560" src="../crops/w302-class-ice.jpg" alt="Recovery tub packed with fresh ice" loading="lazy">
+      <span class="lab"><span class="no">06</span><h3>Cold<br>Cool-down</h3><span class="go">Book →</span></span>
+    </a>
+    <div class="tile flat">
+      <span class="no">07</span>
+      <div><h3>Loud is<br>a setting.</h3>
+      <p>The volume, the lights, the drop — programmed per concept. If you want quiet, that's the 06:15. It still slaps.</p>
+      <a class="go" href="#book">Book 06:15 →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDIOS -->
+<section class="sec" id="studios">
+  <p class="kicker rv">Studio finder</p>
+  <h2 class="title rv">Three studios.<br><em>Zero</em> soft play.</h2>
+  <p class="lede rv">Same concepts, same coaches' standard, same volume dial. Pick a studio — the rate and the playlist travel with you.</p>
+  <div class="studios rv" role="group" aria-label="Choose a studio">
+    <button class="studio" data-st="foundry" aria-pressed="true">
+      <span class="sname">Foundry Studio</span>
+      <span class="saddr">9 Foundry Row — the original floor</span>
+      <span class="smeta" data-open="14 classes today">14 classes today</span>
+      <span class="sopen">Doors 05:45 · last class 21:15</span>
+    </button>
+    <button class="studio" data-st="wire" aria-pressed="false">
+      <span class="sname">Wire Studio</span>
+      <span class="saddr">31 Cable Street — two minutes from the depot</span>
+      <span class="smeta" data-open="11 classes today">11 classes today</span>
+      <span class="sopen">Doors 06:00 · last class 20:45</span>
+    </button>
+    <button class="studio" data-st="arcade" aria-pressed="false">
+      <span class="sname">Arcade Studio</span>
+      <span class="saddr">77 Old Arcade — under the railway arches</span>
+      <span class="smeta" data-open="9 classes today">9 classes today</span>
+      <span class="sopen">Doors 06:00 · last class 20:30</span>
+    </button>
+  </div>
+</section>
+
+<!-- LIVE EVENTS -->
+<section class="sec live" id="live">
+  <div class="live-head">
+    <div>
+      <p class="kicker rv">On the floor</p>
+      <h2 class="title rv">Live this <em>month.</em></h2>
+    </div>
+    <p class="caps" style="color:var(--grey)"><span class="live-dot" aria-hidden="true"></span>Drag the strip — it moves</p>
+  </div>
+  <div class="events rv" tabindex="0" aria-label="Upcoming events, scroll horizontally">
+    <article class="event">
+      <span class="date">Fri 09 Oct</span>
+      <h3>Afterhours Ride: final set</h3>
+      <p>Foundry Studio · 20:15 · resident DJ, lights down, ride up.</p>
+    </article>
+    <article class="event">
+      <span class="date">Sat 10 Oct</span>
+      <h3>Sled League — heats</h3>
+      <p>Wire Studio · 09:30 · sixteen lanes, one leaderboard, quarterly finals.</p>
+    </article>
+    <article class="event">
+      <span class="date">Thu 15 Oct</span>
+      <h3>Contact Boxing: inters</h3>
+      <p>Arcade Studio · 19:00 · pads, mitts and a referee with a whistle.</p>
+    </article>
+    <article class="event">
+      <span class="date">Sat 24 Oct</span>
+      <h3>The 05:45 Club</h3>
+      <p>Foundry Studio · 05:45 · dawn concept, coffee after, city before it wakes.</p>
+    </article>
+    <article class="event">
+      <span class="date">Fri 30 Oct</span>
+      <h3>Loud: the October social</h3>
+      <p>Foundry Studio · 20:00 · floors open, DJs on both, trainers optional.</p>
+    </article>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec" id="experience">
+  <p class="kicker rv">The experience</p>
+  <h2 class="title rv">What it's like<br>in <em>here.</em></h2>
+  <div class="rv" style="margin-top:46px">
+    <div class="acc" data-open="true">
+      <button class="acc-head" aria-expanded="true">
+        <span class="no">01</span>
+        <h3>Doors</h3>
+        <span class="sg" aria-hidden="true">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-in">
+          From 05:45. Lit lockers, warm towels, a desk that knows your booking. Nobody explains the fire exits like it's a flight — you came to train, not to be processed.
+          <span class="tiny">Average door-to-floor: four minutes</span>
+        </div>
+      </div>
+    </div>
+    <div class="acc">
+      <button class="acc-head" aria-expanded="false">
+        <span class="no">02</span>
+        <h3>Sound</h3>
+        <span class="sg" aria-hidden="true">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-in">
+          Resident DJs Friday and Saturday; programmed sets the rest of the week, mixed to each concept's interval sheet. The beat drops when the work does.
+          <span class="tiny">Friday sets start 18:00 — book early</span>
+        </div>
+      </div>
+    </div>
+    <div class="acc">
+      <button class="acc-head" aria-expanded="false">
+        <span class="no">03</span>
+        <h3>Sweat</h3>
+        <span class="sg" aria-hidden="true">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-in">
+          Two towels in, cold towels after. Floors cleaned between every concept, kit serviced weekly, and a floor-walker whose whole job is the stuff nobody else thinks about.
+          <span class="tiny">Towels, water and chalk included</span>
+        </div>
+      </div>
+    </div>
+    <div class="acc">
+      <button class="acc-head" aria-expanded="false">
+        <span class="no">04</span>
+        <h3>After</h3>
+        <span class="sg" aria-hidden="true">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-in">
+          Fuel bar shakes in four minutes flat, cold plunge for the brave, and member rates on everything at the counter. The night out starts here or ends here — your call.
+          <span class="tiny">Members: 20% off the bar, always</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING STRIP -->
+<section class="book" id="book">
+  <div class="book-in">
+    <div class="rv">
+      <h2>Book your<br>first <em>session.</em></h2>
+      <p class="rate"><b>£15</b> first session — any concept, any studio</p>
+      <p class="note">Pick a studio, leave an email, and the desk holds a bench with your name on it. Confirmation inside the hour.</p>
+    </div>
+    <form class="b-form rv" id="bForm" novalidate>
+      <div class="b-field">
+        <label for="bStudio">Studio</label>
+        <select id="bStudio">
+          <option value="Foundry Studio">Foundry Studio — 9 Foundry Row</option>
+          <option value="Wire Studio">Wire Studio — 31 Cable Street</option>
+          <option value="Arcade Studio">Arcade Studio — 77 Old Arcade</option>
+        </select>
+      </div>
+      <div class="b-field">
+        <label for="bEmail">Email</label>
+        <input id="bEmail" type="email" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <button class="btn btn-black" type="submit">Book it</button>
+      <p class="b-msg" id="bMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <p class="fmark">Core <b>Culture</b></p>
+    <div class="frow">
+      <div>
+        <p style="color:var(--grey);max-width:36ch;font-size:12.5px">Not a gym — a culture. Six concepts, three studios, one volume setting: up.</p>
+      </div>
+      <div class="fcols">
+        <div>
+          <h4>Concepts</h4>
+          <a href="#concepts">Afterhours Ride</a>
+          <a href="#concepts">Iron Service</a>
+          <a href="#concepts">Sled League</a>
+        </div>
+        <div>
+          <h4>Studios</h4>
+          <a href="#studios">Foundry Studio</a>
+          <a href="#studios">Wire Studio</a>
+          <a href="#studios">Arcade Studio</a>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>9 Foundry Row</p>
+          <p>Daily 05:45–23:00</p>
+          <a href="#book">desk@coreculture</a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Core Culture — not a gym. A culture.</span>
+      <span class="soc"><a href="#top">IG</a><a href="#top">YT</a><a href="#top">SP</a></span>
+      <span>Foundry District (English)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- GSAP 3.15.0 + ScrollTrigger — pinned versions; the page stays fully visible if these fail -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* mobile menu */
+  var mmenu = document.getElementById("mmenu"),
+      openBtn = document.getElementById("mmenuOpen");
+  openBtn.addEventListener("click", function(){
+    mmenu.classList.add("open");
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mmenu.querySelector("nav a").focus();
+  });
+  function closeMenu(){
+    mmenu.classList.remove("open");
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    openBtn.focus();
+  }
+  document.getElementById("mmenuClose").addEventListener("click", closeMenu);
+  [].forEach.call(mmenu.querySelectorAll("nav a, .btn"), function(a){
+    a.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && mmenu.classList.contains("open")) closeMenu();
+  });
+
+  /* promo carousel */
+  var track = document.getElementById("carTrack"),
+      slides = [].slice.call(track.children),
+      dots = [].slice.call(document.querySelectorAll(".car-dot")),
+      cur = 0, timer = null;
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function go(i){
+    cur = (i + slides.length) % slides.length;
+    track.style.transform = "translateX(-" + cur * 100 + "%)";
+    dots.forEach(function(d, di){ d.setAttribute("aria-pressed", di === cur ? "true" : "false"); });
+  }
+  function auto(){
+    if (reduced) return;
+    stop();
+    timer = setInterval(function(){ go(cur + 1); }, 5200);
+  }
+  function stop(){ if (timer){ clearInterval(timer); timer = null; } }
+  dots.forEach(function(d){
+    d.addEventListener("click", function(){ go(parseInt(d.dataset.i, 10)); auto(); });
+  });
+  document.getElementById("carPrev").addEventListener("click", function(){ go(cur - 1); auto(); });
+  document.getElementById("carNext").addEventListener("click", function(){ go(cur + 1); auto(); });
+  var car = document.getElementById("car");
+  car.addEventListener("mouseenter", stop);
+  car.addEventListener("mouseleave", auto);
+  car.addEventListener("focusin", stop);
+  car.addEventListener("focusout", auto);
+  auto();
+
+  /* studio finder */
+  var studios = [].slice.call(document.querySelectorAll(".studio"));
+  studios.forEach(function(st){
+    st.addEventListener("click", function(){
+      studios.forEach(function(s){
+        s.setAttribute("aria-pressed", s === st ? "true" : "false");
+        var m = s.querySelector(".smeta");
+        m.textContent = (s === st) ? m.dataset.open : "Tap to see today";
+        if (s !== st && !m.dataset.reset){ m.dataset.reset = "1"; }
+      });
+    });
+  });
+  /* reset unselected labels once */
+  studios.forEach(function(s){
+    if (s.getAttribute("aria-pressed") !== "true"){
+      var m = s.querySelector(".smeta");
+      m.dataset.open = m.textContent;
+      m.textContent = "Tap to see today";
+    }
+  });
+
+  /* experience accordions */
+  [].forEach.call(document.querySelectorAll(".acc"), function(acc){
+    var head = acc.querySelector(".acc-head"),
+        body = acc.querySelector(".acc-body");
+    function set(open){
+      acc.dataset.open = open ? "true" : "false";
+      head.setAttribute("aria-expanded", open ? "true" : "false");
+      body.style.maxHeight = open ? body.scrollHeight + "px" : "0px";
+    }
+    set(acc.dataset.open === "true");
+    head.addEventListener("click", function(){ set(acc.dataset.open !== "true"); });
+  });
+  window.addEventListener("resize", function(){
+    [].forEach.call(document.querySelectorAll('.acc[data-open="true"]'), function(acc){
+      var body = acc.querySelector(".acc-body");
+      body.style.maxHeight = body.scrollHeight + "px";
+    });
+  });
+
+  /* booking form */
+  document.getElementById("bForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var studio = document.getElementById("bStudio"),
+        email = document.getElementById("bEmail"),
+        msg = document.getElementById("bMsg");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+      msg.textContent = "Real email needed — the bench is held in your name.";
+      msg.className = "b-msg err";
+      return;
+    }
+    msg.textContent = "Booked — " + studio.value + ". Check your inbox for the time.";
+    msg.className = "b-msg ok";
+    this.reset();
+  });
+
+  /* scroll motion — GSAP 3.15.0 + ScrollTrigger (pinned CDN).
+     Fail-visible: elements are only hidden after the library loads.
+     Electric editorial motion: staggered concept cards, a thin signal
+     progress line, subtle ALTERNATING image parallax (hero backdrop drifts
+     up, carousel backdrop drifts down; tile images keep their CSS hover
+     zoom untouched) — no pinning anywhere. */
+  if (window.gsap && window.ScrollTrigger && !reduced){
+    gsap.registerPlugin(ScrollTrigger);
+    var compact = window.matchMedia("(max-width: 700px)").matches;
+    var dist = compact ? 12 : 24,
+        dur = compact ? 0.55 : 0.75,
+        stag = compact ? 0.06 : 0.09;
+
+    /* thin signal progress line, scrubbed to document scroll */
+    gsap.to("#progressBar", { scaleX: 1, ease: "none",
+      scrollTrigger: { start: 0, end: "max", scrub: 0.3 } });
+
+    /* section introductions */
+    [].forEach.call(["concepts", "studios", "live", "experience"], function(id){
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      gsap.from(sec.querySelectorAll(".kicker, .title, .lede"), {
+        y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+        scrollTrigger: { trigger: sec, start: "top 78%", once: true },
+        clearProps: "all"
+      });
+    });
+
+    /* concept cards, staggered as a wall */
+    var tiles = document.querySelector(".tiles");
+    if (tiles){
+      gsap.from(tiles.querySelectorAll(".tile"), {
+        y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+        scrollTrigger: { trigger: tiles, start: "top 82%", once: true },
+        clearProps: "all"
+      });
+    }
+
+    /* studio buttons, event strip (sideways), accordions, booking form */
+    gsap.from(".studios .studio", { y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".studios", start: "top 82%", once: true }, clearProps: "all" });
+    gsap.from(".events .event", { x: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".events", start: "top 85%", once: true }, clearProps: "all" });
+    gsap.from("#experience .acc", { y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: "#experience .rv", start: "top 80%", once: true }, clearProps: "all" });
+    gsap.from("#book .book-in > *", { y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: "#book", start: "top 78%", once: true }, clearProps: "all" });
+
+    /* subtle alternating image parallax — desktop only, scrubbed, no pinning.
+       Tile images are left alone: their hover zoom is CSS transform-based. */
+    if (!compact){
+      gsap.fromTo(".hero-bg img", { yPercent: -4, scale: 1.1 }, { yPercent: 4, scale: 1.1, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+      [].forEach.call(document.querySelectorAll(".slide .sbg img"), function(img){
+        gsap.fromTo(img, { yPercent: 4, scale: 1.1 }, { yPercent: -4, scale: 1.1, ease: "none",
+          scrollTrigger: { trigger: "#car", start: "top bottom", end: "bottom top", scrub: true } });
+      });
+    }
+  }
+})();
+</script>
+</body>
+</html>

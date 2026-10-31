@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Ritual Ride</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture. Candlelit rides in the Foundry District.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230e0a06'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23e89b3c' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%23ffd9a3'/%3E%3C/svg%3E">
+<style>
+:root{
+  --black:#0e0a06; --panel:#181009; --white:#fff6ea; --warm:#f3e7d3;
+  --amber:#e89b3c; --candle:#ffd9a3; --ember:#c96a1a;
+  --grey:#a4957f; --grey-dk:#6f6353;
+  --hair:rgba(255,217,163,.16);
+  --serif:Georgia,"Times New Roman",Times,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--black);color:var(--white);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.serif{font-family:var(--serif)}
+.caps{text-transform:uppercase;letter-spacing:.26em;font-size:10.5px;font-weight:600}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--amber);color:var(--black);padding:10px 18px;z-index:400;font-weight:700}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:1px solid var(--candle);outline-offset:3px}
+
+/* amber-lit treatment — candlelight from any crop */
+.warmlit{position:relative;overflow:hidden;background:var(--black)}
+.warmlit img{width:100%;height:100%;object-fit:cover;filter:grayscale(.78) sepia(.5) saturate(1.55) brightness(.72) contrast(1.12)}
+.warmlit::after{content:"";position:absolute;inset:0;background:var(--ember);mix-blend-mode:multiply;opacity:.5;pointer-events:none}
+
+/* pill + links */
+.pill{display:inline-block;border:1px solid rgba(255,217,163,.75);border-radius:999px;color:var(--white);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.22em;padding:12px 26px;transition:background .25s,color .25s,border-color .25s}
+.pill:hover{background:var(--amber);border-color:var(--amber);color:var(--black)}
+.pill.solid{background:var(--amber);border-color:var(--amber);color:var(--black)}
+.pill.solid:hover{background:var(--candle);border-color:var(--candle)}
+.tlink{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.22em;color:var(--amber);border-bottom:1px solid rgba(255,217,163,.5);padding-bottom:4px;transition:color .2s,border-color .2s}
+.tlink:hover{color:var(--candle);border-color:var(--candle)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:200;height:64px;display:flex;align-items:center;gap:26px;padding:0 28px;background:rgba(14,10,6,.9);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,217,163,.1)}
+.wordmark{font-family:var(--serif);font-size:18px;letter-spacing:.05em;white-space:nowrap}
+.wordmark span{color:var(--amber)}
+.nav-links{display:flex;gap:26px;margin-left:auto}
+.nav-links a{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,246,234,.75);transition:color .2s}
+.nav-links a:hover{color:var(--candle)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-right .pill{padding:10px 22px}
+.burger{display:none;flex-direction:column;gap:5px;padding:10px 4px}
+.burger span{display:block;width:22px;height:1px;background:var(--candle)}
+
+.mmenu{position:fixed;inset:0;z-index:300;background:var(--black);display:none;flex-direction:column;padding:20px 22px}
+.mmenu.open{display:flex}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center;height:44px;border-bottom:1px solid var(--hair);padding-bottom:10px}
+.mmenu .top button{font-size:19px;color:var(--amber);padding:8px 10px}
+.mmenu nav{display:flex;flex-direction:column;margin-top:40px}
+.mmenu nav a{font-family:var(--serif);font-size:29px;padding:17px 2px;border-bottom:1px solid var(--hair);transition:color .15s,padding-left .15s}
+.mmenu nav a i{font-style:normal;color:var(--amber);font-size:13px;vertical-align:middle;padding-right:16px;letter-spacing:.12em}
+.mmenu nav a:hover{color:var(--candle);padding-left:8px}
+.mmenu .pill{margin-top:34px;text-align:center}
+.mmenu .foot-note{margin-top:auto;color:var(--grey-dk);font-size:10.5px;text-transform:uppercase;letter-spacing:.22em}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--black)}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:grayscale(.78) sepia(.5) saturate(1.55) brightness(.66) contrast(1.12)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:var(--ember);mix-blend-mode:multiply;opacity:.5}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,6,.55) 0%,rgba(14,10,6,.1) 42%,rgba(14,10,6,.92) 100%),linear-gradient(90deg,rgba(14,10,6,.6),rgba(14,10,6,0) 55%)}
+.hero-in{position:relative;z-index:2;width:100%;max-width:1360px;margin:0 auto;padding:0 40px 110px}
+.hero .eyebrow{color:var(--candle);margin-bottom:28px}
+.hero-h1{font-family:var(--serif);font-weight:400;font-size:clamp(48px,7.8vw,118px);line-height:1.03;letter-spacing:-.01em;max-width:14ch}
+.hero-h1 em{font-style:italic;color:var(--amber)}
+.hero .sub{max-width:48ch;margin-top:30px;color:var(--warm);font-size:15px;line-height:1.9}
+.hero .cta-row{display:flex;gap:22px;align-items:center;margin-top:42px;flex-wrap:wrap}
+
+/* candle strip */
+.candle{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--amber) 30%,var(--candle) 50%,var(--amber) 70%,transparent);box-shadow:0 0 18px 2px rgba(232,155,60,.55)}
+
+/* ---------- sections ---------- */
+.sec{max-width:1360px;margin:0 auto;padding:150px 40px 0}
+.eyebrow{color:var(--grey-dk);margin-bottom:26px}
+h2.rvh{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,62px);line-height:1.08;letter-spacing:-.005em;max-width:24ch}
+h2.rvh em{font-style:italic;color:var(--amber)}
+.lede{color:var(--grey);max-width:58ch;margin-top:24px;font-size:14px;line-height:1.95}
+
+/* ritual steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:70px}
+.step{background:var(--black);padding:40px 34px}
+.step i{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--amber);display:block}
+.step h3{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.2vw,30px);margin-top:14px}
+.step p{color:var(--grey);font-size:13px;line-height:1.9;margin-top:12px}
+
+/* rides calendar */
+.days{display:flex;gap:8px;flex-wrap:wrap;margin:42px 0 30px}
+.dchip{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;padding:11px 18px;border:1px solid rgba(255,217,163,.35);color:var(--grey);transition:all .2s;border-radius:999px}
+.dchip:hover{border-color:var(--amber);color:var(--amber)}
+.dchip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--black)}
+.ride-list{border-top:1px solid var(--hair)}
+.ride{display:grid;grid-template-columns:110px 1fr auto auto;gap:28px;align-items:center;padding:22px 4px;border-bottom:1px solid var(--hair);transition:background .2s}
+.ride:hover{background:var(--panel)}
+.ride .t{font-family:var(--serif);font-size:20px;color:var(--amber);font-variant-numeric:tabular-nums}
+.ride .n{font-family:var(--serif);font-size:clamp(18px,1.8vw,24px)}
+.ride .n span{display:block;font-family:var(--sans);font-size:11px;color:var(--grey-dk);margin-top:3px;letter-spacing:.08em;text-transform:uppercase}
+.ride .tag{font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--grey-dk);border:1px solid var(--hair);padding:6px 11px;border-radius:999px;white-space:nowrap}
+.ride-empty{padding:30px 4px;color:var(--grey-dk);font-size:12px;text-transform:uppercase;letter-spacing:.18em;display:none}
+
+/* studios */
+.studio-chips{display:flex;gap:12px;flex-wrap:wrap;margin:42px 0 44px}
+.schip{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.22em;padding:12px 24px;border:1px solid rgba(255,217,163,.4);border-radius:999px;color:rgba(255,246,234,.85);transition:background .2s,color .2s,border-color .2s}
+.schip:hover{border-color:var(--amber);color:var(--amber)}
+.schip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--black)}
+.studio-panel{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:70px;align-items:center}
+.studio-panel .ph{aspect-ratio:4/2.9;overflow:hidden}
+.studio-panel .ph img{transition:opacity .25s}
+.studio-panel h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,44px)}
+.studio-panel .addr{margin-top:12px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.24em;color:var(--grey-dk)}
+.studio-panel p{color:var(--grey);margin:22px 0 24px;max-width:46ch;font-size:14px;line-height:1.9}
+.studio-panel .hours{display:flex;gap:12px;align-items:center;margin-bottom:28px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.18em;color:var(--amber)}
+.studio-panel .hours::before{content:"";width:26px;height:1px;background:var(--amber)}
+.house-fade{transition:opacity .22s ease}
+.fading .house-fade{opacity:0}
+
+/* coaches */
+.coach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
+.coach-card{text-align:left;background:var(--panel);border:1px solid var(--hair);overflow:hidden;transition:border-color .2s,transform .2s}
+.coach-card:hover{border-color:var(--amber);transform:translateY(-3px)}
+.coach-card[aria-pressed="true"]{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.coach-card .ph{aspect-ratio:4/3.2;overflow:hidden}
+.coach-card img{width:100%;height:100%;object-fit:cover;filter:grayscale(.6) sepia(.35) saturate(1.35) brightness(.85);transition:transform .5s cubic-bezier(.2,.6,.2,1)}
+.coach-card:hover img{transform:scale(1.04)}
+.coach-card .body{padding:20px 20px 24px}
+.coach-card h3{font-family:var(--serif);font-weight:400;font-size:22px}
+.coach-card .role{display:block;margin-top:8px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--amber)}
+.coach-card .sig{display:block;margin-top:10px;font-size:12px;color:var(--grey)}
+.coach-feature{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:60px;margin-top:64px;align-items:center;border:1px solid var(--hair);padding:44px;background:var(--panel)}
+.coach-feature .ph{aspect-ratio:4/4.4;overflow:hidden}
+.coach-feature img{width:100%;height:100%;object-fit:cover;filter:grayscale(.6) sepia(.35) saturate(1.35) brightness(.85);transition:opacity .25s}
+.coach-feature blockquote{font-family:var(--serif);font-size:clamp(21px,2.4vw,32px);line-height:1.35}
+.coach-feature blockquote em{font-style:italic;color:var(--amber)}
+.coach-feature .who{margin-top:20px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.22em;color:var(--grey-dk)}
+.coach-feature .meta{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 28px}
+.coach-feature .meta span{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;border:1px solid var(--hair);padding:7px 12px;color:var(--warm)}
+
+/* voices */
+.voice-band{position:relative;margin-top:150px;height:min(76vh,660px);min-height:420px;overflow:hidden}
+.voice-band img{width:100%;height:100%;object-fit:cover;filter:grayscale(.78) sepia(.5) saturate(1.5) brightness(.6)}
+.voice-band::after{content:"";position:absolute;inset:0;background:var(--ember);mix-blend-mode:multiply;opacity:.5}
+.voice-band .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,10,6,.55),rgba(14,10,6,.2) 40%,rgba(14,10,6,.5))}
+.voice-band .quote{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;z-index:2}
+.voice-band blockquote{font-family:var(--serif);font-size:clamp(26px,4.6vw,60px);line-height:1.22;max-width:24ch}
+.voice-band blockquote em{font-style:italic;color:var(--amber)}
+.voice-band .who{margin-top:28px;color:rgba(255,246,234,.7)}
+
+/* booking */
+.book-sec{max-width:1080px;margin:0 auto;padding:130px 40px 0}
+.book-head{text-align:center}
+.book-head .lede{margin:24px auto 0}
+.b-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:56px;text-align:left}
+.b-field{grid-column:span 1}
+.b-field.full{grid-column:1/-1}
+.b-field label{display:block;font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.24em;color:var(--grey-dk);margin-bottom:9px}
+.b-field input,.b-field select{width:100%;background:rgba(255,217,163,.05);border:1px solid rgba(255,217,163,.3);color:var(--white);font:inherit;font-size:13px;padding:15px 14px;border-radius:0;appearance:none}
+.b-field select{background-image:linear-gradient(45deg,transparent 50%,var(--amber) 50%),linear-gradient(135deg,var(--amber) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+.b-field input:focus,.b-field select:focus{outline:none;border-color:var(--amber)}
+.b-actions{grid-column:1/-1;display:flex;gap:18px;align-items:center;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.b-msg{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.18em;color:var(--grey);min-height:16px}
+.b-msg.ok{color:var(--amber)}
+.b-msg.err{color:#f0b8a0}
+.b-note{margin-top:26px;font-size:11.5px;color:var(--grey-dk);letter-spacing:.04em;text-align:center}
+
+/* footer */
+footer{border-top:1px solid rgba(255,217,163,.1);margin-top:120px}
+.foot{max-width:1360px;margin:0 auto;padding:80px 40px 24px}
+.fmark{font-family:var(--serif);font-size:clamp(28px,3.4vw,44px);line-height:1.15}
+.fmark span{color:var(--amber)}
+.fmark p{font-family:var(--sans);font-size:10px;font-weight:600;color:var(--grey-dk);letter-spacing:.26em;margin-top:14px;text-transform:uppercase}
+.frow{display:grid;grid-template-columns:1.3fr 2fr;gap:60px}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fcols h4{font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.26em;color:var(--grey-dk);margin-bottom:16px}
+.fcols a,.fcols p{display:block;color:rgba(255,246,234,.8);font-size:12.5px;padding:4px 0}
+.fcols a:hover{color:var(--amber)}
+.bottom{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,217,163,.1);margin-top:62px;padding:20px 0 6px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--grey-dk)}
+.bottom .soc{display:flex;gap:22px}
+.bottom a:hover{color:var(--amber)}
+
+/* reveal — ScrollReveal 4.0.0; smooth scroll — Lenis 1.3.26 (see footer).
+   Elements are visible by default and only hidden inline once ScrollReveal
+   has loaded, so content stays fully visible if either CDN fails. */
+html.lenis,html.lenis body{height:auto}
+html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* responsive */
+@media (max-width:1060px){
+  .nav{padding:0 20px}
+  .sec{padding:110px 20px 0}
+  .hero-in{padding:0 20px 96px}
+  .studio-panel{gap:40px}
+  .coach-feature{padding:32px;gap:36px}
+  .book-sec{padding:110px 20px 0}
+  .foot{padding:70px 20px 22px}
+}
+@media (max-width:860px){
+  .nav-links,.nav-right .pill{display:none}
+  .burger{display:flex}
+  .hero{min-height:92vh}
+  .steps{grid-template-columns:1fr}
+  .studio-panel{grid-template-columns:1fr}
+  .coach-grid{grid-template-columns:1fr}
+  .coach-feature{grid-template-columns:1fr}
+  .coach-feature .ph{max-width:420px}
+  .ride{grid-template-columns:80px 1fr auto;gap:14px}
+  .ride .tag{display:none}
+  .frow{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:560px){
+  .sec{padding:84px 16px 0}
+  .hero-in{padding:0 16px 76px}
+  .book-sec{padding:96px 16px 0}
+  .b-form{grid-template-columns:1fr}
+  .ride{grid-template-columns:64px 1fr;align-items:start}
+  .ride .b-form .pill,.ride .pill{margin-top:6px}
+  .fcols{grid-template-columns:1fr 1fr}
+  .bottom{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .house-fade{transition:none}
+  .coach-card img{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- NAV -->
+<header class="nav">
+  <a class="wordmark" href="#top">Core <span>Culture</span></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#ritual">The ritual</a>
+    <a href="#rides">Rides</a>
+    <a href="#studios">Studios</a>
+    <a href="#coaches">Coaches</a>
+  </nav>
+  <div class="nav-right">
+    <a class="pill solid" href="#book">Book a ride</a>
+    <button class="burger" id="mmenuOpen" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark">Core <span>Culture</span></span>
+    <button id="mmenuClose" aria-label="Close menu">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#ritual"><i>01</i>The ritual</a>
+    <a href="#rides"><i>02</i>Rides</a>
+    <a href="#studios"><i>03</i>Studios</a>
+    <a href="#coaches"><i>04</i>Coaches</a>
+  </nav>
+  <a class="pill solid" href="#book">Book a ride</a>
+  <div class="foot-note">Foundry District · Doors 05:30–22:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — Ritual Ride. Candlelit indoor cycling in the Foundry District.</h1>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <img width="1080" height="580" src="../crops/w301-hero-dance.jpg" alt="" fetchpriority="high">
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="hero-in">
+    <p class="eyebrow caps">Core Culture — Ride House — Foundry District</p>
+    <p class="hero-h1 serif" aria-hidden="true" style="margin:0">Ride the dark.<br><em>Find your light.</em></p>
+    <p class="sub">Forty-five minutes by candlelight. No screens, no scores, no numbers on the wall — just the room, the beat, and forty-eight riders moving through the dark together until the matches go out.</p>
+    <div class="cta-row">
+      <a class="pill solid" href="#book">Book a ride</a>
+      <a class="tlink" href="#ritual">Learn the ritual</a>
+    </div>
+  </div>
+</section>
+
+<hr class="candle" aria-hidden="true">
+
+<!-- RITUAL -->
+<section class="sec" id="ritual">
+  <p class="eyebrow caps rv">The ritual</p>
+  <h2 class="rvh rv">Every ride begins<br>before the <em>pedals.</em></h2>
+  <p class="lede rv">The room is the ritual. The bike is only where it happens — three steps, the same every time, in every studio, since the first ride.</p>
+  <div class="steps">
+    <div class="step rv">
+      <i>01</i>
+      <h3>Name on the board</h3>
+      <p>Your bike is chalked with your name before you arrive. No screens, no sign-in queue — the room already knows you’re coming.</p>
+    </div>
+    <div class="step rv">
+      <i>02</i>
+      <h3>Lights down low</h3>
+      <p>At the minute mark the overheads die and the candles take over. Phones go in the basket by the door. The day stays outside.</p>
+    </div>
+    <div class="step rv">
+      <i>03</i>
+      <h3>First pull of the match</h3>
+      <p>The coach strikes the match, the front row catches it, and the ride starts in near-dark — together, from the first beat.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RIDES CALENDAR -->
+<section class="sec" id="rides">
+  <p class="eyebrow caps rv">The calendar</p>
+  <h2 class="rvh rv">This week’s <em>rides.</em></h2>
+  <p class="lede rv">Sixteen bikes a class, candles included. Members book seven days out; everyone else, the Sunday before.</p>
+  <div class="days rv" role="group" aria-label="Choose a day">
+    <button class="dchip" data-day="Mon" aria-pressed="true">Mon</button>
+    <button class="dchip" data-day="Tue" aria-pressed="false">Tue</button>
+    <button class="dchip" data-day="Wed" aria-pressed="false">Wed</button>
+    <button class="dchip" data-day="Thu" aria-pressed="false">Thu</button>
+    <button class="dchip" data-day="Fri" aria-pressed="false">Fri</button>
+    <button class="dchip" data-day="Sat" aria-pressed="false">Sat</button>
+    <button class="dchip" data-day="Sun" aria-pressed="false">Sun</button>
+  </div>
+  <div class="ride-list rv" id="rideList" aria-live="polite"></div>
+  <p class="ride-empty" id="rideEmpty">Rest day — the candles cool, the room breathes.</p>
+</section>
+
+<!-- STUDIOS -->
+<section class="sec" id="studios">
+  <p class="eyebrow caps rv">The studios</p>
+  <h2 class="rvh rv">Three rooms.<br>One <em>ritual.</em></h2>
+  <p class="lede rv">The candle count is the same in every room. Pick the one that fits the commute — your rides travel across all three.</p>
+  <div class="studio-chips rv" role="group" aria-label="Choose a studio">
+    <button class="schip" data-st="foundry" aria-pressed="true" aria-controls="studioPanel">Foundry Loft</button>
+    <button class="schip" data-st="canal" aria-pressed="false" aria-controls="studioPanel">Canal Loft</button>
+    <button class="schip" data-st="yard" aria-pressed="false" aria-controls="studioPanel">Yard Loft</button>
+  </div>
+  <div class="studio-panel rv" id="studioPanel" aria-live="polite">
+    <div class="ph warmlit house-fade">
+      <img id="stImg" width="600" height="580" src="../crops/w304-half-studio.jpg" alt="Foundry Loft — the ride room under candlelight" loading="lazy">
+    </div>
+    <div class="house-fade">
+      <h3 id="stName">Foundry Loft</h3>
+      <p class="addr" id="stAddr">9 Foundry Row — the first room</p>
+      <p id="stDesc">Sixteen bikes in three tiered rows, a wall of candles, and the best sound in the district. The room every other room is measured against.</p>
+      <p class="hours" id="stHours">Daily 05:30 – 22:00</p>
+      <a class="tlink" href="#book">Ride at this studio</a>
+    </div>
+  </div>
+</section>
+
+<!-- COACHES -->
+<section class="sec" id="coaches">
+  <p class="eyebrow caps rv">At the front</p>
+  <h2 class="rvh rv">Ridden <em>with.</em> Never <em>at.</em></h2>
+  <p class="lede rv">Choose a coach — each one calls the room differently, and the ride follows.</p>
+  <div class="coach-grid rv">
+    <button class="coach-card" data-coach="maren" aria-pressed="true">
+      <div class="ph warmlit"><img width="600" height="580" src="../crops/w302-class-dance.jpg" alt="Maren Voss riding at the front of the room" loading="lazy"></div>
+      <div class="body">
+        <h3>Maren Voss</h3>
+        <span class="role">Head coach — the dawn rides</span>
+        <span class="sig">Signature: First Light · quiet calls, heavy climbs</span>
+      </div>
+    </button>
+    <button class="coach-card" data-coach="theo" aria-pressed="false">
+      <div class="ph warmlit"><img width="460" height="580" src="../crops/w305-cat-movement.jpg" alt="Theo Adeyemi out of the saddle mid-ride" loading="lazy"></div>
+      <div class="body">
+        <h3>Theo Adeyemi</h3>
+        <span class="role">Coach — the loud nights</span>
+        <span class="sig">Signature: The Release · sprints and singalongs</span>
+      </div>
+    </button>
+    <button class="coach-card" data-coach="sadie" aria-pressed="false">
+      <div class="ph warmlit"><img width="600" height="580" src="../crops/w303-class-dance.jpg" alt="Sadie Lin leading a candlelit climb" loading="lazy"></div>
+      <div class="body">
+        <h3>Sadie Lin</h3>
+        <span class="role">Coach — climbs and breath</span>
+        <span class="sig">Signature: Climb &amp; Repeat · slow burns, long hills</span>
+      </div>
+    </button>
+  </div>
+
+  <div class="coach-feature rv" aria-live="polite">
+    <div class="ph warmlit house-fade">
+      <img id="cfImg" width="600" height="580" src="../crops/w302-class-dance.jpg" alt="Maren Voss riding at the front of the room" loading="lazy">
+    </div>
+    <div class="house-fade">
+      <blockquote id="cfQuote">“I don’t count your revolutions. I watch the room catch the <em>beat</em> — and I hold it there.”</blockquote>
+      <p class="who" id="cfWho">— Maren Voss, at the front since the first ride</p>
+      <div class="meta">
+        <span id="cfRide">Signature: First Light</span>
+        <span id="cfYears">Riding since 2021</span>
+      </div>
+      <button class="pill solid" id="cfBook">Ride with Maren</button>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="voice-band" aria-label="Rider voices">
+  <img width="1080" height="580" src="../crops/w303-hero-dance.jpg" alt="The room mid-ride under candlelight" loading="lazy">
+  <div class="shade" aria-hidden="true"></div>
+  <div class="quote">
+    <blockquote class="rv">You arrive with the day on your shoulders. You leave it in the <em>dark,</em> on a bike that isn’t yours.</blockquote>
+    <p class="who caps rv">— The six a.m. riders, on the Foundry Loft</p>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="book-sec" id="book">
+  <div class="book-head">
+    <p class="eyebrow caps rv">Book a ride</p>
+    <h2 class="rvh rv">Take a <em>bike.</em></h2>
+    <p class="lede rv" style="margin-left:auto;margin-right:auto">First ride is on the house — candle included. Leave your details and the desk chalks your name on the board.</p>
+  </div>
+  <form class="b-form rv" id="bForm" novalidate>
+    <div class="b-field">
+      <label for="bName">Name</label>
+      <input id="bName" type="text" autocomplete="name" placeholder="Your name">
+    </div>
+    <div class="b-field">
+      <label for="bEmail">Email</label>
+      <input id="bEmail" type="email" autocomplete="email" placeholder="you@example.com">
+    </div>
+    <div class="b-field">
+      <label for="bRide">Ride</label>
+      <select id="bRide">
+        <option value="First Light">First Light — the dawn ride</option>
+        <option value="Candlelit 45">Candlelit 45 — the classic</option>
+        <option value="Climb &amp; Repeat">Climb &amp; Repeat — slow burns</option>
+        <option value="The Release">The Release — the loud one</option>
+      </select>
+    </div>
+    <div class="b-field">
+      <label for="bStudio">Studio</label>
+      <select id="bStudio">
+        <option value="Foundry Loft">Foundry Loft — 9 Foundry Row</option>
+        <option value="Canal Loft">Canal Loft — 2 Towpath Walk</option>
+        <option value="Yard Loft">Yard Loft — 14 North Yard</option>
+      </select>
+    </div>
+    <div class="b-field full">
+      <label for="bCoach">Coach</label>
+      <select id="bCoach">
+        <option value="Maren Voss">Maren Voss — First Light</option>
+        <option value="Theo Adeyemi">Theo Adeyemi — The Release</option>
+        <option value="Sadie Lin">Sadie Lin — Climb &amp; Repeat</option>
+      </select>
+    </div>
+    <div class="b-actions">
+      <button class="pill solid" type="submit">Chalk my name</button>
+      <p class="b-msg" id="bMsg" role="status"></p>
+    </div>
+  </form>
+  <p class="b-note rv">First ride free · shoes and towels included · cancel any class, keep the ritual.</p>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div class="frow">
+      <div class="fmark">
+        Core <span>Culture</span>
+        <p>Not a gym — a culture</p>
+      </div>
+      <div class="fcols">
+        <div>
+          <h4>The rooms</h4>
+          <a href="#studios">Foundry Loft</a>
+          <a href="#studios">Canal Loft</a>
+          <a href="#studios">Yard Loft</a>
+        </div>
+        <div>
+          <h4>Rides</h4>
+          <a href="#rides">Candlelit 45</a>
+          <a href="#rides">First Light</a>
+          <a href="#rides">The Release</a>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>9 Foundry Row</p>
+          <p>Daily 05:30–22:00</p>
+          <a href="#book">rides@coreculture</a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Core Culture — not a gym. A culture.</span>
+      <span class="soc"><a href="#top">IG</a><a href="#top">YT</a><a href="#top">SP</a></span>
+      <span>Foundry District (English)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Lenis 1.3.26 + ScrollReveal 4.0.0 — pinned versions; the page stays fully visible if these fail -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* mobile menu */
+  var mmenu = document.getElementById("mmenu"),
+      openBtn = document.getElementById("mmenuOpen");
+  openBtn.addEventListener("click", function(){
+    mmenu.classList.add("open");
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mmenu.querySelector("nav a").focus();
+  });
+  function closeMenu(){
+    mmenu.classList.remove("open");
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    openBtn.focus();
+  }
+  document.getElementById("mmenuClose").addEventListener("click", closeMenu);
+  [].forEach.call(mmenu.querySelectorAll("nav a, .pill"), function(a){
+    a.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && mmenu.classList.contains("open")) closeMenu();
+  });
+
+  /* ride calendar */
+  var COACH_NAMES = { maren: "Maren Voss", theo: "Theo Adeyemi", sadie: "Sadie Lin" };
+  var WEEK = {
+    Mon: [
+      { t: "06:15", n: "First Light", c: "maren", tag: "Dawn" },
+      { t: "12:30", n: "Candlelit 45", c: "sadie", tag: "Classic" },
+      { t: "19:00", n: "The Release", c: "theo", tag: "Loud" }
+    ],
+    Tue: [
+      { t: "07:00", n: "Climb & Repeat", c: "sadie", tag: "Climb" },
+      { t: "19:30", n: "Candlelit 45", c: "maren", tag: "Classic" }
+    ],
+    Wed: [
+      { t: "06:15", n: "First Light", c: "maren", tag: "Dawn" },
+      { t: "18:30", n: "The Release", c: "theo", tag: "Loud" }
+    ],
+    Thu: [
+      { t: "07:00", n: "Climb & Repeat", c: "sadie", tag: "Climb" },
+      { t: "19:00", n: "Candlelit 45", c: "theo", tag: "Classic" }
+    ],
+    Fri: [
+      { t: "06:15", n: "First Light", c: "maren", tag: "Dawn" },
+      { t: "18:30", n: "Community Ride", c: "theo", tag: "Social" }
+    ],
+    Sat: [
+      { t: "08:30", n: "Candlelit 45", c: "sadie", tag: "Classic" },
+      { t: "10:00", n: "First Light", c: "maren", tag: "Dawn" }
+    ],
+    Sun: []
+  };
+  var dchips = [].slice.call(document.querySelectorAll(".dchip")),
+      rideList = document.getElementById("rideList"),
+      rideEmpty = document.getElementById("rideEmpty");
+  function renderDay(day){
+    var rows = WEEK[day] || [];
+    rideList.innerHTML = "";
+    rideEmpty.style.display = rows.length ? "none" : "block";
+    rows.forEach(function(r){
+      var row = document.createElement("div");
+      row.className = "ride";
+      var t = document.createElement("span"); t.className = "t"; t.textContent = r.t;
+      var n = document.createElement("span"); n.className = "n";
+      n.textContent = r.n;
+      var s = document.createElement("span"); s.textContent = "with " + COACH_NAMES[r.c];
+      n.appendChild(s);
+      var tag = document.createElement("span"); tag.className = "tag"; tag.textContent = r.tag;
+      var b = document.createElement("a"); b.className = "pill"; b.href = "#book"; b.textContent = "Book";
+      row.appendChild(t); row.appendChild(n); row.appendChild(tag); row.appendChild(b);
+      rideList.appendChild(row);
+    });
+  }
+  dchips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      dchips.forEach(function(c){ c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      renderDay(chip.dataset.day);
+    });
+  });
+  renderDay("Mon");
+
+  /* studio selector */
+  var STUDIOS = {
+    foundry: {
+      name: "Foundry Loft", addr: "9 Foundry Row — the first room",
+      desc: "Sixteen bikes in three tiered rows, a wall of candles, and the best sound in the district. The room every other room is measured against.",
+      img: "../crops/w304-half-studio.jpg", w: 600, h: 580,
+      alt: "Foundry Loft — the ride room under candlelight", hours: "Daily 05:30 – 22:00"
+    },
+    canal: {
+      name: "Canal Loft", addr: "2 Towpath Walk — ten minutes down the water",
+      desc: "Twelve bikes, taller windows, quieter calls. The early-morning room — First Light rides out onto the towpath and back before the kettle boils.",
+      img: "../crops/w306-room-field.jpg", w: 1080, h: 590,
+      alt: "Canal Loft — the quiet ride room over the water", hours: "Daily 06:00 – 21:00"
+    },
+    yard: {
+      name: "Yard Loft", addr: "14 North Yard — above the yard",
+      desc: "The newest room: fourteen bikes under the north-lights, with the deep-sump sound system. Weekend rides here fill by Wednesday.",
+      img: "../crops/w303-floor-studio.jpg", w: 600, h: 580,
+      alt: "Yard Loft — the newest ride room in the district", hours: "Daily 06:00 – 22:00"
+    }
+  };
+  var schips = [].slice.call(document.querySelectorAll(".schip")),
+      sPanel = document.getElementById("studioPanel"),
+      stImg = document.getElementById("stImg"),
+      stName = document.getElementById("stName"),
+      stAddr = document.getElementById("stAddr"),
+      stDesc = document.getElementById("stDesc"),
+      stHours = document.getElementById("stHours");
+  schips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      schips.forEach(function(c){ c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      var st = STUDIOS[chip.dataset.st];
+      sPanel.classList.add("fading");
+      setTimeout(function(){
+        stName.textContent = st.name;
+        stAddr.textContent = st.addr;
+        stDesc.textContent = st.desc;
+        stImg.src = st.img; stImg.width = st.w; stImg.height = st.h; stImg.alt = st.alt;
+        stHours.textContent = st.hours;
+        sPanel.classList.remove("fading");
+      }, 200);
+      document.getElementById("bStudio").value = st.name;
+    });
+  });
+
+  /* coach selection */
+  var COACHES = {
+    maren: {
+      name: "Maren Voss", img: "../crops/w302-class-dance.jpg", w: 600, h: 580,
+      alt: "Maren Voss riding at the front of the room",
+      quote: "“I don’t count your revolutions. I watch the room catch the <em>beat</em> — and I hold it there.”",
+      who: "— Maren Voss, at the front since the first ride",
+      ride: "Signature: First Light", years: "Riding since 2021", first: "First Light"
+    },
+    theo: {
+      name: "Theo Adeyemi", img: "../crops/w305-cat-movement.jpg", w: 460, h: 580,
+      alt: "Theo Adeyemi out of the saddle mid-ride",
+      quote: "“The dark is permission. Nobody’s watching — so give the last sprint <em>everything</em> you were saving.”",
+      who: "— Theo Adeyemi, the loud nights",
+      ride: "Signature: The Release", years: "Riding since 2022", first: "The Release"
+    },
+    sadie: {
+      name: "Sadie Lin", img: "../crops/w303-class-dance.jpg", w: 600, h: 580,
+      alt: "Sadie Lin leading a candlelit climb",
+      quote: "“A climb is just a flat you haven’t made <em>peace</em> with yet. We make peace every Thursday.”",
+      who: "— Sadie Lin, climbs and breath",
+      ride: "Signature: Climb & Repeat", years: "Riding since 2023", first: "Climb & Repeat"
+    }
+  };
+  var cbtns = [].slice.call(document.querySelectorAll(".coach-card")),
+      cfImg = document.getElementById("cfImg"),
+      cfQuote = document.getElementById("cfQuote"),
+      cfWho = document.getElementById("cfWho"),
+      cfRide = document.getElementById("cfRide"),
+      cfYears = document.getElementById("cfYears"),
+      cfBook = document.getElementById("cfBook");
+  function coachGo(key){
+    var d = COACHES[key];
+    if (!d) return;
+    cbtns.forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.coach === key ? "true" : "false"); });
+    cfImg.src = d.img; cfImg.width = d.w; cfImg.height = d.h; cfImg.alt = d.alt;
+    cfQuote.innerHTML = d.quote;
+    cfWho.textContent = d.who;
+    cfRide.textContent = d.ride;
+    cfYears.textContent = d.years;
+    cfBook.textContent = "Ride with " + d.name.split(" ")[0];
+    document.getElementById("bCoach").value = d.name;
+  }
+  cbtns.forEach(function(b){
+    b.addEventListener("click", function(){ coachGo(b.dataset.coach); });
+  });
+  cfBook.addEventListener("click", function(){
+    document.getElementById("book").scrollIntoView({ behavior: "smooth" });
+  });
+
+  /* booking form */
+  document.getElementById("bForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("bName"),
+        email = document.getElementById("bEmail"),
+        ride = document.getElementById("bRide"),
+        studio = document.getElementById("bStudio"),
+        coach = document.getElementById("bCoach"),
+        msg = document.getElementById("bMsg");
+    if (!name.value.trim()){
+      msg.textContent = "Tell us your name — the board needs it.";
+      msg.className = "b-msg err";
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+      msg.textContent = "That address doesn’t look right.";
+      msg.className = "b-msg err";
+      return;
+    }
+    msg.textContent = "Chalked — " + name.value.trim().split(" ")[0] + ", " + ride.value + " at " + studio.value + " with " + coach.value + ".";
+    msg.className = "b-msg ok";
+    this.reset();
+  });
+
+  /* ---------- calm ride motion: Lenis 1.3.26 + ScrollReveal 4.0.0 (pinned CDNs) ----------
+     Smooth scrolling is initialized only when reduced motion is not set; reveals are
+     slow 18px fade-ups. Fail-visible: content is only hidden after ScrollReveal loads. */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var compact = window.matchMedia("(max-width: 700px)").matches;
+
+  if (window.Lenis && !reduced){
+    var lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+    function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    document.addEventListener("click", function(e){
+      var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      var href = a.getAttribute("href");
+      if (href.length < 2) return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { duration: 1.25 });
+      if (history.pushState) history.pushState(null, "", href);
+    });
+  }
+
+  if (window.ScrollReveal && !reduced){
+    var base = {
+      distance: "18px",
+      duration: compact ? 680 : 950,
+      easing: "cubic-bezier(.2,.6,.2,1)",
+      viewFactor: 0.12,
+      cleanup: true
+    };
+    var sr = ScrollReveal();
+    sr.reveal(".eyebrow.rv, .rvh.rv, .lede.rv", Object.assign({}, base, { interval: compact ? 70 : 110 }));
+    sr.reveal(".step", Object.assign({}, base, { interval: compact ? 80 : 120 }));
+    sr.reveal(".days.rv, #rideList.rv", Object.assign({}, base, { interval: 100 }));
+    sr.reveal(".studio-chips.rv, #studioPanel.rv", Object.assign({}, base, { interval: 100 }));
+    sr.reveal(".coach-grid.rv, .coach-feature.rv", Object.assign({}, base, { interval: 100 }));
+    sr.reveal(".voice-band .quote .rv", Object.assign({}, base, { interval: 120 }));
+    sr.reveal("#bForm.rv, .b-note.rv", Object.assign({}, base, { interval: 100 }));
+  }
+})();
+</script>
+</body>
+</html>

@@ -12,6 +12,8 @@ const html = fs.readFileSync(path.join(site, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(site, 'css/styles.css'), 'utf8');
 const refinements = fs.readFileSync(path.join(site, 'css/refinements.css'), 'utf8');
 const app = fs.readFileSync(path.join(site, 'js/app.js'), 'utf8');
+const motionSource = fs.readFileSync(path.join(site, 'js/motion.source.js'), 'utf8');
+const packageJson = JSON.parse(fs.readFileSync(path.join(site, 'package.json'), 'utf8'));
 
 test('content identifiers are unique in every collection', () => {
   for (const key of ['rooms', 'equipment', 'batches', 'events', 'memberships']) {
@@ -92,6 +94,16 @@ test('motion preferences, form errors, and native accessible dialogs are provide
   for (const id of ['roomPanel', 'directory', 'lightbox', 'mobileMenu']) {
     assert.match(html, new RegExp('<dialog[^>]+id="' + id + '"'));
   }
+});
+
+test('Lenis and GSAP power local smooth scrolling with an accessible fallback', () => {
+  assert.ok(packageJson.dependencies.lenis);
+  assert.ok(packageJson.dependencies.gsap);
+  assert.match(motionSource, /import Lenis from "lenis"/);
+  assert.match(motionSource, /gsap\.registerPlugin\(ScrollTrigger\)/);
+  assert.match(motionSource, /lenis\.on\("scroll"/);
+  assert.match(motionSource, /reducedQuery\.matches \|\| forcedReduced/);
+  assert.match(html, /data-lenis-prevent/);
 });
 
 test('the official identity and downloadable model are local', () => {

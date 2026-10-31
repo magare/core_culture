@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — The Standard</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='21' font-family='Arial' font-size='12' fill='%23fff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --black:#0a0a0a; --pure:#000; --white:#fff; --grey:#9a9a9a; --grey-dk:#6f6f6f;
+  --hair:rgba(255,255,255,.16); --hair-soft:rgba(255,255,255,.09);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--black); color:var(--white);
+  font-size:14px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.caps{text-transform:uppercase;letter-spacing:.22em;font-size:11px;font-weight:400}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--white);color:var(--black);padding:10px 18px;z-index:400}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:1px solid var(--white);outline-offset:3px}
+
+/* ---------- offer strip ---------- */
+.offer{background:var(--white);color:var(--black);overflow:hidden;max-height:60px;transition:max-height .35s ease,opacity .3s ease}
+.offer.gone{max-height:0;opacity:0}
+.offer-in{display:flex;align-items:center;justify-content:center;gap:18px;padding:12px 48px;position:relative}
+.offer p{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;text-align:center}
+.offer p b{font-weight:600}
+.offer .claim{border-bottom:1px solid var(--black);padding-bottom:1px;white-space:nowrap;transition:opacity .2s}
+.offer .claim:hover{opacity:.55}
+.offer .dismiss{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:13px;line-height:1;padding:6px;color:var(--black)}
+.offer .dismiss:hover{opacity:.5}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:200;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  height:76px;padding:0 40px;
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .35s ease,border-color .35s ease,height .35s ease;
+}
+.nav.solid{background:rgba(6,6,6,.94);border-bottom-color:var(--hair-soft);height:64px}
+.wordmark{font-size:15px;font-weight:300;text-transform:uppercase;letter-spacing:.42em;white-space:nowrap}
+.nav-links{display:flex;gap:34px;justify-content:center}
+.nav-links a,.nav-right .join{font-size:10.5px;text-transform:uppercase;letter-spacing:.22em;color:rgba(255,255,255,.82);transition:color .2s}
+.nav-links a:hover,.nav-right .join:hover{color:var(--white)}
+.nav-right{display:flex;justify-content:flex-end;align-items:center;gap:28px}
+.join{border-bottom:1px solid rgba(255,255,255,.6);padding-bottom:3px}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px 2px}
+.burger span{display:block;width:22px;height:1px;background:var(--white)}
+
+/* mobile menu */
+.mmenu{position:fixed;inset:0;z-index:300;background:var(--pure);display:none;flex-direction:column;padding:26px 22px}
+.mmenu.open{display:flex}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center;height:40px}
+.mmenu nav{display:flex;flex-direction:column;margin-top:44px}
+.mmenu nav a{font-size:20px;font-weight:200;text-transform:uppercase;letter-spacing:.26em;padding:20px 2px;border-bottom:1px solid var(--hair-soft)}
+.mmenu .foot-note{margin-top:auto;color:var(--grey-dk);font-size:10.5px;text-transform:uppercase;letter-spacing:.22em}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;height:calc(100vh - 121px);min-height:600px;overflow:hidden;background:var(--pure);
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+}
+.hero-media{position:relative;overflow:hidden;background:var(--pure)}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:62% 22%;filter:grayscale(.62) contrast(1.06) brightness(.94)}
+.hero-media::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,var(--black) 0%,rgba(10,10,10,0) 30%),
+  linear-gradient(0deg,rgba(10,10,10,.4) 0%,rgba(10,10,10,0) 30%)}
+.hero-copy{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 56px}
+.hero-copy .eyebrow{color:rgba(255,255,255,.72);margin-bottom:30px}
+.hero-h1w{
+  font-size:clamp(38px,5.4vw,84px);font-weight:200;line-height:1.12;
+  text-transform:uppercase;letter-spacing:.13em;
+}
+.hero-h1w .dim{color:rgba(255,255,255,.55)}
+.hero-lede{color:var(--grey);font-size:13.5px;line-height:1.9;max-width:42ch;margin-top:32px}
+.cta-btn{
+  display:inline-block;margin-top:44px;background:var(--white);color:var(--black);
+  font-size:10.5px;text-transform:uppercase;letter-spacing:.24em;
+  padding:16px 30px;border:1px solid var(--white);
+  transition:background .25s,color .25s;
+}
+.cta-btn:hover{background:transparent;color:var(--white)}
+
+/* ---------- sections ---------- */
+.sec{padding:150px 40px 0;max-width:1360px;margin:0 auto}
+.label{color:var(--grey);margin-bottom:30px;display:flex;align-items:center;gap:16px}
+.label::after{content:"";height:1px;width:64px;background:var(--hair)}
+.statement{
+  font-size:clamp(26px,3.6vw,52px);font-weight:200;line-height:1.22;
+  text-transform:uppercase;letter-spacing:.1em;max-width:20ch;
+}
+.statement .dim{color:#b3b3b3}
+.lede{color:var(--grey);max-width:52ch;font-size:14px;line-height:1.9;margin-top:34px}
+
+/* disciplines */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:74px}
+.tile{position:relative;display:block;overflow:hidden;background:var(--pure);aspect-ratio:.72}
+.tile img{width:100%;height:100%;object-fit:cover;transform:scale(1.001);transition:transform 1.2s cubic-bezier(.2,.6,.2,1),opacity .5s;opacity:.92}
+.tile:hover img{transform:scale(1.045);opacity:1}
+.tile .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 45%,rgba(0,0,0,.72) 100%)}
+.tile .copy{position:absolute;left:26px;right:26px;bottom:24px}
+.tile .idx{color:rgba(255,255,255,.6);display:block;margin-bottom:10px}
+.tile h3{font-size:clamp(19px,1.9vw,27px);font-weight:200;text-transform:uppercase;letter-spacing:.2em}
+.tile .sub{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;color:rgba(255,255,255,.72)}
+.tile .arrow{transition:transform .35s;font-size:14px}
+.tile:hover .arrow{transform:translateX(6px)}
+
+/* interlude */
+.interlude{position:relative;margin-top:150px;height:min(78vh,700px);min-height:420px;overflow:hidden;background:var(--pure)}
+.interlude img{width:100%;height:100%;object-fit:cover;opacity:.85;filter:saturate(.55) contrast(1.04)}
+.interlude .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.18) 40%,rgba(0,0,0,.3))}
+.interlude .quote{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 24px;
+}
+.interlude blockquote{
+  font-size:clamp(24px,4.4vw,58px);font-weight:200;line-height:1.25;
+  text-transform:uppercase;letter-spacing:.16em;max-width:22ch;
+}
+.interlude .who{margin-top:30px;color:rgba(255,255,255,.65)}
+
+/* protocol accordion */
+.protocol{max-width:980px;margin:0 auto}
+.acc{border-top:1px solid var(--hair)}
+.acc:last-child{border-bottom:1px solid var(--hair)}
+.acc-head{display:grid;grid-template-columns:64px 1fr auto;align-items:baseline;gap:20px;width:100%;text-align:left;padding:30px 4px}
+.acc-head .no{color:var(--grey-dk);font-size:11px;letter-spacing:.22em}
+.acc-head h3{font-size:clamp(19px,2.4vw,30px);font-weight:200;text-transform:uppercase;letter-spacing:.2em}
+.acc-head .sign{color:var(--grey);font-size:16px;transition:transform .35s;transform-origin:center}
+.acc[data-open="true"] .sign{transform:rotate(45deg)}
+.acc-head:hover h3{color:rgba(255,255,255,.72)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.acc-body-in{padding:0 4px 36px 84px;color:var(--grey);max-width:62ch;line-height:1.9;font-size:13.5px}
+.acc-body-in .tiny{display:block;margin-top:14px;color:var(--grey-dk);font-size:10.5px;text-transform:uppercase;letter-spacing:.22em}
+
+/* membership */
+.membership{text-align:center;padding-top:170px;padding-bottom:170px}
+.membership .label{justify-content:center}
+.membership .label::after{display:none}
+.membership .statement{margin:0 auto}
+.membership .lede{margin:30px auto 0}
+.m-form{display:flex;gap:0;justify-content:center;margin-top:56px;flex-wrap:wrap}
+.m-form .field{position:relative;width:min(380px,100%)}
+.m-form input{
+  width:100%;background:transparent;border:1px solid var(--hair);color:var(--white);
+  font:inherit;font-size:11.5px;text-transform:uppercase;letter-spacing:.22em;
+  padding:19px 18px;border-radius:0;transition:border-color .25s;
+}
+.m-form input::placeholder{color:var(--grey-dk)}
+.m-form input:focus{outline:none;border-color:rgba(255,255,255,.65)}
+.m-form button{
+  background:var(--white);color:var(--black);font-size:11px;text-transform:uppercase;
+  letter-spacing:.26em;padding:19px 40px;border:1px solid var(--white);
+  transition:background .25s,color .25s;white-space:nowrap;
+}
+.m-form button:hover{background:transparent;color:var(--white)}
+.m-msg{margin-top:22px;font-size:10.5px;text-transform:uppercase;letter-spacing:.22em;color:var(--grey);min-height:16px}
+.m-msg.ok{color:var(--white)}
+.m-msg.err{color:#d4a17a}
+
+/* footer */
+footer{border-top:1px solid var(--hair-soft)}
+.foot{max-width:1360px;margin:0 auto;padding:90px 40px 26px}
+.foot-mark{
+  font-size:clamp(34px,6.6vw,92px);font-weight:200;line-height:1;
+  text-transform:uppercase;letter-spacing:.3em;text-indent:.3em;
+  color:rgba(255,255,255,.92);white-space:nowrap;
+}
+.fcols{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin:76px 0 90px}
+.fcols h4{font-size:10px;font-weight:400;text-transform:uppercase;letter-spacing:.26em;color:var(--grey-dk);margin-bottom:18px}
+.fcols a,.fcols p{display:block;color:rgba(255,255,255,.78);font-size:12.5px;padding:5px 0;letter-spacing:.04em}
+.fcols a:hover{color:var(--white)}
+.bottom{
+  display:flex;gap:26px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--hair-soft);padding:22px 0 8px;
+  font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:var(--grey-dk);
+}
+.bottom .soc{display:flex;gap:22px}
+.bottom a:hover{color:var(--white)}
+
+/* reveal — handled by ScrollReveal 4.0.0 (see footer). Elements are visible
+   by default and only hidden inline once the library has loaded, so content
+   stays fully visible if the script fails. */
+
+/* responsive */
+@media (max-width:1060px){
+  .nav{padding:0 24px}
+  .sec{padding:110px 24px 0}
+  .foot{padding:70px 24px 22px}
+  .hero-copy{padding:0 26px}
+}
+@media (max-width:860px){
+  .nav-links{display:none}
+  .nav-right .join{display:none}
+  .burger{display:flex}
+  .nav{grid-template-columns:auto 1fr;gap:16px}
+  .nav-right{grid-column:2}
+  .tiles{grid-template-columns:1fr;gap:2px}
+  .tile{aspect-ratio:.82}
+  .fcols{grid-template-columns:1fr 1fr;gap:36px 20px}
+  .offer-in{padding:12px 40px;gap:10px}
+  .hero{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);height:calc(100svh - 110px);min-height:620px}
+  .hero-copy{padding:36px 22px 34px}
+  .hero-media::after{background:linear-gradient(180deg,var(--black) 0%,rgba(10,10,10,0) 32%)}
+  .hero-media img{object-position:50% 20%}
+}
+@media (max-width:560px){
+  .offer p{letter-spacing:.14em}
+  .offer .detail{display:none}
+  .offer-in{padding:12px 44px 12px 16px;gap:12px}
+  .offer .dismiss{right:10px}
+  .sec{padding:88px 18px 0}
+  .hero-copy{padding:26px 18px 24px}
+  .cta-btn{padding:15px 26px}
+  .acc-head{grid-template-columns:44px 1fr auto;gap:12px;padding:24px 2px}
+  .acc-body-in{padding:0 2px 30px 58px}
+  .m-form{flex-direction:column;gap:2px;align-items:stretch;max-width:420px;margin-left:auto;margin-right:auto}
+  .m-form button{padding:18px}
+  .foot-mark{white-space:normal;word-break:break-word}
+  .membership{padding-top:120px;padding-bottom:120px}
+  .bottom{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .tile img{transition:none}
+  .cta-btn{transition:none}
+  .nav,.offer{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- OFFER STRIP -->
+<div class="offer" id="offer">
+  <div class="offer-in">
+    <p><b>The October proposition</b><span class="keep"> — your first thirty days on us</span><span class="detail"> · enrol before 31 October</span></p>
+    <a class="claim caps" href="#membership">Claim</a>
+    <button class="dismiss" id="offerDismiss" aria-label="Dismiss offer">✕</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a class="wordmark" href="#top">Core Culture</a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#disciplines">Disciplines</a>
+    <a href="#standard">The Standard</a>
+    <a href="#protocol">Protocol</a>
+    <a href="#interlude">Stories</a>
+  </nav>
+  <div class="nav-right">
+    <a class="join" href="#membership">Become a member</a>
+    <button class="burger" id="mmenuOpen" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark">Core Culture</span>
+    <button id="mmenuClose" aria-label="Close menu" style="padding:8px 10px;font-size:16px">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#disciplines">Disciplines</a>
+    <a href="#standard">The Standard</a>
+    <a href="#protocol">Protocol</a>
+    <a href="#interlude">Stories</a>
+    <a href="#membership">Become a member</a>
+  </nav>
+  <div class="foot-note">Foundry District · 05:00–23:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — the standard. A premium training club.</h1>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="eyebrow caps">Core Culture — Foundry District — Est. 2026</p>
+    <p class="hero-h1w" aria-hidden="true" style="margin:0">Not a gym.<br><span class="dim">A standard.</span></p>
+    <p class="hero-lede">Strength, movement and recovery, practised as culture. This October, your first thirty days are on us — enrol before the 31st.</p>
+    <a class="cta-btn" href="#membership">Request membership</a>
+  </div>
+  <div class="hero-media">
+    <img width="380" height="1300" src="../crops/w301-sled-tall.jpg" alt="Athlete driving a training sled across a dark floor" fetchpriority="high">
+  </div>
+</section>
+
+<!-- THE STANDARD -->
+<section class="sec" id="standard">
+  <p class="label caps rv">The standard</p>
+  <h2 class="statement rv">Training, taken <span class="dim">seriously.</span></h2>
+  <p class="lede rv">Core Culture is a training club in the Foundry District. We hold the body as a daily practice — strength before spectacle, recovery as ritual, and the floor as a room you belong to rather than visit. No mirrors for posing. No noise for its own sake. One standard, kept quietly, five hours before the city wakes until long after it sleeps.</p>
+</section>
+
+<!-- DISCIPLINES -->
+<section class="sec" id="disciplines">
+  <p class="label caps rv">The disciplines</p>
+  <div class="tiles">
+    <a class="tile rv" href="#protocol">
+      <img width="390" height="1180" src="../crops/w302-hero-sled.jpg" alt="Athlete driving a sled in low light" loading="lazy" style="object-position:50% 30%">
+      <span class="shade" aria-hidden="true"></span>
+      <span class="copy">
+        <span class="idx caps">01</span>
+        <h3>Strength</h3>
+        <span class="sub"><span>The iron floor</span><span class="arrow" aria-hidden="true">→</span></span>
+      </span>
+    </a>
+    <a class="tile rv" href="#protocol">
+      <img width="390" height="1300" src="../crops/w301-dance-tall.jpg" alt="Dancer under neon light, motion caught in the dark" loading="lazy">
+      <span class="shade" aria-hidden="true"></span>
+      <span class="copy">
+        <span class="idx caps">02</span>
+        <h3>Movement</h3>
+        <span class="sub"><span>The studio</span><span class="arrow" aria-hidden="true">→</span></span>
+      </span>
+    </a>
+    <a class="tile rv" href="#protocol">
+      <img width="430" height="790" src="../crops/w301-ice-tall.jpg" alt="Ice bath filled with fresh ice, seen close" loading="lazy">
+      <span class="shade" aria-hidden="true"></span>
+      <span class="copy">
+        <span class="idx caps">03</span>
+        <h3>Recovery</h3>
+        <span class="sub"><span>The cold room</span><span class="arrow" aria-hidden="true">→</span></span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- INTERLUDE -->
+<section class="interlude" id="interlude">
+  <img width="1080" height="580" src="../crops/w301-dusk-wide.jpg" alt="The district at dusk — cars settling under first snow" loading="lazy">
+  <div class="shade" aria-hidden="true"></div>
+  <div class="quote rv">
+    <blockquote>The work is quiet.<br>The results are not.</blockquote>
+    <p class="who caps">— The membership, on training at five</p>
+  </div>
+</section>
+
+<!-- PROTOCOL -->
+<section class="sec" id="protocol">
+  <p class="label caps rv">The protocol</p>
+  <div class="protocol rv">
+    <div class="acc" data-open="true">
+      <button class="acc-head" aria-expanded="true">
+        <span class="no">01</span>
+        <h3>Assess</h3>
+        <span class="sign" aria-hidden="true">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-in">
+          Every membership begins with a seventy-minute assessment: movement screen, strength baseline, recovery markers. No judgement — a reading. The programme you receive is written from it, and from nothing else.
+          <span class="tiny">By appointment · Membership desk</span>
+        </div>
+      </div>
+    </div>
+    <div class="acc">
+      <button class="acc-head" aria-expanded="false">
+        <span class="no">02</span>
+        <h3>Train</h3>
+        <span class="sign" aria-hidden="true">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-in">
+          Progressive programming across the iron floor and the studio, coached in small numbers. Sessions are booked, not crowded. You train at the level of your ambition — the floor simply holds the standard while you meet it.
+          <span class="tiny">05:00–23:00 · Coached hours on the hour</span>
+        </div>
+      </div>
+    </div>
+    <div class="acc">
+      <button class="acc-head" aria-expanded="false">
+        <span class="no">03</span>
+        <h3>Recover</h3>
+        <span class="sign" aria-hidden="true">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-in">
+          The cold room, the dark stretch, the breath room. Recovery is programmed with the same seriousness as load — three protocols, taken weekly, kept in your file beside every lift.
+          <span class="tiny">The cold room · 3° — bookings open Sunday</span>
+        </div>
+      </div>
+    </div>
+    <div class="acc">
+      <button class="acc-head" aria-expanded="false">
+        <span class="no">04</span>
+        <h3>Belong</h3>
+        <span class="sign" aria-hidden="true">+</span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-body-in">
+          Culture nights on the last Friday of the month: film, food, and field runs at dawn. The club is a culture before it is a facility — membership includes the table, not only the floor.
+          <span class="tiny">Last Fridays · The long table</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="sec membership" id="membership">
+  <p class="label caps rv">Membership</p>
+  <h2 class="statement rv" style="max-width:none">Become <span class="dim">a member</span></h2>
+  <p class="lede rv" style="margin-left:auto;margin-right:auto">Membership is limited to keep the floor quiet. Leave your address and the membership desk will reply within two days with times for your assessment.</p>
+  <form class="m-form rv" id="mForm" novalidate>
+    <div class="field">
+      <label class="vh" for="mEmail">Email address</label>
+      <input id="mEmail" type="email" placeholder="YOUR EMAIL" autocomplete="email">
+    </div>
+    <button type="submit">Request invitation</button>
+  </form>
+  <p class="m-msg" id="mMsg" role="status"></p>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <p class="foot-mark">Core Culture</p>
+    <div class="fcols">
+      <div>
+        <h4>The club</h4>
+        <a href="#disciplines">The iron floor</a>
+        <a href="#disciplines">The studio</a>
+        <a href="#disciplines">The cold room</a>
+      </div>
+      <div>
+        <h4>Programmes</h4>
+        <a href="#protocol">Strength</a>
+        <a href="#protocol">Movement</a>
+        <a href="#protocol">Recovery</a>
+      </div>
+      <div>
+        <h4>Club life</h4>
+        <a href="#interlude">Stories</a>
+        <a href="#protocol">Culture nights</a>
+        <a href="#membership">Careers</a>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <p>Foundry District</p>
+        <p>Daily 05:00–23:00</p>
+        <a href="#membership">membership@coreculture</a>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Core Culture — not a gym. A culture.</span>
+      <span class="soc"><a href="#top">IG</a><a href="#top">YT</a><a href="#top">SP</a></span>
+      <span>Foundry District (English)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ScrollReveal 4.0.0 — fixed version; the page stays fully visible if this fails to load -->
+<script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* offer strip dismiss */
+  var offer = document.getElementById("offer");
+  document.getElementById("offerDismiss").addEventListener("click", function(){
+    offer.classList.add("gone");
+    offer.addEventListener("transitionend", function(){ offer.style.display = "none"; }, { once:true });
+    setTimeout(function(){ offer.style.display = "none"; }, 500);
+  });
+
+  /* nav solidify on scroll */
+  var nav = document.getElementById("nav");
+  function navState(){
+    nav.classList.toggle("solid", window.scrollY > 24);
+  }
+  navState();
+  window.addEventListener("scroll", navState, { passive:true });
+
+  /* mobile menu */
+  var mmenu = document.getElementById("mmenu"),
+      openBtn = document.getElementById("mmenuOpen");
+  openBtn.addEventListener("click", function(){
+    mmenu.classList.add("open");
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mmenu.querySelector("nav a").focus();
+  });
+  function closeMenu(){
+    mmenu.classList.remove("open");
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    openBtn.focus();
+  }
+  document.getElementById("mmenuClose").addEventListener("click", closeMenu);
+  [].forEach.call(mmenu.querySelectorAll("nav a"), function(a){
+    a.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && mmenu.classList.contains("open")) closeMenu();
+  });
+
+  /* protocol accordion */
+  [].forEach.call(document.querySelectorAll(".acc"), function(acc){
+    var head = acc.querySelector(".acc-head"),
+        body = acc.querySelector(".acc-body");
+    function set(open){
+      acc.dataset.open = open ? "true" : "false";
+      head.setAttribute("aria-expanded", open ? "true" : "false");
+      body.style.maxHeight = open ? body.scrollHeight + "px" : "0px";
+    }
+    set(acc.dataset.open === "true");
+    head.addEventListener("click", function(){ set(acc.dataset.open !== "true"); });
+  });
+  window.addEventListener("resize", function(){
+    [].forEach.call(document.querySelectorAll('.acc[data-open="true"]'), function(acc){
+      var body = acc.querySelector(".acc-body");
+      body.style.maxHeight = body.scrollHeight + "px";
+    });
+  });
+
+  /* reveal on scroll — ScrollReveal 4.0.0, restrained luxury motion.
+     Fail-visible: elements are only hidden after the library has loaded;
+     if it is unavailable (or reduced motion is set) nothing is hidden. */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.ScrollReveal && !reduced){
+    var compact = window.matchMedia("(max-width: 700px)").matches;
+    var base = {
+      origin: "bottom",
+      distance: compact ? "12px" : "26px",
+      duration: compact ? 560 : 820,
+      easing: "cubic-bezier(.2,.6,.2,1)",
+      viewFactor: 0.12,
+      cleanup: true
+    };
+    var sr = ScrollReveal();
+    sr.reveal(".label.rv, .statement.rv, .lede.rv", base);
+    sr.reveal(".tile.rv", Object.assign({}, base, { interval: compact ? 70 : 110 }));
+    sr.reveal(".interlude .quote.rv", base);
+    sr.reveal(".protocol.rv", base);
+    sr.reveal(".m-form.rv", base);
+  }
+
+  /* membership form */
+  document.getElementById("mForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = document.getElementById("mEmail").value.trim(),
+        msg = document.getElementById("mMsg");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      msg.textContent = "That address doesn't look right.";
+      msg.className = "m-msg err";
+      return;
+    }
+    msg.textContent = "Received. The membership desk replies within two days.";
+    msg.className = "m-msg ok";
+    this.reset();
+  });
+})();
+</script>
+</body>
+</html>

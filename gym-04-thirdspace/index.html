@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — City in Motion</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0c0e'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='17' fill='%23dfeaf2' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --black:#0a0c0e; --panel:#101316; --panel-2:#0e1114; --white:#fff;
+  --cool:#dfeaf2; --cool-dim:rgba(223,234,242,.6);
+  --grey:#a2abaf; --grey-dk:#6d767b;
+  --hair:rgba(223,234,242,.14);
+  --serif:Georgia,"Times New Roman",Times,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--black);color:var(--white);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.serif{font-family:var(--serif)}
+.caps{text-transform:uppercase;letter-spacing:.26em;font-size:10.5px;font-weight:600}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--cool);color:var(--black);padding:10px 18px;z-index:400}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:1px solid var(--cool);outline-offset:3px}
+
+/* glowing light bar */
+.lightbar{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--cool) 30%,var(--cool) 70%,transparent);box-shadow:0 0 16px 1px rgba(205,228,244,.5)}
+.lightbar.dim{background:linear-gradient(90deg,transparent,rgba(223,234,242,.45) 30%,rgba(223,234,242,.45) 70%,transparent);box-shadow:0 0 10px 1px rgba(205,228,244,.28)}
+
+/* pill + links */
+.pill{
+  display:inline-block;border:1px solid rgba(223,234,242,.75);border-radius:999px;
+  color:var(--white);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.22em;
+  padding:12px 26px;transition:background .25s,color .25s,border-color .25s;
+}
+.pill:hover{background:var(--cool);border-color:var(--cool);color:var(--black)}
+.pill.solid{background:var(--cool);border-color:var(--cool);color:var(--black)}
+.pill.solid:hover{background:var(--white);border-color:var(--white)}
+.tlink{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.22em;color:var(--cool);border-bottom:1px solid rgba(223,234,242,.5);padding-bottom:4px;transition:color .2s,border-color .2s}
+.tlink:hover{color:var(--white);border-color:var(--white)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:200;height:62px;display:flex;align-items:center;gap:26px;padding:0 28px;background:rgba(10,12,14,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(223,234,242,.08)}
+.wordmark{font-family:var(--serif);font-size:17px;letter-spacing:.06em;white-space:nowrap}
+.wordmark span{color:var(--cool)}
+.nav-links{display:flex;gap:26px;margin-left:auto}
+.nav-links a{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.78);transition:color .2s}
+.nav-links a:hover{color:var(--cool)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-right .pill{padding:10px 22px}
+.burger{display:none;flex-direction:column;gap:5px;padding:10px 4px}
+.burger span{display:block;width:22px;height:1px;background:var(--cool)}
+
+.mmenu{position:fixed;inset:0;z-index:300;background:var(--black);display:none;flex-direction:column;padding:20px 22px}
+.mmenu.open{display:flex}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center;height:44px}
+.mmenu nav{display:flex;flex-direction:column;margin-top:40px}
+.mmenu nav a{font-family:var(--serif);font-size:28px;padding:16px 0;border-bottom:1px solid var(--hair)}
+.mmenu nav a:hover{color:var(--cool)}
+.mmenu .pill{margin-top:34px;text-align:center}
+.mmenu .foot-note{margin-top:auto;color:var(--grey-dk);font-size:10.5px;text-transform:uppercase;letter-spacing:.22em}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--black)}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 32%;filter:saturate(.3) brightness(.9) contrast(1.05)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(10,12,14,.5) 0%,rgba(10,12,14,.08) 45%,rgba(10,12,14,.88) 100%),
+  linear-gradient(90deg,rgba(10,12,14,.55),rgba(10,12,14,0) 55%)}
+.hero .beam{position:absolute;left:0;right:0;top:38%;height:1px;background:linear-gradient(90deg,transparent,var(--cool) 22%,var(--cool) 78%,transparent);box-shadow:0 0 22px 3px rgba(205,228,244,.55);opacity:.85}
+.hero-in{position:relative;z-index:2;width:100%;max-width:1360px;margin:0 auto;padding:0 40px 110px}
+.hero .eyebrow{color:var(--cool-dim);margin-bottom:30px}
+.hero-h1{font-family:var(--serif);font-weight:400;font-size:clamp(46px,7.4vw,110px);line-height:1.04;letter-spacing:-.01em;max-width:12ch}
+.hero-h1 em{font-style:italic;color:var(--cool)}
+.hero .sub{max-width:46ch;margin-top:30px;color:var(--grey);font-size:14.5px;line-height:1.9}
+.hero .cta-row{display:flex;gap:22px;align-items:center;margin-top:44px;flex-wrap:wrap}
+
+/* ---------- shared section chrome ---------- */
+.sec{max-width:1360px;margin:0 auto;padding:150px 40px 0}
+.eyebrow{color:var(--grey-dk);margin-bottom:26px}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4.2vw,56px);line-height:1.1;letter-spacing:-.005em;max-width:22ch}
+h2 em{font-style:italic;color:var(--cool)}
+.lede{color:var(--grey);max-width:56ch;margin-top:24px;font-size:14px;line-height:1.95}
+
+/* narrative */
+.story-cols{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:64px;align-items:start}
+.story-cols .big{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);line-height:1.5;color:rgba(255,255,255,.92)}
+.story-cols .body p{color:var(--grey);margin-bottom:20px;font-size:14px;line-height:1.95}
+.quiets{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:80px}
+.quiet{background:var(--black);padding:36px 30px}
+.quiet b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(34px,3.6vw,50px);line-height:1;color:var(--cool)}
+.quiet span{display:block;margin-top:14px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.24em;color:var(--grey)}
+
+/* houses (club discovery) */
+.house-chips{display:flex;gap:12px;flex-wrap:wrap;margin:42px 0 40px}
+.hchip{
+  font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.22em;
+  padding:12px 22px;border:1px solid rgba(223,234,242,.45);border-radius:999px;color:rgba(255,255,255,.85);
+  transition:background .2s,color .2s,border-color .2s;
+}
+.hchip:hover{border-color:var(--cool);color:var(--cool)}
+.hchip[aria-pressed="true"]{background:var(--cool);border-color:var(--cool);color:var(--black)}
+.house-panel{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:70px;align-items:center}
+.house-panel .ph{aspect-ratio:4/2.9;overflow:hidden}
+.house-panel img{width:100%;height:100%;object-fit:cover;filter:saturate(.5) brightness(.92);transition:opacity .25s}
+.house-panel h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,44px)}
+.house-panel .addr{margin-top:12px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.24em;color:var(--grey-dk)}
+.house-panel p{color:var(--grey);margin:22px 0 26px;max-width:44ch;font-size:14px;line-height:1.9}
+.house-panel .hours{display:flex;gap:12px;align-items:center;margin-bottom:30px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.18em;color:var(--cool)}
+.house-panel .hours::before{content:"";width:26px;height:1px;background:var(--cool)}
+.house-fade{transition:opacity .22s ease}
+.fading .house-fade{opacity:0}
+
+/* timetable */
+.days{display:flex;gap:8px;flex-wrap:wrap;margin:40px 0 30px}
+.dchip{
+  font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;
+  padding:11px 18px;border:1px solid rgba(223,234,242,.35);color:var(--grey);
+  transition:all .2s;
+}
+.dchip:hover{border-color:var(--cool);color:var(--cool)}
+.dchip[aria-pressed="true"]{background:var(--white);border-color:var(--white);color:var(--black)}
+.tt-list{border-top:1px solid var(--hair)}
+.tt-row{display:grid;grid-template-columns:110px 1fr auto auto;gap:30px;align-items:baseline;padding:24px 4px;border-bottom:1px solid var(--hair);transition:background .2s}
+.tt-row:hover{background:var(--panel-2)}
+.tt-row .t{font-family:var(--serif);font-size:19px;color:var(--cool);font-variant-numeric:tabular-nums}
+.tt-row .n{font-family:var(--serif);font-size:clamp(18px,1.8vw,24px)}
+.tt-row .h{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.22em;color:var(--grey-dk)}
+.tt-empty{padding:30px 4px;color:var(--grey-dk);font-size:12px;text-transform:uppercase;letter-spacing:.18em;display:none}
+
+/* wellness */
+.well-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:80px;margin-top:60px;align-items:center}
+.well-split .ph{aspect-ratio:4/4.7;overflow:hidden}
+.well-split img{width:100%;height:100%;object-fit:cover;filter:saturate(.35) brightness(.9)}
+.well-split .body p{color:var(--grey);font-size:14px;line-height:1.95;margin-bottom:20px}
+.amen{border-top:1px solid var(--hair)}
+.amen:last-of-type{border-bottom:1px solid var(--hair)}
+.amen button{display:flex;width:100%;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 4px;text-align:left;transition:color .2s}
+.amen button:hover{color:var(--cool)}
+.amen .an{font-family:var(--serif);font-size:19px}
+.amen .ad{font-size:12px;color:var(--grey-dk);max-width:38ch;text-align:right}
+.amen .ad.open{display:block;padding:0 4px 20px;text-align:left;color:var(--grey);font-size:13px;line-height:1.85}
+
+/* membership */
+.join-band{margin-top:150px;padding:130px 40px;background:linear-gradient(180deg,var(--black),var(--panel-2) 50%,var(--black));position:relative}
+.join-band::before,.join-band::after{content:"";position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cool) 30%,var(--cool) 70%,transparent);box-shadow:0 0 16px 1px rgba(205,228,244,.4)}
+.join-band::before{top:0}
+.join-band::after{bottom:0}
+.join-in{max-width:880px;margin:0 auto;text-align:center}
+.join-in .lede{margin:26px auto 0}
+.j-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:52px;text-align:left}
+.j-field label{display:block;font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.24em;color:var(--grey-dk);margin-bottom:9px}
+.j-field input,.j-field select{
+  width:100%;background:rgba(223,234,242,.05);border:1px solid rgba(223,234,242,.3);color:var(--white);
+  font:inherit;font-size:13px;padding:15px 14px;border-radius:0;appearance:none;
+}
+.j-field select{background-image:linear-gradient(45deg,transparent 50%,var(--cool) 50%),linear-gradient(135deg,var(--cool) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+.j-field input:focus,.j-field select:focus{outline:none;border-color:var(--cool)}
+.j-field.full{grid-column:1/-1}
+.j-actions{grid-column:1/-1;display:flex;gap:18px;align-items:center;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.j-msg{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.18em;color:var(--grey);min-height:16px}
+.j-msg.ok{color:var(--cool)}
+.j-msg.err{color:#f0b8b0}
+.j-note{margin-top:26px;font-size:11.5px;color:var(--grey-dk);letter-spacing:.04em}
+
+/* footer */
+footer{border-top:1px solid rgba(223,234,242,.08)}
+.foot{max-width:1360px;margin:0 auto;padding:84px 40px 24px}
+.frow{display:grid;grid-template-columns:1.3fr 2fr;gap:60px}
+.fmark{font-family:var(--serif);font-size:clamp(26px,3.2vw,40px);line-height:1.15}
+.fmark span{color:var(--cool)}
+.fmark p{font-family:var(--sans);font-size:10px;font-weight:600;color:var(--grey-dk);letter-spacing:.26em;margin-top:16px;text-transform:uppercase}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fcols h4{font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.26em;color:var(--grey-dk);margin-bottom:16px}
+.fcols a,.fcols p{display:block;color:rgba(255,255,255,.78);font-size:12.5px;padding:4px 0}
+.fcols a:hover{color:var(--cool)}
+.bottom{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid rgba(223,234,242,.08);margin-top:64px;padding:20px 0 6px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--grey-dk)}
+.bottom .soc{display:flex;gap:22px}
+.bottom a:hover{color:var(--cool)}
+
+/* reveal — ScrollReveal 4.0.0; smooth scroll — Lenis 1.3.26 (see footer).
+   Elements are visible by default and only hidden inline once ScrollReveal
+   has loaded, so content stays fully visible if either CDN fails. */
+html.lenis,html.lenis body{height:auto}
+html.lenis,.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+
+/* responsive */
+@media (max-width:1060px){
+  .nav{padding:0 20px}
+  .sec{padding:110px 20px 0}
+  .hero-in{padding:0 20px 96px}
+  .story-cols{gap:44px}
+  .house-panel{gap:40px}
+  .well-split{gap:44px}
+  .foot{padding:70px 20px 22px}
+}
+@media (max-width:860px){
+  .nav-links,.nav-right .pill{display:none}
+  .burger{display:flex}
+  .hero{min-height:92vh}
+  .story-cols{grid-template-columns:1fr;gap:36px}
+  .house-panel{grid-template-columns:1fr}
+  .well-split{grid-template-columns:1fr}
+  .well-split .ph{aspect-ratio:4/3.4}
+  .quiet{padding:28px 22px}
+  .tt-row{grid-template-columns:80px 1fr auto;gap:16px}
+  .tt-row .h{display:none}
+  .join-band{padding:96px 20px;margin-top:120px}
+  .j-form{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:560px){
+  .sec{padding:84px 16px 0}
+  .hero-in{padding:0 16px 76px}
+  .hero .cta-row{gap:16px}
+  .quiet{grid-column:1/-1}
+  .quiets{grid-template-columns:1fr}
+  .tt-row{grid-template-columns:64px 1fr;align-items:start}
+  .tt-row .b{grid-column:2}
+  .fcols{grid-template-columns:1fr 1fr}
+  .bottom{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .house-fade{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- NAV -->
+<header class="nav">
+  <a class="wordmark" href="#top">Core <span>Culture</span></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#houses">Houses</a>
+    <a href="#timetable">Timetable</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#story">The house</a>
+  </nav>
+  <div class="nav-right">
+    <a class="pill" href="#join">Join us</a>
+    <button class="burger" id="mmenuOpen" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark">Core <span>Culture</span></span>
+    <button id="mmenuClose" aria-label="Close menu" style="font-size:19px;padding:8px 10px">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#houses">Houses</a>
+    <a href="#timetable">Timetable</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#story">The house</a>
+  </nav>
+  <a class="pill solid" href="#join">Join us</a>
+  <div class="foot-note">Foundry District · 05:00–23:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — the city in motion. A house of training, recovery and ritual.</h1>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <img width="1080" height="580" src="../crops/w308-hero-dance.jpg" alt="" fetchpriority="high">
+  </div>
+  <div class="beam" aria-hidden="true"></div>
+  <div class="hero-in">
+    <p class="eyebrow caps">Core Culture — Foundry District — Est. 2026</p>
+    <p class="hero-h1 serif" aria-hidden="true" style="margin:0">The city moves.<br><em>Move with it.</em></p>
+    <p class="sub">A house of training, recovery and ritual in the Foundry District. Iron and lanes downstairs, stillness and steam above — everything the week asks of you, under one quiet roof.</p>
+    <div class="cta-row">
+      <a class="pill solid" href="#join">Join us</a>
+      <a class="tlink" href="#houses">Explore the houses</a>
+    </div>
+  </div>
+</section>
+
+<!-- NARRATIVE (quiet black) -->
+<section class="sec" id="story">
+  <p class="eyebrow caps rv">The house</p>
+  <h2 class="rv">Not a gym.<br>A house of <em>practice.</em></h2>
+  <hr class="lightbar rv" style="margin-top:46px">
+  <div class="story-cols">
+    <p class="big rv">The culture is the point. The equipment is only where it happens — a floor of iron, a lane of turf, a cold room at three degrees, and time enough to use all of it properly.</p>
+    <div class="body rv">
+      <p>Core Culture opened in the Foundry District with one idea: the city is already loud, so the house doesn't have to be. Coaches who learn your name before your numbers. Sessions that book out because they're small, not because they're scarce. Recovery treated as training, not as a treat.</p>
+      <p>Nothing here is billed as extreme. The practice is the opposite — the same movements, taken seriously, for years. That is the whole trick, and it is harder than it sounds.</p>
+    </div>
+  </div>
+  <div class="quiets rv">
+    <div class="quiet"><b>Three</b><span>Houses in the district</span></div>
+    <div class="quiet"><b>62</b><span>Classes a week, coached</span></div>
+    <div class="quiet"><b>05:00</b><span>First light, every day</span></div>
+  </div>
+</section>
+
+<!-- CLUB DISCOVERY -->
+<section class="sec" id="houses">
+  <p class="eyebrow caps rv">Club discovery</p>
+  <h2 class="rv">Three houses.<br>One <em>culture.</em></h2>
+  <p class="lede rv">Each house keeps the same timetable, the same coaching standard and the same quiet. Choose the one that fits the commute — membership travels across all three.</p>
+  <div class="house-chips rv" role="group" aria-label="Choose a house">
+    <button class="hchip" data-house="foundry" aria-pressed="true" aria-controls="housePanel">Foundry House</button>
+    <button class="hchip" data-house="canal" aria-pressed="false" aria-controls="housePanel">Canal House</button>
+    <button class="hchip" data-house="yard" aria-pressed="false" aria-controls="housePanel">Yard House</button>
+  </div>
+  <div class="house-panel rv" id="housePanel" aria-live="polite">
+    <div class="ph house-fade">
+      <img id="houseImg" width="600" height="580" src="../crops/w304-half-studio.jpg" alt="Foundry House — the studio floor under cool light" loading="lazy">
+    </div>
+    <div class="house-fade">
+      <h3 id="houseName">Foundry House</h3>
+      <p class="addr" id="houseAddr">9 Foundry Row — the flagship</p>
+      <p id="houseDesc">Five floors of iron, lanes and cool light. The full timetable, the cold room, the fuel bar — the house everything else is measured against.</p>
+      <p class="hours" id="houseHours">Daily 05:00–23:00</p>
+      <a class="tlink" href="#join">Join at this house</a>
+    </div>
+  </div>
+</section>
+
+<!-- TIMETABLE -->
+<section class="sec" id="timetable">
+  <p class="eyebrow caps rv">This week</p>
+  <h2 class="rv">The <em>timetable.</em></h2>
+  <p class="lede rv">Coached sessions stay small — sixteen on the floor, two on the coach's sheet. Members book seven days out; the rest, the Sunday before.</p>
+  <div class="days rv" role="group" aria-label="Choose a day">
+    <button class="dchip" data-day="Mon" aria-pressed="true">Mon</button>
+    <button class="dchip" data-day="Tue" aria-pressed="false">Tue</button>
+    <button class="dchip" data-day="Wed" aria-pressed="false">Wed</button>
+    <button class="dchip" data-day="Thu" aria-pressed="false">Thu</button>
+    <button class="dchip" data-day="Fri" aria-pressed="false">Fri</button>
+    <button class="dchip" data-day="Sat" aria-pressed="false">Sat</button>
+    <button class="dchip" data-day="Sun" aria-pressed="false">Sun</button>
+  </div>
+  <div class="tt-list rv" id="ttList" aria-live="polite"></div>
+  <p class="tt-empty" id="ttEmpty">Rest day — the houses are open, the coaching rests.</p>
+</section>
+
+<!-- WELLNESS -->
+<section class="sec" id="wellness">
+  <p class="eyebrow caps rv">Wellness &amp; amenities</p>
+  <h2 class="rv">Recovery is the<br>other <em>half.</em></h2>
+  <div class="well-split">
+    <div class="ph rv">
+      <img width="540" height="620" src="../crops/w302-disc-recover.jpg" alt="The recovery floor at Core Culture, kept in low light" loading="lazy">
+    </div>
+    <div class="body rv">
+      <p>The house treats the hour after class with the same seriousness as the hour itself. Cold, heat, food and sleep are programmed beside every lift — in your file, not as an upsell.</p>
+      <p>Everything below is included in membership. Book them like classes, because they are ones.</p>
+      <div class="amen">
+        <button aria-expanded="false" data-full="Three degrees on one side of the wall, snowfall on the other. Forty seconds each, booked like a class, taken weekly — logged in your file beside every lift.">
+          <span class="an">Cold plunge &amp; frost shower</span>
+          <span class="ad">Three degrees and snowfall — forty seconds each</span>
+        </button>
+      </div>
+      <div class="amen">
+        <button aria-expanded="false" data-full="The warm floor above the iron. Cedar heat, eucalyptus steam, and quiet rules the coaches actually enforce. Fifteen minutes before work counts double.">
+          <span class="an">Sauna &amp; steam</span>
+          <span class="ad">The warm floor above the iron — quiet rules apply</span>
+        </button>
+      </div>
+      <div class="amen">
+        <button aria-expanded="false" data-full="Coffee, protein and real food until close. Order before class at the desk, collect after — the bill sits on membership, not your morning.">
+          <span class="an">Fuel bar</span>
+          <span class="ad">Coffee, protein, real food — order before, collect after</span>
+        </button>
+      </div>
+      <div class="amen">
+        <button aria-expanded="false" data-full="Twice a term, on the house. Force plates and a body scan with a coach who reads the numbers with you, not at you.">
+          <span class="an">Body scan lab</span>
+          <span class="ad">Twice a term, on the house</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="join-band" id="join">
+  <div class="join-in">
+    <p class="eyebrow caps rv">Membership</p>
+    <h2 class="rv">Enquire, then <em>belong.</em></h2>
+    <p class="lede rv">Membership is kept at three hundred and stays there. Enquire below — the memberships desk replies within two days with a time to visit, not a sales call.</p>
+    <form class="j-form rv" id="jForm" novalidate>
+      <div class="j-field">
+        <label for="jName">Name</label>
+        <input id="jName" type="text" autocomplete="name" placeholder="Your name">
+      </div>
+      <div class="j-field">
+        <label for="jEmail">Email</label>
+        <input id="jEmail" type="email" autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="j-field full">
+        <label for="jHouse">Preferred house</label>
+        <select id="jHouse">
+          <option value="Foundry House">Foundry House — 9 Foundry Row</option>
+          <option value="Canal House">Canal House — 2 Towpath Walk</option>
+          <option value="Yard House">Yard House — 14 North Yard</option>
+        </select>
+      </div>
+      <div class="j-actions">
+        <button class="pill solid" type="submit">Send enquiry</button>
+        <p class="j-msg" id="jMsg" role="status"></p>
+      </div>
+    </form>
+    <p class="j-note rv">From £142 a month · no joining fee this month · cancel any month, keep the culture.</p>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div class="frow">
+      <div class="fmark">
+        Core <span>Culture</span>
+        <p>Not a gym — a culture</p>
+      </div>
+      <div class="fcols">
+        <div>
+          <h4>The houses</h4>
+          <a href="#houses">Foundry House</a>
+          <a href="#houses">Canal House</a>
+          <a href="#houses">Yard House</a>
+        </div>
+        <div>
+          <h4>Practice</h4>
+          <a href="#timetable">Timetable</a>
+          <a href="#wellness">Wellness</a>
+          <a href="#story">The house</a>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>9 Foundry Row</p>
+          <p>Daily 05:00–23:00</p>
+          <a href="#join">membership@coreculture</a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Core Culture — not a gym. A culture.</span>
+      <span class="soc"><a href="#top">IG</a><a href="#top">YT</a><a href="#top">SP</a></span>
+      <span>Foundry District (English)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Lenis 1.3.26 + ScrollReveal 4.0.0 — pinned versions; the page stays fully visible if these fail -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* mobile menu */
+  var mmenu = document.getElementById("mmenu"),
+      openBtn = document.getElementById("mmenuOpen");
+  openBtn.addEventListener("click", function(){
+    mmenu.classList.add("open");
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mmenu.querySelector("nav a").focus();
+  });
+  function closeMenu(){
+    mmenu.classList.remove("open");
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    openBtn.focus();
+  }
+  document.getElementById("mmenuClose").addEventListener("click", closeMenu);
+  [].forEach.call(mmenu.querySelectorAll("nav a, .pill"), function(a){
+    a.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && mmenu.classList.contains("open")) closeMenu();
+  });
+
+  /* club selector */
+  var HOUSES = {
+    foundry: {
+      name: "Foundry House",
+      addr: "9 Foundry Row — the flagship",
+      desc: "Five floors of iron, lanes and cool light. The full timetable, the cold room, the fuel bar — the house everything else is measured against.",
+      img: "../crops/w304-half-studio.jpg",
+      alt: "Foundry House — the studio floor under cool light",
+      hours: "Daily 05:00–23:00"
+    },
+    canal: {
+      name: "Canal House",
+      addr: "2 Towpath Walk — ten minutes down the water",
+      desc: "Smaller and quieter, with the best cold water in the district. Slow mornings, long stretches, and a fuel bar the size of a library desk.",
+      img: "../crops/w306-room-field.jpg",
+      alt: "Canal House — the quiet room looking onto green",
+      hours: "Daily 06:00–22:00"
+    },
+    yard: {
+      name: "Yard House",
+      addr: "14 North Yard — open air",
+      desc: "The outdoor yard. Sleds, turf and winter air under the district lights — for the months when walls feel optional.",
+      img: "../crops/w302-trend-park.jpg",
+      alt: "Yard House — the outdoor yard settling into dusk",
+      hours: "Daily 05:30–22:30"
+    }
+  };
+  var hchips = [].slice.call(document.querySelectorAll(".hchip")),
+      hpanel = document.getElementById("housePanel"),
+      hName = document.getElementById("houseName"),
+      hAddr = document.getElementById("houseAddr"),
+      hDesc = document.getElementById("houseDesc"),
+      hImg = document.getElementById("houseImg"),
+      hHours = document.getElementById("houseHours");
+  hchips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      hchips.forEach(function(c){ c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      var h = HOUSES[chip.dataset.house];
+      hpanel.classList.add("fading");
+      setTimeout(function(){
+        hName.textContent = h.name;
+        hAddr.textContent = h.addr;
+        hDesc.textContent = h.desc;
+        hImg.src = h.img;
+        hImg.alt = h.alt;
+        hHours.textContent = h.hours;
+        hpanel.classList.remove("fading");
+      }, 200);
+    });
+  });
+
+  /* timetable */
+  var WEEK = {
+    Mon: [
+      { t: "06:15", n: "First light intervals", h: "Foundry House" },
+      { t: "12:15", n: "The long rack", h: "Foundry House" },
+      { t: "18:15", n: "Turf engine", h: "Yard House" }
+    ],
+    Tue: [
+      { t: "07:00", n: "Cold open", h: "Canal House" },
+      { t: "17:30", n: "Slow static", h: "Foundry House" },
+      { t: "20:00", n: "Dark movement", h: "Foundry House" }
+    ],
+    Wed: [
+      { t: "06:15", n: "First light intervals", h: "Foundry House" },
+      { t: "16:00", n: "Open rack, coached", h: "Yard House" },
+      { t: "18:15", n: "The long rack", h: "Foundry House" }
+    ],
+    Thu: [
+      { t: "07:00", n: "Cold open", h: "Canal House" },
+      { t: "12:15", n: "Turf engine", h: "Yard House" },
+      { t: "19:30", n: "Steam & stretch", h: "Foundry House" }
+    ],
+    Fri: [
+      { t: "06:15", n: "First light intervals", h: "Foundry House" },
+      { t: "18:00", n: "Culture night — floors open", h: "Foundry House" }
+    ],
+    Sat: [
+      { t: "08:00", n: "Run club, the long way", h: "Canal House" },
+      { t: "10:00", n: "The long rack", h: "Yard House" }
+    ],
+    Sun: []
+  };
+  var dchips = [].slice.call(document.querySelectorAll(".dchip")),
+      ttList = document.getElementById("ttList"),
+      ttEmpty = document.getElementById("ttEmpty");
+  function renderDay(day){
+    var rows = WEEK[day] || [];
+    ttList.innerHTML = "";
+    ttEmpty.style.display = rows.length ? "none" : "block";
+    rows.forEach(function(r){
+      var row = document.createElement("div");
+      row.className = "tt-row";
+      var t = document.createElement("span"); t.className = "t"; t.textContent = r.t;
+      var n = document.createElement("span"); n.className = "n"; n.textContent = r.n;
+      var h = document.createElement("span"); h.className = "h"; h.textContent = r.h;
+      var b = document.createElement("a"); b.className = "tlink"; b.href = "#join"; b.textContent = "Book";
+      row.appendChild(t); row.appendChild(n); row.appendChild(h); row.appendChild(b);
+      ttList.appendChild(row);
+    });
+  }
+  dchips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      dchips.forEach(function(c){ c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      renderDay(chip.dataset.day);
+    });
+  });
+  renderDay("Mon");
+
+  /* amenities expanders */
+  [].forEach.call(document.querySelectorAll(".amen button"), function(btn){
+    btn.addEventListener("click", function(){
+      var open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", open ? "false" : "true");
+      var d = btn.querySelector(".ad");
+      d.classList.toggle("open", !open);
+      if (!open){
+        var full = btn.getAttribute("data-full");
+        d.dataset.short = d.textContent;
+        d.textContent = full;
+      } else {
+        d.textContent = d.dataset.short;
+      }
+    });
+  });
+
+  /* membership enquiry */
+  document.getElementById("jForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("jName"),
+        email = document.getElementById("jEmail"),
+        house = document.getElementById("jHouse"),
+        msg = document.getElementById("jMsg");
+    if (!name.value.trim()){
+      msg.textContent = "Tell us your name — the desk will use it.";
+      msg.className = "j-msg err";
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+      msg.textContent = "That address doesn't look right.";
+      msg.className = "j-msg err";
+      return;
+    }
+    msg.textContent = "Thank you, " + name.value.trim().split(" ")[0] + " — the desk writes to " + email.value.trim() + " about " + house.value + ".";
+    msg.className = "j-msg ok";
+    this.reset();
+  });
+
+  /* calm editorial motion — Lenis 1.3.26 + ScrollReveal 4.0.0 (pinned CDNs).
+     Smooth scrolling is initialized only when reduced motion is not set;
+     reveals use a gentle 16px fade-up. Fail-visible: content is only hidden
+     after ScrollReveal has loaded, so either CDN failing costs nothing. */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var compact = window.matchMedia("(max-width: 700px)").matches;
+
+  /* Lenis smooth scroll — restrained, native anchors preserved */
+  if (window.Lenis && !reduced){
+    var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    document.addEventListener("click", function(e){
+      var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      var href = a.getAttribute("href");
+      if (href.length < 2) return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { duration: 1.15 });
+      if (history.pushState) history.pushState(null, "", href);
+    });
+  }
+
+  /* ScrollReveal — gentle 16px fade-up, modest stagger */
+  if (window.ScrollReveal && !reduced){
+    var base = {
+      distance: "16px",
+      duration: compact ? 620 : 820,
+      easing: "cubic-bezier(.2,.6,.2,1)",
+      viewFactor: 0.12,
+      cleanup: true
+    };
+    var sr = ScrollReveal();
+    sr.reveal(".eyebrow.rv, h2.rv, .lede.rv, .lightbar.rv", Object.assign({}, base, { interval: compact ? 70 : 100 }));
+    sr.reveal("#story .big.rv, #story .body.rv", Object.assign({}, base, { interval: 90 }));
+    sr.reveal(".quiet", Object.assign({}, base, { interval: 90 }));
+    sr.reveal(".house-chips.rv, #housePanel.rv", Object.assign({}, base, { interval: 100 }));
+    sr.reveal(".days.rv, #ttList.rv", Object.assign({}, base, { interval: 100 }));
+    sr.reveal(".well-split .ph.rv, .well-split .body.rv", Object.assign({}, base, { interval: 120 }));
+    sr.reveal("#jForm.rv, .j-note.rv", Object.assign({}, base, { interval: 100 }));
+  }
+})();
+</script>
+</body>
+</html>

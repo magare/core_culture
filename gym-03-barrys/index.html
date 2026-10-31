@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Crimson Circuit</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='%23e0201c' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --black:#070707; --panel:#101010; --white:#fff; --paper:#f6f4f1; --ink:#141414;
+  --red:#e0201c; --red-dk:#a51511; --grey:#9a9a9a; --grey-dk:#6f6f6f;
+  --hair:rgba(255,255,255,.14); --hair-dk:rgba(20,20,20,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--black);color:var(--white);
+  font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.caps{text-transform:uppercase;letter-spacing:.2em;font-size:11px;font-weight:700}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--red);color:var(--white);padding:10px 18px;z-index:400;font-weight:700}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
+/* red-lit treatment */
+.redlit{position:relative;overflow:hidden;background:var(--black)}
+.redlit img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.72) contrast(1.18)}
+.redlit::after{content:"";position:absolute;inset:0;background:var(--red);mix-blend-mode:multiply}
+
+/* buttons */
+.btn{
+  display:inline-block;background:var(--white);color:var(--ink);
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;
+  padding:16px 30px;border:1px solid var(--white);
+  transition:background .2s,color .2s,border-color .2s;text-align:center;
+}
+.btn:hover{background:var(--red);border-color:var(--red);color:var(--white)}
+.btn-red{background:var(--red);border-color:var(--red);color:var(--white)}
+.btn-red:hover{background:var(--white);border-color:var(--white);color:var(--ink)}
+.btn-ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.65)}
+.btn-ghost:hover{background:transparent;border-color:var(--red);color:var(--red)}
+.on-paper .btn{border-color:var(--ink)}
+.on-paper .btn:hover{background:var(--red);border-color:var(--red);color:var(--white)}
+.tlink{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;border-bottom:1px solid var(--red);padding-bottom:4px;transition:color .2s}
+.tlink:hover{color:var(--red)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:200;height:62px;display:flex;align-items:center;gap:24px;padding:0 26px;background:var(--black);border-bottom:1px solid var(--hair)}
+.wordmark{font-size:15px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;white-space:nowrap}
+.wordmark b{color:var(--red)}
+.nav-links{display:flex;gap:24px;margin-left:12px}
+.nav-links a{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.82);padding:8px 2px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
+.nav-links a:hover{color:var(--white);border-color:var(--red)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.nav-right .btn{padding:12px 20px;font-size:10.5px}
+.burger{display:none;flex-direction:column;gap:5px;padding:10px 4px}
+.burger span{display:block;width:22px;height:2px;background:var(--white)}
+.burger span:nth-child(2){background:var(--red)}
+
+/* mobile menu */
+.mmenu{position:fixed;inset:0;z-index:300;background:var(--black);display:none;flex-direction:column;padding:20px 22px}
+.mmenu.open{display:flex}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center;height:44px}
+.mmenu nav{display:flex;flex-direction:column;margin-top:40px}
+.mmenu nav a{font-size:24px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:17px 0;border-bottom:1px solid var(--hair)}
+.mmenu nav a:hover{color:var(--red)}
+.mmenu .btn{margin-top:34px}
+.mmenu .foot-note{margin-top:auto;color:var(--grey-dk);font-size:10.5px;text-transform:uppercase;letter-spacing:.18em}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:calc(100vh - 62px);display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--black);text-align:center}
+.hero .redlit-bg{position:absolute;inset:0}
+.hero .redlit-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.6) contrast(1.2)}
+.hero .redlit-bg::after{content:"";position:absolute;inset:0;background:var(--red);mix-blend-mode:multiply}
+.hero .shade{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(7,7,7,.62) 0%,rgba(7,7,7,.18) 40%,rgba(7,7,7,.78) 100%)}
+.hero-in{position:relative;z-index:2;padding:90px 26px 80px;max-width:1100px}
+.hero .eyebrow{color:rgba(255,255,255,.85);margin-bottom:26px}
+.hero-h1{
+  font-size:clamp(38px,6.8vw,96px);font-weight:800;line-height:.98;letter-spacing:-.015em;
+  text-transform:uppercase;
+}
+.hero-h1 em{font-style:normal;color:var(--red);text-shadow:0 0 42px rgba(224,32,28,.55)}
+.hero .sub{max-width:52ch;margin:30px auto 0;color:rgba(255,255,255,.88);font-size:15px;line-height:1.8}
+.hero .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+.hero .start{margin-top:26px}
+.hero .start a{color:rgba(255,255,255,.85)}
+.hero .start a:hover{color:var(--white)}
+
+/* red light strip */
+.lstrip{display:block;width:100%;height:110px;object-fit:cover}
+
+/* ---------- sections ---------- */
+.sec{padding:120px 26px 0;max-width:1360px;margin:0 auto}
+.kicker{display:inline-block;color:var(--red);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;margin-bottom:20px;position:relative;padding-left:34px}
+.kicker::before{content:"";position:absolute;left:0;top:50%;width:22px;height:1px;background:var(--red)}
+h2{font-size:clamp(30px,4.4vw,58px);font-weight:800;line-height:1.02;letter-spacing:-.02em;text-transform:uppercase}
+h2 em{font-style:normal;color:var(--red)}
+.lede{max-width:54ch;margin-top:22px;font-size:14.5px;line-height:1.85}
+
+/* method — alternating rows (white) */
+.on-paper{background:var(--paper);color:var(--ink)}
+.method{padding:120px 26px 130px}
+.method .kicker{color:var(--red-dk)}
+.method .kicker::before{background:var(--red)}
+.method .sec-head{max-width:1360px;margin:0 auto}
+.method .lede{color:#4c4a47}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;max-width:1360px;margin:90px auto 0}
+.split:first-of-type{margin-top:80px}
+.split .ph{aspect-ratio:4/4.6;overflow:hidden}
+.split.rev .ph{order:2}
+.split .txt h3{font-size:clamp(30px,3.8vw,52px);font-weight:800;text-transform:uppercase;letter-spacing:-.015em;line-height:.98}
+.split .txt h3 small{display:block;font-size:12px;font-weight:700;letter-spacing:.24em;color:var(--red);margin-bottom:14px}
+.split .txt p{color:#4c4a47;margin:20px 0 28px;max-width:44ch;line-height:1.85;font-size:14px}
+.split .txt .tlink{color:var(--ink)}
+.split .txt .tlink:hover{color:var(--red)}
+
+/* rooms (black) */
+.room-chips{display:flex;gap:10px;flex-wrap:wrap;margin:38px 0 34px}
+.rchip{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;
+  padding:12px 18px;border:1px solid rgba(255,255,255,.5);color:var(--white);
+  transition:border-color .15s,color .15s,background .15s;
+}
+.rchip:hover{border-color:var(--red);color:var(--red)}
+.rchip[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:var(--white)}
+.room-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:60px;align-items:center;border:1px solid var(--hair);padding:44px;background:var(--panel)}
+.room-panel .ph{aspect-ratio:4/4.8;overflow:hidden}
+.room-panel img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+.room-panel h3{font-size:clamp(26px,3vw,42px);font-weight:800;text-transform:uppercase;letter-spacing:-.01em}
+.room-panel h3 em{font-style:normal;color:var(--red)}
+.room-panel p{color:var(--grey);margin:18px 0 24px;max-width:46ch;line-height:1.85;font-size:14px}
+.times{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+.times span{font-size:11px;font-weight:700;letter-spacing:.12em;border:1px solid var(--hair);padding:8px 12px;color:rgba(255,255,255,.85)}
+.room-panel.fading .room-fade{opacity:0}
+.room-fade{transition:opacity .22s ease}
+
+/* coaches (white) */
+.coach-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;margin-top:54px;align-items:start}
+.coach-grid blockquote{font-size:clamp(24px,3vw,40px);font-weight:800;line-height:1.15;letter-spacing:-.015em;text-transform:uppercase}
+.coach-grid blockquote em{font-style:normal;color:var(--red)}
+.coach-grid .who{margin-top:22px;color:var(--grey-dk);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.2em}
+.coach-grid .body p{color:#4c4a47;margin-bottom:18px;line-height:1.85;font-size:14px}
+.coach-grid .btn{margin-top:8px}
+.community{margin-top:90px}
+.community img{width:100%;height:min(62vh,540px);object-fit:cover;object-position:50% 38%;filter:saturate(.85)}
+.community .cap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--hair-dk);padding:16px 2px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:#4c4a47}
+.community .cap b{color:var(--ink)}
+
+/* amenities (black) */
+.amen-list{margin-top:54px;border-top:1px solid var(--hair)}
+.amen{display:grid;grid-template-columns:70px 1fr 2fr auto;gap:26px;align-items:baseline;padding:30px 4px;border-bottom:1px solid var(--hair);transition:background .2s}
+.amen:hover{background:var(--panel)}
+.amen .no{font-size:12px;font-weight:800;letter-spacing:.2em;color:var(--red)}
+.amen h3{font-size:clamp(19px,2vw,26px);font-weight:800;text-transform:uppercase;letter-spacing:-.005em}
+.amen p{color:var(--grey);font-size:13.5px;max-width:52ch}
+.amen .dir{color:var(--grey-dk);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;transition:color .2s;white-space:nowrap}
+.amen:hover .dir{color:var(--red)}
+
+/* booking band */
+.book{position:relative;margin-top:130px;padding:110px 26px;overflow:hidden;background:var(--black)}
+.book .redlit-bg{position:absolute;inset:0}
+.book .redlit-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.5) contrast(1.2)}
+.book .redlit-bg::after{content:"";position:absolute;inset:0;background:var(--red);mix-blend-mode:multiply}
+.book .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,7,.88),rgba(7,7,7,.72))}
+.book-in{position:relative;z-index:2;max-width:920px;margin:0 auto;text-align:center}
+.book h2 em{color:var(--red);text-shadow:0 0 40px rgba(224,32,28,.5)}
+.book .lede{margin:22px auto 0;color:rgba(255,255,255,.85);max-width:56ch}
+.b-form{display:grid;grid-template-columns:1fr 1fr 1.2fr auto;gap:10px;margin-top:46px;text-align:left}
+.b-field select,.b-field input{
+  width:100%;background:rgba(7,7,7,.85);border:1px solid rgba(255,255,255,.4);color:var(--white);
+  font:inherit;font-size:12px;padding:16px 14px;border-radius:0;appearance:none;
+}
+.b-field select{background-image:linear-gradient(45deg,transparent 50%,var(--red) 50%),linear-gradient(135deg,var(--red) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+.b-field select:focus,.b-field input:focus{outline:none;border-color:var(--red)}
+.b-field label{display:block;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--grey);margin-bottom:8px}
+.b-form .btn{padding:16px 26px;align-self:end}
+.b-msg{margin-top:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--grey);min-height:16px}
+.b-msg.ok{color:var(--white)}
+.b-msg.err{color:#ffb4ad}
+.book .fine{margin-top:14px;font-size:11px;color:var(--grey);letter-spacing:.06em}
+
+/* footer */
+footer{border-top:1px solid var(--hair)}
+.foot{max-width:1360px;margin:0 auto;padding:80px 26px 24px}
+.frow{display:grid;grid-template-columns:1.2fr 2fr;gap:60px}
+.fmark{font-size:clamp(26px,3.4vw,44px);font-weight:800;text-transform:uppercase;letter-spacing:.1em;line-height:1.1}
+.fmark b{color:var(--red)}
+.fmark p{font-size:11px;font-weight:700;color:var(--grey-dk);letter-spacing:.2em;margin-top:14px;text-transform:uppercase}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fcols h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--grey-dk);margin-bottom:14px}
+.fcols a,.fcols p{display:block;color:rgba(255,255,255,.8);font-size:12.5px;padding:4px 0}
+.fcols a:hover{color:var(--red)}
+.bottom{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid var(--hair);margin-top:64px;padding:20px 0 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--grey-dk)}
+.bottom .soc{display:flex;gap:20px}
+.bottom a:hover{color:var(--red)}
+
+/* reveal — handled by GSAP 3.15.0 + ScrollTrigger (see footer). Elements are
+   visible by default and only hidden inline once the library has loaded, so
+   content stays fully visible if the CDN fails. */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:260;pointer-events:none}
+.progress span{display:block;height:100%;width:100%;background:var(--red);transform:scaleX(0);transform-origin:0 50%}
+
+/* responsive */
+@media (max-width:1060px){
+  .nav{padding:0 20px}
+  .sec{padding:96px 20px 0}
+  .method{padding:96px 20px 104px}
+  .split{gap:44px}
+  .room-panel{padding:32px;gap:36px}
+  .book{padding:92px 20px}
+}
+@media (max-width:900px){
+  .nav-links,.nav-right .btn{display:none}
+  .burger{display:flex}
+  .split{grid-template-columns:1fr;gap:36px}
+  .split.rev .ph{order:0}
+  .split .ph{aspect-ratio:4/3.4}
+  .room-panel{grid-template-columns:1fr}
+  .room-panel .ph{aspect-ratio:4/3}
+  .coach-grid{grid-template-columns:1fr;gap:44px}
+  .amen{grid-template-columns:44px 1fr;gap:8px 18px}
+  .amen p{grid-column:2}
+  .amen .dir{display:none}
+  .b-form{grid-template-columns:1fr 1fr}
+  .frow{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:560px){
+  .sec{padding:76px 16px 0}
+  .method{padding:76px 16px 84px}
+  .hero{min-height:0}
+  .hero-in{padding:72px 16px 64px}
+  .hero .cta-row .btn{width:100%}
+  .lstrip{height:72px}
+  .room-panel{padding:22px}
+  .b-form{grid-template-columns:1fr}
+  .b-form .btn{width:100%}
+  .community img{height:52vh}
+  .bottom{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .room-panel img,.amen{transition:none}
+  .progress{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- NAV -->
+<header class="nav">
+  <a class="wordmark" href="#top">Core <b>Culture</b></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#method">The method</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#coaches">Coaches</a>
+    <a href="#amenities">Amenities</a>
+  </nav>
+  <div class="nav-right">
+    <a class="btn btn-red" href="#book">Book a class</a>
+    <button class="burger" id="mmenuOpen" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark">Core <b>Culture</b></span>
+    <button id="mmenuClose" aria-label="Close menu" style="font-size:19px;padding:8px 10px">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#method">The method</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#coaches">Coaches</a>
+    <a href="#amenities">Amenities</a>
+  </nav>
+  <a class="btn btn-red" href="#book">Book a class</a>
+  <div class="foot-note">Foundry District · 05:00–23:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — Crimson Circuit. A run-and-lift studio in the Foundry District.</h1>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="redlit-bg" aria-hidden="true">
+    <img width="1080" height="590" src="../crops/w302-hero-dance.jpg" alt="" fetchpriority="high">
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="hero-in">
+    <p class="eyebrow caps">Core Culture — Foundry District</p>
+    <p class="hero-h1" aria-hidden="true" style="margin:0">Enter the<br><em>Crimson Circuit</em>.</p>
+    <p class="sub">Fifty minutes under crimson light. Half the hour on the lane, half under the rack — cardio without treadmills, lifting without guesswork, and a coach in every corner. Lights low. Standards high.</p>
+    <div class="cta-row">
+      <a class="btn" href="#book">Book a class</a>
+      <a class="btn btn-ghost" href="#rooms">See the rooms</a>
+    </div>
+    <p class="start caps"><a class="tlink" href="#method">First visit? Start here</a></p>
+  </div>
+</section>
+
+<!-- red light strip -->
+<img class="lstrip" width="1080" height="225" src="../crops/p05-run.jpg" alt="Crimson light streaks across the Crimson Circuit wall" loading="lazy">
+
+<!-- METHOD (white) -->
+<section class="on-paper method" id="method">
+  <div class="sec-head">
+    <p class="kicker rv">The method</p>
+    <h2 class="rv">One hour.<br>Two <em>halves.</em></h2>
+    <p class="lede rv">Every Crimson Circuit class splits down the middle: half the room starts on the lane, half under the rack — then you swap. You leave having done both, which is why you only need to come back.</p>
+  </div>
+  <div class="split">
+    <div class="ph redlit rv">
+      <img width="390" height="1180" src="../crops/w302-hero-sled.jpg" alt="Athlete driving a sled down the turf lane in red light" loading="lazy">
+    </div>
+    <div class="txt rv">
+      <h3><small>Half one</small>The lane</h3>
+      <p>Twenty metres of turf, one heavy sled, and your own pace on the clock. Sprints, pushes and carries in coached intervals — the cardio half of the hour, no treadmill in sight and no lap you can quietly coast.</p>
+      <a class="tlink" href="#book">Book the lane</a>
+    </div>
+  </div>
+  <div class="split rev">
+    <div class="ph redlit rv">
+      <img width="410" height="910" src="../crops/w302-disc-weights.jpg" alt="Plates stacked on a bar in the Crimson Circuit rack" loading="lazy">
+    </div>
+    <div class="txt rv">
+      <h3><small>Half two</small>The rack</h3>
+      <p>Bars, plates and positions a coach has set for your body, not the next one along. Slow the rep, add the plate, log the number — the strength half of the hour that makes next week's lane faster.</p>
+      <a class="tlink" href="#book">Book the rack</a>
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS (black) -->
+<section class="sec" id="rooms">
+  <p class="kicker rv">Find your room</p>
+  <h2 class="rv">Four rooms.<br>One <em>culture.</em></h2>
+  <p class="lede rv">Crimson Circuit is the signature hour, but the booking sheet runs across all four. Pick a room to see tonight's times.</p>
+  <div class="room-chips rv" role="group" aria-label="Choose a room">
+    <button class="rchip" data-room="red" aria-pressed="true" aria-controls="roomPanel">Crimson Circuit</button>
+    <button class="rchip" data-room="cold" aria-pressed="false" aria-controls="roomPanel">The Cold Room</button>
+    <button class="rchip" data-room="iron" aria-pressed="false" aria-controls="roomPanel">The Iron Floor</button>
+    <button class="rchip" data-room="dark" aria-pressed="false" aria-controls="roomPanel">The Dark Studio</button>
+  </div>
+  <div class="room-panel rv" id="roomPanel" aria-live="polite">
+    <div class="ph room-fade">
+      <img id="roomImg" width="380" height="1300" src="../crops/w301-sled-tall.jpg" alt="Crimson Circuit — athlete driving a sled in low light" loading="lazy">
+    </div>
+    <div class="room-fade">
+      <h3 id="roomName"><em>Crimson Circuit</em></h3>
+      <p id="roomDesc">Run-and-lift intervals under crimson light — the signature hour, both halves, every time.</p>
+      <div class="times" id="roomTimes">
+        <span>06:15</span><span>12:15</span><span>18:15</span><span>20:45</span>
+      </div>
+      <a class="btn btn-red" href="#book">Book this room</a>
+    </div>
+  </div>
+</section>
+
+<!-- COACHES (white) -->
+<section class="on-paper method" id="coaches">
+  <div class="sec-head">
+    <p class="kicker rv">Coaches &amp; community</p>
+    <h2 class="rv">Coached like<br>you <em>belong.</em></h2>
+  </div>
+  <div class="coach-grid">
+    <div class="rv">
+      <blockquote>“You don't have to be fit to walk in. <em>Walking in</em> is the workout.”</blockquote>
+      <p class="who">— R. Okafor, Crimson Circuit coach since day one</p>
+    </div>
+    <div class="body rv">
+      <p>Every body in the room gets a coach's eyes. First-timers are scaled in from rep one; regulars get the next plate before they ask. Modifications exist for every lane sprint and every rack lift — injury, pregnancy, first month or fiftieth year, the hour bends to you, not the other way round.</p>
+      <p>The room stays small on purpose: two coaches to sixteen, names learned by week two, and a bench saved when you book. That's the culture part.</p>
+      <a class="btn" href="#book">Book with a coach</a>
+    </div>
+  </div>
+  <div class="community rv">
+    <img width="1080" height="580" src="../crops/w303-hero-dance.jpg" alt="Dancer mid-movement at a Friday culture night" loading="lazy">
+    <p class="cap"><span><b>Culture nights</b> — last Friday of the month, lights up, floors open</span><span>Run club Sundays · 08:00 · the long table after</span></p>
+  </div>
+</section>
+
+<!-- AMENITIES (black) -->
+<section class="sec" id="amenities">
+  <p class="kicker rv">Stay for the rest</p>
+  <h2 class="rv">The hour after<br>the <em>hour.</em></h2>
+  <p class="lede rv">Membership covers what happens either side of class — because the class is only the loud part.</p>
+  <div class="amen-list rv">
+    <div class="amen">
+      <span class="no">01</span>
+      <h3>Fuel bar</h3>
+      <p>Coffee, protein and actual food until close. Order before class, collect after.</p>
+      <a class="dir" href="#book">At the desk</a>
+    </div>
+    <div class="amen">
+      <span class="no">02</span>
+      <h3>Cold plunge &amp; frost shower</h3>
+      <p>Three degrees on one side of the wall, snowfall on the other. Forty seconds each.</p>
+      <a class="dir" href="#book">Book in</a>
+    </div>
+    <div class="amen">
+      <span class="no">03</span>
+      <h3>Lockers &amp; linen</h3>
+      <p>Towel, water and a lit locker included — come from the office, leave for dinner.</p>
+      <a class="dir" href="#book">Included</a>
+    </div>
+    <div class="amen">
+      <span class="no">04</span>
+      <h3>Body scan lab</h3>
+      <p>Twice a term, on the house. Progress on paper, not in the mirror.</p>
+      <a class="dir" href="#book">Twice a term</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING BAND -->
+<section class="book" id="book">
+  <div class="redlit-bg" aria-hidden="true">
+    <img width="390" height="1180" src="../crops/w301-sled-tall.jpg" alt="" loading="lazy">
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="book-in">
+    <p class="kicker rv" style="justify-content:center">Tonight in the Crimson Circuit</p>
+    <h2 class="rv">Book a <em>bench.</em></h2>
+    <p class="lede rv">Sixteen benches, two coaches, one hour. First class £18 — first week unlimited for £30. Members book seven days out; everyone else, the Sunday before.</p>
+    <form class="b-form rv" id="bForm" novalidate>
+      <div class="b-field">
+        <label for="bRoom">Room</label>
+        <select id="bRoom">
+          <option value="red">Crimson Circuit</option>
+          <option value="cold">The Cold Room</option>
+          <option value="iron">The Iron Floor</option>
+          <option value="dark">The Dark Studio</option>
+        </select>
+      </div>
+      <div class="b-field">
+        <label for="bTime">Time</label>
+        <select id="bTime">
+          <option value="06:15">06:15</option>
+          <option value="12:15">12:15</option>
+          <option value="18:15" selected>18:15</option>
+          <option value="20:45">20:45</option>
+        </select>
+      </div>
+      <div class="b-field">
+        <label for="bEmail">Email</label>
+        <input id="bEmail" type="email" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <button class="btn btn-red" type="submit">Book it</button>
+    </form>
+    <p class="b-msg" id="bMsg" role="status"></p>
+    <p class="fine">Doors open fifteen minutes before every class. Latecomers warm up in the hallway.</p>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div class="frow">
+      <div class="fmark">
+        Core <b>Culture</b>
+        <p>Not a gym — a culture</p>
+      </div>
+      <div class="fcols">
+        <div>
+          <h4>The club</h4>
+          <a href="#method">The method</a>
+          <a href="#rooms">Rooms</a>
+          <a href="#amenities">Amenities</a>
+        </div>
+        <div>
+          <h4>Classes</h4>
+          <a href="#book">Crimson Circuit</a>
+          <a href="#book">The Cold Room</a>
+          <a href="#book">The Dark Studio</a>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>Foundry District</p>
+          <p>Daily 05:00–23:00</p>
+          <a href="#book">membership@coreculture</a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Core Culture — not a gym. A culture.</span>
+      <span class="soc"><a href="#top">IG</a><a href="#top">YT</a><a href="#top">SP</a></span>
+      <span>Foundry District (English)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- GSAP 3.15.0 + ScrollTrigger — pinned versions; the page stays fully visible if these fail -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* mobile menu */
+  var mmenu = document.getElementById("mmenu"),
+      openBtn = document.getElementById("mmenuOpen");
+  openBtn.addEventListener("click", function(){
+    mmenu.classList.add("open");
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mmenu.querySelector("nav a").focus();
+  });
+  function closeMenu(){
+    mmenu.classList.remove("open");
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    openBtn.focus();
+  }
+  document.getElementById("mmenuClose").addEventListener("click", closeMenu);
+  [].forEach.call(mmenu.querySelectorAll("nav a, .btn"), function(a){
+    a.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && mmenu.classList.contains("open")) closeMenu();
+  });
+
+  /* room finder */
+  var ROOMS = {
+    red: {
+      name: '<em>Crimson Circuit</em>',
+      desc: "Run-and-lift intervals under crimson light — the signature hour, both halves, every time.",
+      img: "../crops/w301-sled-tall.jpg",
+      alt: "Crimson Circuit — athlete driving a sled in low light",
+      times: ["06:15", "12:15", "18:15", "20:45"]
+    },
+    cold: {
+      name: "The <em>Cold Room</em>",
+      desc: "Three degrees, coached breath, twelve minutes. Booked like a class because it is one.",
+      img: "../crops/w301-ice-tall.jpg",
+      alt: "The Cold Room — ice piled in a plunge tub",
+      times: ["07:00", "13:00", "19:30"]
+    },
+    iron: {
+      name: "The <em>Iron Floor</em>",
+      desc: "Open lifting with coached positions and force plates twice a term. Chalk included.",
+      img: "../crops/w301-machine-tall.jpg",
+      alt: "The Iron Floor — a plate-loaded rack under studio light",
+      times: ["05:30", "16:00", "21:00"]
+    },
+    dark: {
+      name: "The <em>Dark Studio</em>",
+      desc: "Movement and mobility in near-dark, loud playlists, low light. The quiet loud hour.",
+      img: "../crops/w301-dance-tall.jpg",
+      alt: "The Dark Studio — a dancer caught mid-movement in low light",
+      times: ["08:00", "17:30", "20:00"]
+    }
+  };
+  var chips = [].slice.call(document.querySelectorAll(".rchip")),
+      panel = document.getElementById("roomPanel"),
+      rName = document.getElementById("roomName"),
+      rDesc = document.getElementById("roomDesc"),
+      rImg = document.getElementById("roomImg"),
+      rTimes = document.getElementById("roomTimes");
+  chips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      chips.forEach(function(c){ c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      var room = ROOMS[chip.dataset.room];
+      bRoom.value = chip.dataset.room;
+      syncTimes(chip.dataset.room);
+      panel.classList.add("fading");
+      setTimeout(function(){
+        rName.innerHTML = room.name;
+        rDesc.textContent = room.desc;
+        rImg.src = room.img;
+        rImg.alt = room.alt;
+        rTimes.innerHTML = "";
+        room.times.forEach(function(t){
+          var s = document.createElement("span");
+          s.textContent = t;
+          rTimes.appendChild(s);
+        });
+        panel.classList.remove("fading");
+      }, 200);
+    });
+  });
+
+  /* booking form */
+  var FORM_TIMES = {
+    red:  ["06:15", "12:15", "18:15", "20:45"],
+    cold: ["07:00", "13:00", "19:30"],
+    iron: ["05:30", "16:00", "21:00"],
+    dark: ["08:00", "17:30", "20:00"]
+  };
+  var bRoom = document.getElementById("bRoom"),
+      bTime = document.getElementById("bTime");
+  function syncTimes(roomKey){
+    var times = FORM_TIMES[roomKey] || FORM_TIMES.red;
+    var keep = bTime.value;
+    bTime.innerHTML = "";
+    times.forEach(function(t){
+      var o = document.createElement("option");
+      o.value = t; o.textContent = t;
+      bTime.appendChild(o);
+    });
+    if (times.indexOf(keep) !== -1) bTime.value = keep;
+  }
+  syncTimes(bRoom.value);
+  bRoom.addEventListener("change", function(){ syncTimes(bRoom.value); });
+  document.getElementById("bForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = document.getElementById("bEmail"),
+        msg = document.getElementById("bMsg"),
+        roomName = bRoom.options[bRoom.selectedIndex].text;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+      msg.textContent = "We need a real address to hold the bench.";
+      msg.className = "b-msg err";
+      return;
+    }
+    msg.textContent = "Bench held — " + roomName + ", " + bTime.value + ". Confirmation on its way.";
+    msg.className = "b-msg ok";
+    this.reset();
+  });
+
+  /* scroll motion — GSAP 3.15.0 + ScrollTrigger (pinned CDN).
+     Fail-visible: elements are only hidden after the library loads.
+     Controlled crimson motion: staggered section intros and studio/coach
+     panels, a slim red progress track, ONE image parallax (hero) — no pinning. */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.gsap && window.ScrollTrigger && !reduced){
+    gsap.registerPlugin(ScrollTrigger);
+    var compact = window.matchMedia("(max-width: 700px)").matches;
+    var dist = compact ? 14 : 24,
+        dur = compact ? 0.55 : 0.75,
+        stag = compact ? 0.07 : 0.11;
+
+    /* slim red page-progress track, scrubbed to document scroll */
+    gsap.to("#progressBar", { scaleX: 1, ease: "none",
+      scrollTrigger: { start: 0, end: "max", scrub: 0.3 } });
+
+    /* section introductions: kicker → heading → lede */
+    [].forEach.call(["method", "rooms", "coaches", "amenities", "book"], function(id){
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      gsap.from(sec.querySelectorAll(".kicker, h2, .lede"), {
+        y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+        scrollTrigger: { trigger: sec, start: "top 78%", once: true },
+        clearProps: "all"
+      });
+    });
+
+    /* studio panels: photo and copy of each method row, staggered */
+    [].forEach.call(document.querySelectorAll(".split"), function(row){
+      gsap.from(row.children, {
+        y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+        scrollTrigger: { trigger: row, start: "top 80%", once: true },
+        clearProps: "all"
+      });
+    });
+
+    /* coach columns, community frame, room panel, amenities list, booking form */
+    gsap.from(".coach-grid > div", { y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".coach-grid", start: "top 80%", once: true }, clearProps: "all" });
+    gsap.from(".community", { autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: ".community", start: "top 82%", once: true }, clearProps: "all" });
+    gsap.from("#roomPanel", { y: dist, autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: "#roomPanel", start: "top 82%", once: true }, clearProps: "all" });
+    gsap.from(".amen-list", { autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: ".amen-list", start: "top 82%", once: true }, clearProps: "all" });
+    gsap.from("#bForm", { y: dist, autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: "#bForm", start: "top 85%", once: true }, clearProps: "all" });
+
+    /* ONE restrained image parallax: the hero backdrop — desktop only, no pinning */
+    if (!compact){
+      gsap.fromTo(".hero .redlit-bg img", { yPercent: -4, scale: 1.12 }, { yPercent: 5, scale: 1.12, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+    }
+  }
+})();
+</script>
+</body>
+</html>

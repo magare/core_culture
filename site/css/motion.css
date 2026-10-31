@@ -5,6 +5,58 @@
   --page-progress:0;
 }
 
+/* Lenis owns document scrolling; nested rails and dialogs retain native input. */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:clip}
+.lenis.lenis-smooth iframe{pointer-events:none}
+
+/* Full-section editorial wipes create deliberate scene changes between chapters. */
+.cinematic-section{position:relative;isolation:isolate}
+.cinematic-veil{
+  position:absolute;
+  inset:0;
+  z-index:30;
+  background:var(--veil-color,#0b0d0c);
+  pointer-events:none;
+  will-change:transform;
+}
+.cinematic-veil::after{
+  content:"";
+  position:absolute;
+  inset:0 0 0 auto;
+  width:clamp(2px,.45vw,7px);
+  background:var(--accent);
+  box-shadow:-18px 0 48px rgba(255,91,34,.18);
+}
+
+/* A live metallic highlight sits above the display type and follows the scroll. */
+.reflective-type-target{position:relative;opacity:.86}
+.reflective-type-overlay{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  color:transparent!important;
+  -webkit-text-fill-color:transparent!important;
+  background:linear-gradient(
+    var(--reflect-angle,106deg),
+    transparent 0%,
+    transparent calc(var(--reflect-x,-38%) - 20%),
+    rgba(255,255,255,.03) calc(var(--reflect-x,-38%) - 13%),
+    rgba(255,255,255,var(--reflect-opacity,.48)) var(--reflect-x,-38%),
+    rgba(255,255,255,.12) calc(var(--reflect-x,-38%) + 8%),
+    transparent calc(var(--reflect-x,-38%) + 21%),
+    transparent 100%
+  );
+  -webkit-background-clip:text;
+  background-clip:text;
+  mix-blend-mode:screen;
+  will-change:background;
+}
+.reflective-type-overlay em{color:transparent!important;-webkit-text-fill-color:transparent!important}
+
 .site-header::after{
   content:"";
   position:absolute;
@@ -24,7 +76,7 @@
 html.motion-ready:not(.reduce-motion) .hero-copy-panel>.eyebrow{
   animation:cc-rise-in .72s var(--motion-ease) .05s both;
 }
-html.motion-ready:not(.reduce-motion) #hero-title>span,
+html.motion-ready:not(.reduce-motion) #hero-title>span:not(.reflective-type-overlay),
 html.motion-ready:not(.reduce-motion) #hero-title>em{
   animation:cc-title-in .92s var(--motion-ease) both;
   transform-origin:left bottom;
@@ -48,6 +100,19 @@ html.motion-ready:not(.reduce-motion) .hero-media::after{
   animation:cc-light-sweep 1.45s var(--motion-ease) .25s both;
 }
 html.motion-ready:not(.reduce-motion) .first-route{animation:cc-rise-in .8s var(--motion-ease) .55s both}
+
+/* The bundled GSAP timeline replaces the CSS fallback when it is available. */
+html.gsap-ready .hero-copy-panel>.eyebrow,
+html.gsap-ready #hero-title>span:not(.reflective-type-overlay),
+html.gsap-ready #hero-title>em,
+html.gsap-ready .hero-copy,
+html.gsap-ready .hero-actions,
+html.gsap-ready .hero-media,
+html.gsap-ready .hero-media img,
+html.gsap-ready .hero-media-meta,
+html.gsap-ready .hero-media figcaption,
+html.gsap-ready .hero-media::after,
+html.gsap-ready .first-route{animation:none}
 
 @keyframes cc-title-in{
   from{opacity:0;clip-path:inset(100% 0 0);transform:translate3d(0,34px,0) rotate(2deg)}
@@ -80,6 +145,7 @@ html.motion-ready:not(.reduce-motion) .motion-reveal{
     clip-path .84s var(--motion-ease);
   transition-delay:var(--reveal-delay,0ms);
 }
+html.gsap-ready .motion-reveal{transition:none}
 html.motion-ready:not(.reduce-motion) .motion-reveal:not(.is-visible){
   opacity:0;
   transform:translate3d(0,24px,0);
@@ -94,6 +160,16 @@ html.motion-ready:not(.reduce-motion) .motion-reveal[data-reveal-kind="image"]:n
 .motion-reveal:focus-within{opacity:1!important;transform:none!important;clip-path:inset(0)!important;transition:none!important}
 
 .motion-image{overflow:hidden}
+.motion-image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(110deg,rgba(4,5,4,.72),rgba(4,5,4,.18) 48%,rgba(255,91,34,.07));
+  opacity:var(--cinema-light,0);
+  mix-blend-mode:multiply;
+}
 .motion-image>img{
   transform:translate3d(0,var(--parallax-y,0),0) scale(1.045);
   transition:transform 1s var(--motion-ease),filter .6s ease;
@@ -173,3 +249,6 @@ html.reduce-motion .footer-wordmark{
   transition:none!important;
 }
 html.reduce-motion .hero-media::after{display:none!important}
+html.reduce-motion .cinematic-veil{display:none!important}
+html.reduce-motion .motion-image::after{display:none!important}
+html.reduce-motion .reflective-type-overlay{display:none!important}

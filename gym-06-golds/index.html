@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Built on the Floor</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture. Iron first since 1998.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0a08'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' fill='none' stroke='%23cf2233' stroke-width='2'/%3E%3Ctext x='16' y='23' font-family='Arial Narrow,Arial' font-weight='bold' font-size='19' fill='%23fec20f' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --black:#0b0a08; --panel:#151310; --panel2:#1c1915; --white:#fff;
+  --gold:#fec20f; --gold-hi:#ffd23a; --red:#cf2233;
+  --grey:#a8a29a; --grey-dk:#6e6960;
+  --hair:rgba(255,255,255,.14); --hair-gold:rgba(254,194,15,.35);
+  --cond:"Arial Narrow","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--black);color:var(--white);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.cond{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.01em;line-height:.94}
+.caps{text-transform:uppercase;letter-spacing:.18em;font-size:10.5px;font-weight:700}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--gold);color:var(--black);padding:10px 18px;z-index:500;font-weight:700}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* dark strength treatment */
+.darklit{position:relative;overflow:hidden;background:var(--black)}
+.darklit img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.72) contrast(1.22)}
+.darklit::after{content:"";position:absolute;inset:0;background:var(--gold);opacity:.1;mix-blend-mode:multiply;pointer-events:none}
+
+/* buttons — flat rectangles, sharp corners */
+.btn{
+  display:inline-block;background:var(--gold);color:var(--black);
+  font-family:var(--cond);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.07em;
+  padding:15px 30px;border:2px solid var(--gold);transition:background .2s,color .2s,border-color .2s;text-align:center;
+}
+.btn:hover{background:var(--gold-hi);border-color:var(--gold-hi)}
+.btn-black{background:var(--black);color:var(--gold);border-color:var(--black)}
+.btn-black:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.btn-ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.55)}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold);background:transparent}
+
+/* ---------- red topline + black nav with red/gold rules ---------- */
+.topline{background:var(--red);color:#fff;padding:7px 26px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-family:var(--cond);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.14em}
+.topline span i{font-style:normal;opacity:.55;padding:0 10px}
+.navwrap{position:sticky;top:0;z-index:200}
+.nav{height:62px;background:var(--black);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 26px}
+.rules{height:5px;background:linear-gradient(180deg,var(--red) 0 2px,transparent 2px 3px,var(--gold) 3px 5px)}
+.nav-links{display:flex;gap:24px}
+.nav-links.right{justify-content:flex-end;align-items:center;gap:22px}
+.nav a.nl{font-family:var(--cond);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.85);padding:6px 1px;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.nav a.nl:hover{color:var(--white);border-color:var(--gold)}
+.wordmark{font-family:var(--cond);font-weight:700;font-size:22px;text-transform:uppercase;letter-spacing:.13em;text-align:center;white-space:nowrap}
+.wordmark b{color:var(--gold)}
+.nav-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+.nav-right .btn{padding:9px 20px;font-size:12px}
+.burger{display:none;flex-direction:column;gap:5px;padding:10px 2px}
+.burger span{display:block;width:24px;height:2px;background:var(--white)}
+.burger span:last-child{background:var(--gold)}
+
+.mmenu{position:fixed;inset:0;z-index:400;background:var(--black);display:none;flex-direction:column;padding:20px 22px}
+.mmenu.open{display:flex}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center;height:46px;border-bottom:2px solid var(--red);padding-bottom:10px}
+.mmenu .top .wordmark{color:var(--white)}
+.mmenu .top .wordmark b{color:var(--gold)}
+.mmenu .top button{font-size:20px;color:var(--red);padding:8px 10px}
+.mmenu nav{display:flex;flex-direction:column;margin-top:34px}
+.mmenu nav a{font-family:var(--cond);font-weight:700;font-size:32px;text-transform:uppercase;padding:15px 2px;border-bottom:1px solid var(--hair);transition:color .15s,padding-left .15s}
+.mmenu nav a:hover{color:var(--gold);padding-left:10px}
+.mmenu nav a i{font-style:normal;color:var(--red);font-size:14px;vertical-align:middle;padding-right:14px;letter-spacing:.1em}
+.mmenu .btn{margin-top:34px}
+.mmenu .foot-note{margin-top:auto;color:var(--grey-dk);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.2em}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.04fr .96fr;min-height:calc(100vh - 95px);background:var(--black)}
+.hero-copy{display:flex;flex-direction:column;justify-content:center;padding:84px 56px 76px;max-width:820px;margin-left:auto;width:100%}
+.kick{display:inline-flex;align-items:center;gap:12px;font-family:var(--cond);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.18em;color:var(--gold)}
+.kick::before{content:"";width:26px;height:3px;background:var(--red)}
+.hero-h1{font-family:var(--cond);font-weight:700;font-size:clamp(64px,9.2vw,148px);text-transform:uppercase;line-height:.86;letter-spacing:.005em;margin-top:26px}
+.hero-h1 em{font-style:normal;color:var(--gold)}
+.hero .sub{max-width:46ch;margin-top:28px;color:rgba(255,255,255,.85);font-size:14.5px;line-height:1.85}
+.hero .cta-row{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:0;margin-top:44px;border-top:1px solid var(--hair);padding-top:18px}
+.hero-stats div{padding:0 26px;border-left:1px solid var(--hair)}
+.hero-stats div:first-child{padding-left:0;border-left:0}
+.hero-stats b{display:block;font-family:var(--cond);font-weight:700;font-size:26px;color:var(--gold);line-height:1}
+.hero-stats span{display:block;margin-top:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--grey)}
+.hero-photo{position:relative;overflow:hidden;background:var(--black);min-height:420px}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 30%;filter:grayscale(1) brightness(.78) contrast(1.2)}
+.hero-photo::before{content:"";position:absolute;inset:0;background:var(--gold);opacity:.09;mix-blend-mode:multiply;z-index:1}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--black) 0%,rgba(11,10,8,0) 26%),linear-gradient(0deg,rgba(11,10,8,.72),rgba(11,10,8,0) 36%);z-index:1}
+.plaque{position:absolute;left:0;bottom:34px;z-index:2;background:var(--gold);color:var(--black);font-family:var(--cond);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.1em;padding:9px 16px 9px 22px}
+.plaque i{font-style:normal;opacity:.55;padding-left:12px}
+
+/* ---------- sections ---------- */
+.sec{max-width:1360px;margin:0 auto;padding:118px 28px 0}
+h2.title{font-family:var(--cond);font-weight:700;font-size:clamp(40px,5.2vw,74px);text-transform:uppercase;line-height:.9;margin-top:18px}
+h2.title em{font-style:normal;color:var(--gold)}
+.lede{color:var(--grey);max-width:56ch;margin-top:22px;font-size:14px;line-height:1.85}
+
+/* ---------- heritage timeline ---------- */
+.heritage-band{margin-top:110px;background:var(--panel);border-top:1px solid var(--hair-gold);border-bottom:1px solid var(--hair-gold)}
+.heritage-in{max-width:1360px;margin:0 auto;padding:96px 28px 100px}
+.tl{margin-top:56px}
+.tl-chips{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--hair)}
+.tl-chips::-webkit-scrollbar{display:none}
+.tl-chip{flex:1 0 auto;min-width:96px;font-family:var(--cond);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-dk);padding:14px 10px 16px;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
+.tl-chip:hover{color:var(--white)}
+.tl-chip[aria-pressed="true"]{color:var(--gold);border-bottom-color:var(--red)}
+.tl-rail{height:3px;background:rgba(255,255,255,.12);margin-top:-1px;position:relative}
+.tl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--gold);transition:width .45s cubic-bezier(.25,.7,.25,1)}
+.tl-sweep{position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--gold);opacity:.45;transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+.tl-view{display:grid;grid-template-columns:auto 1fr auto;gap:34px;align-items:center;margin-top:44px}
+.tl-year{font-family:var(--cond);font-weight:700;font-size:clamp(84px,10vw,168px);line-height:.8;color:transparent;-webkit-text-stroke:2px var(--gold);white-space:nowrap}
+.tl-panel h3{font-family:var(--cond);font-weight:700;font-size:clamp(24px,2.6vw,36px);text-transform:uppercase;line-height:.95}
+.tl-panel h3 span{color:var(--red)}
+.tl-panel p{color:var(--grey);max-width:52ch;margin-top:14px;font-size:13.5px;line-height:1.85}
+.tl-panel .fact{display:inline-block;margin-top:16px;background:var(--gold);color:var(--black);font-family:var(--cond);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding:7px 12px}
+.tl-arrows{display:flex;flex-direction:column;gap:8px}
+.tl-arrows button{width:52px;height:44px;border:1px solid rgba(255,255,255,.45);font-size:16px;color:var(--white);transition:all .2s}
+.tl-arrows button:hover{background:var(--gold);border-color:var(--gold);color:var(--black)}
+.tl-count{font-family:var(--cond);font-weight:700;font-size:12px;letter-spacing:.14em;color:var(--grey-dk);text-align:center}
+
+/* ---------- training cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:54px}
+.card{position:relative;display:block;aspect-ratio:1.04;overflow:hidden;background:var(--panel);border:1px solid transparent;transition:border-color .25s}
+.card img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.68) contrast(1.25);transition:transform .6s cubic-bezier(.2,.6,.2,1)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,10,8,.88),rgba(11,10,8,.06) 55%)}
+.card:hover{border-color:var(--gold)}
+.card:hover img{transform:scale(1.05)}
+.card .lab{position:absolute;left:18px;right:18px;bottom:16px;z-index:2}
+.card .lab .no{font-family:var(--cond);font-weight:700;font-size:12px;color:var(--gold);letter-spacing:.16em}
+.card .lab .no i{font-style:normal;color:var(--red)}
+.card .lab h3{font-family:var(--cond);font-weight:700;font-size:clamp(22px,2.1vw,30px);text-transform:uppercase;line-height:.95;margin-top:6px}
+.card .lab p{display:block;color:rgba(255,255,255,.72);font-size:11.5px;margin-top:6px}
+.card .lab .go{display:inline-block;margin-top:10px;font-family:var(--cond);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);opacity:0;transform:translateY(6px);transition:all .25s}
+.card:hover .go{opacity:1;transform:none}
+.card.flat{background:var(--gold);color:var(--black);display:flex;flex-direction:column;justify-content:space-between;padding:24px;border:0}
+.card.flat .no{font-family:var(--cond);font-weight:700;font-size:12px;letter-spacing:.16em;color:rgba(0,0,0,.55)}
+.card.flat h3{font-family:var(--cond);font-weight:700;font-size:clamp(26px,2.4vw,34px);text-transform:uppercase;line-height:.92;margin-top:10px}
+.card.flat p{font-size:12px;line-height:1.65;color:rgba(0,0,0,.72);margin-top:12px}
+.card.flat .go{display:inline-block;margin-top:16px;font-family:var(--cond);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;border-bottom:2px solid var(--black);align-self:flex-start}
+
+/* ---------- club discovery ---------- */
+.club-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:16px;margin-top:54px;align-items:stretch}
+.club-list{display:flex;flex-direction:column;gap:12px}
+.club{flex:1;text-align:left;border:1px solid var(--hair);padding:22px 24px;transition:border-color .2s,background .2s;display:flex;flex-direction:column;justify-content:center}
+.club:hover{border-color:var(--hair-gold)}
+.club[aria-pressed="true"]{background:var(--panel2);border-color:var(--gold)}
+.club .cname{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.club .cname b{font-family:var(--cond);font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:.02em}
+.club .cname span{font-family:var(--cond);font-weight:700;font-size:11px;color:var(--red);letter-spacing:.14em;text-transform:uppercase}
+.club .caddr{display:block;margin-top:6px;font-size:12px;color:var(--grey)}
+.club[aria-pressed="true"] .cname span{color:var(--gold)}
+.club-detail{border:1px solid var(--gold);display:grid;grid-template-rows:auto 1fr;background:var(--panel)}
+.cd-photo{position:relative;aspect-ratio:16/8.6;overflow:hidden;background:var(--black)}
+.cd-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.72) contrast(1.22)}
+.cd-photo::after{content:"";position:absolute;inset:0;background:var(--gold);opacity:.09;mix-blend-mode:multiply}
+.cd-photo .tag{position:absolute;left:0;bottom:0;z-index:2;background:var(--red);color:#fff;font-family:var(--cond);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;padding:8px 14px}
+.cd-body{padding:26px 28px 28px}
+.cd-body h3{font-family:var(--cond);font-weight:700;font-size:30px;text-transform:uppercase;line-height:.95}
+.cd-meta{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin-top:18px;border-top:1px solid var(--hair)}
+.cd-meta div{padding:12px 0;border-bottom:1px solid var(--hair)}
+.cd-meta dt{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--grey-dk)}
+.cd-meta dd{font-family:var(--cond);font-weight:700;font-size:15.5px;text-transform:uppercase;letter-spacing:.03em;margin-top:3px}
+.cd-body .btn{margin-top:22px}
+
+/* ---------- member story ---------- */
+.story{display:grid;grid-template-columns:.92fr 1.08fr;gap:64px;margin-top:56px;align-items:center}
+.story-photo{position:relative}
+.story-photo .frame{position:relative;border:1px solid var(--gold);padding:10px}
+.story-photo img{width:100%;aspect-ratio:.94;object-fit:cover;filter:grayscale(1) brightness(.8) contrast(1.2)}
+.story-photo::before{content:"";position:absolute;top:-14px;left:-14px;width:64px;height:64px;border-top:3px solid var(--red);border-left:3px solid var(--red)}
+.story-quote{font-family:var(--cond);font-weight:700;font-size:clamp(28px,3.2vw,46px);text-transform:uppercase;line-height:1.02}
+.story-quote em{font-style:normal;color:var(--gold)}
+.story-quote::before{content:"“";display:block;font-size:1.6em;line-height:.4;color:var(--red);margin-bottom:18px}
+.story-who{display:flex;align-items:center;gap:16px;margin-top:30px;padding-top:22px;border-top:1px solid var(--hair)}
+.story-who .bar{width:34px;height:3px;background:var(--gold)}
+.story-who b{display:block;font-family:var(--cond);font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:.04em}
+.story-who span{display:block;font-size:11px;color:var(--grey);text-transform:uppercase;letter-spacing:.12em;margin-top:2px}
+
+/* ---------- join ---------- */
+.join{margin-top:130px;position:relative;background:var(--black)}
+.join .jbg{position:absolute;inset:0;overflow:hidden}
+.join .jbg img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.34) contrast(1.3)}
+.join .jbg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,10,8,.94) 0%,rgba(11,10,8,.72) 55%,rgba(11,10,8,.88) 100%)}
+.join .rules-top,.join .rules-bot{height:5px;background:linear-gradient(180deg,var(--gold) 0 2px,transparent 2px 3px,var(--red) 3px 5px);position:relative;z-index:2}
+.join-in{position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:96px 28px;display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.join h2{font-family:var(--cond);font-weight:700;font-size:clamp(44px,5.6vw,84px);text-transform:uppercase;line-height:.88}
+.join h2 em{font-style:normal;color:var(--gold)}
+.join .rate{margin-top:24px;font-family:var(--cond);font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:.06em}
+.join .rate b{background:var(--gold);color:var(--black);padding:4px 10px}
+.join .note{margin-top:14px;font-size:12.5px;color:var(--grey);max-width:44ch;line-height:1.8}
+.j-form{background:rgba(11,10,8,.82);border:1px solid var(--hair-gold);padding:30px;display:flex;flex-direction:column;gap:14px}
+.j-field label{display:block;font-family:var(--cond);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.14em;margin-bottom:7px;color:var(--gold)}
+.j-field select,.j-field input{
+  width:100%;border:1px solid rgba(255,255,255,.4);background:var(--black);color:var(--white);
+  font:inherit;font-size:13.5px;padding:14px;border-radius:0;appearance:none;
+}
+.j-field select{background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+.j-field select:focus,.j-field input:focus{outline:none;border-color:var(--gold)}
+.j-msg{font-family:var(--cond);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em;min-height:17px}
+.j-msg.ok{color:var(--gold)}
+.j-msg.err{color:#ff6b7a}
+
+/* ---------- footer ---------- */
+footer{background:var(--black)}
+.rules{height:5px;background:linear-gradient(180deg,var(--red) 0 2px,transparent 2px 3px,var(--gold) 3px 5px)}
+.foot{max-width:1360px;margin:0 auto;padding:80px 28px 24px}
+.fmark{font-family:var(--cond);font-weight:700;font-size:clamp(44px,7vw,104px);text-transform:uppercase;line-height:.9;letter-spacing:.05em}
+.fmark b{color:transparent;-webkit-text-stroke:1.5px var(--gold)}
+.frow{display:grid;grid-template-columns:1.3fr 2fr;gap:60px;margin-top:52px}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fcols h4{font-family:var(--cond);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--grey-dk);margin-bottom:14px}
+.fcols a,.fcols p{display:block;color:rgba(255,255,255,.8);font-size:12.5px;padding:4px 0}
+.fcols a:hover{color:var(--gold)}
+.bottom{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid var(--hair);margin-top:58px;padding:20px 0 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--grey-dk)}
+.bottom .soc{display:flex;gap:22px}
+.bottom a:hover{color:var(--gold)}
+
+/* reveal — handled by GSAP 3.15.0 + ScrollTrigger (see footer). Elements are
+   visible by default and only hidden inline once the library has loaded, so
+   content stays fully visible if the CDN fails. */
+
+/* responsive */
+@media (max-width:1120px){
+  .hero{grid-template-columns:1fr .9fr}
+  .hero-copy{padding:72px 32px 64px}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .club-grid{grid-template-columns:1fr}
+  .club-list{flex-direction:row}
+  .club{padding:18px 20px}
+  .join-in{grid-template-columns:1fr;gap:48px}
+  .story{grid-template-columns:1fr;gap:48px}
+  .story-photo{max-width:480px}
+}
+@media (max-width:860px){
+  .topline{padding:7px 18px;font-size:10.5px}
+  .topline .hide-m{display:none}
+  .nav{padding:0 18px;grid-template-columns:1fr auto}
+  .nav-links{display:none}
+  .nav-right{display:flex}
+  .nav-right .btn{display:none}
+  .wordmark{justify-self:center;font-size:19px}
+  .burger{display:flex}
+  .sec{padding:92px 20px 0}
+  .heritage-in{padding:76px 20px 84px}
+  .tl-view{grid-template-columns:auto 1fr;gap:24px}
+  .tl-arrows{flex-direction:row;grid-column:1 / -1;justify-content:flex-end}
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-copy{padding:60px 20px 54px;max-width:none}
+  .hero-photo{min-height:54vh}
+  .hero-stats div{padding:0 16px}
+  .foot{padding:64px 20px 20px}
+  .frow{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:560px){
+  .sec{padding:76px 16px 0}
+  .hero-copy{padding:48px 16px 44px}
+  .hero .cta-row .btn{width:100%}
+  .hero-stats{flex-wrap:wrap;gap:14px 0}
+  .hero-stats div{border:0;padding:0 16px 0 0}
+  .cards{grid-template-columns:1fr}
+  .card{aspect-ratio:4/3.2}
+  .club-list{flex-direction:column}
+  .cd-body{padding:22px 18px 24px}
+  .cd-meta{grid-template-columns:1fr}
+  .tl-year{font-size:72px;-webkit-text-stroke:1.5px var(--gold)}
+  .tl-view{grid-template-columns:1fr;gap:20px}
+  .tl-arrows{justify-content:flex-start}
+  .j-form{padding:22px 18px}
+  .j-form .btn{width:100%}
+  .join-in{padding:76px 16px}
+  .fcols{grid-template-columns:1fr 1fr}
+  .bottom{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .card img{transition:none}
+  .tl-fill{transition:none}
+  .tl-sweep{display:none}
+  .mmenu nav a{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- RED TOPLINE -->
+<div class="topline" role="note" aria-label="Club notice">
+  <span>Iron first since 1998<i>◆</i><b class="hide-m" style="font-weight:700">The strength district</b></span>
+  <span class="hide-m">Doors 05:30–23:00 daily<i>◆</i>Chalk, towels and honest weights included</span>
+</div>
+
+<!-- BLACK NAV + RED/GOLD RULES -->
+<div class="navwrap">
+  <header class="nav">
+    <nav class="nav-links" aria-label="Primary left">
+      <a class="nl" href="#heritage">Heritage</a>
+      <a class="nl" href="#training">Training</a>
+    </nav>
+    <a class="wordmark" href="#top">Core <b>Culture</b></a>
+    <div class="nav-right">
+      <nav class="nav-links right" aria-label="Primary right">
+        <a class="nl" href="#clubs">Clubs</a>
+        <a class="nl" href="#story">Story</a>
+      </nav>
+      <a class="btn" href="#join">Join</a>
+      <button class="burger" id="mmenuOpen" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="rules" aria-hidden="true"></div>
+</div>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark">Core <b>Culture</b></span>
+    <button id="mmenuClose" aria-label="Close menu">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#heritage"><i>01</i>Heritage</a>
+    <a href="#training"><i>02</i>Training</a>
+    <a href="#clubs"><i>03</i>Clubs</a>
+    <a href="#story"><i>04</i>Story</a>
+  </nav>
+  <a class="btn" href="#join">Join the floor</a>
+  <div class="foot-note">Foundry District · Doors 05:30–23:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — built on the floor. Iron-first strength training in the Foundry District since 1998.</h1>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="kick rv">The strength district — est. 1998</p>
+    <h2 class="hero-h1" aria-hidden="true" style="margin:26px 0 0">Built on<br>the <em>floor.</em></h2>
+    <p class="sub rv">Twenty-eight years of the same promise: the weight on the bar is honest, the coaching is earned, and nobody trains alone. Three clubs, one standard, zero shortcuts.</p>
+    <div class="cta-row rv">
+      <a class="btn" href="#join">Claim first session</a>
+      <a class="btn btn-ghost" href="#heritage">Walk the heritage</a>
+    </div>
+    <div class="hero-stats rv">
+      <div><b>’98</b><span>First rack</span></div>
+      <div><b>3</b><span>Clubs</span></div>
+      <div><b>62</b><span>Coached sessions / wk</span></div>
+      <div><b>05:30</b><span>First light</span></div>
+    </div>
+  </div>
+  <div class="hero-photo" aria-hidden="false">
+    <img width="390" height="1180" src="../crops/w302-hero-sled.jpg" alt="Athlete driving a weighted sled across a dark training floor" fetchpriority="high">
+    <p class="plaque">The Foundry Yard<i>05:30 first light</i></p>
+  </div>
+</section>
+
+<!-- HERITAGE TIMELINE -->
+<section class="heritage-band" id="heritage" aria-label="Heritage timeline">
+  <div class="heritage-in">
+    <p class="kick rv">The heritage</p>
+    <h2 class="title rv">Twenty-eight years.<br><em>Same standard.</em></h2>
+    <p class="lede rv">No rebrands, no gimmicks, no machine that does the lifting for you. The district changed around us; the standard didn’t. Walk the wall.</p>
+
+    <div class="tl rv">
+      <div class="tl-chips" role="group" aria-label="Timeline years">
+        <button class="tl-chip" data-i="0" aria-pressed="true">1998</button>
+        <button class="tl-chip" data-i="1" aria-pressed="false">2003</button>
+        <button class="tl-chip" data-i="2" aria-pressed="false">2008</button>
+        <button class="tl-chip" data-i="3" aria-pressed="false">2014</button>
+        <button class="tl-chip" data-i="4" aria-pressed="false">2019</button>
+        <button class="tl-chip" data-i="5" aria-pressed="false">2026</button>
+      </div>
+      <div class="tl-rail" aria-hidden="true"><div class="tl-fill" id="tlFill" style="width:0%"></div><span class="tl-sweep" aria-hidden="true"></span></div>
+
+      <div class="tl-view">
+        <div class="tl-year" id="tlYear" aria-hidden="true">1998</div>
+        <div class="tl-panel">
+          <div class="tl-stop" data-i="0">
+            <h3>The <span>garage</span> years</h3>
+            <p>One squat rack, two bench shifts, sixteen members and a kettlebell with a split handle. The rule that still runs the place was written on the wall in marker: the bar doesn’t care who you are — it only counts what you put on it.</p>
+            <span class="fact">16 members · 1 rack · 0 excuses</span>
+          </div>
+          <div class="tl-stop" data-i="1" hidden>
+            <h3>Iron lands on <span>Foundry Row</span></h3>
+            <p>The garage outgrew the garage. We took the old foundry workshop on Foundry Row, kept the concrete floors on purpose, and welded the first rig ourselves. Members numbered their own plates — most of those plates are still in service.</p>
+            <span class="fact">The Foundry Yard opens its doors</span>
+          </div>
+          <div class="tl-stop" data-i="2" hidden>
+            <h3>The coaching <span>charter</span></h3>
+            <p>We wrote down what the good years had taught us: nobody trains their first year unsupervised, every programme is coached, and a PR gets the same whistle as a first warm-up. The charter hangs by the desk at all three clubs now.</p>
+            <span class="fact">Every session coached — no exceptions</span>
+          </div>
+          <div class="tl-stop" data-i="3" hidden>
+            <h3>Doors before <span>dawn</span></h3>
+            <p>The 05:30 shift started as a favour to two dockworkers and became the club’s heartbeat. First light, empty floor, chalk in the air. If you know, you know — and half the district knows.</p>
+            <span class="fact">05:30 — the original members’ hour</span>
+          </div>
+          <div class="tl-stop" data-i="4" hidden>
+            <h3>Three clubs, <span>one book</span></h3>
+            <p>Ironworks opened in the Canal Quarter, Southpaw took the old depot end. Same charter, same coaching standard, same plates counted by hand. One membership walks through all three doors — that was the whole point.</p>
+            <span class="fact">One membership · every floor</span>
+          </div>
+          <div class="tl-stop" data-i="5" hidden>
+            <h3>The standard <span>travels</span></h3>
+            <p>Twenty-eight years in, the racks are busier and the promise hasn’t moved. The weight on the bar is still honest, the coaching is still earned, and the floor still does the talking. Wherever the next door opens, the standard goes with it.</p>
+            <span class="fact">Next chapter loading — watch this wall</span>
+          </div>
+        </div>
+        <div class="tl-arrows">
+          <button id="tlPrev" aria-label="Previous milestone">←</button>
+          <button id="tlNext" aria-label="Next milestone">→</button>
+          <span class="tl-count" id="tlCount">1 / 6</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING CARDS -->
+<section class="sec" id="training">
+  <p class="kick rv">The training</p>
+  <h2 class="title rv">Iron first.<br><em>Everything else after.</em></h2>
+  <p class="lede rv">Five rooms, five disciplines, one hierarchy: strength sets the tone and everything else listens. Coached, capped and counted — the way it’s been since the garage.</p>
+
+  <div class="cards rv">
+    <a class="card" href="#join">
+      <img width="410" height="410" src="../crops/w302-class-machine.jpg" alt="Loaded pin of a strength machine under hard light" loading="lazy">
+      <span class="lab"><span class="no">01 <i>/</i> Iron Room</span><h3>Iron<br>Room</h3><p>Slow presses, heavy pins, coached to the kilo.</p><span class="go">Book the room →</span></span>
+    </a>
+    <a class="card" href="#join">
+      <img width="415" height="375" src="../crops/w302-class-streak.jpg" alt="Light streaks across a dark conditioning floor" loading="lazy">
+      <span class="lab"><span class="no">02 <i>/</i> Engine Room</span><h3>Engine<br>Room</h3><p>Intervals that buy you a stronger heart, not just a sweat.</p><span class="go">Book the room →</span></span>
+    </a>
+    <a class="card" href="#join">
+      <img width="420" height="420" src="../crops/w301-sled-sq.jpg" alt="Athlete gripping a heavy sled head-on in low light" loading="lazy">
+      <span class="lab"><span class="no">03 <i>/</i> Sled Yard</span><h3>Sled<br>Yard</h3><p>Turf lanes, loaded sleds, the purest honest work there is.</p><span class="go">Book the yard →</span></span>
+    </a>
+    <div class="card flat">
+      <span class="no">The standard</span>
+      <div><h3>Turn up.<br>Lift honest.</h3>
+      <p>Every discipline runs on the charter: coached, capped at sixteen, and finished with a count. If it isn’t written down, it didn’t happen.</p>
+      <a class="go" href="#join">Read the charter →</a></div>
+    </div>
+    <a class="card" href="#join">
+      <img width="410" height="400" src="../crops/w307-obj-rack.jpg" alt="Barbell rack frame in a quiet corner of the club" loading="lazy">
+      <span class="lab"><span class="no">04 <i>/</i> The Rack</span><h3>The<br>Rack</h3><p>Barbell club — squat, pull, press. Technique first, plates after.</p><span class="go">Book the rack →</span></span>
+    </a>
+    <a class="card" href="#join">
+      <img width="620" height="620" src="../crops/w301-ice-sq.jpg" alt="Recovery tub packed with fresh ice" loading="lazy">
+      <span class="lab"><span class="no">05 <i>/</i> Cold Room</span><h3>Cold<br>Room</h3><p>Three degrees and a timer. Recovery counted as training here.</p><span class="go">Book the tub →</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- CLUB DISCOVERY -->
+<section class="sec" id="clubs">
+  <p class="kick rv">Find your club</p>
+  <h2 class="title rv">Three floors.<br><em>One culture.</em></h2>
+  <p class="lede rv">Pick a door — the standard travels with you. Same charter, same coaching, same plates counted by hand.</p>
+
+  <div class="club-grid rv">
+    <div class="club-list" role="group" aria-label="Choose a club">
+      <button class="club" data-club="yard" aria-pressed="true">
+        <span class="cname"><b>The Foundry Yard</b><span>Est. 2003</span></span>
+        <span class="caddr">9 Foundry Row — the original floor</span>
+      </button>
+      <button class="club" data-club="works" aria-pressed="false">
+        <span class="cname"><b>Ironworks</b><span>Est. 2019</span></span>
+        <span class="caddr">12 Cable Wharf — Canal Quarter</span>
+      </button>
+      <button class="club" data-club="paw" aria-pressed="false">
+        <span class="cname"><b>Southpaw</b><span>Est. 2019</span></span>
+        <span class="caddr">4 Depot End — under the arches</span>
+      </button>
+    </div>
+
+    <div class="club-detail" aria-live="polite">
+      <div class="cd-photo">
+        <img id="cdImg" width="380" height="1180" src="../crops/w303-floor-engine.jpg" alt="Members pushing sleds down the long dark floor of the Foundry Yard" loading="lazy">
+        <span class="tag" id="cdTag">The original floor</span>
+      </div>
+      <div class="cd-body">
+        <h3 id="cdName">The Foundry Yard</h3>
+        <dl class="cd-meta">
+          <div><dt>Doors</dt><dd id="cdDoors">05:30 – 23:00</dd></div>
+          <div><dt>Strength floor</dt><dd id="cdFloor">420 m² of iron</dd></div>
+          <div><dt>Coached today</dt><dd id="cdClasses">21 sessions</dd></div>
+          <div><dt>Known for</dt><dd id="cdKnown">The 05:30 shift</dd></div>
+        </dl>
+        <button class="btn" id="cdJoin">Join this club</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBER STORY -->
+<section class="sec" id="story">
+  <p class="kick rv">Member story</p>
+  <div class="story">
+    <div class="story-photo rv">
+      <div class="frame">
+        <img width="520" height="550" src="../crops/w303-ix-strength.jpg" alt="Member leaning into a heavy set under low light at Ironworks" loading="lazy">
+      </div>
+    </div>
+    <div class="rv">
+      <blockquote class="story-quote">I came for a six-week fix. I stayed because the bar told the <em>truth</em> — and so did every coach in the <em>building.</em></blockquote>
+      <div class="story-who">
+        <span class="bar" aria-hidden="true"></span>
+        <div>
+          <b>Ruth Okafor</b>
+          <span>Member since 2016 · Ironworks · first pull-up ’18, 140kg deadlift ’24</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join" id="join">
+  <div class="rules-top" aria-hidden="true"></div>
+  <div class="jbg" aria-hidden="true">
+    <img width="733" height="440" src="../crops/w301-streak-card.jpg" alt="" loading="lazy">
+  </div>
+  <div class="join-in">
+    <div class="rv">
+      <p class="kick">Join the floor</p>
+      <h2 style="margin-top:18px">Step on.<br><em>Stay on.</em></h2>
+      <p class="rate"><b>£10</b> first session — any club, any room</p>
+      <p class="note">Pick your club, tell us where you’re headed, leave an email. The desk holds a spot with your name on it and confirmation lands inside the hour. No contract hides in the small print — there is no small print.</p>
+    </div>
+    <form class="j-form rv" id="jForm" novalidate>
+      <div class="j-field">
+        <label for="jClub">Club</label>
+        <select id="jClub">
+          <option value="The Foundry Yard">The Foundry Yard — 9 Foundry Row</option>
+          <option value="Ironworks">Ironworks — 12 Cable Wharf</option>
+          <option value="Southpaw">Southpaw — 4 Depot End</option>
+        </select>
+      </div>
+      <div class="j-field">
+        <label for="jGoal">First goal</label>
+        <select id="jGoal">
+          <option value="Get strong">Get strong</option>
+          <option value="Build the engine">Build the engine</option>
+          <option value="First pull-up">First pull-up</option>
+          <option value="The comeback">The comeback</option>
+        </select>
+      </div>
+      <div class="j-field">
+        <label for="jEmail">Email</label>
+        <input id="jEmail" type="email" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <button class="btn" type="submit">Claim first session</button>
+      <p class="j-msg" id="jMsg" role="status"></p>
+    </form>
+  </div>
+  <div class="rules-bot" aria-hidden="true"></div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="rules" aria-hidden="true"></div>
+  <div class="foot">
+    <p class="fmark">Core <b>Culture</b></p>
+    <div class="frow">
+      <div>
+        <p style="color:var(--grey);max-width:36ch;font-size:12.5px">Not a gym — a culture. Iron first since 1998. Three clubs, one standard, and a wall that keeps its promises.</p>
+      </div>
+      <div class="fcols">
+        <div>
+          <h4>Training</h4>
+          <a href="#training">Iron Room</a>
+          <a href="#training">Sled Yard</a>
+          <a href="#training">Cold Room</a>
+        </div>
+        <div>
+          <h4>Clubs</h4>
+          <a href="#clubs">The Foundry Yard</a>
+          <a href="#clubs">Ironworks</a>
+          <a href="#clubs">Southpaw</a>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>9 Foundry Row</p>
+          <p>Daily 05:30–23:00</p>
+          <a href="#join">desk@coreculture</a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Core Culture — iron first.</span>
+      <span class="soc"><a href="#top">IG</a><a href="#top">YT</a><a href="#top">SP</a></span>
+      <span>Foundry District (English)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- GSAP 3.15.0 + ScrollTrigger — pinned versions; the page stays fully visible if these fail -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- mobile menu ---------- */
+  var mmenu = document.getElementById("mmenu"),
+      openBtn = document.getElementById("mmenuOpen");
+  openBtn.addEventListener("click", function(){
+    mmenu.classList.add("open");
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mmenu.querySelector("nav a").focus();
+  });
+  function closeMenu(){
+    mmenu.classList.remove("open");
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    openBtn.focus();
+  }
+  document.getElementById("mmenuClose").addEventListener("click", closeMenu);
+  [].forEach.call(mmenu.querySelectorAll("nav a, .btn"), function(a){
+    a.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && mmenu.classList.contains("open")) closeMenu();
+  });
+
+  /* ---------- heritage timeline ---------- */
+  var chips = [].slice.call(document.querySelectorAll(".tl-chip")),
+      stops = [].slice.call(document.querySelectorAll(".tl-stop")),
+      tlYear = document.getElementById("tlYear"),
+      tlFill = document.getElementById("tlFill"),
+      tlCount = document.getElementById("tlCount"),
+      tlCur = 0;
+  function tlGo(i){
+    tlCur = Math.max(0, Math.min(chips.length - 1, i));
+    chips.forEach(function(c, ci){ c.setAttribute("aria-pressed", ci === tlCur ? "true" : "false"); });
+    stops.forEach(function(s, si){ s.hidden = si !== tlCur; });
+    tlYear.textContent = chips[tlCur].textContent;
+    tlCount.textContent = (tlCur + 1) + " / " + chips.length;
+    tlFill.style.width = (chips.length > 1 ? (tlCur / (chips.length - 1)) * 100 : 0) + "%";
+  }
+  chips.forEach(function(c){
+    c.addEventListener("click", function(){ tlGo(parseInt(c.dataset.i, 10)); });
+  });
+  document.getElementById("tlPrev").addEventListener("click", function(){ tlGo(tlCur - 1); });
+  document.getElementById("tlNext").addEventListener("click", function(){ tlGo(tlCur + 1); });
+  document.querySelector(".tl-chips").addEventListener("keydown", function(e){
+    if (e.key === "ArrowRight"){ tlGo(tlCur + 1); chips[tlCur].focus(); }
+    if (e.key === "ArrowLeft"){ tlGo(tlCur - 1); chips[tlCur].focus(); }
+  });
+  tlGo(0);
+
+  /* ---------- club discovery ---------- */
+  var CLUBS = {
+    yard: {
+      name: "The Foundry Yard", tag: "The original floor",
+      img: "../crops/w303-floor-engine.jpg", w: 380, h: 1180,
+      alt: "Members pushing sleds down the long dark floor of the Foundry Yard",
+      doors: "05:30 – 23:00", floor: "420 m² of iron", classes: "21 sessions", known: "The 05:30 shift"
+    },
+    works: {
+      name: "Ironworks", tag: "Canal Quarter",
+      img: "../crops/w304-tab-machine.jpg", w: 460, h: 610,
+      alt: "Strength machine stack ready for work at Ironworks",
+      doors: "06:00 – 23:00", floor: "360 m² of iron", classes: "18 sessions", known: "Barbell club nights"
+    },
+    paw: {
+      name: "Southpaw", tag: "Under the arches",
+      img: "../crops/w302-class-sled.jpg", w: 520, h: 510,
+      alt: "Athlete leaning into a heavy sled push at Southpaw",
+      doors: "06:00 – 22:00", floor: "300 m² + turf lane", classes: "16 sessions", known: "Engine and sled work"
+    }
+  };
+  var clubBtns = [].slice.call(document.querySelectorAll(".club")),
+      cdImg = document.getElementById("cdImg"),
+      cdTag = document.getElementById("cdTag"),
+      cdName = document.getElementById("cdName"),
+      cdDoors = document.getElementById("cdDoors"),
+      cdFloor = document.getElementById("cdFloor"),
+      cdClasses = document.getElementById("cdClasses"),
+      cdKnown = document.getElementById("cdKnown");
+  function clubGo(key){
+    var d = CLUBS[key];
+    if (!d) return;
+    clubBtns.forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.club === key ? "true" : "false"); });
+    cdImg.src = d.img; cdImg.width = d.w; cdImg.height = d.h; cdImg.alt = d.alt;
+    cdTag.textContent = d.tag;
+    cdName.textContent = d.name;
+    cdDoors.textContent = d.doors;
+    cdFloor.textContent = d.floor;
+    cdClasses.textContent = d.classes;
+    cdKnown.textContent = d.known;
+  }
+  clubBtns.forEach(function(b){
+    b.addEventListener("click", function(){ clubGo(b.dataset.club); });
+  });
+  document.getElementById("cdJoin").addEventListener("click", function(){
+    var active = clubBtns.filter(function(b){ return b.getAttribute("aria-pressed") === "true"; })[0];
+    if (active) document.getElementById("jClub").value = CLUBS[active.dataset.club].name;
+    document.getElementById("join").scrollIntoView({ behavior: "smooth" });
+  });
+
+  /* ---------- join form ---------- */
+  document.getElementById("jForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var club = document.getElementById("jClub"),
+        goal = document.getElementById("jGoal"),
+        email = document.getElementById("jEmail"),
+        msg = document.getElementById("jMsg");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+      msg.textContent = "Real email needed — the desk holds the spot in your name.";
+      msg.className = "j-msg err";
+      return;
+    }
+    msg.textContent = "Held — " + club.value + ", goal: " + goal.value + ". Check your inbox.";
+    msg.className = "j-msg ok";
+    this.reset();
+  });
+
+  /* ---------- scroll motion: GSAP 3.15.0 + ScrollTrigger (pinned CDN) ----------
+     Fail-visible: elements are only hidden after the library loads.
+     Heritage-led motion: staggered section intros and image cards, the
+     timeline rail sweeps gold as it enters, subtle parallax on the hero
+     backdrop only — no pinning anywhere. */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.gsap && window.ScrollTrigger && !reduced){
+    gsap.registerPlugin(ScrollTrigger);
+    var compact = window.matchMedia("(max-width: 700px)").matches;
+    var dist = compact ? 12 : 24,
+        dur = compact ? 0.55 : 0.75,
+        stag = compact ? 0.06 : 0.09;
+
+    /* section introductions (heritage / training / clubs / story share the hook set) */
+    [].forEach.call(["heritage", "training", "clubs", "story"], function(id){
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      gsap.from(sec.querySelectorAll(".kick.rv, h2.title.rv, .lede.rv"), {
+        y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+        scrollTrigger: { trigger: sec, start: "top 78%", once: true },
+        clearProps: "all"
+      });
+    });
+
+    /* heritage wall: chips stagger, panel fades, rail sweeps gold on entry */
+    gsap.from(".tl-chips .tl-chip", {
+      y: Math.round(dist * 0.7), autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".tl-chips", start: "top 85%", once: true },
+      clearProps: "all"
+    });
+    gsap.from(".tl-view", {
+      autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: ".tl-view", start: "top 85%", once: true },
+      clearProps: "all"
+    });
+    gsap.to(".tl-sweep", {
+      scaleX: 1, duration: 1.3, ease: "power2.inOut",
+      scrollTrigger: { trigger: "#heritage", start: "top 68%", once: true }
+    });
+
+    /* image cards (training wall) */
+    gsap.from(".cards .card", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".cards", start: "top 82%", once: true },
+      clearProps: "all"
+    });
+
+    /* club discovery: buttons stagger, detail panel fades */
+    gsap.from(".club-list .club", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".club-grid", start: "top 82%", once: true },
+      clearProps: "all"
+    });
+    gsap.from(".club-detail", {
+      autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: ".club-grid", start: "top 78%", once: true },
+      clearProps: "all"
+    });
+
+    /* member story: portrait and quote together */
+    gsap.from(".story > .rv", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag + 0.03,
+      scrollTrigger: { trigger: ".story", start: "top 80%", once: true },
+      clearProps: "all"
+    });
+
+    /* join band: copy column and form */
+    gsap.from("#join .join-in > *", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: "#join", start: "top 76%", once: true },
+      clearProps: "all"
+    });
+
+    /* subtle parallax — hero backdrop only, desktop only, no pinning */
+    if (!compact){
+      gsap.fromTo(".hero-photo img", { yPercent: -4, scale: 1.1 }, { yPercent: 4, scale: 1.1, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — High Voltage</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='Arial Black,Arial' font-size='18' font-weight='900' fill='%23ffe600' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --black:#000; --panel:#0c0c0c; --white:#fff; --grey:#9c9c9c; --grey-dk:#6d6d6d;
+  --volt:#ffe600; --hair:rgba(255,255,255,.14);
+  --heavy:"Arial Black","Avenir Next",Futura,-apple-system,"Helvetica Neue",Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--black);color:var(--white);
+  font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.heavy{font-family:var(--heavy);font-weight:900;text-transform:uppercase;letter-spacing:-.01em;line-height:.96}
+.caps{text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--volt);color:var(--black);padding:10px 18px;z-index:400;font-weight:700}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:2px solid var(--volt);outline-offset:3px}
+
+/* ---------- blocky buttons ---------- */
+.btn{
+  display:inline-block;background:var(--volt);color:var(--black);
+  font-family:var(--heavy);font-weight:900;font-size:12.5px;text-transform:uppercase;
+  letter-spacing:.06em;padding:17px 30px;border:2px solid var(--volt);
+  transition:background .2s,border-color .2s,color .2s;text-align:center;
+}
+.btn:hover{background:var(--white);border-color:var(--white)}
+.btn-ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.7)}
+.btn-ghost:hover{background:transparent;color:var(--volt);border-color:var(--volt)}
+.btn-black{background:var(--black);color:var(--white);border-color:var(--black)}
+.btn-black:hover{background:var(--white);color:var(--black);border-color:var(--white)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:200;height:64px;
+  display:flex;align-items:center;gap:26px;padding:0 28px;
+  background:var(--black);border-bottom:1px solid var(--hair);
+}
+.wordmark{font-family:var(--heavy);font-weight:900;font-size:17px;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap}
+.wordmark em{font-style:normal;color:var(--volt)}
+.nav-links{display:flex;gap:26px;margin-left:14px}
+.nav-links a{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.85);padding:8px 2px;transition:color .15s}
+.nav-links a:hover{color:var(--volt)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.nav-right .btn{padding:12px 20px;font-size:11.5px}
+.burger{display:none;flex-direction:column;gap:5px;padding:10px 4px}
+.burger span{display:block;width:24px;height:3px;background:var(--volt)}
+
+/* mobile menu */
+.mmenu{position:fixed;inset:0;z-index:300;background:var(--black);display:none;flex-direction:column;padding:20px 22px}
+.mmenu.open{display:flex}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center;height:48px}
+.mmenu nav{display:flex;flex-direction:column;margin-top:40px}
+.mmenu nav a{font-family:var(--heavy);font-weight:900;font-size:30px;text-transform:uppercase;padding:16px 0;border-bottom:1px solid var(--hair)}
+.mmenu nav a:hover{color:var(--volt)}
+.mmenu .btn{margin-top:36px}
+.mmenu .foot-note{margin-top:auto;color:var(--grey-dk);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.16em}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:calc(100vh - 64px);display:flex;align-items:flex-end;overflow:hidden;background:var(--black)}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;opacity:.88;filter:saturate(.92) contrast(1.05)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.55) 42%,rgba(0,0,0,.18) 100%),
+  linear-gradient(0deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.05) 45%)}
+.hero-in{position:relative;z-index:2;padding:64px 28px 0;max-width:1360px;width:100%;margin:0 auto}
+.hero-h1{
+  font-family:var(--heavy);font-weight:900;text-transform:uppercase;
+  font-size:clamp(46px,8.6vw,124px);line-height:.92;letter-spacing:-.015em;
+  max-width:11ch;
+}
+.hero-h1 em{font-style:normal;color:var(--volt)}
+.hero .deal-line{
+  display:inline-block;background:var(--volt);color:var(--black);
+  font-family:var(--heavy);font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:.06em;
+  padding:9px 14px;margin:30px 0 22px;
+}
+.hero .sub{max-width:46ch;color:rgba(255,255,255,.85);font-size:15px;line-height:1.75;margin-bottom:34px}
+.hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;padding-bottom:56px}
+/* countdown */
+.count{position:relative;z-index:2;display:flex;align-items:center;gap:18px;flex-wrap:wrap;border-top:1px solid var(--hair);padding:20px 28px 26px;max-width:1360px;margin:0 auto;width:100%}
+.count .clabel{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--volt)}
+.count .units{display:flex;gap:10px}
+.count .u{background:var(--panel);border:1px solid var(--hair);padding:10px 14px;min-width:74px;text-align:center}
+.count .u b{display:block;font-family:var(--heavy);font-weight:900;font-size:26px;line-height:1;font-variant-numeric:tabular-nums}
+.count .u span{display:block;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--grey);margin-top:6px}
+
+/* ---------- sections ---------- */
+.sec{max-width:1360px;margin:0 auto;padding:110px 28px 0}
+.kicker{display:inline-block;background:var(--volt);color:var(--black);font-family:var(--heavy);font-weight:900;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;padding:7px 12px;margin-bottom:22px}
+.sec h2{font-family:var(--heavy);font-weight:900;text-transform:uppercase;font-size:clamp(32px,4.6vw,64px);line-height:.95;letter-spacing:-.01em}
+.sec h2 em{font-style:normal;color:var(--volt)}
+.sec .lede{color:var(--grey);max-width:56ch;margin-top:20px;font-size:14.5px;line-height:1.85}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:56px}
+.stat{background:var(--black);padding:34px 26px 30px}
+.stat b{display:block;font-family:var(--heavy);font-weight:900;font-size:clamp(40px,4.6vw,64px);line-height:1;color:var(--volt);font-variant-numeric:tabular-nums}
+.stat b sup{font-size:.45em;vertical-align:super}
+.stat b span{font-size:inherit}
+.stat > span{display:block;margin-top:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--white)}
+
+/* classes */
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;margin:36px 0 30px}
+.chip{
+  font-family:var(--heavy);font-weight:900;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;
+  padding:11px 18px;border:2px solid rgba(255,255,255,.55);color:var(--white);
+  transition:border-color .15s,color .15s,background .15s;
+}
+.chip:hover{border-color:var(--volt);color:var(--volt)}
+.chip[aria-pressed="true"]{background:var(--volt);border-color:var(--volt);color:var(--black)}
+.class-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.class-card{position:relative;display:block;background:var(--panel);border:1px solid var(--hair);overflow:hidden}
+.class-card.hide{display:none}
+.class-card .ph{aspect-ratio:16/11;overflow:hidden}
+.class-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.6,.2,1)}
+.class-card:hover img{transform:scale(1.05)}
+.class-card .tag{
+  position:absolute;top:14px;left:14px;background:var(--volt);color:var(--black);
+  font-family:var(--heavy);font-weight:900;font-size:10px;text-transform:uppercase;letter-spacing:.08em;padding:6px 10px;
+}
+.class-card .body{padding:20px 20px 22px}
+.class-card h3{font-family:var(--heavy);font-weight:900;font-size:21px;text-transform:uppercase;letter-spacing:0}
+.class-card p{color:var(--grey);font-size:12.5px;line-height:1.7;margin:10px 0 14px}
+.class-card .more{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--white);border-bottom:2px solid var(--volt);padding-bottom:3px}
+.class-card:hover .more{color:var(--volt)}
+.classes-foot{display:flex;justify-content:center;padding:44px 0 0}
+.empty-note{color:var(--grey);padding:34px 0;font-size:13px;text-transform:uppercase;letter-spacing:.14em;display:none}
+
+/* marquee */
+.tick{margin-top:120px;background:var(--volt);color:var(--black);overflow:hidden;padding:16px 0;border-top:1px solid var(--volt)}
+.tick-row{display:flex;gap:0;width:max-content;animation:tick 22s linear infinite}
+.tick:hover .tick-row{animation-play-state:paused}
+.tick-row span{
+  font-family:var(--heavy);font-weight:900;font-size:22px;text-transform:uppercase;letter-spacing:.02em;
+  white-space:nowrap;padding:0 26px;
+}
+.tick-row span i{font-style:normal;color:var(--black);opacity:.35;padding-left:52px}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* upgrades */
+.up-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px}
+.up-card{background:var(--panel);border:1px solid var(--hair)}
+.up-card .ph{aspect-ratio:4/3;overflow:hidden}
+.up-card img{width:100%;height:100%;object-fit:cover;transition:opacity .3s}
+.up-card:hover img{opacity:.75}
+.up-card .body{padding:20px}
+.up-card h3{font-family:var(--heavy);font-weight:900;font-size:16.5px;text-transform:uppercase}
+.up-card p{color:var(--grey);font-size:12.5px;line-height:1.7;margin:9px 0 16px}
+.up-card .btn{padding:11px 16px;font-size:10.5px}
+
+/* spotted band */
+.spotted{margin-top:120px;position:relative;overflow:hidden;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.spotted img{width:100%;height:min(64vh,560px);object-fit:cover;object-position:50% 42%}
+.spotted .cap{
+  position:absolute;left:28px;bottom:24px;z-index:2;
+  background:var(--black);padding:18px 22px;border-left:6px solid var(--volt);
+}
+.spotted .cap b{display:block;font-family:var(--heavy);font-weight:900;font-size:clamp(20px,2.6vw,32px);text-transform:uppercase}
+.spotted .cap span{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--volt)}
+
+/* join band */
+.join{background:var(--volt);color:var(--black);margin-top:120px}
+.join-in{max-width:1360px;margin:0 auto;padding:96px 28px;display:flex;align-items:center;justify-content:space-between;gap:44px;flex-wrap:wrap}
+.join h2{font-family:var(--heavy);font-weight:900;text-transform:uppercase;font-size:clamp(40px,6vw,86px);line-height:.92;letter-spacing:-.015em;max-width:12ch}
+.join .rate{margin-top:18px;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+.join .rate b{background:var(--black);color:var(--volt);padding:4px 10px}
+.join .note{margin-top:12px;font-size:12.5px;color:rgba(0,0,0,.72);max-width:44ch}
+
+/* footer */
+footer{border-top:1px solid var(--hair)}
+.foot{max-width:1360px;margin:0 auto;padding:84px 28px 26px}
+.fmark{font-family:var(--heavy);font-weight:900;font-size:clamp(38px,7vw,104px);text-transform:uppercase;line-height:.92;letter-spacing:-.01em}
+.fmark em{font-style:normal;color:var(--volt)}
+.fwrap{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;margin-top:60px}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fcols h4{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--grey-dk);margin-bottom:16px}
+.fcols a,.fcols p{display:block;color:rgba(255,255,255,.8);font-size:13px;padding:4px 0}
+.fcols a:hover{color:var(--volt)}
+.fnews h4{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--grey-dk);margin-bottom:16px}
+.fnews p{color:var(--grey);font-size:13px;max-width:40ch;margin-bottom:18px}
+.n-form{display:flex;max-width:440px}
+.n-form input{
+  flex:1;min-width:0;background:var(--panel);border:1px solid var(--hair);border-right:0;color:var(--white);
+  font:inherit;font-size:12px;letter-spacing:.06em;padding:15px 16px;border-radius:0;
+}
+.n-form input::placeholder{color:var(--grey-dk);text-transform:uppercase;letter-spacing:.12em}
+.n-form input:focus{outline:none;border-color:var(--volt)}
+.n-form .btn{padding:15px 20px;font-size:11px}
+.n-msg{margin-top:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--grey);min-height:15px}
+.n-msg.ok{color:var(--volt)}
+.n-msg.err{color:#ff7a59}
+.bottom{
+  display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--hair);margin-top:70px;padding:22px 0 8px;
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--grey-dk);
+}
+.bottom .soc{display:flex;gap:20px}
+.bottom a:hover{color:var(--volt)}
+
+/* reveal — handled by GSAP 3.15.0 + ScrollTrigger (see footer). Elements are
+   visible by default and only hidden inline once the library has loaded, so
+   content stays fully visible if the CDN fails. */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:260;pointer-events:none}
+.progress span{display:block;height:100%;width:100%;background:var(--volt);transform:scaleX(0);transform-origin:0 50%}
+
+/* responsive */
+@media (max-width:1060px){
+  .nav{padding:0 20px}
+  .sec{padding:88px 20px 0}
+  .hero-in{padding:56px 20px 0}
+  .count{padding-left:20px;padding-right:20px}
+  .fwrap{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:860px){
+  .nav-links,.nav-right .btn{display:none}
+  .burger{display:flex}
+  .hero{min-height:0}
+  .hero h1{max-width:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .class-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .up-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .join-in{padding:72px 20px}
+  .spotted .cap{left:20px}
+}
+@media (max-width:560px){
+  .sec{padding:70px 16px 0}
+  .hero-in{padding:44px 16px 0}
+  .hero .cta-row{padding-bottom:40px}
+  .hero .cta-row .btn{width:100%}
+  .count{flex-direction:column;align-items:flex-start;gap:14px;padding-bottom:22px}
+  .count .u{min-width:0;flex:1}
+  .class-grid{grid-template-columns:1fr}
+  .up-grid{grid-template-columns:1fr}
+  .fcols{grid-template-columns:1fr 1fr}
+  .n-form{flex-direction:column}
+  .n-form input{border-right:1px solid var(--hair)}
+  .tick-row span{font-size:17px}
+  .bottom{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .tick-row{animation:none}
+  .class-card img{transition:none}
+  .progress{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- NAV -->
+<header class="nav">
+  <a class="wordmark" href="#top">Core Culture<em>.</em></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#classes">Classes</a>
+    <a href="#upgrades">Upgrades</a>
+    <a href="#floor">The Floor</a>
+    <a href="#join">Membership</a>
+  </nav>
+  <div class="nav-right">
+    <a class="btn" href="#join">Join now</a>
+    <button class="burger" id="mmenuOpen" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark">Core Culture<em>.</em></span>
+    <button id="mmenuClose" aria-label="Close menu" style="font-size:20px;padding:8px 10px">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#classes">Classes</a>
+    <a href="#upgrades">Upgrades</a>
+    <a href="#floor">The Floor</a>
+    <a href="#join">Membership</a>
+  </nav>
+  <a class="btn" href="#join">Join now</a>
+  <div class="foot-note">Foundry District · 05:00–23:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — high voltage. A loud training club in the Foundry District.</h1>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <img width="1080" height="590" src="../crops/w302-hero-dance.jpg" alt="" fetchpriority="high">
+  </div>
+  <div class="hero-in">
+    <p class="deal-line">Founding rate — first month £10</p>
+    <p class="hero-h1" aria-hidden="true" style="margin:0"><span class="h1xl">Nothing</span><br><span class="h1xl">held <em>back.</em></span></p>
+    <p class="sub">The Foundry District's loudest training club. Sixty-plus coached classes a week, DJs after dark, and a recovery deck that hits as hard as the floor. Ordinary is the only thing we don't stock.</p>
+    <div class="cta-row">
+      <a class="btn" href="#join">Claim the rate</a>
+      <a class="btn btn-ghost" href="#classes">Free day pass</a>
+    </div>
+  </div>
+</section>
+<div class="count">
+  <span class="clabel">Founding rate ends 31 Oct</span>
+  <div class="units" role="timer" aria-label="Time remaining at founding rate">
+    <div class="u"><b id="cdD">--</b><span>Days</span></div>
+    <div class="u"><b id="cdH">--</b><span>Hrs</span></div>
+    <div class="u"><b id="cdM">--</b><span>Min</span></div>
+    <div class="u"><b id="cdS">--</b><span>Sec</span></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="sec">
+  <p class="kicker rv">Inside the club</p>
+  <h2 class="rv">One floor.<br>No <em>filler.</em></h2>
+  <p class="lede rv">Every square metre earns its keep — iron, bikes, rings, bags, tubs. If it doesn't make you stronger, faster or calmer, it isn't in the building.</p>
+  <div class="stats rv">
+    <div class="stat"><b><span data-count="62">0</span><sup>+</sup></b><span>Classes a week</span></div>
+    <div class="stat"><b>0<span data-count="5">0</span></b><span>Studios under one roof</span></div>
+    <div class="stat"><b><span data-count="38">0</span></b><span>Coaches on the payroll</span></div>
+    <div class="stat"><b><span data-count="3">0</span></b><span>Recovery zones, included</span></div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section class="sec" id="classes">
+  <p class="kicker rv">The timetable</p>
+  <h2 class="rv">Classes, <em>cranked.</em></h2>
+  <p class="lede rv">Small numbers, big volume, zero cruise mode. Pick a lane — the coach brings the noise.</p>
+  <div class="filter-row rv" role="group" aria-label="Filter classes by discipline">
+    <button class="chip" data-filter="all" aria-pressed="true">All</button>
+    <button class="chip" data-filter="strength" aria-pressed="false">Strength</button>
+    <button class="chip" data-filter="rhythm" aria-pressed="false">Rhythm</button>
+    <button class="chip" data-filter="engine" aria-pressed="false">Engine</button>
+    <button class="chip" data-filter="recover" aria-pressed="false">Recover</button>
+  </div>
+  <div class="class-grid rv" id="classGrid">
+    <a class="class-card" href="#join" data-cat="strength">
+      <span class="tag">Strength</span>
+      <div class="ph"><img width="410" height="410" src="../crops/w302-class-machine.jpg" alt="Plate-loaded strength machine under studio light" loading="lazy"></div>
+      <div class="body">
+        <h3>Iron Standard</h3>
+        <p>Barbell-first strength block. Five lifts, progressive loading, decibels optional but encouraged.</p>
+        <span class="more">View class →</span>
+      </div>
+    </a>
+    <a class="class-card" href="#join" data-cat="rhythm">
+      <span class="tag">Rhythm</span>
+      <div class="ph"><img width="600" height="580" src="../crops/w302-class-dance.jpg" alt="Dancer mid-movement under pink neon" loading="lazy"></div>
+      <div class="body">
+        <h3>Neon Cardio</h3>
+        <p>Dance-built conditioning under the neon wall. The playlist does the pushing; you do the sweating.</p>
+        <span class="more">View class →</span>
+      </div>
+    </a>
+    <a class="class-card" href="#join" data-cat="engine">
+      <span class="tag">Engine</span>
+      <div class="ph"><img width="520" height="510" src="../crops/w302-class-sled.jpg" alt="Athlete gripping a heavy training sled" loading="lazy"></div>
+      <div class="body">
+        <h3>Sled Alley</h3>
+        <p>Sprints, drags and carries down the turf lane. Forty minutes that feel like a highlight reel.</p>
+        <span class="more">View class →</span>
+      </div>
+    </a>
+    <a class="class-card" href="#join" data-cat="recover">
+      <span class="tag">Recover</span>
+      <div class="ph"><img width="560" height="560" src="../crops/w302-class-ice.jpg" alt="Recovery tub filled with fresh ice" loading="lazy"></div>
+      <div class="body">
+        <h3>Cold Club</h3>
+        <p>Guided ice protocol with breathwork. Three degrees, twelve minutes, zero phones.</p>
+        <span class="more">View class →</span>
+      </div>
+    </a>
+    <a class="class-card" href="#join" data-cat="rhythm">
+      <span class="tag">Rhythm</span>
+      <div class="ph"><img width="415" height="375" src="../crops/w302-class-streak.jpg" alt="Streaks of colored light in a dark room" loading="lazy"></div>
+      <div class="body">
+        <h3>Night Ride</h3>
+        <p>Interval riding in the dark with a live set. Beat drops, watts climb.</p>
+        <span class="more">View class →</span>
+      </div>
+    </a>
+    <a class="class-card" href="#join" data-cat="recover">
+      <span class="tag">Recover</span>
+      <div class="ph"><img width="490" height="490" src="../crops/w302-class-frost.jpg" alt="Frost-textured glass surface" loading="lazy"></div>
+      <div class="body">
+        <h3>Slow Static</h3>
+        <p>Deep-stretch and mobility hour. The quietest class in the building — still not easy.</p>
+        <span class="more">View class →</span>
+      </div>
+    </a>
+  </div>
+  <p class="empty-note" id="emptyNote">No classes in this lane yet.</p>
+  <div class="classes-foot rv"><a class="btn btn-ghost" href="#join">Full timetable</a></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="tick" aria-hidden="true">
+  <div class="tick-row">
+    <span>Train loud<i>◆</i></span><span>Recover louder<i>◆</i></span><span>No soft edges<i>◆</i></span><span>Ordinary not stocked<i>◆</i></span>
+    <span>Train loud<i>◆</i></span><span>Recover louder<i>◆</i></span><span>No soft edges<i>◆</i></span><span>Ordinary not stocked<i>◆</i></span>
+  </div>
+</div>
+
+<!-- UPGRADES -->
+<section class="sec" id="upgrades">
+  <p class="kicker rv">Club upgrades</p>
+  <h2 class="rv">The extras hit <em>too.</em></h2>
+  <p class="lede rv">Membership covers the weird and the wonderful. Book them like classes — because they are one.</p>
+  <div class="up-grid">
+    <div class="up-card rv">
+      <div class="ph"><img width="415" height="375" src="../crops/w302-class-streak.jpg" alt="Red and white light streaks in darkness" loading="lazy"></div>
+      <div class="body">
+        <h3>Light room</h3>
+        <p>Red-light panels for skin, sleep and stiff joints. Ten minutes, pre or post.</p>
+        <a class="btn" href="#join">Find out more</a>
+      </div>
+    </div>
+    <div class="up-card rv">
+      <div class="ph"><img width="540" height="620" src="../crops/w302-disc-recover.jpg" alt="Recovery station in low light" loading="lazy"></div>
+      <div class="body">
+        <h3>Compression deck</h3>
+        <p>Six boots, one rule: sit down, switch off, legs come back new.</p>
+        <a class="btn" href="#join">Find out more</a>
+      </div>
+    </div>
+    <div class="up-card rv">
+      <div class="ph"><img width="510" height="510" src="../crops/w302-amen-ice.jpg" alt="Ice poured into a cold plunge tub" loading="lazy"></div>
+      <div class="body">
+        <h3>Frost showers</h3>
+        <p>Snow shower and plunge, forty seconds that rewrite your morning.</p>
+        <a class="btn" href="#join">Find out more</a>
+      </div>
+    </div>
+    <div class="up-card rv">
+      <div class="ph"><img width="410" height="910" src="../crops/w302-disc-weights.jpg" alt="Weight plates stacked on a training rig" loading="lazy"></div>
+      <div class="body">
+        <h3>Strength lab</h3>
+        <p>Force plates and a body scan twice a term. Progress on paper, not vibes.</p>
+        <a class="btn" href="#join">Find out more</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPOTTED -->
+<section class="spotted" id="floor">
+  <img width="1080" height="520" src="../crops/w302-trend-pop.jpg" alt="Pop-art figure painted on the club's culture wall" loading="lazy">
+  <div class="cap">
+    <b>Spotted on the floor</b>
+    <span>Tag @coreculture.foundry — wall every month</span>
+  </div>
+</section>
+</main>
+
+<!-- JOIN BAND -->
+<section class="join" id="join">
+  <div class="join-in">
+    <div>
+      <h2>Join the noise</h2>
+      <p class="rate"><b>£59</b> / month · first month <b>£10</b></p>
+      <p class="note">Founding rate ends 31 October. No joining fee, no twelve-month trap — cancel when the culture stops fitting.</p>
+    </div>
+    <a class="btn btn-black" href="#join">Join now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <p class="fmark">Core Culture<em>.</em></p>
+    <div class="fwrap">
+      <div class="fcols">
+        <div>
+          <h4>The club</h4>
+          <a href="#classes">Classes</a>
+          <a href="#upgrades">Upgrades</a>
+          <a href="#floor">The floor</a>
+        </div>
+        <div>
+          <h4>Train</h4>
+          <a href="#classes">Iron Standard</a>
+          <a href="#classes">Neon Cardio</a>
+          <a href="#classes">Sled Alley</a>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>Foundry District</p>
+          <p>Daily 05:00–23:00</p>
+          <a href="#join">membership@coreculture</a>
+        </div>
+      </div>
+      <div class="fnews">
+        <h4>Loud mail, monthly</h4>
+        <p>New classes, culture nights and the odd founding-member perk. No spam, no filler.</p>
+        <form class="n-form" id="nForm" novalidate>
+          <label class="vh" for="nEmail">Email address</label>
+          <input id="nEmail" type="email" placeholder="Your email" autocomplete="email">
+          <button class="btn" type="submit">Sign up</button>
+        </form>
+        <p class="n-msg" id="nMsg" role="status"></p>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Core Culture — not a gym. A culture.</span>
+      <span class="soc"><a href="#top">IG</a><a href="#top">YT</a><a href="#top">SP</a></span>
+      <span>Foundry District (English)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- GSAP 3.15.0 + ScrollTrigger — pinned versions; the page stays fully visible if these fail -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* countdown to founding-rate deadline */
+  var target = new Date("2026-10-31T23:59:59").getTime();
+  var cdD = document.getElementById("cdD"), cdH = document.getElementById("cdH"),
+      cdM = document.getElementById("cdM"), cdS = document.getElementById("cdS");
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function tickCd(){
+    var diff = target - Date.now();
+    if (diff <= 0){
+      cdD.textContent = cdH.textContent = cdM.textContent = cdS.textContent = "00";
+      var label = document.querySelector(".clabel");
+      if (label) label.textContent = "The founding rate has left the building";
+      clearInterval(cdTimer);
+      return;
+    }
+    var s = Math.floor(diff / 1000);
+    cdD.textContent = pad(Math.floor(s / 86400));
+    cdH.textContent = pad(Math.floor(s % 86400 / 3600));
+    cdM.textContent = pad(Math.floor(s % 3600 / 60));
+    cdS.textContent = pad(s % 60);
+  }
+  tickCd();
+  var cdTimer = setInterval(tickCd, 1000);
+
+  /* mobile menu */
+  var mmenu = document.getElementById("mmenu"),
+      openBtn = document.getElementById("mmenuOpen");
+  openBtn.addEventListener("click", function(){
+    mmenu.classList.add("open");
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mmenu.querySelector("nav a").focus();
+  });
+  function closeMenu(){
+    mmenu.classList.remove("open");
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    openBtn.focus();
+  }
+  document.getElementById("mmenuClose").addEventListener("click", closeMenu);
+  [].forEach.call(mmenu.querySelectorAll("nav a, .btn"), function(a){
+    a.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && mmenu.classList.contains("open")) closeMenu();
+  });
+
+  /* class filter */
+  var chips = [].slice.call(document.querySelectorAll(".chip")),
+      cards = [].slice.call(document.querySelectorAll(".class-card")),
+      emptyNote = document.getElementById("emptyNote");
+  chips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      chips.forEach(function(c){ c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      var f = chip.dataset.filter, shown = 0;
+      cards.forEach(function(card){
+        var show = f === "all" || card.dataset.cat === f;
+        card.classList.toggle("hide", !show);
+        if (show) shown++;
+      });
+      emptyNote.style.display = shown ? "none" : "block";
+    });
+  });
+
+  /* stat counters */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var counters = [].slice.call(document.querySelectorAll("[data-count]"));
+  function fill(el){ el.textContent = el.dataset.count; }
+  if (reduced || !("IntersectionObserver" in window)){
+    counters.forEach(fill);
+  } else {
+    var seen = new WeakSet();
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting || seen.has(en.target)) return;
+        seen.add(en.target); io.unobserve(en.target);
+        var el = en.target, end = parseInt(el.dataset.count, 10), t0 = null;
+        function step(ts){
+          if (!t0) t0 = ts;
+          var p = Math.min((ts - t0) / 900, 1);
+          el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(step); else el.textContent = end;
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold:.5 });
+    counters.forEach(function(el){ io.observe(el); });
+  }
+
+  /* scroll motion — GSAP 3.15.0 + ScrollTrigger (pinned CDN).
+     Fail-visible: elements are only hidden after the library loads.
+     Restrained high voltage: staggered section/card fades, one fixed
+     progress line, light parallax on the two story panels — no pinning. */
+  if (window.gsap && window.ScrollTrigger && !reduced){
+    gsap.registerPlugin(ScrollTrigger);
+    var compact = window.matchMedia("(max-width: 700px)").matches;
+    var dist = compact ? 14 : 26,
+        dur = compact ? 0.55 : 0.75,
+        stag = compact ? 0.07 : 0.11;
+
+    /* page progress line, scrubbed to document scroll */
+    gsap.to("#progressBar", { scaleX: 1, ease: "none",
+      scrollTrigger: { start: 0, end: "max", scrub: 0.3 } });
+
+    /* section intros: kicker → heading → lede */
+    [].forEach.call(document.querySelectorAll(".sec"), function(sec){
+      gsap.from(sec.querySelectorAll(".kicker, h2, .lede"), {
+        y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+        scrollTrigger: { trigger: sec, start: "top 78%", once: true },
+        clearProps: "all"
+      });
+    });
+
+    /* card grids: stagger the cards themselves */
+    [].forEach.call([["#classGrid", ".class-card"], [".up-grid", ".up-card"], [".stats", ".stat"]], function(pair){
+      var grid = document.querySelector(pair[0]);
+      if (!grid) return;
+      gsap.from(grid.querySelectorAll(pair[1]), {
+        y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+        scrollTrigger: { trigger: grid, start: "top 82%", once: true },
+        clearProps: "all"
+      });
+    });
+
+    /* timetable controls and foot ride along with the classes section */
+    gsap.from(".filter-row.rv, .classes-foot.rv", { autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: "#classes", start: "top 70%", once: true }, clearProps: "all" });
+
+    /* join band and spotted caption */
+    gsap.from(".join-in > div, .join-in .btn", { y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".join", start: "top 80%", once: true }, clearProps: "all" });
+    gsap.from(".spotted .cap", { y: 18, autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: ".spotted", start: "top 72%", once: true }, clearProps: "all" });
+
+    /* light parallax on the story panels — desktop only, scrubbed, no pinning */
+    if (!compact){
+      gsap.fromTo(".hero-bg img", { yPercent: -4, scale: 1.12 }, { yPercent: 5, scale: 1.12, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+      gsap.fromTo(".spotted img", { yPercent: -5, scale: 1.12 }, { yPercent: 5, scale: 1.12, ease: "none",
+        scrollTrigger: { trigger: ".spotted", start: "top bottom", end: "bottom top", scrub: true } });
+    }
+  }
+
+  /* newsletter form */
+  document.getElementById("nForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = document.getElementById("nEmail").value.trim(),
+        msg = document.getElementById("nMsg");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      msg.textContent = "That address doesn't look right.";
+      msg.className = "n-msg err";
+      return;
+    }
+    msg.textContent = "In. Loud mail lands monthly.";
+    msg.className = "n-msg ok";
+    this.reset();
+  });
+})();
+</script>
+</body>
+</html>

@@ -45,9 +45,10 @@ exported anew on September 28; its manifest hash matches the saved source.
 - Large photographic opening, concise club philosophy, native horizontal
   space rail, quiet recovery feature, daily timetable, interactive 3D floor,
   proposed memberships, and a contextual first-visit form.
-- Scroll-driven club story with three changing images and progressive title
-  fills, a moving typography band, staged section entrances, and photographic
-  parallax. Desktop holds the story in view; mobile uses a natural stacked layout.
+- Lenis-powered smooth scrolling and GSAP/ScrollTrigger choreography: directional
+  scene curtains, staggered perspective entrances, drifting display type,
+  scroll-scrubbed image lighting/depth, a moving typography band, header progress,
+  and precise anchor navigation.
 - Deliberate mobile compositions, usable keyboard states, reduced motion,
   lazy-loaded supporting images, and preloaded hero/display font.
 - Lazy-loaded Three.js, with no autoplay, analytics, third-party runtime requests,
@@ -62,7 +63,8 @@ exported anew on September 28; its manifest hash matches the saved source.
 - `css/motion.css` — responsive narrative layout, entrances, and scroll effects.
 - `js/data.js` — sample club content and image mappings.
 - `js/app.js` — navigation, room rail, gallery, directory, schedule, form, routing.
-- `js/motion.js` — on-demand scroll updates, reveal observers, and motion preferences.
+- `js/motion.source.js` — editable Lenis and GSAP motion source.
+- `js/motion.js` — bundled, ready-to-serve motion runtime and dependencies.
 - `js/model-loader.js` — lazy loading, data-saver opt-in, and retry handling.
 - `js/model-viewer.js` — editable Three.js viewer source.
 - `js/model-viewer.bundle.js` — ready-to-serve local viewer and dependencies.
@@ -99,9 +101,19 @@ not as a specification of this redesign.
   Successful demo submission clears entered details without storing or sending.
 - `?rm=1` forces reduced motion for both CSS and JavaScript; the operating
   system's reduced-motion preference is also honored, including live changes.
-- Motion uses native scrolling, a single on-demand animation frame, and cached
-  section measurements. Keyboard focus reveals its content immediately. Without
-  JavaScript or with reduced motion, the narrative remains a readable static layout.
+- Lenis and GSAP share one animation ticker, while the room rail, dialogs, model,
+  and touch interactions remain native. Dialogs pause page scrolling, keyboard
+  focus reveals content immediately, and reduced motion removes both smoothing
+  and animation so the narrative remains a readable static layout.
+
+## Rebuild the motion bundle
+
+```sh
+npm --prefix site ci
+npm --prefix site run build:motion
+```
+
+Lenis and GSAP are bundled locally; the production page makes no CDN requests.
 
 ## Rebuild the 3D viewer
 

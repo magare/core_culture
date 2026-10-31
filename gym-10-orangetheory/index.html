@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORE CULTURE — Orange Signal</title>
+<meta name="description" content="Core Culture: train, move, recover, connect. Not a gym — a culture. Heart-rate-zoned group intervals in the Foundry District.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1e22'/%3E%3Cpath d='M16 25c-4-3.5-8-6.7-8-10.4C8 11.6 10 10 12.2 10c1.5 0 2.9.8 3.8 2 .9-1.2 2.3-2 3.8-2C22 10 24 11.6 24 14.6c0 3.7-4 6.9-8 10.4z' fill='%23f26a1b'/%3E%3C/svg%3E">
+<style>
+:root{
+  --charcoal:#1b1e22; --charcoal-2:#23272c; --white:#fff; --paper:#f5f6f7;
+  --orange:#f26a1b; --orange-dk:#d9560e;
+  --z1:#8d939b; --z2:#2e6fd1; --z3:#2fa84f; --z4:#f26a1b; --z5:#d21f2b;
+  --grey:#8b9097; --grey-dk:#65696f; --ink:#15171a;
+  --hair:rgba(21,23,26,.12); --hair-d:rgba(255,255,255,.12);
+  --cond:"Arial Narrow","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--white);color:var(--ink);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.cond{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.01em;line-height:.94}
+.caps{text-transform:uppercase;letter-spacing:.2em;font-size:10.5px;font-weight:700}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:absolute;left:-9999px;top:0;background:var(--orange);color:#fff;padding:10px 18px;z-index:500;font-weight:700}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+
+/* buttons */
+.btn{display:inline-block;background:var(--orange);color:#fff;font-family:var(--cond);font-weight:700;font-size:13.5px;text-transform:uppercase;letter-spacing:.08em;padding:15px 28px;border:2px solid var(--orange);transition:background .2s,border-color .2s,color .2s;text-align:center}
+.btn:hover{background:var(--ink);border-color:var(--ink)}
+.btn-ink{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn-ink:hover{background:var(--orange);border-color:var(--orange)}
+.btn-ghost-d{background:transparent;color:var(--white);border-color:rgba(255,255,255,.6)}
+.btn-ghost-d:hover{color:var(--orange);border-color:var(--orange);background:transparent}
+
+/* workout progress rail */
+.progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:300;pointer-events:none;background:rgba(21,23,26,.08)}
+.progress span{display:block;height:100%;width:100%;background:var(--orange);transform:scaleX(0);transform-origin:0 50%}
+
+/* ---------- nav (crisp white) ---------- */
+.nav{position:sticky;top:4px;z-index:200;height:66px;display:flex;align-items:center;gap:26px;padding:0 28px;background:var(--white);border-bottom:1px solid var(--hair)}
+.wordmark{font-family:var(--cond);font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.wordmark em{font-style:normal;color:var(--orange)}
+.nav-links{display:flex;gap:24px;margin-left:10px}
+.nav-links a{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--grey);padding:8px 2px;border-bottom:3px solid transparent;transition:color .15s,border-color .15s}
+.nav-links a:hover{color:var(--ink);border-color:var(--orange)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.nav-right .btn{padding:12px 20px;font-size:11.5px}
+.burger{display:none;flex-direction:column;gap:5px;padding:10px 4px}
+.burger span{display:block;width:24px;height:3px;background:var(--ink)}
+.burger span:nth-child(2){background:var(--orange)}
+
+.mmenu{position:fixed;inset:0;z-index:400;background:var(--white);display:none;flex-direction:column;padding:20px 22px}
+.mmenu.open{display:flex}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center;height:48px;border-bottom:3px solid var(--ink)}
+.mmenu .top button{font-size:20px;padding:8px 10px;color:var(--orange)}
+.mmenu nav{display:flex;flex-direction:column;margin-top:36px}
+.mmenu nav a{font-family:var(--cond);font-weight:700;font-size:30px;text-transform:uppercase;padding:15px 2px;border-bottom:1px solid var(--hair)}
+.mmenu nav a i{font-style:normal;color:var(--orange);font-size:13px;vertical-align:middle;padding-right:14px;letter-spacing:.1em}
+.mmenu nav a:hover{color:var(--orange)}
+.mmenu .btn{margin-top:32px}
+.mmenu .foot-note{margin-top:auto;color:var(--grey-dk);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.18em}
+
+/* ---------- hero (charcoal telemetry) ---------- */
+.hero{background:var(--charcoal);color:var(--white);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.045) 39px 40px),
+  repeating-linear-gradient(90deg,transparent 0 39px,rgba(255,255,255,.045) 39px 40px)}
+.hero-in{position:relative;max-width:1360px;margin:0 auto;padding:76px 28px 72px;display:grid;grid-template-columns:1.04fr .96fr;gap:56px;align-items:center}
+.kick{display:inline-block;background:var(--orange);color:#fff;font-family:var(--cond);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.1em;padding:8px 14px;margin-bottom:24px}
+.hero-h1{font-family:var(--cond);font-weight:700;text-transform:uppercase;font-size:clamp(48px,7.6vw,118px);line-height:.9;letter-spacing:-.01em}
+.hero-h1 em{font-style:normal;color:var(--orange)}
+.hero .sub{max-width:48ch;color:var(--grey);font-size:14.5px;line-height:1.85;margin-top:28px}
+.hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+.hero .tele{display:flex;gap:12px;margin-top:44px;flex-wrap:wrap}
+.hero .tele span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;border:1px solid var(--hair-d);padding:8px 12px;color:var(--grey)}
+.hero .tele b{color:var(--orange);font-weight:400}
+.hero-photo{position:relative}
+.hero-photo .frame{position:relative;border:3px solid var(--white)}
+.hero-photo img{width:100%;aspect-ratio:16/11;object-fit:cover}
+.hero-photo::before{content:"";position:absolute;top:-14px;right:-14px;width:88px;height:88px;background:var(--orange);z-index:0}
+.hero-photo::after{content:"";position:absolute;bottom:-14px;left:-14px;width:56px;height:56px;background:var(--charcoal);border:1px solid var(--hair-d);z-index:0}
+.hero-photo .chip{position:absolute;left:0;bottom:0;background:var(--orange);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:9px 13px}
+
+/* ---------- shared ---------- */
+.sec{max-width:1360px;margin:0 auto;padding:112px 28px 0}
+.sec-kick{display:inline-block;font-family:var(--cond);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.1em;padding:7px 13px;margin-bottom:22px}
+.sec-kick.orange{background:var(--orange);color:#fff}
+.sec-kick.ink{background:var(--ink);color:#fff}
+h2.title{font-family:var(--cond);font-weight:700;text-transform:uppercase;font-size:clamp(38px,5.2vw,72px);line-height:.92}
+h2.title em{font-style:normal;color:var(--orange)}
+.lede{color:var(--grey);max-width:58ch;margin-top:20px;font-size:14px;line-height:1.85}
+
+/* ---------- zone panel (charcoal) ---------- */
+.zones-band{background:var(--charcoal);color:var(--white);margin-top:110px;padding:104px 28px}
+.zones-in{max-width:1360px;margin:0 auto}
+.zones-band .lede{color:var(--grey)}
+.zone-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-top:54px;align-items:start}
+.zone-list{display:flex;flex-direction:column;gap:12px}
+.zone{text-align:left;border:1px solid var(--hair-d);background:var(--charcoal-2);padding:14px 16px;transition:border-color .2s,background .2s}
+.zone:hover{border-color:var(--orange)}
+.zone[aria-pressed="true"]{border-color:var(--orange);background:#2a2016}
+.zone .zrow{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.zone .zname{font-family:var(--cond);font-weight:700;font-size:17px;text-transform:uppercase}
+.zone .zname i{font-style:normal;display:inline-block;width:10px;height:10px;margin-right:10px}
+.zone .zrng{font-family:var(--mono);font-size:12px;color:var(--grey)}
+.zone[aria-pressed="true"] .zrng{color:var(--candle,#ffd9a3)}
+.zone .zbar{height:8px;background:rgba(255,255,255,.09);margin-top:12px;overflow:hidden}
+.zone .zbar i{display:block;height:100%;transform-origin:0 50%}
+.zone-detail{border:2px solid var(--orange);background:var(--charcoal-2);padding:30px 32px;position:sticky;top:86px}
+.zd-head{display:flex;align-items:center;gap:12px}
+.zd-head i{width:16px;height:16px;flex-shrink:0}
+.zd-head h3{font-family:var(--cond);font-weight:700;font-size:clamp(24px,2.4vw,32px);text-transform:uppercase}
+.zd-range{font-family:var(--mono);font-size:30px;color:var(--orange);margin-top:14px}
+.zd-range small{font-size:13px;color:var(--grey);display:block;margin-top:2px;letter-spacing:.14em;text-transform:uppercase}
+.zd-body p{color:var(--grey);font-size:13.5px;line-height:1.85;margin:18px 0 22px}
+.zd-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+.zd-meta span{font-family:var(--mono);font-size:11px;letter-spacing:.04em;border:1px solid var(--hair-d);padding:8px 12px}
+.zd-meta span b{color:var(--orange);font-weight:400}
+
+/* effort band (orange count-ups) */
+.effort{background:var(--orange);color:#fff;margin-top:96px;padding:64px 28px}
+.effort-in{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.effort .eff{border-left:2px solid rgba(255,255,255,.4);padding-left:20px}
+.effort .eff b{display:block;font-family:var(--cond);font-weight:700;font-size:clamp(38px,4.4vw,60px);line-height:1;font-variant-numeric:tabular-nums}
+.effort .eff b sup{font-size:.45em}
+.effort .eff span{display:block;margin-top:10px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.85)}
+
+/* ---------- coaches (white) ---------- */
+.coach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
+.coach{background:var(--paper);border-top:5px solid var(--orange)}
+.coach:nth-child(2){border-top-color:var(--ink)}
+.coach:nth-child(3){border-top-color:var(--z2)}
+.coach .ph{aspect-ratio:4/3.4;overflow:hidden}
+.coach img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.6,.2,1)}
+.coach:hover img{transform:scale(1.04)}
+.coach .body{padding:22px}
+.coach h3{font-family:var(--cond);font-weight:700;font-size:21px;text-transform:uppercase}
+.coach .role{display:inline-block;margin-top:8px;background:var(--ink);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;padding:5px 10px}
+.coach:nth-child(2) .role{background:var(--orange)}
+.coach:nth-child(3) .role{background:var(--z2)}
+.coach p{color:var(--grey);font-size:12.5px;line-height:1.7;margin-top:12px}
+
+/* ---------- member story (charcoal) ---------- */
+.story-band{background:var(--charcoal);color:var(--white);margin-top:110px;padding:104px 28px}
+.story{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.story-photo{position:relative}
+.story-photo img{width:100%;aspect-ratio:4/4.2;object-fit:cover;border:3px solid var(--orange)}
+.story-photo::before{content:"";position:absolute;top:-14px;left:-14px;width:64px;height:64px;background:var(--orange);z-index:0}
+.story blockquote{font-family:var(--cond);font-weight:700;font-size:clamp(23px,2.6vw,34px);text-transform:uppercase;line-height:1.06}
+.story blockquote em{font-style:normal;color:var(--orange)}
+.story blockquote::before{content:"";display:block;width:56px;height:8px;background:var(--orange);margin-bottom:24px}
+.story .who{display:flex;align-items:center;gap:14px;margin-top:28px;padding-top:20px;border-top:1px solid var(--hair-d)}
+.story .who b{display:block;font-family:var(--cond);font-weight:700;font-size:16px;text-transform:uppercase}
+.story .who span{display:block;font-family:var(--mono);font-size:11px;color:var(--grey);margin-top:3px;letter-spacing:.04em}
+
+/* ---------- timetable (white) ---------- */
+.days{display:flex;gap:8px;flex-wrap:wrap;margin:38px 0 26px}
+.dchip{font-family:var(--cond);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:11px 17px;border:2px solid var(--hair);color:var(--grey);transition:all .15s}
+.dchip:hover{border-color:var(--orange);color:var(--orange)}
+.dchip[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:#fff}
+.tt-list{border-top:3px solid var(--ink)}
+.tt-row{display:grid;grid-template-columns:96px 1fr auto auto;gap:26px;align-items:center;padding:20px 4px;border-bottom:1px solid var(--hair);transition:background .15s}
+.tt-row:hover{background:var(--paper)}
+.tt-row .t{font-family:var(--mono);font-size:16px;color:var(--orange);font-variant-numeric:tabular-nums}
+.tt-row .n{font-family:var(--cond);font-weight:700;font-size:17px;text-transform:uppercase}
+.tt-row .n span{display:block;font-family:var(--sans);font-weight:400;font-size:11px;color:var(--grey-lt,#9a9da3);text-transform:none;letter-spacing:.02em;margin-top:3px}
+.tt-row .tag{font-family:var(--mono);font-size:10.5px;padding:6px 11px;color:#fff;white-space:nowrap}
+.tt-row .tag.ink{background:var(--ink)}
+.tt-row .tag.orange{background:var(--orange)}
+.tt-row .tag.blue{background:var(--z2)}
+.tt-empty{padding:30px 4px;color:var(--grey-lt);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;display:none}
+
+/* ---------- booking (charcoal) ---------- */
+.book{background:var(--charcoal);color:var(--white);margin-top:120px;padding:96px 28px;position:relative;overflow:hidden}
+.book::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.035) 39px 40px),
+  repeating-linear-gradient(90deg,transparent 0 39px,rgba(255,255,255,.035) 39px 40px)}
+.book-in{position:relative;max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.book h2{font-family:var(--cond);font-weight:700;text-transform:uppercase;font-size:clamp(40px,5.2vw,76px);line-height:.9}
+.book h2 em{font-style:normal;color:var(--orange)}
+.book .rate{margin-top:22px;font-family:var(--mono);font-size:13px;letter-spacing:.04em}
+.book .rate b{background:var(--orange);color:#fff;padding:4px 10px;font-family:var(--cond);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+.book .note{margin-top:14px;font-size:12.5px;color:var(--grey);max-width:44ch;line-height:1.8}
+.b-form{background:var(--charcoal-2);border:1px solid var(--hair-d);padding:28px;display:flex;flex-direction:column;gap:13px;position:relative}
+.b-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px;color:var(--grey)}
+.b-field input,.b-field select{width:100%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.04);color:var(--white);font:inherit;font-size:13px;padding:14px;border-radius:0;appearance:none}
+.b-field select{background-image:linear-gradient(45deg,transparent 50%,var(--orange) 50%),linear-gradient(135deg,var(--orange) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+.b-field input:focus,.b-field select:focus{outline:none;border-color:var(--orange)}
+.b-field input::placeholder{color:var(--grey-dk)}
+.b-msg{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;min-height:16px}
+.b-msg.ok{color:var(--orange)}
+.b-msg.err{color:#ffb1a3}
+
+/* ---------- footer ---------- */
+footer{background:var(--white);border-top:1px solid var(--hair)}
+.foot{max-width:1360px;margin:0 auto;padding:78px 28px 24px}
+.fmark{font-family:var(--cond);font-weight:700;font-size:clamp(38px,6.4vw,92px);text-transform:uppercase;line-height:.92}
+.fmark em{font-style:normal;color:var(--orange)}
+.frow{display:grid;grid-template-columns:1.3fr 2fr;gap:60px;margin-top:52px}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fcols h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--grey-dk);margin-bottom:14px}
+.fcols a,.fcols p{display:block;color:var(--grey);font-size:12.5px;padding:4px 0}
+.fcols a:hover{color:var(--orange)}
+.bottom{display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:1px solid var(--hair);margin-top:58px;padding:20px 0 6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--grey-dk)}
+.bottom .soc{display:flex;gap:22px}
+.bottom a:hover{color:var(--orange)}
+
+/* responsive */
+@media (max-width:1120px){
+  .hero-in{grid-template-columns:1fr .92fr;gap:40px}
+  .zone-wrap{grid-template-columns:1fr}
+  .zone-detail{position:static}
+  .book-in{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:900px){
+  .nav{padding:0 20px}
+  .nav-links,.nav-right .btn{display:none}
+  .burger{display:flex}
+  .hero-in{grid-template-columns:1fr;padding:56px 20px 64px}
+  .sec{padding:88px 20px 0}
+  .effort-in{grid-template-columns:1fr 1fr;gap:32px}
+  .coach-grid{grid-template-columns:1fr}
+  .coach{max-width:520px}
+  .story{grid-template-columns:1fr;gap:44px}
+  .story-photo{max-width:440px}
+  .tt-row{grid-template-columns:80px 1fr auto;gap:14px}
+  .tt-row .tag{display:none}
+  .frow{grid-template-columns:1fr;gap:44px}
+}
+@media (max-width:560px){
+  .hero-in{padding:44px 16px 56px}
+  .sec{padding:76px 16px 0}
+  .zones-band{padding:84px 16px}
+  .zones-band .zone-wrap{margin-top:40px}
+  .story-band{padding:84px 16px}
+  .hero .cta-row .btn{width:100%}
+  .hero .tele span{font-size:10px}
+  .effort{padding:52px 16px}
+  .effort-in{grid-template-columns:1fr}
+  .zone-detail{padding:24px 18px}
+  .tt-row{grid-template-columns:64px 1fr;align-items:start}
+  .tt-row .btn{grid-column:2;justify-self:start}
+  .book{padding:76px 16px}
+  .b-form{padding:22px 16px}
+  .fcols{grid-template-columns:1fr 1fr}
+  .bottom{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .coach img{transition:none}
+  .zone{transition:none}
+  .progress{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- NAV -->
+<header class="nav">
+  <a class="wordmark" href="#top">Core <em>Culture</em></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#zones">The zones</a>
+    <a href="#coaches">Coaches</a>
+    <a href="#timetable">Timetable</a>
+    <a href="#story">Story</a>
+  </nav>
+  <div class="nav-right">
+    <a class="btn" href="#book">Book a session</a>
+    <button class="burger" id="mmenuOpen" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="top">
+    <span class="wordmark">Core <em>Culture</em></span>
+    <button id="mmenuClose" aria-label="Close menu">✕</button>
+  </div>
+  <nav aria-label="Mobile">
+    <a href="#zones"><i>01</i>The zones</a>
+    <a href="#coaches"><i>02</i>Coaches</a>
+    <a href="#timetable"><i>03</i>Timetable</a>
+    <a href="#story"><i>04</i>Story</a>
+  </nav>
+  <a class="btn" href="#book">Book a session</a>
+  <div class="foot-note">Foundry District · Doors 05:30–22:00</div>
+</div>
+
+<main id="main">
+<h1 class="vh">Core Culture — Orange Signal. Heart-rate-zoned group intervals in the Foundry District.</h1>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-in">
+    <div class="hero-copy">
+      <p class="kick rv">Orange Signal<i>◆</i>Live telemetry</p>
+      <h2 class="hero-h1" aria-hidden="true" style="margin:0">Every beat<br>gets <em>counted.</em></h2>
+      <p class="sub rv">Strap on a heart-rate band, take a zone, and spend forty-five minutes chasing your own signal. Five zones on the board, coaches calling the shifts, and twelve orange minutes that carry your metabolism for the rest of the day.</p>
+      <div class="cta-row rv">
+        <a class="btn" href="#book">Claim first session</a>
+        <a class="btn btn-ghost-d" href="#zones">Read the zones</a>
+      </div>
+      <div class="tele rv" aria-hidden="true">
+        <span>LIVE · AVG <b>84%</b></span>
+        <span>SIGNAL <b>12:36</b></span>
+        <span>CREW <b>24</b></span>
+      </div>
+    </div>
+    <div class="hero-photo rv">
+      <div class="frame">
+        <img width="1080" height="590" src="../crops/w302-hero-dance.jpg" alt="The crew mid-interval under the studio lights" fetchpriority="high">
+      </div>
+      <p class="chip">ZONE 4 · SIGNAL — 84% avg</p>
+    </div>
+  </div>
+</section>
+
+<!-- ZONE PANEL -->
+<section class="zones-band" id="zones">
+  <div class="zones-in">
+    <p class="sec-kick orange rv">The five zones</p>
+    <h2 class="title rv">Train to a <em>target,</em><br>not a guess.</h2>
+    <p class="lede rv">Every class live-tracks your heart rate to the board. Select a zone to see what it asks, what it builds, and how many minutes of it a good class hands you.</p>
+
+    <div class="zone-wrap">
+      <div class="zone-list rv" role="group" aria-label="Choose a heart-rate zone">
+        <button class="zone" data-zn="z1" aria-pressed="false">
+          <span class="zrow"><span class="zname"><i style="background:var(--z1)"></i>Zone 1 · Warm-up</span><span class="zrng">50–60% max</span></span>
+          <span class="zbar"><i style="width:50%;background:var(--z1)"></i></span>
+        </button>
+        <button class="zone" data-zn="z2" aria-pressed="false">
+          <span class="zrow"><span class="zname"><i style="background:var(--z2)"></i>Zone 2 · Build</span><span class="zrng">61–70% max</span></span>
+          <span class="zbar"><i style="width:62%;background:var(--z2)"></i></span>
+        </button>
+        <button class="zone" data-zn="z3" aria-pressed="false">
+          <span class="zrow"><span class="zname"><i style="background:var(--z3)"></i>Zone 3 · Push</span><span class="zrng">71–83% max</span></span>
+          <span class="zbar"><i style="width:74%;background:var(--z3)"></i></span>
+        </button>
+        <button class="zone" data-zn="z4" aria-pressed="true">
+          <span class="zrow"><span class="zname"><i style="background:var(--z4)"></i>Zone 4 · Signal</span><span class="zrng">84–91% max</span></span>
+          <span class="zbar"><i style="width:86%;background:var(--z4)"></i></span>
+        </button>
+        <button class="zone" data-zn="z5" aria-pressed="false">
+          <span class="zrow"><span class="zname"><i style="background:var(--z5)"></i>Zone 5 · Max</span><span class="zrng">92–100% max</span></span>
+          <span class="zbar"><i style="width:96%;background:var(--z5)"></i></span>
+        </button>
+      </div>
+
+      <div class="zone-detail" aria-live="polite">
+        <div class="zd-head">
+          <i id="zdDot" style="background:var(--z4)"></i>
+          <h3 id="zdName">Zone 4 · Signal</h3>
+        </div>
+        <p class="zd-range"><span id="zdPct">84–91%</span> of max heart rate<small>the target window</small></p>
+        <div class="zd-body">
+          <p id="zdFeel">The afterburn zone. Twelve-ish minutes here per class is the whole game — breathing hard, words in short supply, and your metabolism running hot long after the boards go dark.</p>
+        </div>
+        <div class="zd-meta">
+          <span>Target <b id="zdMins">12 min / class</b></span>
+          <span>Feels <b id="zdLevel">Hard</b></span>
+        </div>
+        <a class="btn" href="#book">Train in this zone</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- effort / benefit count-ups -->
+  <div class="effort rv">
+    <div class="effort-in">
+      <div class="eff"><b><span class="count" data-count="12">12</span></b><span>Minutes in the signal zone, per class</span></div>
+      <div class="eff"><b><span class="count" data-count="24">24</span><sup>h</sup></b><span>Afterburn window after the boards go dark</span></div>
+      <div class="eff"><b><span class="count" data-count="5">5</span></b><span>Zones tracked live on the studio board</span></div>
+      <div class="eff"><b><span class="count" data-count="24">24</span></b><span>Riders per class, every strap accounted for</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COACHES -->
+<section class="sec" id="coaches">
+  <p class="sec-kick orange rv">On the board</p>
+  <h2 class="title rv">Coaches who read<br>the <em>numbers.</em></h2>
+  <p class="lede rv">Your board is public — the coaches read it like a weather report and call the shifts before you flatline. Three of them, one signal, zero guessing.</p>
+  <div class="coach-grid">
+    <article class="coach rv">
+      <div class="ph"><img width="520" height="510" src="../crops/w302-class-sled.jpg" alt="Rosa Iwuchukwu calling an interval from the floor" loading="lazy"></div>
+      <div class="body">
+        <h3>Rosa Iwuchukwu</h3>
+        <span class="role">Head coach — intervals</span>
+        <p>Sees a stalling Zone 3 from across the room and calls the shift two beats before you’d have noticed. Twelve years on the clock.</p>
+      </div>
+    </article>
+    <article class="coach rv">
+      <div class="ph"><img width="410" height="410" src="../crops/w302-class-machine.jpg" alt="Ben Aalto setting the strength blocks" loading="lazy"></div>
+      <div class="body">
+        <h3>Ben Aalto</h3>
+        <span class="role">Strength blocks</span>
+        <p>Owns the floor half of the hour. Loads your stations off your board history — heavy days are scheduled, not guessed.</p>
+      </div>
+    </article>
+    <article class="coach rv">
+      <div class="ph"><img width="415" height="375" src="../crops/w302-class-streak.jpg" alt="Ines Duarte running the recovery blocks" loading="lazy"></div>
+      <div class="body">
+        <h3>Ines Duarte</h3>
+        <span class="role">Recovery + data wrap-ups</span>
+        <p>Reads the class the way a coach reads a race — and walks you out with your numbers, your next target, and no drama.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- MEMBER STORY -->
+<section class="story-band" id="story">
+  <p class="sec-kick orange rv">Member signal</p>
+  <div class="story">
+    <div class="story-photo rv">
+      <img width="415" height="375" src="../crops/w303-class-dance.jpg" alt="Tomas between intervals, strap on, mid-session" loading="lazy">
+    </div>
+    <div class="rv">
+      <blockquote>Three years of training on vibes. Twelve sessions with the strap and I found out my easy day was a <em>lie</em> — and my hard days got honest.</blockquote>
+      <div class="who">
+        <div>
+          <b>Tomas Berg</b>
+          <span>Member since 2025 · 61 sessions · avg signal 14:10</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMETABLE -->
+<section class="sec" id="timetable">
+  <p class="sec-kick ink rv">The timetable</p>
+  <h2 class="title rv">Book by<br>the <em>numbers.</em></h2>
+  <p class="lede rv">Straps are yours for the session and the boards stay live all class. Members book seven days out; everyone else, the Sunday before.</p>
+  <div class="days rv" role="group" aria-label="Choose a day">
+    <button class="dchip" data-day="Mon" aria-pressed="true">Mon</button>
+    <button class="dchip" data-day="Tue" aria-pressed="false">Tue</button>
+    <button class="dchip" data-day="Wed" aria-pressed="false">Wed</button>
+    <button class="dchip" data-day="Thu" aria-pressed="false">Thu</button>
+    <button class="dchip" data-day="Fri" aria-pressed="false">Fri</button>
+    <button class="dchip" data-day="Sat" aria-pressed="false">Sat</button>
+    <button class="dchip" data-day="Sun" aria-pressed="false">Sun</button>
+  </div>
+  <div class="tt-list rv" id="ttList" aria-live="polite"></div>
+  <p class="tt-empty" id="ttEmpty">Rest day — the boards sleep, the afterburn doesn’t.</p>
+</section>
+
+<!-- BOOKING -->
+<section class="book" id="book">
+  <div class="book-in">
+    <div class="rv">
+      <p class="sec-kick orange">Claim a strap</p>
+      <h2>Get on<br>the <em>board.</em></h2>
+      <p class="rate"><b>First session £10</b> — strap, board and afterburn included</p>
+      <p class="note">Pick a session, leave your name, and the desk hands you a strap with your number on it. The board does the rest.</p>
+    </div>
+    <form class="b-form rv" id="bForm" novalidate>
+      <div class="b-field">
+        <label for="bName">Name</label>
+        <input id="bName" type="text" autocomplete="name" placeholder="Your name">
+      </div>
+      <div class="b-field">
+        <label for="bEmail">Email</label>
+        <input id="bEmail" type="email" autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="b-field">
+        <label for="bClass">Session</label>
+        <select id="bClass">
+          <option value="Signal 45">Signal 45 — the full five zones</option>
+          <option value="Base Build">Base Build — zones 2 and 3</option>
+          <option value="Peak Power">Peak Power — zones 4 and 5</option>
+        </select>
+      </div>
+      <div class="b-field">
+        <label for="bDay">Day</label>
+        <select id="bDay">
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+        </select>
+      </div>
+      <button class="btn" type="submit">Hold my strap</button>
+      <p class="b-msg" id="bMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <p class="fmark">Core <em>Culture</em></p>
+    <div class="frow">
+      <div>
+        <p style="color:var(--grey);max-width:36ch;font-size:12.5px">Not a gym — a culture. Five zones, one board, twelve orange minutes. Train to a target, not a guess.</p>
+      </div>
+      <div class="fcols">
+        <div>
+          <h4>The club</h4>
+          <a href="#zones">The zones</a>
+          <a href="#coaches">Coaches</a>
+          <a href="#timetable">Timetable</a>
+        </div>
+        <div>
+          <h4>Sessions</h4>
+          <a href="#book">Signal 45</a>
+          <a href="#book">Base Build</a>
+          <a href="#book">Peak Power</a>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>9 Foundry Row</p>
+          <p>Daily 05:30–22:00</p>
+          <a href="#book">signal@coreculture</a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 Core Culture — not a gym. A culture.</span>
+      <span class="soc"><a href="#top">IG</a><a href="#top">YT</a><a href="#top">SP</a></span>
+      <span>Foundry District (English)</span>
+    </div>
+  </div>
+</footer>
+
+<!-- GSAP 3.15.0 + ScrollTrigger — pinned versions; the page stays fully visible if these fail -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* mobile menu */
+  var mmenu = document.getElementById("mmenu"),
+      openBtn = document.getElementById("mmenuOpen");
+  openBtn.addEventListener("click", function(){
+    mmenu.classList.add("open");
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    mmenu.querySelector("nav a").focus();
+  });
+  function closeMenu(){
+    mmenu.classList.remove("open");
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    openBtn.focus();
+  }
+  document.getElementById("mmenuClose").addEventListener("click", closeMenu);
+  [].forEach.call(mmenu.querySelectorAll("nav a, .btn"), function(a){
+    a.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && mmenu.classList.contains("open")) closeMenu();
+  });
+
+  /* live zone selector */
+  var ZONES = {
+    z1: { name: "Zone 1 · Warm-up", dot: "var(--z1)", pct: "50–60%",
+      feel: "The wake-up. Easy pace, full conversation, heart rate climbing out of bed. It looks like nothing on the board — that’s exactly what it’s for.",
+      mins: "5 min / class", level: "Easy" },
+    z2: { name: "Zone 2 · Build", dot: "var(--z2)", pct: "61–70%",
+      feel: "The aerobic base. Steady work where sentences come in full sentences — the zone that makes every other zone possible.",
+      mins: "10 min / class", level: "Comfortable-hard" },
+    z3: { name: "Zone 3 · Push", dot: "var(--z3)", pct: "71–83%",
+      feel: "Threshold work. Sentences shrink to clauses. This is where the engine gets bigger — uncomfortable, sustainable, honest.",
+      mins: "14 min / class", level: "Hard" },
+    z4: { name: "Zone 4 · Signal", dot: "var(--z4)", pct: "84–91%",
+      feel: "The afterburn zone. Twelve-ish minutes here per class is the whole game — breathing hard, words in short supply, and your metabolism running hot long after the boards go dark.",
+      mins: "12 min / class", level: "Very hard" },
+    z5: { name: "Zone 5 · Max", dot: "var(--z5)", pct: "92–100%",
+      feel: "All-out efforts, thirty to sixty seconds at a time. You earn minutes here in sprints — the board flashes, the room roars, it’s over fast.",
+      mins: "2 min / class", level: "Everything" }
+  };
+  var zBtns = [].slice.call(document.querySelectorAll(".zone")),
+      zdDot = document.getElementById("zdDot"),
+      zdName = document.getElementById("zdName"),
+      zdPct = document.getElementById("zdPct"),
+      zdFeel = document.getElementById("zdFeel"),
+      zdMins = document.getElementById("zdMins"),
+      zdLevel = document.getElementById("zdLevel");
+  function zoneGo(key){
+    var d = ZONES[key];
+    if (!d) return;
+    zBtns.forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.zn === key ? "true" : "false"); });
+    zdDot.style.background = d.dot;
+    zdName.textContent = d.name;
+    zdPct.textContent = d.pct;
+    zdFeel.textContent = d.feel;
+    zdMins.textContent = d.mins;
+    zdLevel.textContent = d.level;
+  }
+  zBtns.forEach(function(b){
+    b.addEventListener("click", function(){ zoneGo(b.dataset.zn); });
+  });
+
+  /* timetable */
+  var WEEK = {
+    Mon: [
+      { t: "06:15", n: "Signal 45", s: "The full five zones, both halves", tag: "orange", tagTxt: "Z4 · 12 min" },
+      { t: "12:15", n: "Base Build", s: "Zones 2 and 3 — the engine hour", tag: "blue", tagTxt: "Z2–Z3" },
+      { t: "18:30", n: "Peak Power", s: "Zones 4 and 5 — short, savage", tag: "orange", tagTxt: "Z4–Z5" }
+    ],
+    Tue: [
+      { t: "07:00", n: "Base Build", s: "Zones 2 and 3 — the engine hour", tag: "blue", tagTxt: "Z2–Z3" },
+      { t: "19:00", n: "Signal 45", s: "The full five zones, both halves", tag: "orange", tagTxt: "Z4 · 12 min" }
+    ],
+    Wed: [
+      { t: "06:15", n: "Signal 45", s: "The full five zones, both halves", tag: "orange", tagTxt: "Z4 · 12 min" },
+      { t: "12:15", n: "Peak Power", s: "Zones 4 and 5 — short, savage", tag: "orange", tagTxt: "Z4–Z5" },
+      { t: "18:30", n: "Base Build", s: "Zones 2 and 3 — the engine hour", tag: "blue", tagTxt: "Z2–Z3" }
+    ],
+    Thu: [
+      { t: "07:00", n: "Base Build", s: "Zones 2 and 3 — the engine hour", tag: "blue", tagTxt: "Z2–Z3" },
+      { t: "19:00", n: "Signal 45", s: "The full five zones, both halves", tag: "orange", tagTxt: "Z4 · 12 min" }
+    ],
+    Fri: [
+      { t: "06:15", n: "Signal 45", s: "The full five zones, both halves", tag: "orange", tagTxt: "Z4 · 12 min" },
+      { t: "17:45", n: "Peak Power", s: "Zones 4 and 5 — short, savage", tag: "orange", tagTxt: "Z4–Z5" }
+    ],
+    Sat: [
+      { t: "08:30", n: "Signal 45", s: "Weekend boards — full crew, full volume", tag: "orange", tagTxt: "Z4 · 12 min" }
+    ],
+    Sun: []
+  };
+  var dchips = [].slice.call(document.querySelectorAll(".dchip")),
+      ttList = document.getElementById("ttList"),
+      ttEmpty = document.getElementById("ttEmpty");
+  function renderDay(day){
+    var rows = WEEK[day] || [];
+    ttList.innerHTML = "";
+    ttEmpty.style.display = rows.length ? "none" : "block";
+    rows.forEach(function(r){
+      var row = document.createElement("div");
+      row.className = "tt-row";
+      var t = document.createElement("span"); t.className = "t"; t.textContent = r.t;
+      var n = document.createElement("span"); n.className = "n";
+      n.textContent = r.n;
+      var s = document.createElement("span"); s.textContent = r.s;
+      n.appendChild(s);
+      var tag = document.createElement("span"); tag.className = "tag " + r.tag; tag.textContent = r.tagTxt;
+      var b = document.createElement("a"); b.className = "btn"; b.href = "#book"; b.textContent = "Book";
+      row.appendChild(t); row.appendChild(n); row.appendChild(tag); row.appendChild(b);
+      ttList.appendChild(row);
+    });
+  }
+  dchips.forEach(function(chip){
+    chip.addEventListener("click", function(){
+      dchips.forEach(function(c){ c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      renderDay(chip.dataset.day);
+    });
+  });
+  renderDay("Mon");
+
+  /* booking form */
+  document.getElementById("bForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("bName"),
+        email = document.getElementById("bEmail"),
+        cls = document.getElementById("bClass"),
+        day = document.getElementById("bDay"),
+        msg = document.getElementById("bMsg");
+    if (!name.value.trim()){
+      msg.textContent = "The board needs a name.";
+      msg.className = "b-msg err";
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+      msg.textContent = "That address doesn’t look right.";
+      msg.className = "b-msg err";
+      return;
+    }
+    msg.textContent = "Strap held — " + name.value.trim().split(" ")[0] + ", " + cls.value + " on " + day.value + ". Chase the orange.";
+    msg.className = "b-msg ok";
+    this.reset();
+  });
+
+  /* ---------- scroll motion: GSAP 3.15.0 + ScrollTrigger (pinned CDN) ----------
+     Fail-visible: elements are only hidden after the library loads, and the
+     counters keep their final values unless GSAP takes them to zero first.
+     Data motion: zone bars sweep in on entry, effort numbers count up,
+     restrained reveals throughout — no pinning. */
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.gsap && window.ScrollTrigger && !reduced){
+    gsap.registerPlugin(ScrollTrigger);
+    var compact = window.matchMedia("(max-width: 700px)").matches;
+    var dist = compact ? 12 : 24,
+        dur = compact ? 0.55 : 0.75,
+        stag = compact ? 0.06 : 0.09;
+
+    /* workout progress rail */
+    gsap.to("#progressBar", { scaleX: 1, ease: "none",
+      scrollTrigger: { start: 0, end: "max", scrub: 0.3 } });
+
+    /* section intros */
+    [].forEach.call(["zones", "coaches", "timetable"], function(id){
+      var sec = document.getElementById(id);
+      if (!sec) return;
+      gsap.from(sec.querySelectorAll(".sec-kick.rv, h2.title.rv, .lede.rv"), {
+        y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+        scrollTrigger: { trigger: sec, start: "top 78%", once: true },
+        clearProps: "all"
+      });
+    });
+
+    /* hero copy + photo */
+    gsap.from(".hero-copy .rv", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag + 0.02,
+      scrollTrigger: { trigger: ".hero", start: "top 70%", once: true },
+      clearProps: "all"
+    });
+    gsap.from(".hero-photo.rv", {
+      y: dist, autoAlpha: 0, duration: dur + 0.1, ease: "power2.out",
+      scrollTrigger: { trigger: ".hero", start: "top 70%", once: true },
+      clearProps: "all"
+    });
+
+    /* zone list rows + detail panel */
+    gsap.from(".zone-list .zone", {
+      x: -dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".zone-list", start: "top 82%", once: true },
+      clearProps: "all"
+    });
+    gsap.from(".zone-detail", {
+      autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: ".zone-wrap", start: "top 78%", once: true },
+      clearProps: "all"
+    });
+
+    /* ZONE BARS — chart entry: each fill sweeps to its own width */
+    gsap.from(".zone .zbar i", {
+      scaleX: 0, duration: dur + 0.25, ease: "power3.out", stagger: stag,
+      scrollTrigger: { trigger: ".zone-list", start: "top 80%", once: true },
+      clearProps: "transform"
+    });
+
+    /* effort count-ups — restrained, once, on entry */
+    [].forEach.call(document.querySelectorAll(".count"), function(el){
+      var end = parseInt(el.dataset.count, 10) || 0;
+      var obj = { v: 0 };
+      gsap.to(obj, {
+        v: end, duration: 1.2, ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 88%", once: true },
+        onUpdate: function(){ el.textContent = Math.round(obj.v); }
+      });
+    });
+
+    /* coach cards, story, timetable, booking */
+    gsap.from(".coach-grid .coach", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".coach-grid", start: "top 82%", once: true },
+      clearProps: "all"
+    });
+    gsap.from("#story .story > .rv, #story .story-photo", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag + 0.03,
+      scrollTrigger: { trigger: "#story .story", start: "top 80%", once: true },
+      clearProps: "all"
+    });
+    gsap.from(".days .dchip", {
+      y: dist * 0.7, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: ".days", start: "top 85%", once: true },
+      clearProps: "all"
+    });
+    gsap.from("#ttList", {
+      autoAlpha: 0, duration: dur, ease: "power2.out",
+      scrollTrigger: { trigger: "#ttList", start: "top 85%", once: true },
+      clearProps: "all"
+    });
+    gsap.from("#book .book-in > *", {
+      y: dist, autoAlpha: 0, duration: dur, ease: "power2.out", stagger: stag,
+      scrollTrigger: { trigger: "#book", start: "top 76%", once: true },
+      clearProps: "all"
+    });
+  }
+})();
+</script>
+</body>
+</html>
